@@ -1,0 +1,38 @@
+
+
+
+
+nave{
+width:19%;
+height:645px;
+float:left;      /*왼쪽으로 붙혀줌*/
+margin-left:0px;
+background-color:white;
+border: 1;
+border: 1px solid black;
+margin-top: 0px;	
+}
+td{
+	
+    padding: 5px;
+    border-bottom: #a4a8a5 1px solid;
+    background-color: #ebedec;
+    font-weight: normal;
+    margin-left:10px;
+	font-size: 15px
+}
+
+
+
+a {
+	font-size: 12px;  /*포지션 이름 글자 크기*/
+	color: #000000;
+	text-decoration: none 
+}
+
+a:hover {
+	color: black;
+	text-decoration: underline
+}
+
+
