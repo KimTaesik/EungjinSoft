@@ -40,6 +40,7 @@ public class AdminController {
 
 	@RequestMapping(value="admin.action", method = RequestMethod.GET)
 	public String admin() {	
+		System.out.println("asdasdasdasd");
 		return "admin/admin";	
 	}
 	
