@@ -1,5 +1,5 @@
 package com.groupware.controller;
-
+//test
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -40,7 +40,6 @@ public class AdminController {
 
 	@RequestMapping(value="admin.action", method = RequestMethod.GET)
 	public String admin() {	
-		System.out.println("asdasdasdasd");
 		return "admin/admin";	
 	}
 	
