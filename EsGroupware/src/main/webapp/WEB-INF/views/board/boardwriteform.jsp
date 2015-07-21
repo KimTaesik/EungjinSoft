@@ -1,7 +1,9 @@
 <%@page import="com.groupware.dto.Employee"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 
 <html>
@@ -51,10 +53,10 @@
 					<tr>
 						<th>작성자</th>
 						<td>
-						<% Employee member = (Employee)session.getAttribute("loginuser"); %>
-						<%= member.getId() %>
+						<%-- <% Employee member = (Employee)session.getAttribute("loginuser"); %> --%>
+						${member.id}
 						<!--  hidden : 눈에 보이진 않지만 , 서버로 전송되는 데이터  -->
-						<input type="hidden" name="writer" value="<%=member.getId() %>" />
+						<input type="hidden" name="writer" value="${member.id}" />
  						</td>
 					</tr>
 					<tr>
@@ -72,16 +74,17 @@
 					<%-- 
 					<a href="javascript:history.back();">목록보기</a> <!-- history 라는 객체 : 현재 작업의 바로 전 단계로 되돌아가는 조작. -->
 					--%>
-					<% String pageno= "1" ; 
-					if(request.getParameter("pageno") != null) {
-						pageno = request.getParameter("pageno");
-					}
-						String classify="1";
-					if(request.getParameter("classify") != null){
-						classify = request.getParameter("classify");
-					}
-					%>
-					<a href="list.action?pageno=<%= pageno %>&classify=<%= classify %>">목록보기</a>
+					<c:set var="pageno" value="1" />
+					<c:if test="${ pageno != null }" >
+						<c:set var="pageno" value="${ pageno }" />
+					</c:if>
+				
+					<c:set var="classify" value="1" />
+					<c:if test="${ classify != null }" >
+						<c:set var="classify" value="${ classify }" />
+					</c:if>
+					
+					<a href="list.action?pageno=${pageno}&classify=${classify}">목록보기</a>
 				</div>
 				</form>
 			</div>

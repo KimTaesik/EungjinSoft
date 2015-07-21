@@ -2,7 +2,9 @@
 <%@page import="com.groupware.dto.Employee"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 
 <html>
@@ -16,15 +18,60 @@
 
 	<div id="pageContainer">
 		
-	
-		
-		
 		<div style="padding-top:25px;text-align:center">
 		<div id="inputcontent">
 		    <div id="inputmain">
 		        <div class="inputsubtitle">댓글 쓰기</div>
 		        <form action="reply.action" method="post">
+		        
 		        <!--  이 밑에는 서버에서 데이터를 받아오는 거고... -->
+		        <c:set var="pageNo" value="${ pageno }" />
+		        <c:set var="boardNo" value="${ boardno }" />
+		        <c:set var="classify" value="${ classify }" />
+		        <c:set var="board_no" value="${ board_no }" />
+		        
+		 
+		        <!-- 이 밑에는 다시 이 데이터들을 서버로 넘겨주는 거... (form사용. doPost쪽으로..  -->
+		        <input type="hidden" name="pageno" value="${ pageNo }" />
+		        <input type="hidden" name="boardno" value="${ boardNo }" />
+		        <input type="hidden" name="classify" value="${ classify }" />
+		        <input type="hidden" name="board_no" value="${ board_no }" />
+		        
+		        <table>
+		            <tr>
+		                <th>제목</th>
+		                <td>
+		                    <input type="text" name="title" style="width:550px"
+		                    	value="" />
+		                </td>
+		            </tr>
+		            <tr>
+		                <th>작성자</th>
+		                <td>
+				<%-- 	<% Employee member = (Employee) session.getAttribute("loginuser"); %> --%>
+		                	<input type="hidden" name="writer"
+		                		value='${ member.id }' />
+		                	${ member.id }
+		                </td>
+		            </tr>
+		            <tr>
+		                <th>내용</th>
+		                <td>
+							<textarea name="content" cols="76" rows="15"></textarea>
+		                </td>
+		            </tr>
+		        </table>
+		        <div class="buttons">		        	
+		        	<a href="javascript:document.forms[0].submit();">저장</a>
+		        	&nbsp;&nbsp;
+		        	<a href="list.action?pageno="${ pageNo }">취소</a>
+		        	&nbsp;&nbsp;
+		        	<a href="list.action?pageno="${ pageNo }">목록보기</a>
+		        	
+		        	
+		        	
+		        	
+		      <%--   	 <!--  이 밑에는 서버에서 데이터를 받아오는 거고... -->
 		        <%
 		        String pageNo = (String)request.getAttribute("pageno");
 		        String boardNo = (String)request.getAttribute("boardno");
@@ -66,7 +113,7 @@
 		        	&nbsp;&nbsp;
 		        	<a href="list.action?pageno=<%= pageNo %>">취소</a>
 		        	&nbsp;&nbsp;
-		        	<a href="list.action?pageno=<%= pageNo %>">목록보기</a>
+		        	<a href="list.action?pageno=<%= pageNo %>">목록보기</a> --%>
 		        </div>
 		        </form>
 		    </div>
