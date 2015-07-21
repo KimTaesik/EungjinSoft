@@ -31,13 +31,63 @@
 		<div id="inputcontent">
 		    <div id="inputmain">
 		        <div class="inputsubtitle">게시판 글 쓰기</div>
-		        <%Board board = (Board)request.getAttribute("board"); %>
+		      <%--   <%Board board = (Board)request.getAttribute("board"); %> --%>
 		        <form id="updateform" action="edit.action" method="post">
 		        <table>
 		            <tr>
 		                <th>제목</th>
 		                <td>
-		                <input type="text" name="title" value="<%= board.getTitle() %>" />
+		                <input type="text" name="title" value="${ board.title }" />
+		                
+		                <input type="hidden" name="boardno" value="${ board.boardNo }" />
+		                <input type="hidden" name="pageno" value="${pageno}"  />
+		                <input type="hidden" name="board_no" value="${ board.board_No }" />
+		                <input type="hidden" name="classify" value="${ board.classify }"  />
+		                </td>
+		            </tr>
+		            <tr>
+		                <th>작성자</th>
+		                <td>${ board.writer }</td>
+		            </tr>
+		            <tr>
+		                <th>작성일</th>
+		                <td>${ board.regDate }</td>
+		            </tr>
+					<tr>
+		                <th>조회수</th>
+		                <td>${ board.readCount }</td>
+		            </tr>
+		            <tr>
+		                <th>내용</th>
+		                <td>
+							<textarea 
+		                    	name="content" style="width:580px" 
+		                    	rows="15">${ fn:replace(board.content, rn, br) }</textarea>
+		                </td>
+		            </tr>
+		        </table>
+		        </form>
+
+		        <c:set var="pageno" value="1" />
+		        <c:if test="${ pageno !=null }" >
+		       		<c:set var="pageno" value="${ pageno }" />
+		        </c:if>
+		        
+		        <%-- <%String pageno="1";
+					if(request.getParameter("pageno")!=null){
+						pageno=request.getParameter("pageno"); 
+					}
+					%> --%>
+					
+		        <div class="buttons">
+		        	<!--  <input type="submit" value="수정" /> -->
+		        	<a href="javascript:doSubmit();">수정</a>
+		        	&nbsp;
+		        	<a href="list.action?classify=${ board.classify }&pageno=${ pageno }">취소</a>
+		      
+		      
+		      
+		       <%--     <input type="text" name="title" value="<%= board.getTitle() %>" />
 		                
 		                <input type="hidden" name="boardno" value="<%=board.getBoardNo() %>" />
 		                <input type="hidden" name="pageno" value="${pageno}"  />
@@ -80,7 +130,9 @@
 		        	<!--  <input type="submit" value="수정" /> -->
 		        	<a href="javascript:doSubmit();">수정</a>
 		        	&nbsp;
-		        	<a href="list.action?classify=<%=board.getClassify()%>&pageno=<%=pageno%>">취소</a>
+		        	<a href="list.action?classify=<%=board.getClassify()%>&pageno=<%=pageno%>">취소</a> --%>
+		      
+		      
 		        </div>
 		    </div>
 		</div>   	
