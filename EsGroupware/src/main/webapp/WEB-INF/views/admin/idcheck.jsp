@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html>
@@ -57,7 +57,27 @@
 		        </table>
 		        <br /><br />
 		        <div id="message" style='text-align:center;color:blue'>
-		        	<% String id = (String)request.getAttribute("id"); %>
+		        	<c:set var="id" value="${ id }" />
+					<c:set var="valid" value="false" />
+					<c:choose>
+						<c:when test="${ id != null }">
+							${ id }는
+				        	<c:set var="valid" value="${ valid }"/>
+				        	<c:choose>
+				        		<c:when test="${ valid == true }">
+				        			사용가능한 아이디입니다.
+				        		</c:when>
+				        		<c:otherwise>
+				        			이미 사용중인 아이디입니다.
+				        		</c:otherwise>
+				        	</c:choose>
+						</c:when>
+						<c:otherwise>
+							아이디를 입력하고 중복 검사를 수행하세요
+						</c:otherwise>
+					</c:choose>
+		        
+		        	<%-- <% String id = (String)request.getAttribute("id"); %>
 		        	<% boolean valid = false; %>
 		        	<% if (id != null) { %>
 		        		<%= id %>는
@@ -65,12 +85,24 @@
 			        	<%= valid ? "사용가능한 아이디입니다." : "이미 사용중인 아이디입니다." %>
 		        	<% } else { %>
 		         	아이디를 입력하고 중복 검사를 수행하세요
-		         	<% } %>
+		         	<% } %> --%>
 		        </div>
 		        <div class='buttons'>
-		        	<input type='button' value='사용' style='height:25px'
+<%-- 		        	<input type='button' value='사용' style='height:25px'
 		        		onclick="useThisId('<%= id %>');" 
 		        		<%= valid ? "" : "disabled='disabled'" %> />
+		        	<input type='button' value='취소' style='height:25px'
+		        		onclick="window.close();" /> --%>
+		        		<input type='button' value='사용' style='height:25px'
+		        		onclick="useThisId('${ id }');" 
+		        		<c:choose>
+				        		<c:when test="${ valid == true }">
+				        			""
+				        		</c:when>
+				        		<c:otherwise>
+				        			disabled='disabled'
+				        		</c:otherwise>
+				        </c:choose> />
 		        	<input type='button' value='취소' style='height:25px'
 		        		onclick="window.close();" />
 		        </div>

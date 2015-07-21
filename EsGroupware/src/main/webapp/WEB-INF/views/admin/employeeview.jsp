@@ -167,12 +167,11 @@
 		                <th id="essential">* 부서</th>
 		                <td>
 		                	<select id='dept' type='text' name='deptNo' style='width:80px'>
-<%-- 		                	<% for (Dept dept : depts) { %>
-								<% if(employee.getDeptNo().equals(dept.getDeptNo())) {%>
-		                		<option value= '<%= employee.getDeptNo() %>'><%= dept.getPartName() %></option>
-		                		<% } %>    
-		                	<%} %> --%>
-		                	
+		                	<c:forEach var="dept" items="${ depts }">
+		                		<c:if test="${ employee.deptNo.equals(dept.deptNo) }">
+		                			<option value= '${ employee.deptNo }'>${ dept.partName }</option>  
+		                		</c:if>
+		                	</c:forEach>  	
 		                	<c:forEach var="dept" items="${ depts }">
 		                		<option value='${ dept.deptNo }' 
 		                			<c:if test="${ employee.deptNo.equals(dept.deptNo) }"> selected = "selected" </c:if>
@@ -180,8 +179,14 @@
 			                	${ dept.partName }
 			                	</option>
 		                	</c:forEach>
+		                	
+<%-- 	                	<% for (Dept dept : depts) { %>
+								<% if(employee.getDeptNo().equals(dept.getDeptNo())) {%>
+		                		<option value= '<%= employee.getDeptNo() %>'><%= dept.getPartName() %></option>
+		                		<% } %>    
+		                	<%} %>
 		                	            	
-<%-- 		                	<% for (Dept dept : depts) { %>
+ 		                	<% for (Dept dept : depts) { %>
 			                	<option value='<%= dept.getDeptNo() %>' <% if(employee.getDeptNo().equals(dept.getDeptNo())){%> selected = "selected" <%}%> >
 			                	<%= dept.getPartName() %></option>
 		                	<% } %> --%>
@@ -197,14 +202,26 @@
 			                	<% if(employee.getPositionNo().equals(position.getPositionNo())) {%>
 			                	<option value= '<%= employee.getPositionNo() %>'><%= position.getPositionName() %></option>
 			                	<% } %>
-			                <%} %> --%>
-			                
-			                
-			                
-		                	<% for (Position position : positions) { %>
+			                <%} %>
+			                <% for (Position position : positions) { %>
 		                	<option value='<%= position.getPositionNo() %>' <% if(employee.getPositionNo().equals(position.getPositionNo())) {%> selected = "selected" <%}%> >
 		                	<%= position.getPositionName()%></option>
 		                	<% } %>
+			                 --%>
+			                
+			                <c:forEach var="position" items="${ positions }">
+			                	<c:if test="${ employee.positionNo.equals(position.positionNo) }">
+			                		<option value= '${ employee.positionNo }'>${ position.positionName }</option>
+			                	</c:if>
+			                </c:forEach>
+			                <c:forEach var="position" items="${ positions }">
+			                	<option value="${ position.positionNo }"
+			                	<c:if test="${ employee.positionNo.equals(position.positionNo) }">
+			                		selected = "selected"
+			                	</c:if>
+			                	>
+		                		${ position.positionName }</option>
+			                </c:forEach>
 		                	</select>
 		                </td>
 		            </tr>
@@ -218,7 +235,8 @@
 		        
 		        <div class='buttons'>
 		        	<input type='button' value='수정' style='height:25px' onclick="javascript:doSubmit();"; />
-		        	<input type='button' value='삭제' style='height:25px' onclick="javascript:deleteEmployee('<%=employee.getId()%>');"; />
+		        	<%-- <input type='button' value='삭제' style='height:25px' onclick="javascript:deleteEmployee('<%=employee.getId()%>');"; /> --%>
+		        	<input type='button' value='삭제' style='height:25px' onclick="javascript:deleteEmployee('${ employee.id }');"; />
 		        	<input type='button' value='취소' style='height:25px'
 		        		onclick="location.href='employeelist.action';" />
 		        </div>

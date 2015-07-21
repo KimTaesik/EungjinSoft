@@ -4,6 +4,7 @@
 <%@page import="com.groupware.dto.Employee"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
 <!DOCTYPE html>
@@ -75,6 +76,7 @@
 			<% } else { %>
 			<h3 style='text-align:center'>등록된 부서가 없습니다.</h3>
 			<% } %> --%>
+			${ fn:replace(dept.partName,'a', 'aa') }
 
 		</div>
 	</div>
