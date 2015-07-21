@@ -32,7 +32,7 @@
 		var txt = (out.checked == true ? "Y" : "");
 		if(work == 1){
 			if(document.getElementById("textfield").value.length<2){
-				location.href = "recheck.action?year="+clockYear+"&month="+clockMonth+"&day="+clockDay+"&hours="+clockHours+"&minutes="+clockMinutes+"&seconds="+clockSeconds+"&chk="+chk+"&out="+txt;
+				location.href = "check.action?year="+clockYear+"&month="+clockMonth+"&day="+clockDay+"&hours="+clockHours+"&minutes="+clockMinutes+"&seconds="+clockSeconds+"&chk="+chk+"&out="+txt;
 			}else{
 				alert("이미 출근처리를 하셨습니다. 수정사항은 관리자에게 문의해주세요.");
 			}
@@ -42,7 +42,7 @@
 			}
 			if(document.getElementById("textfield2").value.length<2){
 				var chk=2;
-				location.href = "recheck.action?year="+clockYear+"&month="+clockMonth+"&day="+clockDay+"&hours="+clockHours+"&minutes="+clockMinutes+"&seconds="+clockSeconds+"&chk="+chk+"&out="+txt;
+				location.href = "check.action?year="+clockYear+"&month="+clockMonth+"&day="+clockDay+"&hours="+clockHours+"&minutes="+clockMinutes+"&seconds="+clockSeconds+"&chk="+chk+"&out="+txt;
 			} else {
 				alert("이미 퇴근처리를 하셨습니다. 수정사항은 관리자에게 문의해주세요.");
 			}
@@ -53,7 +53,7 @@
 <body >
 	<c:import url="/WEB-INF/views/include/attheader.jsp"></c:import>
 		<section>
-			<form method="post" action="recheck.action" name="officeform">
+			<form method="get" action="check.action" name="officeform">
 				<input type="hidden" name="year" id="year" value="0" />
 				<div id="sub">
 					<!--  검색 버튼 영역 -->
@@ -129,50 +129,29 @@
 				</div>
 			</form>
 			<br />
-			<form method="post" action="recheck.action" name="calendar">
+			<form method="get" action="check.action" name="calendar">
+			<c:set var="date" value="${ rdate }"></c:set>
 			<%
 				List<Attendance> allAtt = (List<Attendance>)request.getAttribute("all");
 				Date date;
+				int currentYear = 0;
+				int currentMonth = 0;
+				int currentDate = 0;
+				int currentDay = 0;
 				if(request.getAttribute("ryear")!=null){
-					date = new Date((int)request.getAttribute("ryear"), (int)request.getAttribute("rmonth")-1, 1);
+					date = (Date)request.getAttribute("rdate");
+					currentYear = (int)request.getAttribute("ryear");
+					currentMonth = (int)request.getAttribute("rmonth");
+					currentDate = 1;
+					currentDay = date.getDay()-1;
 				} else {
 					date = new Date();
-				}
-				
-				int currentYear = 0;
-				if(request.getAttribute("ryear")==null){
 					currentYear = date.getYear()+1900;
-				}else{
-					currentYear = (int)request.getAttribute("ryear");
-				}
-				//년도를 구함
-				
-				
-				int currentMonth = 0;
-				if(request.getAttribute("rmonth")==null){
 					currentMonth = date.getMonth() + 1;
-				}else{
-					currentMonth = (int)request.getAttribute("rmonth");
-				}
-				//연을 구함. 월은 0부터 시작하므로 +1, 12월은 11을 출력
-				
-				int currentDate = 0;
-				if(request.getAttribute("ryear")==null || request.getAttribute("rmonth")==null){
 					currentDate = date.getDate();
-				}else{
-					currentDate = 1;
-				}
-				//int currentDate = date.getDate();
-				//오늘 일자.
-				
-				date.setDate(1);
-				int currentDay = 0;
-				if(request.getAttribute("ryear")==null || request.getAttribute("rmonth")==null){
 					currentDay = date.getDay();
-				}else{
-					currentDay = date.getDay()-1;
-				}	
-				//이번달 1일의 요일은 출력. 0은 일요일 6은 토요일
+				}
+				date.setDate(1);
 				
 				String[] dateString = new String[]{"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
 				int[] lastDate = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
