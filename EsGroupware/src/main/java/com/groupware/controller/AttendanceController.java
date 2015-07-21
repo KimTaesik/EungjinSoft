@@ -52,7 +52,16 @@ public class AttendanceController {
 		ModelAndView mav = new ModelAndView();
 		String aarrive="";
 		
+		int currentYear = 0;
+		int currentMonth = 0;
+		int currentDate = 0;
+		int currentDay = 0;
+		Date date;
 		String arrive,home;
+		
+		String[] dateString = new String[]{"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
+		int[] lastDate = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		
 		String selectday = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
 		String[] se = selectday.split("-");
 		
@@ -61,12 +70,20 @@ public class AttendanceController {
 			int rmonth = Integer.parseInt(mmonth);
 			se[0] = yyear;
 			se[1] = mmonth;
-			Date date = new Date(ryear, rmonth-1, 1);
+			date = new Date(ryear, rmonth-1, 1);
+			date.setDate(1);
 			mav.addObject("rdate",date);
 			mav.addObject("ryear", ryear);
 			mav.addObject("rmonth", rmonth);
+			
 		} else {
 			System.out.println("널널널널너런러");
+			date = new Date();
+			currentYear = date.getYear()+1900;
+			currentMonth = date.getMonth() + 1;
+			currentDate = date.getDate();
+			currentDay = date.getDay();
+			date.setDate(1);
 		}
 	
 		Employee loginUser = new Employee();
