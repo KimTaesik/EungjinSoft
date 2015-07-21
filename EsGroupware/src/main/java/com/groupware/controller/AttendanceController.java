@@ -1,5 +1,6 @@
 package com.groupware.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,41 +37,8 @@ public class AttendanceController {
 	 * 달력출력과 등등
 	 * 
 	 * @return mav
-	 */
+	 */	
 	@RequestMapping(value = "check.action", method = RequestMethod.GET)
-	public ModelAndView check(HttpSession session, HttpServletRequest req) {
-		//yyear, mmonth select로 달력 선택!
-
-		ModelAndView mav = new ModelAndView();
-		
-		String arrive,home;
-		String selectday = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
-		String[] se = selectday.split("-");
-	
-		Employee loginUser = new Employee();
-		loginUser.setId(((Employee)session.getAttribute("loginuser")).getId());
-//		loginUser.setId("admin");
-		String logUser = loginUser.getId();
-		
-		List<Attendance> allAtt = attendanceDao.selectAllAtt(logUser,Integer.parseInt(se[0]), Integer.parseInt(se[1]));
-		List<Attendance> att = attendanceDao.selectAttendance(logUser, Integer.parseInt(se[0]), Integer.parseInt(se[1]), Integer.parseInt(se[2]));
-		if(att != null && att.size()>0){
-			arrive = att.get(0).getYears()+"-"+att.get(0).getMonths()+"-"+att.get(0).getDays()+" "+att.get(0).getHours()+":"+att.get(0).getMinutes()+":"+att.get(0).getSeconds();
-			mav.addObject("workdate", arrive);
-			if(att.size()>1){
-				home = att.get(1).getYears()+"-"+att.get(1).getMonths()+"-"+att.get(1).getDays()+" "+att.get(1).getHours()+":"+att.get(1).getMinutes()+":"+att.get(1).getSeconds();
-				mav.addObject("homedate", home);
-			}
-		}
-		String userIp   = req.getRemoteAddr();
-		mav.addObject("all",allAtt);
-		mav.addObject("userIp", userIp);		
-		mav.setViewName("attendance/check");
-		
-		return mav;
-	}
-	
-	@RequestMapping(value = "recheck.action", method = RequestMethod.POST)
 	public ModelAndView recheck(String yyear, String mmonth, String chk, String out, HttpSession session,
 			@RequestParam(value="year", defaultValue="0") int year, 
 			@RequestParam(value="month", defaultValue="0") int month, 
@@ -88,91 +56,17 @@ public class AttendanceController {
 		String selectday = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
 		String[] se = selectday.split("-");
 		
-		if(yyear !=null){
+		if(yyear !=null || mmonth != null){
 			int ryear = Integer.parseInt(yyear);
-			se[0] = yyear;
-			mav.addObject("ryear", ryear);
-		}
-		if(mmonth !=null){
 			int rmonth = Integer.parseInt(mmonth);
-			se[1] = mmonth;
-			mav.addObject("rmonth", rmonth);
-		}
-	
-		Employee loginUser = new Employee();
-		loginUser.setId(((Employee)session.getAttribute("loginuser")).getId());
-//		loginUser.setId("admin");
-		String logUser = loginUser.getId();
-		
-		List<Attendance> allAtt = attendanceDao.selectAllAtt(logUser,Integer.parseInt(se[0]), Integer.parseInt(se[1]));
-		List<Attendance> att = attendanceDao.selectAttendance(logUser, Integer.parseInt(se[0]), Integer.parseInt(se[1]), Integer.parseInt(se[2]));
-		
-		if(att.size()<1){
-			if(chk !=null){
-				if(chk.equals("1")){
-					if(out.equals("Y")){
-						aarrive="외근";
-					}
-					arrive = year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
-					attendanceDao.insertAttendance(year,month,day,hours,minutes,seconds,logUser,(hours>7 ? aarrive+"지각":aarrive+"출근"));
-					mav.addObject("workdate", arrive);
-				}
-			}
-		}else{
-			arrive = att.get(0).getYears()+"-"+att.get(0).getMonths()+"-"+att.get(0).getDays()+" "+att.get(0).getHours()+":"+att.get(0).getMinutes()+":"+att.get(0).getSeconds();
-			req.setAttribute("workdate", arrive);
-			if(att.size()==1){
-				if(chk !=null){
-					if(chk.equals("2")){
-						if(out.equals("Y")){
-							aarrive="외근";
-						}
-						home = year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
-						attendanceDao.insertAttendance(year,month,day,hours,minutes,seconds,logUser,(hours>18 ? aarrive+"야근":aarrive+"퇴근"));
-						mav.addObject("homedate", home);
-					}
-				}
-			}else{
-				home = att.get(1).getYears()+"-"+att.get(1).getMonths()+"-"+att.get(1).getDays()+" "+att.get(1).getHours()+":"+att.get(1).getMinutes()+":"+att.get(1).getSeconds();
-				mav.addObject("homedate", home);
-			}
-		}
-
-		String userIp   = req.getRemoteAddr();
-		mav.addObject("all",allAtt);
-		mav.addObject("userIp", userIp);		
-		mav.setViewName("attendance/check");
-		
-		return mav;
-	}	
-	
-	@RequestMapping(value = "recheck.action", method = RequestMethod.GET)
-	public ModelAndView rerecheck(String yyear, String mmonth, String chk, String out, HttpSession session,
-			@RequestParam(value="year", defaultValue="0") int year, 
-			@RequestParam(value="month", defaultValue="0") int month, 
-			@RequestParam(value="day", defaultValue="0") int day, 
-			@RequestParam(value="hours", defaultValue="0") int hours, 
-			@RequestParam(value="minutes", defaultValue="0") int minutes, 
-			@RequestParam(value="seconds", defaultValue="0") int seconds, 
-			HttpServletRequest req) {
-		//yyear, mmonth select로 달력 선택!
-
-		ModelAndView mav = new ModelAndView();
-		String aarrive="";
-		
-		String arrive,home;
-		String selectday = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
-		String[] se = selectday.split("-");
-		
-		if(yyear !=null){
-			int ryear = Integer.parseInt(yyear);
 			se[0] = yyear;
-			mav.addObject("ryear", ryear);
-		}
-		if(mmonth !=null){
-			int rmonth = Integer.parseInt(mmonth);
 			se[1] = mmonth;
+			Date date = new Date(ryear, rmonth-1, 1);
+			mav.addObject("rdate",date);
+			mav.addObject("ryear", ryear);
 			mav.addObject("rmonth", rmonth);
+		} else {
+			System.out.println("널널널널너런러");
 		}
 	
 		Employee loginUser = new Employee();
