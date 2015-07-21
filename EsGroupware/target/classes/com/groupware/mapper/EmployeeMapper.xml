@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace:패키지명,클래스이름을 논리적으로 선언 -->
+<mapper namespace="com.groupware.mapper.EmployeeMapper">
+
+
+	<insert id="insertEmployee" parameterType="Employee">
+
+		INSERT INTO employee
+		(
+		id,
+		password,
+		name,
+		sex,
+		home_number,
+		phone_number,
+		address,
+		marital_status,
+		postcode,
+		direct_line,
+		dept_no,
+		position_no,
+		ip_adress,
+		extension,
+		join_date,
+		birth_date
+		)
+		VALUES
+		(
+		#{id},
+		#{password},
+		#{name},
+		#{sex},
+		#{homeNumber},
+		#{phoneNumber},
+		#{address},
+		#{maritalStatus},
+		#{postcode},
+		#{directLine},
+		#{deptNo},
+		#{positionNo},
+		#{ipAdress},
+		#{extension},
+		#{joinDate},
+		#{birthDate}
+		)
+	</insert>
+
+	<insert id="insertDept" parameterType="Dept">
+
+		INSERT INTO Dept
+
+		(dept_no, partname)
+
+		VALUES
+		(deptno_sequence.nextval, #{partName})
+	</insert>
+	<insert id="insertPosition" parameterType="Position">
+		INSERT INTO Position
+		(
+		position_no,
+		position_name
+		)
+		VALUES
+		(
+		positionno_sequence.nextval,
+		#{positionName}
+		)
+	</insert>
+
+
+
+	<select id="getDeptList" resultType="Dept">
+		SELECT dept_no deptNo,partname partName
+		FROM dept
+	</select>
+	
+<!-- 	<select id="getEmployeeList" resultType="Employee">
+		SELECT id, name, dept_no deptNo, position_no positionNo, sex
+		FROM employee
+		WHERE deleted = 0
+		ORDER BY dept_no DESC, position_no DESC
+	</select> -->
+	
+	<select id="getEmployeeList" resultType="Employee" parameterType="hashMap" >
+		SELECT id, name, dept_no deptNo, position_no positionNo, sex
+		FROM employee
+		WHERE deleted = 0
+		ORDER BY 
+		<choose>
+			<when test='lineup == "id"'>
+				id
+			</when>
+			<when test='lineup == "name"'>
+				name
+			</when>
+			<when test='lineup == "dept"'>
+				position_no DESC, dept_no 
+			</when>
+			<when test='lineup == "position"'>
+				position_no
+			</when>
+		</choose>
+		 ASC 
+	</select>
+
+	<select id="getPositionList" resultType="Position">
+		SELECT position_no positionNo, position_name positionName
+		FROM position
+	</select>
+
+	<select id="getEmployeeById" parameterType="String" resultType="Employee">
+		SELECT id, password, name, sex, home_number homeNumber,phone_number
+		phoneNumber, address, email,
+		marital_status maritalStatus, postcode, direct_line directLine, dept_no deptNo,
+		position_no positionNo, ip_adress ipAdress, extension,join_date
+		joinDate, birth_date birthDate
+		FROM employee WHERE id = #{id}
+	</select>
+
+
+	<select id="getEmployeeByIdAndPasswd" parameterType="hashMap"
+		resultType="Employee">
+		SELECT id, name,position_no positionNo
+		FROM employee
+		WHERE id = #{id} AND password = #{password}
+	</select>
+	<select id="getMemberCountById" parameterType="String"
+		resultType="int">
+		SELECT COUNT(id) FROM employee WHERE id = #{id}
+	</select>
+
+
+	<select id="getemList" resultMap="EmployeeResult">
+		SELECT id,dept_no,position_no,name FROM employee
+	</select>
+
+	<select id="getEmployeeInfomationList" parameterType="String"
+		resultMap="EmployeeResult"> 
+		SELECT id,name,sex,birth_date,phone_number,direct_line,join_date,email,address
+		,position_no,dept_no
+		FROM employee
+		WHERE id=#{id}
+	</select>
+
+	<!-- <select id="getEmployeeList" resultType="Employee" > SELECT id, name, 
+		dept_no, position_no, sex FROM employee WHERE deleted = 0 ORDER BY dept_no 
+		DESC, position_no DESC </select> -->
+	<update id="updateEmployee" parameterType="hashMap">
+		UPDATE employee 
+		set dept_no = #{deptNo}, position_no = #{positionNo} 
+		WHERE id = #{id}
+	</update>
+
+	<update id="deleteEmployee" parameterType="String">
+		UPDATE employee set deleted = '1' WHERE id = #{id}
+	</update>
+	<update id="deleteDept" parameterType="String">
+		DELETE FROM dept WHERE dept_no = #{id}
+	</update>
+	<update id="deletePosition" parameterType="String">
+		DELETE FROM position WHERE position_no = #{id}
+	</update>
+
+	<resultMap type="Employee" id="EmployeeResult">
+		<id property="id" column="id" />
+		<result property="deptNo" column="dept_no" />
+		<result property="email" column="email" />
+		<result property="name" column="name" />
+		<result property="sex" column="sex" />
+		<result property="birthDate" column="birth_date" />
+		<result property="phoneNumber" column="phone_number" />
+		<result property="directLine" column="direct_line" />
+		<result property="joinDate" column="Join_Date" />
+		<result property="email" column="email" />
+		<result property="address" column="address" />
+		
+		<association property="dept" column="dept_no" select="selectDeptById" />
+		<association property="position" column="position_no"
+			select="selectPositionById" />
+
+	</resultMap>
+
+
+	<resultMap type="Dept" id="deptResult">
+		<result property="deptNo" column="dept_no" />
+		<result property="partName" column="partname" />
+	</resultMap>
+
+	<resultMap type="Position" id="PositionResult">
+		<result property="positionNo" column="position_no" />
+		<result property="positionName" column="position_name" />
+	</resultMap>
+
+	<select id="selectDeptById" resultMap="deptResult"
+		parameterType="int">
+		SELECT dept_no,partname FROM dept where dept_no=#{no}
+	</select>
+
+	<select id="selectPositionById" resultMap="PositionResult"
+		parameterType="int">
+		SELECT position_no, position_name FROM position where position_no =#{no}
+
+
+	</select>
+
+
+
+</mapper>                                                                                 

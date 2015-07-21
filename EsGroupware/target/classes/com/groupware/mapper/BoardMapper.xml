@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.groupware.mapper.BoardMapper">
+ 	
+ 	<insert id="insertBoard" 
+		parameterType="Board">
+		<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
+			SELECT 
+			<choose>
+				<when test='classify == "1"'>
+					boardnotice_sequence.nextval
+				</when>
+				<when test='classify == "2"'>
+					boardsystemnotice_sequence.nextval
+				</when>
+				<when test='classify == "3"'>
+					boardfree_sequence.nextval
+				</when>
+				<when test='classify == "4"'>
+					boardreference_sequence.nextval
+				</when>
+			</choose>
+			FROM DUAL
+		</selectKey>
+		
+		
+	 	INSERT INTO board 
+	 	(board_no, boardno, title, id, content, groupno, step,classify) 
+	 	VALUES 
+	 	(board_sequence.nextval, #{boardNo}, #{title}, #{ writer }, #{ content }, #{boardNo},1, #{ classify })
+ 	</insert>  
+ 
+ 	<!-- 목록(List) 조회하기 (이제 필요 ㄴㄴㄴㄴ)-->
+ <!-- 	<select id="getBoardList" parameterType="String" resultType="Board">
+ 	SELECT 
+ 	boardno boardNo, title, id, readcount readCount, regdate regDate, groupno groupNo, step, depth, deleted
+ 	FROM
+ 	board
+ 	WHERE classify = #{ classify }
+ 	ORDER BY 
+ 	groupno DESC, step ASC
+ 	</select>
+  -->
+
+<!--  	페이징 처리 [목록 조회] -->
+    <select id="getBoardList" parameterType="hashMap" resultType="Board">
+ 	SELECT 
+ 	board_no board_No,boardno , title, id writer, readcount, regdate, groupno,
+ 	step, depth, deleted, classify
+ 	FROM 
+ 		(
+ 			SELECT 
+ 				rownum idx, s.*
+ 			FROM (
+ 				SELECT 
+ 					board_no, boardno, title, id, readcount, regdate, groupno,
+ 					step, depth, deleted, classify
+				FROM 
+					board
+ 				WHERE classify = #{ classify }
+ 				ORDER BY 
+ 					groupno DESC, step ASC
+ 				)s	
+ 		)
+ 	WHERE
+ 		idx &gt;= #{ first } AND idx &lt; #{ last }
+ 	</select>
+ 
+ <!-- 	페이징 처리 - title로 [목록 조회]  -->
+ 	<select id="getBoardListByTitle" parameterType="hashMap" resultType="Board">
+ 	SELECT 
+ 	board_no, boardno, title, id writer, readcount, regdate, groupno,
+ 	step, depth, deleted, classify
+ 	FROM
+ 		(
+ 			SELECT
+ 				rownum idx, s.*
+ 			FROM (
+ 				SELECT
+ 					board_no, boardno, title, id, readcount, regdate, groupno,
+ 					step, depth, deleted, classify
+ 				FROM 
+ 					board
+ 				WHERE
+ 					title LIKE '%' || #{ title } || '%' AND classify = #{ classify }
+ 				ORDER BY 
+ 					groupno DESC, step ASC
+ 		)s  
+ 	) 
+ 	WHERE 
+ 		idx &gt;= #{ first } AND idx &lt; #{ last }
+ 	</select>
+ 	
+ 	 <!-- 페이징 처리 -id(작성자)로 [목록 조회] -->
+ 	<select id="getBoardListById" parameterType="hashMap" resultType="Board">
+ 	SELECT 
+ 	board_no, boardno, title, id writer, readcount, regdate, groupno,
+ 	step, depth, deleted, classify
+ 	FROM
+ 		(
+ 			SELECT
+ 				rownum idx, s.*
+ 			FROM (
+ 				SELECT
+ 					board_no, boardno, title, id, readcount, regdate, groupno,
+ 					step, depth, deleted, classify
+ 				FROM 
+ 					board
+ 				WHERE
+ 					id LIKE '%' || #{ id } || '%' AND classify = #{ classify }
+ 				ORDER BY 
+ 					groupno DESC, step ASC
+ 		)s  
+ 	) 
+ 	WHERE 
+ 		idx &gt;= #{ first } AND idx &lt; #{ last }
+ 	</select>
+
+ 	
+ 	 <!--  게시판 전체 게시글 수 조회하는 작업--> 
+ 	<select id="getBoardCount" parameterType="String" resultType="int">
+ 	SELECT 
+ 	COUNT (boardno)
+ 	FROM 
+ 		board
+ 	WHERE classify = #{ classify }
+ 	</select>
+ 	
+ 	 <!--  검색해서, 검색조건에 맞는 게시판 게시글 수 (title)로 조회하는 작업 -->
+ 	<select id="getBoardCountByTitle"  parameterType="hashMap" resultType="int">
+ 	SELECT 
+ 	COUNT (boardno)
+ 	FROM 
+ 		board
+ 	WHERE 
+ 		title LIKE '%' || #{ title } || '%' AND classify = #{ classify }
+ 	</select>
+ 	
+ 	 <!--  검색해서, 검색조건에 맞는 게시판 게시글 수 (id)로 조회하는 작업-->
+ 	<select id="getBoardCountById" parameterType="hashMap" resultType="int"> 
+ 	SELECT 
+ 	COUNT (boardno)
+ 	FROM 
+ 		board
+ 	WHERE 
+ 		id LIKE '%' || #{ id } || '%' AND classify = #{ classify }
+ 	</select>
+ 	
+ 	<!-- 게시글 (Board) list 보여주기 [view]작업 -->
+ 	<select id="getBoardByBoardNo" parameterType="hashMap" resultMap="boardResult">
+ 	SELECT 
+ 		board_no, title, id writer, regdate, readcount, content, groupno, step, depth, 
+ 		classify, boardno
+ 	FROM 
+ 		board
+ 	WHERE 
+ 		boardno = #{ boardno } AND deleted = '0' AND classify = #{ classify }
+ 	</select>
+ 	
+ 	<!--  게시글 수정 (편집)?  --> 
+ 	<update id="updateBoard" parameterType="hashMap">
+ 	UPDATE 
+ 		board
+ 	SET title = #{ title } , content = #{ content }
+ 	WHERE boardno = #{ boardno }
+ 	</update> 
+ 	
+ 	<!--  게시판 글 delete기능-->
+ 	<update id="deleteBoard" parameterType="int" >
+ 	UPDATE 
+ 		board
+ 	SET 
+ 		deleted = '1' 
+ 	WHERE boardno = #{ boardno }
+ 	</update>
+ 	
+  
+ 	<resultMap type="Board" id="boardResult">
+		<id column="board_no" property="board_No" />
+		<result column="boardno" property="boardNo" />
+		<result column="title" property="title" />
+		<result column="writer" property="writer" />
+		<result column="content" property="content" />
+		<result column="regdate" property="regDate" />
+		<result column="readcount" property="readCount" />
+		<result column="deleted" property="deleted" />
+		<result column="groupno" property="groupNo" />
+		<result column="step" property="step" />
+		<result column="depth" property="depth" />
+		<result column="classify" property="classify" />
+		<collection property="comments" 
+			column="board_no" select="getBoardCommentListByBoardNo" />
+	</resultMap>
+	<resultMap type="BoardComment" id="boardcommentResult">
+		<id column="commentno" property="commentNo" />
+		<result column="board_no" property="board_No" />
+		<result column="writer" property="writer" />
+		<result column="content" property="content" />
+		<result column="regdate" property="regDate" />
+	</resultMap>
+ 	
+   <!-- 댓글쓰기 -->
+<!--    <update id="insertBoardReply" parameterType="Board" >
+   
+   UPDATE 
+   		board
+   SET
+   		step = step+1 
+   WHERE 
+   		groupNo = #{ groupNo } AND step &gt; #{ step } AND classify = #{classify}
+   
+   INSERT INTO board(board_no, boardno, title, id, content, id writer, content, groupno, step, depth, classify)
+   VALUES ()
+   
+   </update> -->
+   
+   <!-- view 부분에 댓글 달기 -->
+   <insert id="insertBoardComment" parameterType="BoardComment" >
+   INSERT INTO 
+   		boardcomment (commentno, board_no, id, content)
+   VALUES (boardcomment_sequence.nextval, #{board_No}, #{writer}, #{content})
+   </insert>
+   
+   <!-- 댓글 리스트  -->
+   <select id="getBoardCommentListByBoardNo" parameterType="int" resultMap="boardcommentResult">
+   SELECT
+   		commentno, board_no, id writer, content, regdate
+   FROM
+   		boardcomment
+   WHERE 
+   		board_no = #{ board_no }
+   </select>
+   
+   <!--  댓글 삭제 -->
+   <update id="deleteComment" parameterType="int">
+   DELETE 
+   FROM
+   		boardcomment 
+   WHERE 
+   		commentno = #{ commentNo }
+   </update>
+   
+   <!--  댓글 수정 -->
+   <update id="updateComment" parameterType="BoardComment" >
+   UPDATE
+   		boardcomment
+   SET
+   		content = #{ content } 
+   WHERE commentno = #{ commentNo }
+   </update>
+   
+   <update id="updateReadCount" parameterType="hashMap" >
+   UPDATE
+   		board
+   SET readcount = readcount + 1
+   		
+   WHERE boardno = #{ boardno } AND classify=#{classify}
+   </update>
+   
+   
+  
+ </mapper>
+  
