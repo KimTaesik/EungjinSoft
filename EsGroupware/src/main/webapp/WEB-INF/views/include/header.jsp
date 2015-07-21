@@ -57,6 +57,10 @@
 			<img src="/groupware/resources/image/organization.png" /><br />
 				조직도
 			</td>
+ 			<td onclick="window.open('/groupware/address/addressbook.action','주소록','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
+			<img src="/groupware/resources/image/home.png" /><br />
+				주소록
+			</td>
 		</tr>
 		<!--
 			<td>
