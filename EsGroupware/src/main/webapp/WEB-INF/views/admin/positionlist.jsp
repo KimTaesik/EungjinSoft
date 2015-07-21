@@ -37,7 +37,7 @@
 							<th>직급</th>
 							<th> </th>
 						</tr>
-						<c:forEach var="position" items="positions">
+						<c:forEach var="position" items="${ positions }">
 							<tr style="height:30px;text-align:left;">
 								<td>
 									${ position.positionName }
@@ -48,10 +48,10 @@
 							</tr>
 						</c:forEach>				
 					</table>
-					<c:otherwise>
-						<h3 style='text-align:center'>등록된 직급이 없습니다.</h3>
-					</c:otherwise>
 				</c:when>
+				<c:otherwise>
+						<h3 style='text-align:center'>등록된 직급이 없습니다.</h3>
+				</c:otherwise>
 			</c:choose>
 			
 			<%-- <% if (positions != null && positions.size() > 0) { %>			
