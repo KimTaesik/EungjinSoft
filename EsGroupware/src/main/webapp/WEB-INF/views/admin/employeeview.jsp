@@ -2,6 +2,7 @@
 <%@page import="com.groupware.dto.Position"%>
 <%@page import="com.groupware.dto.Dept"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
 <!DOCTYPE html>
@@ -92,7 +93,8 @@
 		                <th>아이디(ID)</th>
 		                <td>
 		                    <input type='text' id="id" name='id' 
-		                    	style='width:200px' value=<%= employee.getId() %> readonly="readonly"/>
+		                    	<%-- style='width:200px' value=<%= employee.getId() %> readonly="readonly"/> --%>
+		                    	style='width:200px' value=${ employee.id } readonly="readonly"/>
 		                </td>
 		            </tr>
 <!-- 		            <tr>
@@ -114,7 +116,8 @@
 		            <tr>
 		                <th>이름</th>
 		                <td>
-		                	<input id='name' type='text' name='name' style='width:280px' value=<%= employee.getName() %> readonly="readonly" />
+		                	<%-- <input id='name' type='text' name='name' style='width:280px' value=<%= employee.getName() %> readonly="readonly" /> --%>
+		                	<input id='name' type='text' name='name' style='width:280px' value=${ employee.name } readonly="readonly" />
 		                </td>
 		            </tr>	       
 		            <%-- <tr>
@@ -168,11 +171,20 @@
 								<% if(employee.getDeptNo().equals(dept.getDeptNo())) {%>
 		                		<option value= '<%= employee.getDeptNo() %>'><%= dept.getPartName() %></option>
 		                		<% } %>    
-		                	<%} %> --%>            	
-		                	<% for (Dept dept : depts) { %>
-		                	<option value='<%= dept.getDeptNo() %>' <% if(employee.getDeptNo().equals(dept.getDeptNo())){%> selected = "selected" <%}%> >
-		                	<%= dept.getPartName() %></option>
-		                	<% } %>
+		                	<%} %> --%>
+		                	
+		                	<c:forEach var="dept" items="${ depts }">
+		                		<option value='${ dept.deptNo }' 
+		                			<c:if test="${ employee.deptNo.equals(dept.deptNo) }"> selected = "selected" </c:if>
+								>
+			                	${ dept.partName }
+			                	</option>
+		                	</c:forEach>
+		                	            	
+<%-- 		                	<% for (Dept dept : depts) { %>
+			                	<option value='<%= dept.getDeptNo() %>' <% if(employee.getDeptNo().equals(dept.getDeptNo())){%> selected = "selected" <%}%> >
+			                	<%= dept.getPartName() %></option>
+		                	<% } %> --%>
 		                	</select>
 		                </td>
 		            </tr>
@@ -186,6 +198,9 @@
 			                	<option value= '<%= employee.getPositionNo() %>'><%= position.getPositionName() %></option>
 			                	<% } %>
 			                <%} %> --%>
+			                
+			                
+			                
 		                	<% for (Position position : positions) { %>
 		                	<option value='<%= position.getPositionNo() %>' <% if(employee.getPositionNo().equals(position.getPositionNo())) {%> selected = "selected" <%}%> >
 		                	<%= position.getPositionName()%></option>

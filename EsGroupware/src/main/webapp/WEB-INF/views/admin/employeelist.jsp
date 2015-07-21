@@ -27,9 +27,9 @@
 			<h3 style="text-align: center;">사원 관리 목록</h3>
 			<br /><br />
 			
-			<% List<Employee> employees = (List<Employee>)request.getAttribute("employees"); %>
+<%-- 			<% List<Employee> employees = (List<Employee>)request.getAttribute("employees"); %>
 			<% List<Dept> depts = (List<Dept>)request.getAttribute("depts"); %>
-			<% List<Position> positions = (List<Position>)request.getAttribute("positions"); %>
+			<% List<Position> positions = (List<Position>)request.getAttribute("positions"); %> --%>
 			<c:choose>
 				<c:when test="${ employees != null && employees.size() > 0 }">
 					<table id="listcss" border="2" bordercolor="#70a3f8" style="width:600px; border-spacing: 0px;" align="right">
