@@ -94,6 +94,8 @@
 		                <input type="hidden" name="pageno" value="${pageno}"  />
 		                <input type="hidden" name="board_no" value="<%=board.getBoard_No() %>" />
 		                <input type="hidden" name="classify" value="<%=board.getClassify() %>"  />
+		                
+		                
 		                </td>
 		            </tr>
 		            <tr>
@@ -113,7 +115,8 @@
 		                <td>
 							<textarea 
 		                    	name="content" style="width:580px" 
-		                    	rows="15"><%= board.getContent().replace("\r\n","<br />") %></textarea>
+		                    	rows="15">
+		                    	 ${fn:replace(board.content,cn,br)}</textarea>
 		                </td>
 		            </tr>
 		        </table>
