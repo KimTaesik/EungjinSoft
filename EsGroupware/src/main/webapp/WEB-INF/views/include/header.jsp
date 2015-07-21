@@ -1,6 +1,7 @@
 <%@page import="com.groupware.dto.Employee"%>
 <%@page import="com.groupware.dto.Board"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" pageEncoding="utf-8"%>
 
 <html>
@@ -14,14 +15,26 @@
 	<div id="login">
             <div>
                 <ul>
-  					<% Employee employee2= (Employee)session.getAttribute("loginuser"); %>
+  					<%-- <% Employee employee2= (Employee)session.getAttribute("loginuser"); %>
 	            	<% if (employee2 == null) { %>
-	            	<li><a href="/groupware/login/loginform.action">로그인</a></li>
-	                <li><a href="#"></a></li>
+	            		<li><a href="/groupware/login/loginform.action">로그인</a></li>
+	                	<li><a href="#"></a></li>   	
 	                <% } else { %>
-	                <%= employee2.getName() %>님 환영합니다.
-	                <li><a href='/groupware/login/logout.action'>로그아웃</a></li>
-	                <% } %>
+	                	<%= employee2.getName() %>님 환영합니다.
+	                	<li><a href='/groupware/login/logout.action'>로그아웃</a></li>
+					<% } %> --%>
+					
+					<!------------------------------JSTL------------------------------->
+					<c:choose>
+						<c:when test="${loginuser == null}">	
+							<li><a href="/groupware/login/loginform.action">로그인</a></li>
+		                	<li><a href="#"></a></li>
+						</c:when>
+						<c:otherwise>
+							${ loginuser.name }님 환영합니다.
+		                	<li><a href='/groupware/login/logout.action'>로그아웃</a></li>
+						</c:otherwise>
+					</c:choose>				
                 </ul>
             </div>
 		</div>
