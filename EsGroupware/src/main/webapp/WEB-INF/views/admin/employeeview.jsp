@@ -82,7 +82,7 @@
 		    <div id='inputmain'>
 		        <div class='inputsubtitle'>회원기본정보</div>
 		        <form id='form' action='employeeupdate.action' method='post'><!-- 상대경로표시 -->
-		         <% Employee employee = (Employee)request.getAttribute("employee"); %>  
+		        <%-- <% Employee employee = (Employee)request.getAttribute("employee"); %>  --%> 
 		        <table>
 		        	<tr>
 		            	<th style='background-color: #fffffc;text-align: left;'>
@@ -162,7 +162,7 @@
 		                	※ 내선은 선택 입력사항입니다.
 		                </td>
 		            </tr> -->
-		            <% List<Dept> depts = (List<Dept>)request.getAttribute("depts"); %>            
+		            <%-- <% List<Dept> depts = (List<Dept>)request.getAttribute("depts"); %> --%>            
 		            <tr>
 		                <th id="essential">* 부서</th>
 		                <td>

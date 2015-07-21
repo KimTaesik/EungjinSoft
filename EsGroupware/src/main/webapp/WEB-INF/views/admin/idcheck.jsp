@@ -47,8 +47,9 @@
 		            <tr>
 		                <th>아이디(ID)</th>
 		                <td>
-		                	<% String getid = (String)request.getAttribute("getid"); %>
-		                    <input type='text' id="id" name='memberId' style='width:200px' value='<%= getid %>'/>
+		                	<%-- <% String getid = (String)request.getAttribute("getid"); %>
+		                    <input type='text' id="id" name='memberId' style='width:200px' value='<%= getid %>'/>  --%>
+		                    <input type='text' id="id" name='memberId' style='width:200px' value='${ getid }'/>
 		                    &nbsp;&nbsp;
 		                    <input type="button" value="중복검사" style='height:25px' onclick="checkandsubmit();" />
 		                </td>

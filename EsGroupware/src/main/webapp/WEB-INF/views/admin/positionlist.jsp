@@ -4,6 +4,7 @@
 <%@page import="com.groupware.dto.Employee"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 
@@ -29,6 +30,7 @@
 			<% List<Employee> employees = (List<Employee>)request.getAttribute("employees"); %>
 			<% List<Dept> depts = (List<Dept>)request.getAttribute("depts"); %>
 			<% List<Position> positions = (List<Position>)request.getAttribute("positions"); %>
+			
 			<% if (positions != null && positions.size() > 0) { %>			
 			<!-- <table id="listcss" border='1' align='center' width='600' cellspacing="0"> -->
 			<table id="listcss" border="2" bordercolor="#70a3f8" style="width:300px; border-spacing: 0px;" align="center">
