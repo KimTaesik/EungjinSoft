@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.groupware.mapper.AttendanceMapper">
+ 
+ 	<insert id="insertAttendance" parameterType="hashMap" >
+		INSERT INTO attendance(at_id, id, years, months, days, hours, minutes, seconds, classify) 
+		values(att_seq.nextval,#{id},#{year},#{month},#{day},#{hours},#{minutes},#{seconds},#{classfiy})
+ 	</insert>
+
+ 	<select id="selectAttendance" parameterType="hashMap" resultType="Attendance">
+ 		SELECT years, months, days, hours, minutes, seconds, classify FROM attendance 
+ 		WHERE ID = #{id} and years=#{year} and months=#{month} and days=#{day}
+ 	</select>
+ 	
+ 	<select id="selectAllAtt" parameterType="hashMap" resultType="Attendance">
+ 		SELECT years, months, days, hours, minutes, seconds, classify FROM attendance 
+ 		WHERE ID = #{id} and years=#{year} and months=#{month}
+ 	</select>
+ 	
+ 	<resultMap type="Employee" id="EmployeeResult">
+		<id property="id" column="id"/>
+		<result property="deptNo" column="dept_no"/>
+		<result property="email" column="email"/>
+		<result property="name" column="name"/>
+		<result property="sex" column="sex"/>
+		<result property="birthDate" column="birth_date"/>
+		<result property="phoneNumber" column="phone_number"/>
+		<result property="directLine" column="direct_line"/>
+		<result property="joinDate" column="Join_Date"/>
+		<result property="deptName" column="partname"/>
+		<result property="positionName" column="position_name"/>
+		<result property="attCount" column="attcount"/>
+		<result property="normalCount" column="normalcount"/>
+	</resultMap>
+
+ 	<select id="getSelectAll" resultMap="EmployeeResult">
+ 		select DISTINCT e.name, d.partname, p.position_name,
+		(select count(*) from attendance a where e.ID=a.ID and CLASSIFY like '%지각') attcount,
+		(select count(*) from attendance a where e.ID=a.ID and CLASSIFY like '%출근') normalcount 
+		from EMPLOYEE e, dept d, POSITION p, ATTENDANCE att 
+		where e.DEPT_NO = d.DEPT_NO(+) and p.POSITION_NO(+)= e.POSITION_NO and e.ID = att.ID(+)
+ 	</select>
+ 	
+  	<select id="getSelectCalendar" parameterType="hashMap" resultMap="EmployeeResult">
+		select DISTINCT e.name, d.partname, p.position_name,
+		(select count(*) from attendance a where e.ID=a.ID and CLASSIFY like '%지각' and years*10000+months*100+days between #{stDate} and #{edDate}) attcount,
+		(select count(*) from attendance a where e.ID=a.ID and CLASSIFY like '%출근' and years*10000+months*100+days between #{stDate} and #{edDate}) normalcount 
+		from EMPLOYEE e, dept d, POSITION p, ATTENDANCE att 
+		where e.DEPT_NO = d.DEPT_NO and p.POSITION_NO= e.POSITION_NO and e.ID = att.ID(+)
+ 	</select>
+ 	
+ 	<select id="getSelectCalendarName" parameterType="hashMap" resultMap="EmployeeResult">
+		select DISTINCT e.name, d.partname, p.position_name,
+		(select count(*) from attendance a where e.ID=a.ID and CLASSIFY like '%지각' and years*10000+months*100+days between #{stDate} and #{edDate}) attcount,
+		(select count(*) from attendance a where e.ID=a.ID and CLASSIFY like '%출근' and years*10000+months*100+days between #{stDate} and #{edDate}) normalcount 
+		from EMPLOYEE e, dept d, POSITION p, ATTENDANCE att 
+		where e.DEPT_NO = d.DEPT_NO and p.POSITION_NO= e.POSITION_NO and e.ID = att.ID(+) and e.name like '%'||#{name}||'%'
+ 	</select>
+
+	<select id="getSelectCalendarDept" parameterType="hashMap" resultMap="EmployeeResult">
+		select DISTINCT e.name, d.partname, p.position_name,
+		(select count(*) from attendance a where e.ID=a.ID and CLASSIFY like '%지각' and years*10000+months*100+days between #{stDate} and #{edDate}) attcount,
+		(select count(*) from attendance a where e.ID=a.ID and CLASSIFY like '%출근' and years*10000+months*100+days between #{stDate} and #{edDate}) normalcount 
+		from EMPLOYEE e, dept d, POSITION p, ATTENDANCE att 
+		where e.DEPT_NO = d.DEPT_NO and p.POSITION_NO= e.POSITION_NO and e.ID = att.ID(+) and d.PARTNAME= #{name}
+	</select>
+ 	
+ </mapper>
+  
