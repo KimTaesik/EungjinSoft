@@ -205,39 +205,7 @@
 					
 					<tbody>
 			<c:set var="dateNum" value="${ 1 - currentDay }"></c:set>
-			<%
-			
-				int dateNum = 1 - currentDay;
-				for(int i = 0; i < week; i++) {
-			%>
-								<tr>
-			<% 
-					for(int j = 0; j < 7; j++, dateNum++) {
-						if( dateNum < 1 || dateNum > currentLastDate ) {
-			%>
-											<td class="<%= dateString[j] %>"> </td>
-			<%
-							continue;
-						}
-			%>
-								<td class="<%= dateString[j] %>"><%=dateNum%><br />
-			<%
-						for(Attendance att : allAtt){
-							if(dateNum == att.getDays() && currentYear == att.getYears() && currentMonth == att.getMonths()){
-			%>
-										 <%=att.getClassify() %> : <%=att.getHours()%>시 <%=att.getMinutes() %>분 <br />
-			<%					
-							}
-						}
-			%>
-								</td>
-			<%
-					}
-			%>
-								</tr>
-			<%					
-				}
-			%>
+
 							</tbody>
 						</table>
 			</form>
