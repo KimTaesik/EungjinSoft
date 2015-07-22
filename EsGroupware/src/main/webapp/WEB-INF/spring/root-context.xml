@@ -59,4 +59,10 @@
 	</bean>
 
 
+	<bean id="ApprovalMapper" 
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" 
+			value="com.groupware.mapper.ApprovalMapper"/>
+		<property name="sqlSessionFactory" ref="sessionFactory" />
+	</bean>
 </beans>
