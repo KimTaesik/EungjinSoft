@@ -32,7 +32,7 @@
 		var txt = (out.checked == true ? "Y" : "");
 		if(work == 1){
 			if(document.getElementById("textfield").value.length<2){
-				location.href = "recheck.action?year="+clockYear+"&month="+clockMonth+"&day="+clockDay+"&hours="+clockHours+"&minutes="+clockMinutes+"&seconds="+clockSeconds+"&chk="+chk+"&out="+txt;
+				location.href = "check.action?year="+clockYear+"&month="+clockMonth+"&day="+clockDay+"&hours="+clockHours+"&minutes="+clockMinutes+"&seconds="+clockSeconds+"&chk="+chk+"&out="+txt;
 			}else{
 				alert("이미 출근처리를 하셨습니다. 수정사항은 관리자에게 문의해주세요.");
 			}
@@ -42,7 +42,7 @@
 			}
 			if(document.getElementById("textfield2").value.length<2){
 				var chk=2;
-				location.href = "recheck.action?year="+clockYear+"&month="+clockMonth+"&day="+clockDay+"&hours="+clockHours+"&minutes="+clockMinutes+"&seconds="+clockSeconds+"&chk="+chk+"&out="+txt;
+				location.href = "check.action?year="+clockYear+"&month="+clockMonth+"&day="+clockDay+"&hours="+clockHours+"&minutes="+clockMinutes+"&seconds="+clockSeconds+"&chk="+chk+"&out="+txt;
 			} else {
 				alert("이미 퇴근처리를 하셨습니다. 수정사항은 관리자에게 문의해주세요.");
 			}
@@ -53,7 +53,7 @@
 <body >
 	<c:import url="/WEB-INF/views/include/attheader.jsp"></c:import>
 		<section>
-			<form method="post" action="recheck.action" name="officeform">
+			<form method="get" action="check.action" name="officeform">
 				<input type="hidden" name="year" id="year" value="0" />
 				<div id="sub">
 					<!--  검색 버튼 영역 -->
@@ -129,93 +129,61 @@
 				</div>
 			</form>
 			<br />
-			<form method="post" action="recheck.action" name="calendar">
-			<%
-				List<Attendance> allAtt = (List<Attendance>)request.getAttribute("all");
-				Date date;
-				if(request.getAttribute("ryear")!=null){
-					date = new Date((int)request.getAttribute("ryear"), (int)request.getAttribute("rmonth")-1, 1);
-				} else {
-					date = new Date();
-				}
-				
-				int currentYear = 0;
-				if(request.getAttribute("ryear")==null){
-					currentYear = date.getYear()+1900;
-				}else{
-					currentYear = (int)request.getAttribute("ryear");
-				}
-				//년도를 구함
-				
-				
-				int currentMonth = 0;
-				if(request.getAttribute("rmonth")==null){
-					currentMonth = date.getMonth() + 1;
-				}else{
-					currentMonth = (int)request.getAttribute("rmonth");
-				}
-				//연을 구함. 월은 0부터 시작하므로 +1, 12월은 11을 출력
-				
-				int currentDate = 0;
-				if(request.getAttribute("ryear")==null || request.getAttribute("rmonth")==null){
-					currentDate = date.getDate();
-				}else{
-					currentDate = 1;
-				}
-				//int currentDate = date.getDate();
-				//오늘 일자.
-				
-				date.setDate(1);
-				int currentDay = 0;
-				if(request.getAttribute("ryear")==null || request.getAttribute("rmonth")==null){
-					currentDay = date.getDay();
-				}else{
-					currentDay = date.getDay()-1;
-				}	
-				//이번달 1일의 요일은 출력. 0은 일요일 6은 토요일
-				
-				String[] dateString = new String[]{"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
-				int[] lastDate = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-				if( (currentYear % 4 == 0 && currentYear % 100 != 0) || currentYear % 400 == 0 )
-					lastDate[1] = 29;
-				//각 달의 마지막 일을 계산, 윤년의 경우 년도가 4의 배수이고 100의 배수가 아닐 때 혹은 400의 배수일 때 2월달이 29일 임.
-				
-				int currentLastDate = lastDate[currentMonth-1];
-				int week = (int)Math.ceil(( currentDay + currentLastDate ) / 7 )+1;
-				//총 몇 주인지 구함.
-				
-				String calendar = "";
-				%>
+			<form method="get" action="check.action" name="calendar">
+			<c:choose>
+				<c:when test="${ ryear != null }">
+					<c:set var="date" value="${ rdate }" />
+					<c:set var="currentYear" value="${ ryear }" />
+					<c:set var="currentMonth" value="${ rmonth }" />
+					<c:set var="currentDate" value="1" />
+					<c:set var="currentDay" value="${ currentDay }" />
+				</c:when>
+				<c:otherwise>
+					<c:set var="date" value="${ date }" />
+					<c:set var="currentYear" value="${ ryear }" />
+					<c:set var="currentMonth" value="${ rmonth }" />
+					<c:set var="currentDate" value="1" />
+					<c:set var="currentDay" value="${ currentDay }" />
+				</c:otherwise>
+			</c:choose>
+			<c:set var="dateString" value="${ dateString }" />
+			<c:set var="lastDate" value="${ lastDate }" />
+			<c:if test="${(currentYear % 4 == 0 && currentYear % 100 != 0) || currentYear % 400 == 0}">
+				<c:set var="lastDate[1]" value="29" />
+				${ lastDate[1] = 29}
+			</c:if>
+			<c:set var="currentLastDate" valye="${ lastDate[currentMonth-1] }"/>
+			<c:set var="week" value="${( currentDay + currentLastDate ) / 7+(1-(( currentDay + currentLastDate ) / 7%1))%1+1}" />
 				
 				<div id="header" class="kheader">
-					<span id="date"><%= currentYear %>년 <%= currentMonth %>월</span>
+					<span id="date">${ currentYear }년 ${ currentMonth }월</span>
 				</div>
 				<div class="sheader">
 					
 					<select name="yyear" style="WIDTH: 60px" class="sinput" onchange="submit();"> 
-						<option value='2008' <%= currentYear==2008 ? "selected":"" %> >2008</option>
-						<option value='2009' <%= currentYear==2009 ? "selected":"" %> >2009</option>
-						<option value='2010' <%= currentYear==2010 ? "selected":"" %> >2010</option>
-						<option value='2011' <%= currentYear==2011 ? "selected":"" %> >2011</option>
-						<option value='2012' <%= currentYear==2012 ? "selected":"" %> >2012</option>
-						<option value='2013' <%= currentYear==2013 ? "selected":"" %> >2013</option>
-						<option value='2014' <%= currentYear==2014 ? "selected":"" %> >2014</option>
-						<option value='2015' <%= currentYear==2015 ? "selected":"" %> >2015</option>
+						<option value='2008' ${ currentYear==2008 ? "selected":"" } >2008</option>
+						<option value='2009' ${ currentYear==2009 ? "selected":"" } >2009</option>
+						<option value='2010' ${ currentYear==2010 ? "selected":"" } >2010</option>
+						<option value='2011' ${ currentYear==2011 ? "selected":"" } >2011</option>
+						<option value='2012' ${ currentYear==2012 ? "selected":"" } >2012</option>
+						<option value='2013' ${ currentYear==2013 ? "selected":"" } >2013</option>
+						<option value='2014' ${ currentYear==2014 ? "selected":"" } >2014</option>
+						<option value='2015' ${ currentYear==2015 ? "selected":"" } >2015</option>
 					</select>
 					년
 					<select name="mmonth" style="WIDTH: 60px" class="sinput" onchange="submit();"> 
-						<option value='1' <%= currentMonth==1 ? "selected":"" %>>1</option>
-						<option value='2' <%= currentMonth==2 ? "selected":"" %> >2</option>
-						<option value='3' <%= currentMonth==3 ? "selected":"" %> >3</option>
-						<option value='4' <%= currentMonth==4 ? "selected":"" %> >4</option>
-						<option value='5' <%= currentMonth==5 ? "selected":"" %> >5</option>
-						<option value='6' <%= currentMonth==6 ? "selected":"" %> >6</option>
-						<option value='7' <%= currentMonth==7 ? "selected":"" %> >7</option>
-						<option value='8' <%= currentMonth==8 ? "selected":"" %> >8</option>
-						<option value='9' <%= currentMonth==9 ? "selected":"" %> >9</option>
-						<option value='10' <%= currentMonth==10 ? "selected":"" %> >10</option>
-						<option value='11' <%= currentMonth==11 ? "selected":"" %> >11</option>
-						<option value='12' <%= currentMonth==12 ? "selected":"" %> >12</option>
+						<option value='1' ${ currentMonth==1 ? "selected":"" } >1</option>
+						<option value='2' ${ currentMonth==2 ? "selected":"" } >2</option>
+						<option value='3' ${ currentMonth==3 ? "selected":"" } >3</option>
+						<option value='4' ${ currentMonth==4 ? "selected":"" } >4</option>
+						<option value='5' ${ currentMonth==5 ? "selected":"" } >5</option>
+						<option value='6' ${ currentMonth==6 ? "selected":"" } >6</option>
+						<option value='7' ${ currentMonth==7 ? "selected":"" } >7</option>
+						<option value='8' ${ currentMonth==8 ? "selected":"" } >8</option>
+						<option value='9' ${ currentMonth==9 ? "selected":"" } >9</option>
+						<option value='10' ${ currentMonth==10 ? "selected":"" } >10</option>
+						<option value='11' ${ currentMonth==11 ? "selected":"" } >11</option>
+						<option value='12' ${ currentMonth==12 ? "selected":"" } >12</option>
 					</select>
 					월
 				</div>
@@ -236,8 +204,9 @@
 					</thead>
 					
 					<tbody>
-					
+			<c:set var="dateNum" value="${ 1 - currentDay }"></c:set>
 			<%
+			
 				int dateNum = 1 - currentDay;
 				for(int i = 0; i < week; i++) {
 			%>

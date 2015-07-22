@@ -1,6 +1,7 @@
 <%@page import="com.groupware.dto.Employee"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -11,7 +12,8 @@
 
 	<div>
 		
-		<% pageContext.include("/WEB-INF/views/include/header.jsp"); %>
+		<%-- <% pageContext.include("/WEB-INF/views/include/header.jsp"); %> --%>
+		<c:import url="/WEB-INF/views/include/header.jsp" />
 			
 		<div style="margin-top: 15%;">
 			<br /><br /><br />

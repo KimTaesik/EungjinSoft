@@ -2,6 +2,7 @@
 <%@page import="com.groupware.dto.Position"%>
 <%@page import="com.groupware.dto.Dept"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
 <!DOCTYPE html>
@@ -81,7 +82,7 @@
 		    <div id='inputmain'>
 		        <div class='inputsubtitle'>회원기본정보</div>
 		        <form id='form' action='employeeupdate.action' method='post'><!-- 상대경로표시 -->
-		         <% Employee employee = (Employee)request.getAttribute("employee"); %>  
+		        <%-- <% Employee employee = (Employee)request.getAttribute("employee"); %>  --%> 
 		        <table>
 		        	<tr>
 		            	<th style='background-color: #fffffc;text-align: left;'>
@@ -92,7 +93,8 @@
 		                <th>아이디(ID)</th>
 		                <td>
 		                    <input type='text' id="id" name='id' 
-		                    	style='width:200px' value=<%= employee.getId() %> readonly="readonly"/>
+		                    	<%-- style='width:200px' value=<%= employee.getId() %> readonly="readonly"/> --%>
+		                    	style='width:200px' value=${ employee.id } readonly="readonly"/>
 		                </td>
 		            </tr>
 <!-- 		            <tr>
@@ -114,7 +116,8 @@
 		            <tr>
 		                <th>이름</th>
 		                <td>
-		                	<input id='name' type='text' name='name' style='width:280px' value=<%= employee.getName() %> readonly="readonly" />
+		                	<%-- <input id='name' type='text' name='name' style='width:280px' value=<%= employee.getName() %> readonly="readonly" /> --%>
+		                	<input id='name' type='text' name='name' style='width:280px' value=${ employee.name } readonly="readonly" />
 		                </td>
 		            </tr>	       
 		            <%-- <tr>
@@ -159,20 +162,34 @@
 		                	※ 내선은 선택 입력사항입니다.
 		                </td>
 		            </tr> -->
-		            <% List<Dept> depts = (List<Dept>)request.getAttribute("depts"); %>            
+		            <%-- <% List<Dept> depts = (List<Dept>)request.getAttribute("depts"); %> --%>            
 		            <tr>
 		                <th id="essential">* 부서</th>
 		                <td>
 		                	<select id='dept' type='text' name='deptNo' style='width:80px'>
-<%-- 		                	<% for (Dept dept : depts) { %>
+		                	<c:forEach var="dept" items="${ depts }">
+		                		<c:if test="${ employee.deptNo.equals(dept.deptNo) }">
+		                			<option value= '${ employee.deptNo }'>${ dept.partName }</option>  
+		                		</c:if>
+		                	</c:forEach>  	
+		                	<c:forEach var="dept" items="${ depts }">
+		                		<option value='${ dept.deptNo }' 
+		                			<c:if test="${ employee.deptNo.equals(dept.deptNo) }"> selected = "selected" </c:if>
+								>
+			                	${ dept.partName }
+			                	</option>
+		                	</c:forEach>
+		                	
+<%-- 	                	<% for (Dept dept : depts) { %>
 								<% if(employee.getDeptNo().equals(dept.getDeptNo())) {%>
 		                		<option value= '<%= employee.getDeptNo() %>'><%= dept.getPartName() %></option>
 		                		<% } %>    
-		                	<%} %> --%>            	
-		                	<% for (Dept dept : depts) { %>
-		                	<option value='<%= dept.getDeptNo() %>' <% if(employee.getDeptNo().equals(dept.getDeptNo())){%> selected = "selected" <%}%> >
-		                	<%= dept.getPartName() %></option>
-		                	<% } %>
+		                	<%} %>
+		                	            	
+ 		                	<% for (Dept dept : depts) { %>
+			                	<option value='<%= dept.getDeptNo() %>' <% if(employee.getDeptNo().equals(dept.getDeptNo())){%> selected = "selected" <%}%> >
+			                	<%= dept.getPartName() %></option>
+		                	<% } %> --%>
 		                	</select>
 		                </td>
 		            </tr>
@@ -185,11 +202,26 @@
 			                	<% if(employee.getPositionNo().equals(position.getPositionNo())) {%>
 			                	<option value= '<%= employee.getPositionNo() %>'><%= position.getPositionName() %></option>
 			                	<% } %>
-			                <%} %> --%>
-		                	<% for (Position position : positions) { %>
+			                <%} %>
+			                <% for (Position position : positions) { %>
 		                	<option value='<%= position.getPositionNo() %>' <% if(employee.getPositionNo().equals(position.getPositionNo())) {%> selected = "selected" <%}%> >
 		                	<%= position.getPositionName()%></option>
 		                	<% } %>
+			                 --%>
+			                
+			                <c:forEach var="position" items="${ positions }">
+			                	<c:if test="${ employee.positionNo.equals(position.positionNo) }">
+			                		<option value= '${ employee.positionNo }'>${ position.positionName }</option>
+			                	</c:if>
+			                </c:forEach>
+			                <c:forEach var="position" items="${ positions }">
+			                	<option value="${ position.positionNo }"
+			                	<c:if test="${ employee.positionNo.equals(position.positionNo) }">
+			                		selected = "selected"
+			                	</c:if>
+			                	>
+		                		${ position.positionName }</option>
+			                </c:forEach>
 		                	</select>
 		                </td>
 		            </tr>
@@ -203,7 +235,8 @@
 		        
 		        <div class='buttons'>
 		        	<input type='button' value='수정' style='height:25px' onclick="javascript:doSubmit();"; />
-		        	<input type='button' value='삭제' style='height:25px' onclick="javascript:deleteEmployee('<%=employee.getId()%>');"; />
+		        	<%-- <input type='button' value='삭제' style='height:25px' onclick="javascript:deleteEmployee('<%=employee.getId()%>');"; /> --%>
+		        	<input type='button' value='삭제' style='height:25px' onclick="javascript:deleteEmployee('${ employee.id }');"; />
 		        	<input type='button' value='취소' style='height:25px'
 		        		onclick="location.href='employeelist.action';" />
 		        </div>

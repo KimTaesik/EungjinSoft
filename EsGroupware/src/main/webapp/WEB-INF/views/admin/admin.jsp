@@ -7,19 +7,54 @@
 	<link rel="Stylesheet" href="/groupware/resources/styles/admin.css" />
 	<script type='text/javascript'>
 	</script>
+  	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  	<link rel="stylesheet" href="/resources/demos/style.css">
+  	<script>
+	$(function() {	
+	    $( "#accordion" ).accordion();	
+	});	
+	</script>	
+	
 </head>
 <body>
 <nav>
-	<ul>
+<!-- 	<ul>
         <li><a href="/groupware/admin/registerform.action" target="myframe">사원등록</a></li>
         <li><a href="/groupware/admin/deptlist.action" target="myframe">부서관리</a></li>
         <li><a href="/groupware/admin/positionlist.action" target="myframe">직급등록</a></li>
         <li><a href="/groupware/admin/employeelist.action?lineup=position" target="myframe">사원관리</a></li>
-    </ul>
-</nav>
- 
+    </ul> -->
+     <div id="accordion" style="font-size: 10pt">
+		  <h3>회원 / 관리자 관리</h3>
+		  		<ul>
+			        <li><a href="/groupware/admin/registerform.action" target="myframe">사원등록</a></li>
+			        <li><a href="/groupware/admin/deptlist.action" target="myframe">부서관리</a></li>
+			        <li><a href="/groupware/admin/positionlist.action" target="myframe">직급등록</a></li>
+			        <li><a href="/groupware/admin/employeelist.action?lineup=position" target="myframe">사원관리</a></li>
+			        <li><a href="" target="myframe">관리자지정</a></li>
+		    	</ul>
+		  <h3>관리자 2</h3>
+			  <div>
 
-<iframe name="myframe" src="/groupware/admin/registerform.action" scrollbars="no" frameborder="0"></iframe>   
+			  </div>
+		  <h3>관리자 3</h3>
+			    <ul>
+				      <li>List item one</li>
+				      <li>List item two</li>
+				      <li>List item three</li>
+			    </ul>
+		  <h3>관리자 4</h3>
+		  <div>
+
+		  </div>
+		</div>
+		
+</nav>
+
+<iframe name="myframe" src="/groupware/admin/registerform.action" scrollbars="no" frameborder="0">	
+</iframe>   
  
 <!-- 크기를 지정해줘야함, 안그럼 거지같이 나옴 ㅋ 보더값도 0으로 줘야함. 스크롤은 맘대로-->
  

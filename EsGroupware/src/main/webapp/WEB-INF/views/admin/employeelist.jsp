@@ -3,6 +3,7 @@
 <%@page import="com.groupware.dto.Dept"%>
 <%@page import="com.groupware.dto.Employee"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
 <!DOCTYPE html>
@@ -26,10 +27,63 @@
 			<h3 style="text-align: center;">사원 관리 목록</h3>
 			<br /><br />
 			
-			<% List<Employee> employees = (List<Employee>)request.getAttribute("employees"); %>
+<%-- 			<% List<Employee> employees = (List<Employee>)request.getAttribute("employees"); %>
 			<% List<Dept> depts = (List<Dept>)request.getAttribute("depts"); %>
-			<% List<Position> positions = (List<Position>)request.getAttribute("positions"); %>
-			<% if (employees != null && employees.size() > 0) { %>			
+			<% List<Position> positions = (List<Position>)request.getAttribute("positions"); %> --%>
+			<c:choose>
+				<c:when test="${ employees != null && employees.size() > 0 }">
+					<table id="listcss" border="2" bordercolor="#70a3f8" style="width:600px; border-spacing: 0px;" align="right">
+						<tr style="background-color:#70a3f8; text-align:left; " height="30px">
+							<th>
+							<a style='text-decoration:none;font-weight: bold' href='employeelist.action?lineup=id' >아이디</a>
+							</th>
+							<th>
+							<a style='text-decoration:none;font-weight: bold' href='employeelist.action?lineup=name' >이름</a>
+							</th>
+							<th>
+							성별
+							</th>
+							<th>
+							<a style='text-decoration:none;font-weight: bold' href='employeelist.action?lineup=dept' >소속부서</a>
+							</th>
+							<th>
+							<a style='text-decoration:none;font-weight: bold' href='employeelist.action?lineup=position' >직급</a>
+							</th>
+						</tr>
+						<c:forEach var="employee" items="${ employees }">
+							<tr style="height:30px;text-align:left;">
+								<td>
+									<a style='text-decoration:none;font-weight: bold' href='employeeview.action?id=${ employee.id }' >${ employee.id }</a>
+								</td>
+								<td>${ employee.name }</td>
+								<td>${ employee.sex }</td>
+								
+								<c:forEach var="dept" items="${ depts }">
+									<c:choose>
+										<c:when test="${ employee.deptNo.equals(dept.deptNo) }">
+											<td>${ dept.partName }</td>
+										</c:when>
+										<c:otherwise></c:otherwise>
+									</c:choose>
+								</c:forEach>
+								<c:forEach var="position" items="${ positions }">
+									<c:choose>
+										<c:when test="${ employee.positionNo.equals(position.positionNo) }">
+											<td>${ position.positionName }</td>
+										</c:when>
+										<c:otherwise></c:otherwise>
+									</c:choose>
+								</c:forEach>							
+							</tr>
+						</c:forEach>
+					</table>
+				</c:when>
+				<c:otherwise>
+					<h3 style='text-align:center'>등록된 사용자가 없습니다.</h3>
+				</c:otherwise>
+			</c:choose>
+			
+			<%-- <% if (employees != null && employees.size() > 0) { %>			
 			<!-- <table id="listcss" border='1' align='center' width='600' cellspacing="0"> -->
 			<table id="listcss" border="2" bordercolor="#70a3f8" style="width:600px; border-spacing: 0px;" align="right">
 				<tr style="background-color:#70a3f8; text-align:left; " height="30px">
@@ -76,7 +130,7 @@
 			</table>
 			<% } else { %>
 			<h3 style='text-align:center'>등록된 사용자가 없습니다.</h3>
-			<% } %>
+			<% } %> --%>
 
 		</div>
 	</div>
