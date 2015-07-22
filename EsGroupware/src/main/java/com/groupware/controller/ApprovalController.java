@@ -20,7 +20,7 @@ public class ApprovalController {
 		this.employeeDao = employeeDao;
 	}
 
-	@RequestMapping(value="admin.action", method = RequestMethod.GET)
+	@RequestMapping(value="admin2.action", method = RequestMethod.GET)
 	public String admin() {	
 		return "admin/admin";	
 	}
