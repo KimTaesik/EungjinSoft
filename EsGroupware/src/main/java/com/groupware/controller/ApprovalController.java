@@ -14,14 +14,14 @@ import com.groupware.dao.EmployeeDao;
 public class ApprovalController {
 	private EmployeeDao employeeDao;
 	
-	@Autowired
-	@Qualifier("approvalDao")
-	public void setEmployeeDao(EmployeeDao employeeDao) {
-		this.employeeDao = employeeDao;
-	}
-
-	@RequestMapping(value="admin2.action", method = RequestMethod.GET)
-	public String admin() {	
-		return "admin/admin";	
-	}
+//	@Autowired
+//	@Qualifier("approvalDao")
+//	public void setEmployeeDao(EmployeeDao employeeDao) {
+//		this.employeeDao = employeeDao;
+//	}
+//
+//	@RequestMapping(value="admin2.action", method = RequestMethod.GET)
+//	public String admin() {	
+//		return "admin/admin";	
+//	}
 }
