@@ -15,38 +15,38 @@
 		id,
 		password,
 		name,
-		sex,
+		<!-- sex,
 		home_number,
 		phone_number,
 		address,
 		marital_status,
 		postcode,
-		direct_line,
+		direct_line, -->
 		dept_no,
 		position_no,
-		ip_adress,
-		extension,
-		join_date,
-		birth_date
+		<!-- ip_adress,
+		extension, -->
+		join_date
+<!-- 		birth_date -->
 		)
 		VALUES
 		(
 		#{id},
 		#{password},
 		#{name},
-		#{sex},
+		<!-- #{sex},
 		#{homeNumber},
 		#{phoneNumber},
 		#{address},
 		#{maritalStatus},
 		#{postcode},
-		#{directLine},
+		#{directLine}, -->
 		#{deptNo},
 		#{positionNo},
-		#{ipAdress},
-		#{extension},
-		#{joinDate},
-		#{birthDate}
+<!-- 		#{ipAdress},
+		#{extension}, -->
+		#{joinDate}
+<!-- 		#{birthDate} -->
 		)
 	</insert>
 

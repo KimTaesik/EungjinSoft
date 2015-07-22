@@ -16,7 +16,7 @@
 	<link rel='Stylesheet' href='/groupware/resources/styles/input.css' />
 	<style type="text/css">
 		td {
-			border-bottom: 1px solid #EAEAEA
+			border-bottom: 1px solid #111111
 		}
 	</style>
 </head>
@@ -38,7 +38,7 @@
 			<c:choose>
 				<c:when test="${ employees != null && employees.size() > 0 }">
 					 <table id="listcss" style="width:600px; border-spacing: 0px;">
-						<tr style="background-color:#E4E4E4; text-align:left; height: 30px;">
+						<tr style="background-color:#D5D5D5; text-align:left; height: 30px;">
 							<th>
 							<a style='text-decoration:none;font-weight: bold' href='employeelist.action?lineup=id' >아이디</a>
 							</th>

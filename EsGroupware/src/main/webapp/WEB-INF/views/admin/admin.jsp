@@ -33,7 +33,7 @@
 			        <li><a href="/groupware/admin/deptlist.action" target="myframe">부서관리</a></li>
 			        <li><a href="/groupware/admin/positionlist.action" target="myframe">직급등록</a></li>
 			        <li><a href="/groupware/admin/employeelist.action?lineup=position" target="myframe">사원관리</a></li>
-			        <li><a href="" target="myframe">관리자지정</a></li>
+			        <li><a href="/groupware/admin/admingrant.action" target="myframe">관리자지정</a></li>
 		    	</ul>
 		  <h3>관리자 2</h3>
 			  <div>

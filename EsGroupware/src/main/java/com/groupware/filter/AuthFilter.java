@@ -1,4 +1,4 @@
-package com.groupware.filter;
+/*package com.groupware.filter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -81,3 +81,4 @@ public class AuthFilter implements Filter{
 		
 	}
 }
+*/
