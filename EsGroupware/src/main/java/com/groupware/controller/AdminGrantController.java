@@ -21,11 +21,29 @@ import com.groupware.dto.Position;
 @Controller
 @RequestMapping(value="admin")
 public class AdminGrantController {
-
-	@RequestMapping(value="admingrant.action", method = RequestMethod.GET)
-	public String admin() {	
-		return "admin/admingrant";	
+	private EmployeeDao employeeDao;
+	
+	@Autowired
+	@Qualifier("employeeDao")
+	public void setEmployeeDao(EmployeeDao employeeDao) {
+		this.employeeDao = employeeDao;
 	}
 	
-	
+	@RequestMapping(value="admingrant.action", method = RequestMethod.GET)
+	public ModelAndView admin(HttpServletRequest req) throws UnsupportedEncodingException {	
+		
+		req.setCharacterEncoding("utf-8");		
+		ModelAndView mav = new ModelAndView();
+
+		List<Dept> depts = employeeDao.getDeptList();
+		List<Position> positions = employeeDao.getPositionList();
+		
+		mav.addObject("depts", depts);
+		mav.addObject("positions", positions);
+		mav.setViewName("admin/admingrant");
+		
+		return mav;
+		
+	}
+		
 }

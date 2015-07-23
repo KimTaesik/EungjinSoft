@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/groupware/dao/OracleBoardDao.java=UTF-8
 encoding//src/main/java/com/groupware/dao/OracleEmployeeDao.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/admin/admingrant.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/index.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/organization/main.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/organization/test.jsp=UTF-8
