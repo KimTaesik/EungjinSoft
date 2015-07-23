@@ -49,11 +49,15 @@ $(document).ready(function () {
              $('#infoid').text(r.id);
              $('#infoname').text(r.name);
              $('#infosex').text(r.sex);
-             $('#infobirth').text(r.birth);
-             $('#infophone').text(r.phone);
-             $('#infoemail').text(r.eamil);
+             $('#infobirth').text(r.birthdate);
+             $('#infophone').text(r.phoneNumber);
+             $('#infoemail').text(r.email);
              $('#infoaddress').text(r.address);
-             $('#infopartName').tetx(r.dept.partName)
+             $('#infopartName').text(r.dept.partName);
+             $('#infopositionName').text(r.position.positionName);
+             $('#infodirectLine').text(r.directLine);
+             $('#infojoinDate').text(r.joinDate);
+             
             },
             error : function(xhr,status,ex) {
 				$('#result').text(status +"/" + ex );
