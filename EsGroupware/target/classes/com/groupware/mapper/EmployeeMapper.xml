@@ -125,7 +125,7 @@
 
 	<select id="getEmployeeByIdAndPasswd" parameterType="hashMap"
 		resultType="Employee">
-		SELECT id, name,position_no positionNo
+		SELECT id, name,position_no positionNo,usertype userType
 		FROM employee
 		WHERE id = #{id} AND password = #{password}
 	</select>
