@@ -1,0 +1,18 @@
+/* Kurien / Kurien's Blog / http://blog.kurien.co.kr */
+/* 주석만 제거하지 않는다면, 어떤 용도로 사용하셔도 좋습니다. */
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.kheader {height: 50px; line-height: 50px; text-align: center; font-size: 18px; font-weight: bold}
+.sheader {text-align: right; font-size: 15px; font-weight: bold}
+.kbutton {color: #000; text-decoration: none;}
+.cal {width: 970px; height: 300px; font-size: 13px;}
+.ccap {display: none;}
+
+.sun {text-align: center; color: deeppink; width: 10px;}
+.mon {text-align: center;width: 10px;}
+.tue {text-align: center;width: 10px;}
+.wed {text-align: center;width: 10px;}
+.thu {text-align: center;width: 10px;}
+.fri {text-align: center;width: 10px;}
+.sat {text-align: center; color: deepskyblue;width: 10px;}
