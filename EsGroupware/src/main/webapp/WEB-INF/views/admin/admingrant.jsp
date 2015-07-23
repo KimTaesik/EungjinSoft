@@ -36,7 +36,22 @@
 				method : "post",
 				success : function(result, status, xhr) {
 					/* $("#result").text(result); */
-					alert(result);
+					//alert(result[0].name);
+					var TreeKeyDiv2 = document.getElementById('TreeKeyDiv2');
+					var html = 
+						"<select name='TreeKey2' size='5' style='width:500px;height:100px;' onchange='getTreeKeyCode(this.value);'>";
+						for(var i= 0 ; i < result.length; i ++) {
+							html += "<option value='" + result[i].id + "'>" + result[i].name + "</option>";
+						}
+						
+						html += "</select>";
+						
+						if( result.length > 0) {
+							TreeKeyDiv2.innerHTML = html;
+						}
+						if( result.length == 0) {
+							TreeKeyDiv2.innerHTML = "<select name='TreeKey2' size='5' style='width:500px;height:100px;' onchange='getTreeKeyCode(this.value);'><option>사원 없음</option></select>";
+						}	
 				},
 				error : function(xhr, status, ex) {
 
@@ -170,6 +185,21 @@
 							<span class="btn_page">
 								<a href="#" id="adminSearch"><span><img src="/groupware/resources/image/icon_magnify.gif" class="vm"  /> 관리자 찾기</span></a>
 							</span>
+						</nobr>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<div>
+						<nobr>				
+							관리자 선택						</nobr>
+					</div>						
+				</th>
+				<td>
+					<div>
+						<nobr>				
+							<div id="TreeKeyDiv2" style='padding-top:10px;padding-bottom:10px;'>&nbsp;</div>
 						</nobr>
 					</div>
 				</td>
