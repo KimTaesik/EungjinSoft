@@ -66,6 +66,13 @@ public class OracleEmployeeDao implements EmployeeDao {
 				employeeMapper.getEmployeeList(params);
 		return employees;
 	}
+	
+	@Override
+	public List<Employee> searchAdmin(String id) {
+		List<Employee> employees = employeeMapper.searchAdmin(id);
+		return employees;
+	}
+	
 	@Override
 	public List<Dept> getDeptList() {
 		return employeeMapper.getDeptList();
@@ -115,5 +122,6 @@ public class OracleEmployeeDao implements EmployeeDao {
 	public void deletePosition(String id) {
 		employeeMapper.deletePosition(id);
 	}
+
 }
 

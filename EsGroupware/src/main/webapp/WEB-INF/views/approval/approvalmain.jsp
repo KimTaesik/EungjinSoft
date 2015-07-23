@@ -16,9 +16,9 @@
 
 <body>
 <div style="float: left; border: 1px solid;">
-	<% pageContext.include("/WEB-INF/views/organization/test.jsp"); %>
+	<% pageContext.include("/WEB-INF/views/include/approvalheader.jsp"); %>
 </div>
-<div style="float:left; margin-left: 10px; border: 1px solid;">
+<div  style="width:85%; float:right; margin-left: 10px; border: 1px solid;">
     <!--  검색 버튼 영역 --> 
     <div id="title" style="border: 1px solid; "> 
         <h2><span >전자결재 메인</span></h2> 

@@ -1,0 +1,280 @@
+@charset "UTF-8";
+/* ------------------------------------------------------------
+설명: 그룹웨어 V2.0 서브페이지 스타일 시트
+- 각각의 서브페이지별 레이아웃
+날짜: 2009년 10월
+------------------------------------------------------------- */
+
+#sub {width:100%; min-height: 100%;padding:0 0 80px 0; margin:0;}
+
+/* 레이아웃- 타이틀 영역 */
+#sub #title {height:40px;}
+#sub #title h2  {font-family:Dotum, "돋움"; font-size:14px; color:#333333; font-weight:bold; display:inline; float:left; padding-left:15px; padding-top:10px; float:left}
+#sub #title h2 .comm {background:url('/Src/Img/Renewal/Comm/bullet_comm.gif') no-repeat left top;height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .comm-list {background:url('/Src/Img/Renewal/Comm/bullet_comm_list.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .sched {background:url('/Src/Img/Renewal/Schedule/bullet_schedule.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .screen{background:url('/Src/Img/Renewal/Screen/bullet_screen.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .screen-user {background:url('/Src/Img/Renewal/Screen/bullet_user_screen.gif') no-repeat left top; width:300px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .pers {background:url('/Src/Img/Renewal/Pers/bullet_personal.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .join  {background:url('/Src/Img/Renewal/Pers/bullet_join_member.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .conf {background:url('/Src/Img/Renewal/Prop/bullet_kalarm.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .cate {background:url('/Src/Img/Renewal/Prop/bullet_view_tree.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .pc {background:url('/Src/Img/Renewal/Prop/bullet_mymac.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .goods {background:url('/Src/Img/Renewal/Prop/bullet_ark.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .myinfo {background:url('/Src/Img/Renewal/Prop/icon_warehause.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .appr {background:url('/Src/Img/Renewal/Appr/bullet_tablet.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .proj {background:url('/Src/Img/Renewal/Proj/bullet_todo.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .buslog {background:url('/Src/Img/Renewal/Buslog/bullet_kedit.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .addr {background:url('/Src/Img/Renewal/Addr/bullet_namecard.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .albu {background:url('/Src/Img/Renewal/Comm/bullet_thumbnail.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .comp {background:url('/Src/Img/Renewal/Comm/bullet_building.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .recomm {background:url('/Src/Img/Renewal/Comm/bullet_krfb.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .sech  {background:url('/Src/Img/Renewal/Comm/bullet_neonpen.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .event  {background:url('/Src/Img/Renewal/Comm/bullet_bookmark_folder.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .organ  {background:url('/Src/Img/Renewal/Manage/bullet_org.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .attend  {background:url('/Src/Img/Renewal/Manage/bullet_ktimer.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .holi  {background:url('/Src/Img/Renewal/Manage/bullet_date.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .call  {background:url('/Src/Img/Renewal/Adds/bullet_sms.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .memo  {background:url('/Src/Img/Renewal/Adds/bullet_memo.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .admin  {background:url('/Src/Img/Renewal/Admin/bullet_admin.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .docu  {background:url('/Src/Img/Renewal/Docu/bullet_file_locked.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .book  {background:url('/Src/Img/Renewal/Prop/bullet_book.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .log {background:url('/Src/Img/Renewal/Comm/bullet_log.gif') no-repeat left top;height:30px; display:block; padding-left:30px; padding-top:4px;}
+
+/* 091209관리자, 화면설정, 자산관리2 타이틀추가 */
+#sub #title h2 .gw-ct  {background:url('/Src/Img/Renewal/Admin/bullet_gw_contect.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .data-backup  {background:url('/Src/Img/Renewal/Admin/bullet_file_backup.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .popup-admin  {background:url('/Src/Img/Renewal/Admin/bullet_popup.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .docu-save   {background:url('/Src/Img/Renewal/Admin/bullet_docu_admin.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .docu-delete   {background:url('/Src/Img/Renewal/Admin/bullet_docu_delete.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .part-news   {background:url('/Src/Img/Renewal/Admin/bullet_news.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .screen-color  {background:url('/Src/Img/Renewal/Screen/bullet_screen_color.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .situation  {background:url('/Src/Img/Renewal/Prop/bullet_chart.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .desktalk {background:url('/Src/Img/Cache/Event/DeskTalk/bullet_desktalk.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+
+/* 100203 웹메일 타이틀추가 */
+#sub #title h2 .mail00  {background:url('/Src/Img/Renewal/Mail/bullet_mail00.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail01  {background:url('/Src/Img/Renewal/Mail/bullet_mail01.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail02  {background:url('/Src/Img/Renewal/Mail/bullet_mail02.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail03  {background:url('/Src/Img/Renewal/Mail/bullet_mail03.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail04  {background:url('/Src/Img/Renewal/Mail/bullet_mail04.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail05  {background:url('/Src/Img/Renewal/Mail/bullet_mail05.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail06  {background:url('/Src/Img/Renewal/Mail/bullet_basket.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail07  {background:url('/Src/Img/Renewal/Mail/bullet_default.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail08  {background:url('/Src/Img/Renewal/Mail/bullet_absense.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail09  {background:url('/Src/Img/Renewal/Mail/bullet_cut.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail10  {background:url('/Src/Img/Renewal/Mail/bullet_spam.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail11  {background:url('/Src/Img/Renewal/Mail/bullet_virtual.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail12  {background:url('/Src/Img/Renewal/Mail/bullet_sign.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail13  {background:url('/Src/Img/Renewal/Mail/bullet_forwarding.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail14  {background:url('/Src/Img/Renewal/Mail/bullet_white_list.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail15  {background:url('/Src/Img/Renewal/Mail/bullet_white_list_add.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail16  {background:url('/Src/Img/Renewal/Mail/bullet_reject.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .mail17  {background:url('/Src/Img/Renewal/Mail/bullet_temp.gif') no-repeat left 2px; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+
+/* 100331 지출결의 */
+#sub #title h2 .expen  {background:url('/Src/Img/Renewal/Expen/bullet_expen.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+#sub #title h2 .enterp  {background:url('/Src/Img/Renewal/Expen/bullet_enterprise.gif') no-repeat left top; width:320px; height:30px; display:block; padding-left:30px; padding-top:4px;}
+
+.under {background:url('/Src/Img/Renewal/title_underline.gif') repeat-x left top; height:10px; margin-bottom:10px;}
+#sub #title .auth     {font-family:Dotum, "돋움"; font-size:11px; color:#999999; text-align:right; float:right; padding-top:22px; padding-right:7px;}
+.tb_num {background:url('/Src/Img/Renewal/table_number_view.gif') no-repeat left top; text-align:right; width:116px; height:22px; float:right; margin:0 5px 2px 0; padding:4px 5px 0 0;}
+#sub #title .tb_num {
+	margin:15px 5px 2px 0;
+}
+
+/* 바탕화면 설정 */
+#sub #scr_default  {position:relative; float:left; height:100%; width:65%;}
+#sub #scr_user      {position:relative; float:left; height:100%; width:34%;}
+#sub #ce_bar        {position:relative; float:left; max-height:100%; min-height:700px; width:5px; background:#E9E9E9; border-right:1px solid #B2B2B2; border-left:1px solid #B2B2B2;}
+.screen_box {margin:10px; padding:10px; background:url('/Src/Img/Renewal/board_view_bg.gif') repeat-x left top; border:1px solid #D4D4D4;}
+
+/* 세부 설명글 블릿 이미지 */
+.text_explain {background:url('/Src/Img/Renewal/bull_arr_gray.gif') no-repeat 3px 50%; padding-left:12px; color:#686868; font-family:Dotum, "돋움"; font-size:11px; line-height:140%;}
+
+/* 레이아웃- 버튼 및 검색 영역 */
+#sub .toparea { overflow:hidden; clear:both; background:url('/Src/Img/Renewal/board_view_bg.gif') repeat-x left top; height:29px; border-bottom:1px solid #D4D4D4; border-top:1px solid #D4D4D4;}
+#sub .toparea img {vertical-align:middle;}
+#sub .toparea .leftarea { text-align:left; float:left; display:inline; margin-top:4px; padding-left:7px}/* 버튼 및 검색 영역 - 좌측영역 */
+#sub .toparea .leftarea .input {border-right:none;}
+#sub .toparea .rightarea {float:right; display:inline; margin-top:4px; padding-right:5px; text-align:right;}/* 버튼 및 검색 영역 - 우측영역 */
+#sub .toparea .btn {}/* 버튼 설정 */
+#sub .toparea .btn img {vertical-align:middle; margin:0px; padding-bottom:2px}
+#sub .toparea .btn a    {float:left; line-height:140%; border:1px solid #F5F5F5; border-left:1px dotted #C9C9C9; color:#444444; font-size:11px; text-decoration:none; padding:1px 10px 2px 10px;}
+#sub .toparea .btn a:hover {background:#FFFFFF; border:1px solid #CFCFCF; color:#444444; padding:1px 10px 2px 10px;}
+
+/* 레이아웃- 버튼 및 검색 영역2 */
+#sub .btmarea {clear:both;position:fixed; _position:absolute; z-index:100; left:0; bottom:0;_bottom:-1px; width:100%; background:url('/Src/Img/Renewal/board_view_bg.gif') repeat-x left top; height:29px; border-bottom:1px solid #D4D4D4; border-top:1px solid #D4D4D4;overflow:hidden;}
+#sub .btmarea img {vertical-align:middle;}
+#sub .btmarea .leftarea { text-align:left; float:left; display:inline; margin-top:4px; padding-left:7px}/* 버튼 및 검색 영역 - 좌측영역 */
+#sub .btmarea .leftarea .input {border-right:none;}
+#sub .btmarea .rightarea {float:right; display:inline; margin-top:4px; padding-right:5px; text-align:right;}/* 버튼 및 검색 영역 - 우측영역 */
+#sub .btmarea .btn {}/* 버튼 설정 */
+#sub .btmarea .btn img {vertical-align:middle; margin:0px; padding-bottom:2px}
+#sub .btmarea .btn a    {float:left; line-height:140%; border:1px solid #F5F5F5; border-left:1px dotted #C9C9C9; color:#444444; font-size:11px; text-decoration:none; padding:1px 10px 2px 10px;}
+#sub .btmarea .btn a:hover {background:#FFFFFF; border:1px solid #CFCFCF; color:#444444; padding:1px 10px 2px 10px;}
+
+
+/* 상단 탭 091030 */
+.tab a {font-weight:bold; float:left; height:20px; margin-top:4px; padding-top:2px; display:inline; padding-left:20px;padding-right:20px; background:url("/Src/Img/Renewal/btn_bg_dott.gif") no-repeat right -7px; font-family:Gulim, "굴림"; text-decoration:none;color:#888888}
+.tab a:hover {font-weight:bold; height:20px; background:#FFFFFF; margin-top:0px; padding-top:5px; padding-left:19px;padding-right:19px; border:1px solid #D4D4D4; border-bottom:none; color:#555555}
+.selected a {display:inline;float:left; font-weight:bold; height:20px; background:#FFFFFF; margin-top:0px; padding-top:5px; padding-left:19px;padding-right:19px; border:1px solid #D4D4D4; border-bottom:none; color:#555555}
+.selected a.bb {border-bottom:#FFFFFF 1px solid; z-index:10;}/* 익스6 */
+
+/* 일정관리 */
+.today {padding:17px 10px 0 10px; height:30px;}
+.today .left {float:left; width:250px; text-align:left;}
+.today .right {float:right; width:400px; display:inline; text-align:right}
+.color_00 {background-color:#FFFFFF;}/* 개인부서회사별 칼라 */
+.color_01 {background-color:#A8CC72;}
+.color_02 {background-color:#72A8DA;}
+.color_03 {background-color:#DF8AD8;}
+.color_04 {background-color:#B98DEC;}
+.color_05 {background-color:#F998C7;}
+.color_06 {background-color:#A28AB5;}
+.color_07 {background-color:#CCC05D;}
+.color_08 {background-color:#EFB33E;}
+.color_09 {background-color:#FE9372;}
+.color_10 {background-color:#AAAAAA;}
+.color_11 {background-color:#7AD0CA;}
+.color_12 {background-color:#CEB877;}
+.color_13 {background-color:#F67E97;}
+.color_14 {background-color:#DA9B9B;}
+.color_15 {background-color:#73A8DA;}
+.color_box div {display:inline}
+.color_box div span {display:block; width:12px; height:12px; border:none;}
+
+/* 일정종류 */
+.memorial {background:url("/Src/Img/Renewal/Schedule/icon_schedule_01.gif") no-repeat left 50%; padding-left:20px; padding-top:3px; padding-bottom:1px;} /* 기념일 */
+.birth      {background:url("/Src/Img/Renewal/Schedule/icon_schedule_02.gif") no-repeat left 50%; padding-left:20px; padding-top:3px; padding-bottom:1px;} /* 생일 */
+.dine       {background:url("/Src/Img/Renewal/Schedule/icon_schedule_03.gif") no-repeat left 50%; padding-left:20px; padding-top:3px; padding-bottom:1px;} /* 회식 */
+.phone    {background:url("/Src/Img/Renewal/Schedule/icon_schedule_04.gif") no-repeat left 50%; padding-left:20px; padding-top:3px; padding-bottom:1px;} /* 전화 */
+.conf      {background:url("/Src/Img/Renewal/Schedule/icon_schedule_05.gif") no-repeat left 50%; padding-left:20px; padding-top:3px; padding-bottom:1px;} /* 회의 */
+.movie    {background:url("/Src/Img/Renewal/Schedule/icon_schedule_06.gif") no-repeat left 50%; padding-left:20px; padding-top:3px; padding-bottom:1px;} /* 영화 */
+.holiday  {background:url("/Src/Img/Renewal/Schedule/icon_schedule_07.gif") no-repeat left 50%; padding-left:20px; padding-top:3px; padding-bottom:1px;} /* 휴일 */
+.sports   {background:url("/Src/Img/Renewal/Schedule/icon_schedule_08.gif") no-repeat left 50%; padding-left:20px; padding-top:3px; padding-bottom:1px;} /* 스포츠 */
+.meeting {background:url("/Src/Img/Renewal/Schedule/icon_schedule_09.gif") no-repeat left 50%; padding-left:20px; padding-top:3px; padding-bottom:1px;} /* 모임 */
+.travel    {background:url("/Src/Img/Renewal/Schedule/icon_schedule_10.gif") no-repeat left 50%; padding-left:20px; padding-top:3px; padding-bottom:1px;} /* 여행 */
+.etc       {background:url("/Src/Img/Renewal/Schedule/icon_schedule_11.gif") no-repeat left 50%; padding-left:20px; padding-top:3px; padding-bottom:1px;} /* 기타 */
+
+/* 회의실예약 */
+.conf_title {background:url("/Src/Img/Renewal/Prop/box_title.gif") repeat-x left top; height:27px;padding-top:7px; padding-left:10px; border-left:1px solid #D1D1D1; border-right:1px solid #D1D1D1;}
+.conf_box {border:1px solid #D1D1D1;border-top:0px; padding:10px;}
+.inner {border:1px solid #EDEDED;}
+.conf_box_list ul {padding:0; margin:7px; list-style:none;}
+.conf_box_list ul li  {padding:1px 0 1px 9px; margin:0; background:url("/Src/Img/Renewal/bull_arr_sgray.gif") no-repeat left 4px; line-height:130%}
+.conf_box2 {border:1px solid #D1D1D1;}
+.bdr_top {border-top:1px solid #D3D3D1}
+.bgcolor3 {background-color:#EFEFEF}
+
+/* 전자결재 */
+.table_title_0 {background:url('/Src/Img/Renewal/table_title_bg.gif') repeat-x left top; font-weight:normal; font-family:Gulim, "굴림"; line-height:150%; padding-bottom:1px; height:30px;}
+
+/* 프로젝트 */
+.percent-box {border:1px solid #DCDCDC; padding:1px; height:12px; width:100%;}
+.percent-box .percent { background-color:#6488E2; height:100%; display:block}
+.percent-box .percent1 { background-color:#91CF5B; height:100%; display:block}
+.percent-box .percent2 { background-color:#EDBD49; height:100%; display:block}
+.percent-box .percent3 { background-color:#E78999; height:100%; display:block}
+.percent-box .percent4 { background-color:#5BC7CF; height:100%; display:block}
+.percent-box .percent5 { background-color:#B489E9; height:100%; display:block}
+.percent-box .percent6 { background-color:#ED8149; height:100%; display:block}
+.percent-box .percent7 { background-color:#96CCE9; height:100%; display:block}
+
+/* 091111 추가 */
+.black_overlay {display: none;position: absolute;top: 0;left: 0;width: 100%;min-height: 100%;height: 100%;background-color: #000000;z-index:1001;-moz-opacity: 0.1;opacity:.10;filter: alpha(opacity=10);}
+.white_content {display: none;position: absolute;top: 0px;left: 0px;width: 100%;height: 100%;z-index:1002;overflow: hidden;}
+
+/* 커뮤니티 */
+.bgcolor4 {background:#EDEDED}
+.album_thum {width:px; height:px; background:url("/Src/Img/Renewal/Comm/album_thumnail_bg.gif") no-repeat left top; padding:4px 4px 6px 4px; margin-right:7px; margin-bottom:7px; float:left}
+.bdr_left_gry {border-left:1px sold #D7D7D7}
+.bdr_ri_gry {border-right:1px sold #D7D7D7}
+
+/* 추천사이트 */
+.recomm_box    {font-family:Dotum, "돋움"; font-size:11px;}
+.recomm_box th {background:url("/Src/Img/Renewal/table_title_bg.gif") repeat-x left top; padding-left:10px; height:30px; }
+.recomm_box td {border-bottom:1px solid #D3D3D3; padding:10px; }
+.recomm_box .bdr {border-right:1px solid #D3D3D3;}
+.recomm_box dt  {background:url("/Src/Img/Renewal/bullet_circle_blue.gif") no-repeat left 50%; font-weight:bold; color:#2D79C7; padding-left:8px; float:left; line-height:170%}
+.recomm_box dd {line-height:170%; margin-left:3px}
+
+/* 회사소개 */
+.comp_edit {background-color:#F0F0EE; border-left:1px solid #DDDDDD; border-right:1px solid #DDDDDD;}
+.comp_edit_box {background-color:#FFFFFF; border-bottom:1px solid #DDDDDD; padding:10px;}
+
+/* 인사관리 */
+.check_ok   {color:#6281B4; padding:2px 0 2px 23px; clear:both; background:url("/Src/Img/Renewal/Manage/bullet_balloon-blue.gif") no-repeat 5px top; line-height:180%}
+.check_late {color:#FF6600;  padding:2px 0 2px 23px; clear:both;background:url("/Src/Img/Renewal/Manage/bullet_balloon-red.gif") no-repeat 5px top;}
+.check_leave {color:#22A340;  padding:2px 0 2px 23px; clear:both; background:url("/Src/Img/Renewal/Manage/bullet_balloon-org.gif") no-repeat 5px top;}
+.check_holiday {color:#777777; padding:2px 0 2px 23px; clear:both;background:url("/Src/Img/Renewal/Manage/bullet_balloon-gry.gif") no-repeat 5px top; }
+.check_sunday {color:#999999; padding:2px 6px; clear:both; }
+.box_soft {border:5px solid #F1F1F1;}
+.list_title {background:url('/Src/Img/Renewal/control.gif') no-repeat left top;display:block; margin:20px 0px 5px 10px;padding-left:20px;}
+.left_prev {background:url("/Src/Img/Renewal/Manage/box_left_arr.gif") repeat-y left top;}
+.right_next {background:url("/Src/Img/Renewal/Manage/box_right_arr.gif") repeat-y right top;}
+.select_person {color:#5595BE; background:#F1F1F1}
+
+/* 091202 장애페이지 */
+.error {background:#FFFFFF url("/Src/Img/Renewal/error_bg.jpg") no-repeat left top; width:800px; height:600px; padding-left:390px; padding-top:150px;}
+
+/*  20100126 */
+.popup_mx {width:584px; border:3px solid #FF904E; position:relative; text-align:center; float:left;}
+.popup_mx p {font-size:22px; font-weight:bold; color:#FF6600; font-family:Verdana; line-height:130%;}
+
+/* 100203 웹메일추가 */
+.sendok {position:relative; background:#FFFFFF url("../images/Mail/send_ok_bg.gif") repeat-x 0 0; width:100%; clear:both; display:block; padding-top:10px;}
+.sendok table {margin:0 auto;}
+.sendsms {position:relative; float:left; display:inline; background:url("../images/Mail/send_ok_phonebg.gif") no-repeat 0 0; width:144px; height:185px; margin-right:20px}
+.sendsms .box {position:absolute; left:12px; top:11px;}
+.sendsms .box textarea {border:0; overflow-y:scroll; width:110px; height:109px;}
+.sendsms .count {position:absolute; left:60px; top:140px;}
+.white_box {border:1px solid #E3E3E3; background:#FFFFFF;}
+
+/* 20100324 화상회의 */
+.vc_title {position:relative; background:url('/Src/Img/Renewal/Vc/bg_title.gif') repeat-x left top; padding:0; margin:0; height:70px; width:100%}
+.greentable th {padding:7px; background:#A3C289; border-right:1px solid #E1E1E1; border-bottom:1px solid #E1E1E1;}
+.greentable .bdr-top {border-top:1px solid #E1E1E1;}
+.greentable td {padding:7px; font-weight:bold; font-family:Dotum, "돋움"; font-size:12px; color:#888888; border-right:1px solid #E1E1E1; border-bottom:1px solid #E1E1E1; line-height:130% }
+
+/* 20100331 지출결의 */
+.expen input {height:18px; color:#000000; border:1px solid #97AABB; font-size:12px; line-height:160%;}
+.expen select {height:18px; color:#000000; border:1px solid #CDCDCD; font-size:12px}
+.expen .radio {border:0; vertical-align:middle;}
+.expen .com {font-family:Verdana, 돋움; font-size:20px; text-align:right; letter-spacing:-1px}
+.expen .cash {padding-right:15px; text-align:right;}
+.expen .small {font-family:돋움; font-size:11px; letter-spacing:-0.04em}
+.expen .date {font-family:돋움; font-size:11px; letter-spacing:-0.04em; text-align:center; border-right:1px solid #000000}
+.expen .date_red {font-family:돋움; color:#FF0000; font-size:11px; letter-spacing:-0.04em; text-align:center; border-right:1px solid #000000}
+.expen .th {text-align:center; border-right:1px solid #000000;padding:0px;}
+.expen .td {text-align:center; border-right:1px solid #000000}
+.expen .bor_btm {border-bottom:1px solid #000000}
+.expen .bor_btm2 {border-bottom:1px solid #D4D4D4}
+.expen .bdr_none {border-right:none;}
+.expen .padding {padding:5px}
+.expen .pad_left {padding-left:15px}
+.expen .pad_right {padding-right:12px}
+.expen .boldline {border:2px solid #000000}
+.expen .grybox {border:1px solid #B2B2B2; padding:5px}
+.expen .txt_ri {text-align:right;}
+.expen h1 {margin:0; padding:0; font-family:돋움,verdana; font-size:34px; font-weight:bold; text-align:center; letter-spacing:-1px;}
+.expen h2 {margin:0; padding:0; font-family:돋움,verdana; font-size:20px; font-weight:bold; text-align:center; letter-spacing:-1px;}
+.expen dl {margin:0px 10px;padding:0px;float:left;width:530px;height:23px;}
+.expen dl dt {float:left;width:60px;line-height:160%;}
+.expen dl dd {float:left;margin-right:10px;}
+
+/*결재상태 icon & style*/
+.eword-state-0 {padding-left:20px;background:url('/Src/Img/Renewal/icon_process_0.gif') no-repeat 0 0;height:16px;display:inline-block;color:#959595;} /*미결재*/
+.eword-state-1 {padding-left:20px;background:url('/Src/Img/Renewal/icon_process_1.gif') no-repeat 0 0;height:16px;display:inline-block;color:#61A143;} /*결재*/
+.eword-state-2 {padding-left:20px;background:url('/Src/Img/Renewal/icon_process_2.gif') no-repeat 0 0;height:16px;display:inline-block;color:#1D7EC0;} /*전결*/
+.eword-state-3 {padding-left:20px;background:url('/Src/Img/Renewal/icon_process_3.gif') no-repeat 0 0;height:16px;display:inline-block;color:#A07419;} /*보류*/
+.eword-state-4 {padding-left:20px;background:url('/Src/Img/Renewal/icon_process_4.gif') no-repeat 0 0;height:16px;display:inline-block;color:#D34F00;} /*기각*/
+
+/* 상단탭 20110710 */
+.actab span {height:19px; background:#ffffff;border:1px solid #d4d4d4;font-family:Dotum ,"돋움";font-size:11px;color:#a4a4a4;margin-top:0px; padding-top:6px; display:inline; padding-left:20px;padding-right:20px;float:left;}
+.acselected span {height:19px; background:#b3b3b3;border:1px solid #a7a7a7;font-family:Dotum ,"돋움";font-size:11px;margin-top:0px; padding-top:6px; display:inline; padding-left:20px;padding-right:20px;float:left;color:#ffffff;}
+.dtab span {height:19px;background:#ffffff;border:1px solid #d4d4d4; font-family:Dotum,"돋움";font-size:11px;color:#a4a4a4;padding-top:6px; display:inline; padding-left:20px;padding-right:20px;float:left;}
+.dselected span {height:19px;background:#efefef;border:1px solid #d4d4d4; font-family:Dotum,"돋움";font-size:11px;color:#000000;padding-top:6px; display:inline; padding-left:20px;padding-right:20px;float:left;}
+
+
+

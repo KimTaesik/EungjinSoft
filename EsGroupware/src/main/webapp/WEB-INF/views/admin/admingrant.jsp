@@ -26,6 +26,26 @@
 	<script type="text/javascript" src="http://js.whoisdesk.net/Src/WebCommon/Jquery/jquery.js?dt=20110117"></script>
 	<script type="text/javascript" src="http://js.whoisdesk.net/Src/WebCommon/Jquery/Plugin/jquery.DOMWindow.js"></script>
 
+	<script type="text/javascript">
+	$(function() {
+		$("#adminSearch").click(function(event) {
+			$.ajax({
+				url : "/groupware/admin/adminsearch.action",
+				async : true,
+				data : { "option": $("option:selected").val()},
+				method : "post",
+				success : function(result, status, xhr) {
+					/* $("#result").text(result); */
+					alert(result);
+				},
+				error : function(xhr, status, ex) {
+
+				}
+			})		
+			event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
+		})	
+	})
+	</script>
 </head>
 
 <body>
@@ -148,7 +168,7 @@
 								<input name="userInfo" type="text" class="input vm" value="" style="width:200px" readonly />
 							</span>
 							<span class="btn_page">
-								<a href="#blank-link" onclick="javascript:();"><span><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_magnify.gif" class="vm"  /> 관리자 찾기</span></a>
+								<a href="#" id="adminSearch"><span><img src="/groupware/resources/image/icon_magnify.gif" class="vm"  /> 관리자 찾기</span></a>
 							</span>
 						</nobr>
 					</div>

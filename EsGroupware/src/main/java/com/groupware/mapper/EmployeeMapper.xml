@@ -204,10 +204,11 @@
 	<select id="selectPositionById" resultMap="PositionResult"
 		parameterType="int">
 		SELECT position_no, position_name FROM position where position_no =#{no}
-
-
 	</select>
-
-
+	
+	<select id="searchAdmin" resultType="Employee"
+		parameterType="String">
+		SELECT id, name FROM employee where dept_no =#{no}
+	</select>
 
 </mapper>                                                                                 

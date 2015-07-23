@@ -22,6 +22,8 @@ public interface EmployeeMapper {
 	List<Employee> getemList();
 	
 	List<Employee> getEmployeeList(HashMap<String, String> params);
+	
+	List<Employee> searchAdmin(String id);
 
 	List<Dept> getDeptList();
 

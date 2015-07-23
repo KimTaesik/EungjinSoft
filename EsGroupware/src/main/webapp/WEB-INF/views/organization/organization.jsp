@@ -1,104 +1,81 @@
-<%@page import="com.groupware.dto.Dept"%>
-<%@page import="java.util.List"%>
-<%@page import="com.groupware.dto.Employee"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<!DOCTYPE html>
+    pageEncoding="utf-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="Stylesheet"
-	href="/groupware/resources/styles/organization.css" />
-<title>¾È´ë°Ç</title>
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="/groupware/resources/styles/jquery/jquery-ui.css">
+<script src="/groupware/resources/styles/script/jquery.js"></script>
+<script src="/groupware/resources/styles/script/jquery-ui.js"></script>
+<link rel="stylesheet" href="/groupware/resources/styles/approval.css">
+<style>
+/* IE has layout issues when sorting (see #5413) */
+.group {
+	zoom: 1
+}
+</style>
+
+<script>
+	$(function() {
+		$("#accordion").accordion({
+			header : "> div > h3"
+		}).sortable({
+			axis : "y",
+			handle : "h3",
+			stop : function(event, ui) {
+
+				ui.item.children("h3").triggerHandler("focusout");
+				$(this).accordion("refresh");
+			}
+		});
+	});
+	
+
+$(document).ready(function () {
+    $('.get').click(function (event) {
+    	var id = $('#id').val();
+        $.ajax({
+            url:"infomation.action?employeeid="+id,
+            type: 'get',
+            dataType: 'text',
+            success: function (data) {
+            	alert('ì„±ê³µ');
+             $('#di').val(data)
+            
+            },
+          
+        });
+        event.preventDefault();
+    });
+});
+</script>
+
 </head>
 <body>
-
-	<script language="javascript">
-		var old_menu = '';
-		var old_cell = '';
-
-		function menuclick(i, cellbar) {
-			var submenu = document.getElementById('submenu' + i);
-			if (old_menu != submenu) {
-
-				submenu.style.display = 'block';
-				cellbar.src = '/groupware/resources/image/club_minus.gif';
-				old_menu = submenu;
-				old_cell = cellbar;
-
-			} else {
-				
-				submenu.style.display = 'none';
-				cellbar.src = '/groupware/resources/image/club_plus.gif';
-				old_menu = '';
-				old_cell = '';
-			}
-
-		}
-function link(id){
-			
-			
-			location.href = "infomation.action?employeeid="+id;
-			
-		}
-	
-	</script>
-
-	
-	<table width="200" cellspacing="0" cellpadding="0"
-		style="padding-left: 10px; padding-top: 0px">
-		<!--  Ã¹¹øÂ° ¸Þ´º ºÎºÐ -->
-		<!--  º» ¸Þ´º,  º»¸Þ´º¸¦ Ãß°¡ÇÒ °æ¿ì menuclick(submenu1,bar1)ÀÇ ¼ýÀÚ 1°ú IMG name=bar1ÀÇ ¼ýÀÚ 1 ±×¸®°í ¼­ºê¸Þ´ºÀÇ SPAN id=submenu1ÀÇ 1 ÀÏÄ¡½ÃÄÑ¾ß ÇÔ-->
-
-		<tr>
-			<td bgcolor="white" align="center" colspan="2"
-				style="font-size: 20px; font-weight: bolder;">ºÎ¼­ ¸ñ·Ï</td>
-		</tr>
+<div style="float: left; border: 1px solid;">
+	<div id="accordion">
 		<c:forEach var="dept" items="${depts}">
-			<tr height="22">
-				<td bgcolor="white" style="CURSOR: hand" colspan="2"
-					onMouseOver="this.style.backgroundColor = 'gray'"
-					onMouseOut="this.style.backgroundColor='gray'"
-					onclick="menuclick(${dept.deptNo},bar${dept.deptNo})">&nbsp;&nbsp;<IMG
-					name=bar${dept.getDeptNo()}
-					src="/groupware/resources/image/club_plus.gif" width="11"
-					height="11">&nbsp;&nbsp;<font color='#000000'>${dept.partName}</font></td>
-			</tr>
-
-			<!--  ¼­ºê ¸Þ´º: º»¸Þ´º¸¦ Å¬¸¯ÇÒ °æ¿ì ³ªÅ¸³ª´Â ÇÏÀ§ ¸Þ´º -->
-			<tr>
-				<td><SPAN id=submenu${dept.deptNo}
-					style="DISPLAY: none; MARGIN-LEFT: 0px; CURSOR: hand">
-						<table id="dis"width="190" cellspacing="0" cellpadding="10">
-
-							<c:forEach var="employee" items="${employees}">
-								<c:if test="${dept.deptNo eq employee.deptNo}">
-									<tr>
-										<td bgcolor='white'></td>
-										<td id ="dis" style="font-size: 10px;" bgcolor='#fff7da' class="text"
-											onMouseOver="this.style.backgroundColor = '#ffffff'"
-											onMouseOut="this.style.backgroundColor='white'"
-											align="left"><img
-											src='/groupware/resources/image/re.gif' />&nbsp;
-											 <a href="javascript:link('${employee.id}');">${employee.position.positionName}&nbsp;&nbsp;${employee.name}</a> 
-											<%-- <a href="javascript:gettimestring('${employee.id}');">${employee.position.positionName}&nbsp;&nbsp;${employee.name}</a> --%>
-										</td>
-									</tr>
-								</c:if>
-							</c:forEach>
-						</table>
-				</span></td>
+			<div class="group">
+				<h3>${dept.partName}</h3>
+				<div>
+					<c:forEach var="employee" items="${employees}">
+						<c:if test="${dept.deptNo eq employee.deptNo}">
+							<div ><a class="get" href="#">
+									<img src='/groupware/resources/image/re.gif' />&nbsp; 
+									${employee.position.positionName}&nbsp;&nbsp;${employee.name}</a></div><br />
+						<input id="id" type="hidden" width="10px" value="${ employee.id }">
+						</c:if>
+					</c:forEach>
+				</div>
+			</div>
 		</c:forEach>
-
-
-
-	</table>
-
-
-
-	<div></div>
-
+	</div>
+</div>
+<div id="getid" style="float: right ; border: 1px solid;">
+<% pageContext.include("/WEB-INF/views/organization/personalinfo.jsp"); %>
+</div>
 </body>
 </html>
