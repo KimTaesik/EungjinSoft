@@ -1,7 +1,5 @@
 <%@page import="java.util.stream.Stream"%>
 <%@page import="com.groupware.dto.Attendance"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
