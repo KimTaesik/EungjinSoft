@@ -1,0 +1,218 @@
+@charset "UTF-8";
+/* ------------------------------------------------------------
+설명: 그룹웨어 V2.0 팝업스타일
+날짜: 2010년 06월 01일 팝업스타일 공통 수정 #popup_new
+------------------------------------------------------------- */
+
+#popup_new {background:#FFFFFF;padding:40px 0px; margin:0;}
+#popup_new img {border:0;}
+#popup_new a {text-decoration:none; font-size:12px; color:#888888}
+#popup_new #title,#popup .title {cloar:both;position:fixed;__position:absolute;height:30px;width:100%; background: url("/Src/Img/Renewal/popup_title_bg.gif") repeat-x left top;z-index:100; left:0; top:0;_top:-1px; overflow:hidden;}
+#popup_new #title h3,#popup .title h3  {background: url("/Src/Img/Renewal/bullet_arr2.gif") no-repeat left top ;font-family:Dotum, "돋움"; font-size:12px; color:#FFFFFF; font-weight:bold; display:inline; float:left; padding-left:25px; padding-top:9px; margin:0;}
+#popup_new .conf_box {border:1px solid #D1D1D1;}
+#popup_new #contents {background:#FFFFFF; padding:0px; font-family:Dotum, "돋움"; font-size:11px; line-height:150%; text-align:center; margin-bottom:10px}
+#popup_new #bottom {clear:both;position:fixed; _position:absolute;text-align:center;background:#F4F4F4;  z-index:100; left:0; bottom:0;_bottom:-1px; width:100%;height:30px;overflow:hidden;padding:7px 0 0 0;border-top:1px solid #e1e1e1;}
+
+
+
+/* 버튼 */
+.btn_page_pop {
+	margin:0 auto;
+	text-align:center;
+}
+.btn_page_pop a{
+	background: transparent url('/Src/Img/Renewal/btn_contents_bg.gif') no-repeat  scroll left 0;
+	color:#666666;
+	cursor:pointer;
+	display:inline-block;
+	font-family:"돋움", Dotum;
+ 	font-size:11px;
+	font-weight:normal;
+	height:20px;
+	line-height:normal;
+	text-decoration:none;
+	padding-left:6px;
+	margin-right:3px;
+	overflow:hidden;
+}
+.btn_page_pop a:hover {	
+	background: transparent url('/Src/Img/Renewal/btn_contents_bg.gif') no-repeat scroll left -20px;
+}
+.btn_page_pop a span {
+	background: transparent url('/Src/Img/Renewal/btn_contents_bg.gif') no-repeat scroll right 0;
+	display:inline-block;
+	height:20px;
+	line-height:180%;
+	overflow:hidden;
+	padding-right:6px;
+}
+.btn_page_pop a span img {
+	padding-bottom:1px;
+	vertical-align:middle;
+}
+.btn_page_pop a:hover span {
+	background: transparent url('/Src/Img/Renewal/btn_contents_bg.gif') no-repeat scroll right -20px;
+	color:#5B90C4;
+}
+
+
+
+#popup {background:#FFFFFF; width:460px; padding:0; margin:0; border:1px solid #737373; } 
+#popup #title {height:30px; background: url("/Src/Img/Renewal/popup_title_bg.gif") repeat-x left top;} 
+/* íëš ìì  091109 */ 
+#popup #title h3 {background: url("/Src/Img/Renewal/bullet_arr2.gif") no-repeat left top ;font-family:Dotum, "ëì"; font-size:12px; color:#FFFFFF; font-weight:bold; display:inline; float:left; padding-left:25px; padding-top:9px} 
+#popup #contents {background:#FFFFFF; padding:10px; font-family:Dotum, "ëì"; font-size:11px; line-height:150%; text-align:center; margin-bottom:15px} 
+
+
+#popup2 {background:#FFFFFF; width:550px; padding:0; margin:0; border:1px solid #737373;}
+#popup2 #title {height:30px; background:#838383 url("/Src/Img/Renewal/popup_title_bg.gif") repeat-x left top;}
+#popup2 #title h3 {background:#838383 url("/Src/Img/Renewal/bullet_arr2.gif") no-repeat left top ;font-family:Dotum, "돋움"; font-size:12px; color:#FFFFFF; font-weight:bold; display:inline; float:left; padding-left:25px; padding-top:9px}
+#popup2 #contents {background:#FFFFFF; padding:10px; font-family:Dotum, "돋움"; font-size:11px; line-height:150%; margin-bottom:15px}
+
+/* 팝업 width 100%추가 */ 
+#popup3 {background:#FFFFFF; width:99%; padding:0; margin:0; border:1px solid #737373;}
+#popup3 #title {height:30px; background:#838383 url("/Src/Img/Renewal/popup_title_bg.gif") repeat-x left top;}
+#popup3 #title h3 {background:#838383 url("/Src/Img/Renewal/bullet_arr2.gif") no-repeat left top ;font-family:Dotum, "돋움"; font-size:12px; color:#FFFFFF; font-weight:bold; display:inline; float:left; padding-left:25px; padding-top:9px}
+#popup3 #contents {background:#FFFFFF; padding:10px; font-family:Dotum, "돋움"; font-size:11px; line-height:150%; margin-bottom:15px}
+
+
+/* 일정관리 칼라 픽업 팝업 */
+#popup_color {width:130px; height:92px; border:1px solid #C7C7C7;}
+#popup_color .div {border:1px solid #EFEFEF; padding:2px; height:84px; margin:1px;}
+#popup_color .div .close {height:11px; width:100%; display:block; margin:0; padding:0; text-align:right;}
+#popup_color .div .center {padding-left:13px;}
+#popup_color .div .center div {display:block}
+.mar10t {margin-top:10px;}
+.color01 {width:15px; height:15px; background-color:#A8CC72; margin-right:5px; display:block; float:left; margin-top:5px;}
+.color02 {width:15px; height:15px; background-color:#73A8DA; margin-right:5px; display:block; float:left; margin-top:5px;}
+.color03 {width:15px; height:15px; background-color:#DE8AD8; margin-right:5px; display:block; float:left; margin-top:5px;}
+.color04 {width:15px; height:15px; background-color:#B98DEC; margin-right:5px; display:block; float:left; margin-top:5px;}
+.color05 {width:15px; height:15px; background-color:#F997C6; margin-right:5px; display:block; float:left; margin-top:5px;}
+.color06 {width:15px; height:15px; background-color:#A389B6; margin-right:5px; display:block; float:left; margin-top:5px;}
+.color07 {width:15px; height:15px; background-color:#CCC05E; margin-right:5px; display:block; float:left; margin-top:5px;}
+.color08 {width:15px; height:15px; background-color:#F0B33E; margin-right:5px; display:block; float:left; margin-top:5px;}
+.color09 {width:15px; height:15px; background-color:#FE9373; margin-right:5px; display:block; float:left; margin-top:5px;}
+.color10 {width:15px; height:15px; background-color:#AAAAAA; margin-right:5px; display:block; float:left; margin-top:5px;}
+.color11 {width:15px; height:15px; background-color:#79D0C8; margin-right:5px; display:block; float:left; margin-top:5px;}
+.color12 {width:15px; height:15px; background-color:#CDB877; margin-right:5px; display:block; float:left; margin-top:5px;}
+.color13 {width:15px; height:15px; background-color:#F67E97; margin-right:5px; display:block; float:left; margin-top:5px;}
+.color14 {width:15px; height:15px; background-color:#DB9B9B; margin-right:5px; display:block; float:left; margin-top:5px;}
+.color15 {width:15px; height:15px; background-color:#A8CC72; margin-right:5px; display:block; float:left; margin-top:5px;}
+/* 20100622-쪽지 */
+#popup_memo {width:390px; height:290px; background:url("/Src/Img/Renewal/Adds/memo_bg.gif") no-repeat left top; margin:0; padding:0}
+#popup_memo {
+	scrollbar-3dlight-color:#d9a42a; 
+    scrollbar-arrow-color:#d9a42a; 
+    scrollbar-base-color:#e6bd57; 
+    scrollbar-darkshadow-color:#e6bd57; 
+    scrollbar-face-color:#fff7d4; 
+    scrollbar-highlight-color:#FFFFFF; 
+    scrollbar-shadow-color:#d9a42a;
+	scrollbar-track-color:#e6bd57;
+	}
+#popup_memo h3 {font-size:12px; font-family:Verdana, "굴림"; color:#bb691a; padding:0 0 0 10px; margin:5px 0 15px 0;}
+#popup_memo .input_user {clear:both; border:1px solid #dfb240; font-family:verdana; font-size:10px; height:18px; padding:0 5px; background-color:transparent; line-height:160%; color:#bb691a;}
+div.memo_write {clear:both; width:370px; height:230px; margin:0; padding:0 10px;}
+.received-memo {background:#f3d569; border:1px solid #dfb240; width:97%; height:104px; color:#bb691a; padding:5px; margin:0; overflow-x:hidden;overflow-y:auto; text-align:left; line-height:130%; font-size:11px;}
+.dark_org {color:#bb691a;}
+.dark_org_input {background-color:#f3d569;border:0px;}
+.memo_write p {clear:both; margin:0; padding:5px 0; text-align:left; font-size:11px; color:#bb691a;}
+h2.memo-title {background:#fdeb92; font-size:11px; border:1px solid #dfb240; padding:3px; margin-bottom:5px;}
+/* 20140430 파일 첨부 추가 */
+#popup_memo .file_area #file_title {
+	margin: 0.7em 0 0.3em 0;
+	text-align: left;
+}
+#popup_memo .file_area .file_entity_container {
+	margin: 0 0 0.3em 0;
+	text-align: left;
+}
+#popup_memo .file_area .file_entity_container input[type=text] {
+	display: inline-block;
+	vertical-align: middle;
+}
+#popup_memo .file_area .file_entity_container .file_find_attach {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0px;
+	width: 95px;
+	height: 19px;
+	background: transparent url('http://rnd04.whoisdesk.net/Src/Img/Renewal/gwv2_btn_find.gif') no-repeat 0px 0px;
+	cursor: pointer;
+	overflow: hidden;
+}
+#popup_memo .file_area .file_entity_container .file_find_attach input[type=file] {
+/* 	margin-left: -100%; */
+	width: 0px;
+	height: 20px;
+	opacity: .0;
+	-moz-opacity: .0;
+	filter: alpha(opacity=0);
+}
+
+/* 쪽지버튼 노멀 20100628 */
+.btn_memo {
+	text-align:center;
+	background: transparent url('/Src/Img/Renewal/Adds/btn_memo_bg.gif') no-repeat scroll left 0;
+	cursor:pointer;
+	display:inline-block;
+	font-family:"돋움", Dotum;
+ 	font-size:11px;
+	font-weight:normal;
+	height:20px;
+	line-height:normal;
+	text-decoration:none;
+	padding-left:8px;
+	margin-right:3px;
+	overflow:hidden;
+	color:#FFFFFF;
+}
+.btn_memo a {
+	background: #f9e181 url('/Src/Img/Renewal/Adds/btn_memo_bg.gif') no-repeat scroll right 0;
+	color:#FFFFFF;
+	display:inline-block;
+	height:20px;
+	line-height:190%;
+	overflow:hidden;
+	text-decoration:none;
+	padding-right:8px;
+}
+.btn_memo a:link,  .btn_memo a:active, .btn_memo a:visited {
+	color:#FFFFFF;
+}
+.btn_memo a:hover {	
+	color:#000000;
+}
+
+/* 쪽지버튼 빅사이즈 20100628 */
+.btn_memo2 {
+	text-align:center;
+	background: transparent url('/Src/Img/Renewal/Adds/btn_memo_bg.gif') no-repeat scroll left -20px;
+	cursor:pointer;
+	display:inline-block;
+	font-family:"굴림", Gulim;
+ 	font-size:12px;
+	font-weight:bold;
+	height:35px;
+	line-height:normal;
+	text-decoration:none;
+	padding-left:16px;
+	margin-right:3px;
+	overflow:hidden;
+	color:#FFFFFF;
+}
+.btn_memo2 a {
+	background: #f9e181 url('/Src/Img/Renewal/Adds/btn_memo_bg.gif') no-repeat scroll right -20px;
+	display:inline-block;
+	height:35px;
+	line-height:35px;
+	text-decoration:none;
+	overflow:hidden;
+	padding-right:15px;
+}
+.btn_memo2 a:link,  .btn_memo2 a:active, .btn_memo2 a:visited {
+	color:#FFFFFF;
+}
+.btn_memo2 a:hover {	
+	color:#000000;
+}

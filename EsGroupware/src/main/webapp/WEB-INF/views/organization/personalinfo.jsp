@@ -12,12 +12,21 @@
 <title></title>
 <script language="javascript">
 
+$(document).ready(function () {
+    $('#get').click(function () {
+        $.ajax({
+            url: "infomation.action?employeeid="+id,
+            type: 'get',
+            dataType: 'text',
+            success: function (data) {
+            }
+        });
+    });
+});
 	
 </script>
 </head>
-<body ><nave>
-	<% pageContext.include("/WEB-INF/views/organization/organization.jsp"); %>
-	</nave>
+<body >
 	<div id="result" style="padding-left: 20px;">
 	<h4 >직원 신상정보</h4>
 
@@ -65,7 +74,7 @@
 												</div>
 											</th>
 											<td>
-												<div>
+												<div id="di">
 													<nobr>${info.name} </nobr>
 												</div>
 											</td>

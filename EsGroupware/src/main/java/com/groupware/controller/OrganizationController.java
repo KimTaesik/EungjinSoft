@@ -37,7 +37,7 @@ public class OrganizationController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("depts", depts);
 		mav.addObject("employees", employees);
-		mav.setViewName("organization/main");
+		mav.setViewName("organization/organization");
 		return mav;
 	}
 
@@ -51,7 +51,7 @@ public class OrganizationController {
 		mav.addObject("depts", depts);
 		mav.addObject("employees", employees);
 		mav.addObject("info", info);
-		mav.setViewName("organization/personalinfo");
+		mav.setViewName("organization/organization");
 		return mav;
 	}
 

@@ -40,4 +40,6 @@ public interface EmployeeDao {
 
 	List<Employee> getEmployeeList(String lineup);
 
+	List<Employee> searchAdmin(String id);
+
 }

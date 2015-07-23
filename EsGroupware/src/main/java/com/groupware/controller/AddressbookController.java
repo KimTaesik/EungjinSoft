@@ -5,13 +5,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(value="address")
+@RequestMapping(value="addressbook")
 public class AddressbookController {
 
-	@RequestMapping(value="addressbook.action", method = RequestMethod.GET)
-	public String address(){
-		return "address/addressbooklist";
-	}
+//	@RequestMapping(value="list.action", method = RequestMethod.GET)
+//	public String address(){
+//		return "addressbook/addressbooklist";
+//	}
 
-		
+
+	@RequestMapping(value="list.action", method = RequestMethod.GET)
+	public String address1(){
+		return "addressbook/addressbookedit";
 	}
+	
+}

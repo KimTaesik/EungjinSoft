@@ -53,7 +53,7 @@
 		
 </nav>
 
-<iframe name="myframe" src="/groupware/admin/registerform.action" scrollbars="no" frameborder="0">	
+<iframe name="myframe" src="/groupware/admin/registerform.action">	
 </iframe>   
  
 <!-- 크기를 지정해줘야함, 안그럼 거지같이 나옴 ㅋ 보더값도 0으로 줘야함. 스크롤은 맘대로-->
