@@ -10,7 +10,7 @@
 	href="/groupware/resources/styles/jquery/jquery-ui.css">
 <script src="/groupware/resources/styles/script/jquery.js"></script>
 <script src="/groupware/resources/styles/script/jquery-ui.js"></script>
-<link rel="stylesheet" href="/groupware/resources/styles/approval.css">
+<link rel="stylesheet" href="/groupware/resources/styles/organizaion.css">
 <style>
 /* IE has layout issues when sorting (see #5413) */
 .group {
@@ -73,8 +73,9 @@ $(document).ready(function () {
 
 </head>
 <body>
-<div style="float: left; border: 1px solid;">
-	<div id="accordion">
+<nav>
+<div >
+	<div id="accordion" >
 		<c:forEach var="dept" items="${depts}">
 			<div class="group">
 				<h3>${dept.partName}</h3>
@@ -92,8 +93,10 @@ $(document).ready(function () {
 		</c:forEach>
 	</div>
 </div>
-<div id="getid" style="float: right ; border: 1px solid;">
-<% pageContext.include("/WEB-INF/views/organization/personalinfo.jsp"); %>
+</nav>
+<div id="getid" style="float: right ; border: 1px solid; width: 84%">
+<c:import url="/WEB-INF/views/organization/personalinfo.jsp" />
+			
 </div>
 </body>
 </html>

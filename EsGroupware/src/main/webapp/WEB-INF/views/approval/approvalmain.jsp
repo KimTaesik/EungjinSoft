@@ -29,13 +29,14 @@
 </head>
 
 <body>
-	<div style="float: left; border: 1px solid;">
-		<%
-			pageContext.include("/WEB-INF/views/include/approvalheader.jsp");
-		%>
+	<nav>
+	<div>
+		
+		<c:import url="/WEB-INF/views/include/approvalheader.jsp"/>
 	</div>
+	</nav>
 	<div
-		style="width: 85%; float: right; margin-left: 10px; border: 1px solid;">
+		style="width: 83%; float: right; margin-left: 10px; border: 1px solid;">
 		<!--  검색 버튼 영역 -->
 		<div id="title" style="border: 1px solid;">
 			<h2>
