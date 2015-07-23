@@ -29,19 +29,6 @@
 		});
 	});
 
-	$(document).ready(function() {
-		$('#get').click(function() {
-
-			$.ajax({
-				url : "infomation.action?employeeid=" + id,
-				type : 'get',                                                                                          
-				dataType : 'text',
-				success : function(data) {
-					$('#output').val(data);
-				}
-			});
-		});
-	});
 </script>
 	<div id="accordion">
 		<div >
@@ -84,7 +71,7 @@
 			<div >
 				<table >
 					<tr>
-						<td >상신 문서</td>
+						<td id>상신 문서</td>
 					</tr>
 					<tr>
 						<td>임시 저장</td>
