@@ -59,11 +59,11 @@
 		        <br /><br />
 		        <div id="message" style='text-align:center;color:blue'>
 		        	<c:set var="id" value="${ id }" />
-					<c:set var="valid" value="false" />
+<%-- 					<c:set var="valid" value="false" /> --%>
 					<c:choose>
 						<c:when test="${ id != null }">
 							${ id }는
-				        	<c:set var="valid" value="${ valid }"/>
+				        	<%-- <c:set var="valid" value="${ valid }"/> --%>
 				        	<c:choose>
 				        		<c:when test="${ valid == true }">
 				        			사용가능한 아이디입니다.

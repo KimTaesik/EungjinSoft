@@ -19,15 +19,15 @@
 		home_number,
 		phone_number,
 		address,
-		marital_status,
+		<!-- marital_status, -->
 		postcode,
 		direct_line,
 		dept_no,
 		position_no,
-		ip_adress,
-		extension,
-		join_date,
-		birth_date
+		<!-- ip_adress,
+		extension, -->
+		join_date
+<!-- 		birth_date -->
 		)
 		VALUES
 		(
@@ -38,15 +38,15 @@
 		#{homeNumber},
 		#{phoneNumber},
 		#{address},
-		#{maritalStatus},
+		<!-- #{maritalStatus}, -->
 		#{postcode},
 		#{directLine},
 		#{deptNo},
 		#{positionNo},
-		#{ipAdress},
-		#{extension},
-		#{joinDate},
-		#{birthDate}
+<!-- 		#{ipAdress},
+		#{extension}, -->
+		#{joinDate}
+<!-- 		#{birthDate} -->
 		)
 	</insert>
 
@@ -125,7 +125,7 @@
 
 	<select id="getEmployeeByIdAndPasswd" parameterType="hashMap"
 		resultType="Employee">
-		SELECT id, name,position_no positionNo
+		SELECT id, name,position_no positionNo,usertype userType
 		FROM employee
 		WHERE id = #{id} AND password = #{password}
 	</select>

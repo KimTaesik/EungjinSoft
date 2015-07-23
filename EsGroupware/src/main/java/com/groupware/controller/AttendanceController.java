@@ -25,6 +25,8 @@ import com.groupware.dto.Employee;
 @RequestMapping(value="attendance")
 public class AttendanceController {
 	
+	//Test
+	
 	private AttendanceDao attendanceDao;
 	@Autowired
 	@Qualifier("AttendanceDao")
@@ -52,7 +54,18 @@ public class AttendanceController {
 		ModelAndView mav = new ModelAndView();
 		String aarrive="";
 		
+		int currentYear = 0;
+		int currentMonth = 0;
+		int currentDate = 0;
+		int currentDay = 0;
+		Date date;
 		String arrive,home;
+		
+		String[] dateString = new String[]{"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
+		int[] lastDate = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		mav.addObject("dateString",dateString);
+		mav.addObject("lastDate",lastDate);
+		
 		String selectday = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
 		String[] se = selectday.split("-");
 		
@@ -61,14 +74,23 @@ public class AttendanceController {
 			int rmonth = Integer.parseInt(mmonth);
 			se[0] = yyear;
 			se[1] = mmonth;
-			Date date = new Date(ryear, rmonth-1, 1);
+			date = new Date(ryear, rmonth-1, 1);
+			date.setDate(1);
 			mav.addObject("rdate",date);
 			mav.addObject("ryear", ryear);
 			mav.addObject("rmonth", rmonth);
+			mav.addObject("currentDay",date.getDay()-1);
+			
 		} else {
-			System.out.println("널널널널너런러");
+			date = new Date();
+
+			mav.addObject("currentYear", date.getYear()+1900);
+			mav.addObject("currentMonth", date.getMonth() + 1);
+			mav.addObject("currentDate", date.getDate());
+			mav.addObject("currentDay",date.getDay());
+			mav.addObject("date", date);
 		}
-	
+		
 		Employee loginUser = new Employee();
 		loginUser.setId(((Employee)session.getAttribute("loginuser")).getId());
 //		loginUser.setId("admin");

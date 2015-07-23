@@ -24,6 +24,7 @@ public class Employee {
 	private String positionName;
 	private int attCount;
 	private int normalCount;
+	private int userType;
 	
 	private Dept dept;
 	private Position position;
@@ -165,5 +166,11 @@ public class Employee {
 	}
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
+	}
+	public int getUserType() {
+		return userType;
+	}
+	public void setUserType(int userType) {
+		this.userType = userType;
 	}
 }

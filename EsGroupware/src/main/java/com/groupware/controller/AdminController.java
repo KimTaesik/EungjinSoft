@@ -18,33 +18,6 @@ import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
 import com.groupware.dto.Position;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
-
-import com.groupware.dao.EmployeeDao;
-import com.groupware.dao.OracleEmployeeDao;
-import com.groupware.dto.Dept;
-import com.groupware.dto.Employee;
-import com.groupware.dto.Position;
-
 @Controller
 @RequestMapping(value="admin")
 public class AdminController {

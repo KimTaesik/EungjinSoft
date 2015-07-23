@@ -8,12 +8,21 @@
 	
 	<context:component-scan base-package="com.groupware.dao" />
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		<bean id="dataSource"
+<!-- 		<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource"
 		p:driverClassName="oracle.jdbc.OracleDriver"
 		p:url="jdbc:oracle:thin:@210.16.214.196:1521:xe"
 		p:username="eungjinsoft"
 		p:password="esdbdb"
+		p:maxIdle="20"
+		p:maxTotal="100"
+		p:maxWaitMillis="1000">	 -->
+		<bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		p:driverClassName="oracle.jdbc.OracleDriver"
+		p:url="jdbc:oracle:thin:@210.16.214.196:1521:xe"
+		p:username="esoft"
+		p:password="esoft"
 		p:maxIdle="20"
 		p:maxTotal="100"
 		p:maxWaitMillis="1000">		

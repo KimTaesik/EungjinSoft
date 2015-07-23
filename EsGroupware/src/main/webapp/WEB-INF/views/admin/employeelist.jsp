@@ -14,6 +14,11 @@
 	<title>직원관리</title>
 	<link rel='Stylesheet' href='/groupware/resources/styles/default.css' />
 	<link rel='Stylesheet' href='/groupware/resources/styles/input.css' />
+	<style type="text/css">
+		td {
+			border-bottom: 1px solid #EAEAEA
+		}
+	</style>
 </head>
 <body>
 
@@ -32,8 +37,8 @@
 			<% List<Position> positions = (List<Position>)request.getAttribute("positions"); %> --%>
 			<c:choose>
 				<c:when test="${ employees != null && employees.size() > 0 }">
-					<table id="listcss" border="2" bordercolor="#70a3f8" style="width:600px; border-spacing: 0px;" align="right">
-						<tr style="background-color:#70a3f8; text-align:left; " height="30px">
+					 <table id="listcss" style="width:600px; border-spacing: 0px;">
+						<tr style="background-color:#E4E4E4; text-align:left; height: 30px;">
 							<th>
 							<a style='text-decoration:none;font-weight: bold' href='employeelist.action?lineup=id' >아이디</a>
 							</th>
@@ -51,7 +56,7 @@
 							</th>
 						</tr>
 						<c:forEach var="employee" items="${ employees }">
-							<tr style="height:30px;text-align:left;">
+							<tr style="height:30px;text-align:left;border-bottom: 2px #000000 solid;">
 								<td>
 									<a style='text-decoration:none;font-weight: bold' href='employeeview.action?id=${ employee.id }' >${ employee.id }</a>
 								</td>
@@ -76,7 +81,7 @@
 								</c:forEach>							
 							</tr>
 						</c:forEach>
-					</table>
+						</table>					
 				</c:when>
 				<c:otherwise>
 					<h3 style='text-align:center'>등록된 사용자가 없습니다.</h3>
