@@ -20,8 +20,20 @@ public class ApprovalController {
 //		this.employeeDao = employeeDao;
 //	}
 //
-	@RequestMapping(value="approval.action", method = RequestMethod.GET)
-	public String admin() {	
+	@RequestMapping(value="approvalheader.action", method = RequestMethod.GET)
+	public String approvalheader() {	
+		return "approval/approvalheader";	
+	}
+	
+	@RequestMapping(value="approvalmain.action", method = RequestMethod.GET)
+	public String approvalmain() {	
 		return "approval/approvalmain";	
 	}
+	
+	@RequestMapping(value="approvalwrite.action", method = RequestMethod.GET)
+	public String approvalwrite() {	
+		return "approval/approvalwrite";	
+	}
+	
+	
 }

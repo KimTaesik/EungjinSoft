@@ -56,7 +56,7 @@ public class OrganizationController {
 //		mav.addObject("employees", employees);
 //		mav.addObject("info", info);
 		
-		ArrayList<Object> list= new ArrayList<>();
+		
 		
 		
 	

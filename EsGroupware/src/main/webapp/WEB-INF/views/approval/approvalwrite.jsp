@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>groupware</title>
+
+
 <link rel="stylesheet"
 	href="/groupware/resources/styles/jquery/jquery-ui.css">
 <script src="/groupware/resources/styles/script/jquery.js"></script>
@@ -12,19 +10,7 @@
 <link rel="stylesheet" href="/groupware/resources/styles/approval.css">
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('#get').click(function() {
 
-			$.ajax({
-				url : "infomation.action?employeeid=" + id,
-				method : 'get',
-				dataType : 'text',
-				success : function(data) {
-					$('#output').val(data);
-				}
-			});
-		});
-	});
 	$(function() {
 		$("#accordion").accordion({
 			header : "> div > h3"
@@ -52,17 +38,11 @@
 		});
 	});
 </script>
-</head>
+
 
 <body>
-	<nav>
-		<div>
-			<%
-				pageContext.include("/WEB-INF/views/include/approvalheader.jsp");
-			%>
-		</div>
-	</nav>
-	<div style="width: 83%; height: 500px; float: right; margin-left: 10px; border: 1px solid;">
+	
+	<div  id="frame" style="width: 83%; height: 500px; float: right; margin-left: 10px; border: 1px solid;">
 		<!--  검색 버튼 영역 -->
 		
 				
@@ -78,7 +58,8 @@
 				<div style="float:left;width:50%; height: 20%;" >결재문서양식</div>
 				<div style="float:left;width:50%;  height: 20%;">결재양식정보</div>
 				</h2>
-		<div id="accordion2" style="clear:both; float:left; width: 50%;"  >
+		<nav>
+		<div id="accordion2" style="clear:both;  width: 50%;"  >
 					
 			<div >
 				
@@ -152,6 +133,7 @@
 				</div>
 			</div>
 		</div>
+		</nav>
 		<div style="float:right; width: 50%">
 			
 			<table id="form1"  border="0" cellspacing="1" cellpadding="2" class="table_layout" style='width:100%; height:150px; border-top:1px solid #EEEEEE; border-bottom: 1px solid #EEEEEE'>
@@ -229,4 +211,4 @@
 	</div>
 
 </body>
-</html>
+

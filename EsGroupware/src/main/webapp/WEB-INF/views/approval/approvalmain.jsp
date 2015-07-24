@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>groupware</title>
+
 <link rel="stylesheet"
 	href="/groupware/resources/styles/jquery/jquery-ui.css">
 <script src="/groupware/resources/styles/script/jquery.js"></script>
@@ -12,30 +9,28 @@
 <link rel="stylesheet" href="/groupware/resources/styles/approval.css">
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('#get').click(function() {
+$(document).ready(function() {
+	$(function() {	
+		$("#accordion").accordion({
+			header : "> div > h3"
+		}).sortable({
+			axis : "y",
+			handle : "h3",
+			stop : function(event, ui) {
 
-			$.ajax({
-				url : "infomation.action?employeeid=" + id,
-				method : 'get',
-				dataType : 'text',
-				success : function(data) {
-					$('#output').val(data);
-				}
-			});
+				ui.item.children("h3").triggerHandler("focusout");
+				$(this).accordion("refresh");
+			}
 		});
+		
 	});
+});
 </script>
 </head>
 
 <body>
-	<nav>
-	<div>
-		
-		<c:import url="/WEB-INF/views/include/approvalheader.jsp"/>
-	</div>
-	</nav>
-	<div
+
+	<div id="frame"
 		style="width: 83%; float: right; margin-left: 10px; border: 1px solid;">
 		<!--  검색 버튼 영역 -->
 		<div id="title" style="border: 1px solid;">
@@ -728,9 +723,5 @@
 			<!-- //전자결재 컨텐츠 -->
 		</div>
 	</div>
-
-
-
-
 </body>
-</html>
+
