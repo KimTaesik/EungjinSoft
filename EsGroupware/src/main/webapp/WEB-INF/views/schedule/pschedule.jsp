@@ -8,14 +8,18 @@
 	<link rel="Stylesheet" href="/groupware/resources/styles/scalendar.css" >
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>일정관리</title>
+	<script type="text/javascript">
+		$(function(){
+		});
+	</script>
 </head>
 <body>
 <div id="sub">
 	<div id="title">
-	<h2>
-		<span class="sched" >개인일정 &gt;
-        <font color="0073BD">월간일정</font></span>
-        </h2>
+		<h2>
+			<span class="sched" >개인일정 &gt;
+	        <font color="0073BD">월간일정</font></span>
+	    </h2>
 	</div>
 	<div class="toparea">		
 		<div class="leftarea" style="width:50%;">
@@ -130,7 +134,7 @@
 												<td class="${ dateString[j-1] }"></td>
 											</c:when>
 											<c:otherwise>
-												<td class="${ dateString[j-1] }" height="70" align="left" valign="top">${dateNum}<a href="index.php?action=schedule_addform&schedule_type=schedule_month&year=2015&month=7&day=1&auth=PRIVATE&schedule_open="><font class="org8"><img src="/groupware/resources/image/cal_plus.png" align="absmiddle" border="0"  /></font></a>
+												<td class="${ dateString[j-1] }" height="70" align="left" valign="top">${dateNum}<a href="index.php?action=schedule_addform&schedule_type=schedule_month&year=2015&month=7&day=1&auth=PRIVATE&schedule_open="><font class="org8"><img class="plus" src="/groupware/resources/image/cal_plus.png" align="absmiddle" border="0"  /></font></a>
 												<br />
 												</td>
 											</c:otherwise>

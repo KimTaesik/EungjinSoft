@@ -14,6 +14,7 @@
   	<script>
 	$(function() {	
 	    $( "#accordion" ).accordion();
+	    
 	    $("#ps").click(function(){
 	        $("#frame").load("pschedule.action");
 	    });
@@ -25,8 +26,7 @@
 	<div id="accordion" style="font-size: 10pt">
 			<h3>내 일정</h3>
 		  		<ul>
-			        <li><a href="#" id="ps">사원등록</a></li>
-			        <li><a href="/groupware/attendance/check.action">부서관리</a></li>
+			        <li><a href="#" id="ps">개인일정</a></li>
 		    	</ul>
 		    <h3>공개일정</h3>
 		    	<ul>

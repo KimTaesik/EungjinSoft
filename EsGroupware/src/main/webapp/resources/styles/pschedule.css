@@ -37,6 +37,7 @@ li{
 li:hover, li:focus {
 	background-color: #dfefff;
 }
+.plus{ float: right; margin-right: 100px;margin-top: 2px}
 
 
 .left {float:left}

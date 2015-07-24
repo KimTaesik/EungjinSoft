@@ -19,6 +19,11 @@ import com.groupware.dto.Employee;
 @RequestMapping(value="schedule")
 public class ScheduleController {
 	
+	@RequestMapping(value = "scheduleheader.action", method = RequestMethod.GET)
+	public String management2() {
+		return "schedule/scheduleheader";
+	}
+	
 	@RequestMapping(value = "pschedule.action", method = RequestMethod.GET)
 	public ModelAndView calendarcheck(String yyear, String mmonth, String chk, String out, HttpSession session,
 			@RequestParam(value="year", defaultValue="0") int year, 
@@ -65,15 +70,12 @@ public class ScheduleController {
 			mav.addObject("date", date);
 		}
 		
-		mav.setViewName("schedule/pschedule");
+		
 		
 		return mav;
 	}
 	
-	@RequestMapping(value = "scheduleheader.action", method = RequestMethod.GET)
-	public String management2() {
-		return "schedule/scheduleheader";
-	}
+
 
 
 }

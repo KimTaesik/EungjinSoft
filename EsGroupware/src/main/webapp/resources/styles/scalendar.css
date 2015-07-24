@@ -9,10 +9,10 @@
 .cal {width: 970px; height: 300px; font-size: 13px;}
 .ccap {display: none;}
 
-.sun {text-align: center; color: deeppink; width: 10px;}
-.mon {text-align: center;width: 10px;}
-.tue {text-align: center;width: 10px;}
-.wed {text-align: center;width: 10px;}
-.thu {text-align: center;width: 10px;}
-.fri {text-align: center;width: 10px;}
-.sat {text-align: center; color: deepskyblue;width: 10px;}
+.sun {color: deeppink; width: 10px;}
+.mon {width: 10px;}
+.tue {width: 10px;}
+.wed {width: 10px;}
+.thu {width: 10px;}
+.fri {width: 10px;}
+.sat {color: deepskyblue;width: 10px;}
