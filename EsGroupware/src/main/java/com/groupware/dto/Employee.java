@@ -1,5 +1,7 @@
 package com.groupware.dto;
 
+import java.util.List;
+
 
 
 public class Employee {
@@ -29,6 +31,15 @@ public class Employee {
 	private Dept dept;
 	private Position position;
 
+	private List<AddressBook> addressbooks;
+	
+	public List<AddressBook> getAddressbooks() {
+		return addressbooks;
+	}
+	public void setAddressbooks(List<AddressBook> addressbooks) {
+		this.addressbooks = addressbooks;
+	}
+	
 	public int getNormalCount() {
 		return normalCount;
 	}
