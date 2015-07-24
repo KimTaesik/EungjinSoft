@@ -10,7 +10,7 @@
   	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  	<link rel="stylesheet" href="/resources/demos/style.css">
+  	
   	<script>
 	$(function() {	
 	    $( "#accordion" ).accordion();
@@ -18,6 +18,7 @@
 	    $("#ps").click(function(){
 	        $("#frame").load("pschedule.action");
 	    });
+	    
 	});
 	</script>
 </head>
@@ -30,9 +31,9 @@
 		    	</ul>
 		    <h3>공개일정</h3>
 		    	<ul>
-			        <li><a href="#">공개일정</a></li>
-			        <li><a href="#">부서일정</a></li>
-			        <li><a href="#">회사일정</a></li>
+			        <li><a href="" id="pus">공개일정</a></li>
+			        <li><a href="">부서일정</a></li>
+			        <li><a href="">회사일정</a></li>
 		    	</ul>
 	</div>
 </nav>

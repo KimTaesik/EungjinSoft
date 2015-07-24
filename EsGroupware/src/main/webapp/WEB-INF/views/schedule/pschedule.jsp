@@ -10,6 +10,23 @@
 	<title>일정관리</title>
 	<script type="text/javascript">
 		$(function(){
+			$("#calendar").change(function(event){
+				$.ajax({
+					url : "/groupware/schedule/pschedule.action",
+					async : true,
+					type: "json",
+					data : {},
+					method : "get",
+					success : function(result, status, xhr){
+						alert(result.currentDay);
+					},
+					error : function(xhr, status, ex){
+						alert(status+"/"+ex+"/"+xhr);
+					}
+				})
+				
+				event.preventDefault(); //원래 요소의 이벤트에 대한 기본 동작 수행을 막는 코드
+			})
 		});
 	</script>
 </head>
@@ -48,7 +65,7 @@
 		<div class="right pad1tb">
 		</div>
 	</div>
-	<form method="get" action="pschedule.action" name="calendar">
+	<form id="calendar">
 			<c:choose>
 				<c:when test="${ ryear != null }">
 					<c:set var="date" value="${ rdate }" />
@@ -77,7 +94,7 @@
 				</div>
 				<div class="sheader">
 					
-					<select name="yyear" style="WIDTH: 60px" class="sinput" onchange="submit();"> 
+					<select name="yyear" style="WIDTH: 60px" class="sinput"> 
 						<option value='2008' ${ currentYear==2008 ? "selected":"" } >2008</option>
 						<option value='2009' ${ currentYear==2009 ? "selected":"" } >2009</option>
 						<option value='2010' ${ currentYear==2010 ? "selected":"" } >2010</option>
@@ -88,7 +105,7 @@
 						<option value='2015' ${ currentYear==2015 ? "selected":"" } >2015</option>
 					</select>
 					년
-					<select name="mmonth" style="WIDTH: 60px" class="sinput" onchange="submit();"> 
+					<select name="mmonth" style="WIDTH: 60px" class="sinput"> 
 						<option value='1' ${ currentMonth==1 ? "selected":"" } >1</option>
 						<option value='2' ${ currentMonth==2 ? "selected":"" } >2</option>
 						<option value='3' ${ currentMonth==3 ? "selected":"" } >3</option>
