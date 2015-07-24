@@ -1,86 +1,33 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>jQuery UI Accordion - Sortable</title>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">
-<style>
-/* IE has layout issues when sorting (see #5413) */
-.group {
-	zoom: 1
+[
+
+[
+{"deptNo":"1","partName":"개발팀","employees":null,"positions":null},
+{"deptNo":"2","partName":"개발2팀","employees":null,"positions":null},
+{"deptNo":"21","partName":"인사팀","employees":null,"positions":null},
+{"deptNo":"22","partName":"영업팀","employees":null,"positions":null},
+{"deptNo":"23","partName":"마케팅팀","employees":null,"positions":null}
+],
+
+[
+{"id":"admin","password":null,"name":"김응진","sex":null,"birthDate":null,"homeNumber":null,"phoneNumber":null,"address":null,"email":null,"maritalStatus":null,"postcode":null,"directLine":null,"deptNo":"1","positionNo":null,"joinDate":null,"ipAdress":null,"extension":null,"deptName":null,"positionName":null,"attCount":0,"normalCount":0,"dept":{"deptNo":"1","partName":"개발팀","employees":null,"positions":null},"position":{"positionNo":"1","positionName":"대표"}
+},
+{"id":"employee1","password":null,"name":"em1","sex":null,"birthDate":null,"homeNumber":null,"phoneNumber":null,"address":null,"email":null,"maritalStatus":null,"postcode":null,"directLine":null,"deptNo":"1","positionNo":null,"joinDate":null,"ipAdress":null,"extension":null,"deptName":null,"positionName":null,"attCount":0,"normalCount":0,"dept":{"deptNo":"1","partName":"개발팀","employees":null,"positions":null},"position":{"positionNo":"1","positionName":"대표"}
+},
+{"id":"employee2","password":null,"name":"김응진","sex":null,"birthDate":null,"homeNumber":null,"phoneNumber":null,"address":null,"email":null,"maritalStatus":null,"postcode":null,"directLine":null,"deptNo":"23","positionNo":null,"joinDate":null,"ipAdress":null,"extension":null,"deptName":null,"positionName":null,"attCount":0,"normalCount":0,"dept":{"deptNo":"23","partName":"마케팅팀","employees":null,"positions":null},"position":{"positionNo":"2","positionName":"과장"}
 }
-</style>
-<script>
-	$(function() {
-		$("#accordion").accordion({
-			header : "> div > h3"
-		}).sortable({
-			axis : "y",
-			handle : "h3",
-			stop : function(event, ui) {
+],
 
-				ui.item.children("h3").triggerHandler("focusout");
-				$(this).accordion("refresh");
-			}
-		});
-	});
-</script>
-</head>
-<body>
-
-	<div id="accordion">
-		<div class="group">
-			<h3>Section 1</h3>
-			<div>
-				<p>Mauris mauris ante, blandit et, ultrices a, suscipit eget,
-					quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida
-					in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros.
-					Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum
-					a velit eu ante scelerisque vulputate.</p>
-			</div>
-		</div>
-		<div class="group">
-			<h3>Section 2</h3>
-			<div>
-				<p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum
-					sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris
-					turpis porttitor velit, faucibus interdum tellus libero ac justo.
-					Vivamus non quam. In suscipit faucibus urna.</p>
-			</div>
-		</div>
-		<div class="group">
-			<h3>Section 3</h3>
-			<div>
-				<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus.
-					Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in
-					pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac
-					felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam
-					nisi, eu iaculis leo purus venenatis dui.</p>
-				<ul>
-					<li>List item one</li>
-					<li>List item two</li>
-					<li>List item three</li>
-				</ul>
-			</div>
-		</div>
-		<div class="group">
-			<h3>Section 4</h3>
-			<div>
-				<p>Cras dictum. Pellentesque habitant morbi tristique senectus
-					et netus et malesuada fames ac turpis egestas. Vestibulum ante
-					ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-					Curae; Aenean lacinia mauris vel est.</p>
-				<p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim
-					consequat lectus. Class aptent taciti sociosqu ad litora torquent
-					per conubia nostra, per inceptos himenaeos.</p>
-			</div>
-		</div>
-	</div>
+{"id":"admin","password":null,"name":"김응진","sex":null,"birthDate":null,"homeNumber":null,"phoneNumber":null,"address":null,"email":null,"maritalStatus":null,"postcode":null,"directLine":null,"deptNo":"1","positionNo":null,"joinDate":"2015-07-22
+00:00:00","ipAdress":null,"extension":null,"deptName":null,"positionName":null,"attCount":0,"normalCount":0,
+"dept":{"deptNo":"1","partName":"개발팀","employees":null,"positions":null},
+"position":{"positionNo":"1","positionName":"대표"}
+}
+]
 
 
-</body>
-</html>
+
+
+[
+{"id":"admin","password":null,"name":"김응진","sex":null,"birthDate":null,"homeNumber":null,"phoneNumber":null,"address":null,"email":null,"maritalStatus":null,"postcode":null,"directLine":null,"deptNo":"1","positionNo":null,"joinDate":"2015-07-22 00:00:00","ipAdress":null,"extension":null,"deptName":null,"positionName":null,"attCount":0,"normalCount":0,
+"dept":{"deptNo":"1","partName":"개발팀","employees":null,"positions":null},"position":{"positionNo":"1","positionName":"대표"}}
+]

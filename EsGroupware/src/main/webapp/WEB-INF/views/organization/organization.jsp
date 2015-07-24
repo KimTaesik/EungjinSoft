@@ -10,7 +10,7 @@
 	href="/groupware/resources/styles/jquery/jquery-ui.css">
 <script src="/groupware/resources/styles/script/jquery.js"></script>
 <script src="/groupware/resources/styles/script/jquery-ui.js"></script>
-<link rel="stylesheet" href="/groupware/resources/styles/approval.css">
+<link rel="stylesheet" href="/groupware/resources/styles/organizaion.css">
 <style>
 /* IE has layout issues when sorting (see #5413) */
 .group {
@@ -36,37 +36,56 @@
 
 $(document).ready(function () {
     $('.get').click(function (event) {
-    	var id = $('#id').val();
+    	var id = $(this).attr('id');
         $.ajax({
             url:"infomation.action?employeeid="+id,
-            type: 'get',
+            method: 'get',
+            data:{},
             dataType: 'text',
-            success: function (data) {
-            	alert('성공');
-             $('#di').val(data)
-            
+            success: function (result,status,xhr) {
+            	
+            	eval("var r="+result);
+            	
+             $('#infoid').text(r.id);
+             $('#infoname').text(r.name);
+             $('#infosex').text(r.sex);
+             $('#infobirth').text(r.birthdate);
+             $('#infophone').text(r.phoneNumber);
+             $('#infoemail').text(r.email);
+             $('#infoaddress').text(r.address);
+             $('#infopartName').text(r.dept.partName);
+             $('#infopositionName').text(r.position.positionName);
+             $('#infodirectLine').text(r.directLine);
+             $('#infojoinDate').text(r.joinDate);
+             
             },
+            error : function(xhr,status,ex) {
+				$('#result').text(status +"/" + ex );
+		}
           
         });
         event.preventDefault();
     });
+    
 });
+
 </script>
 
 </head>
 <body>
-<div style="float: left; border: 1px solid;">
-	<div id="accordion">
+<nav>
+<div >
+	<div id="accordion" >
 		<c:forEach var="dept" items="${depts}">
 			<div class="group">
 				<h3>${dept.partName}</h3>
 				<div>
 					<c:forEach var="employee" items="${employees}">
 						<c:if test="${dept.deptNo eq employee.deptNo}">
-							<div ><a class="get" href="#">
+							<div ><a id="${ employee.id }" class="get" href="#">
 									<img src='/groupware/resources/image/re.gif' />&nbsp; 
 									${employee.position.positionName}&nbsp;&nbsp;${employee.name}</a></div><br />
-						<input id="id" type="hidden" width="10px" value="${ employee.id }">
+						
 						</c:if>
 					</c:forEach>
 				</div>
@@ -74,8 +93,10 @@ $(document).ready(function () {
 		</c:forEach>
 	</div>
 </div>
-<div id="getid" style="float: right ; border: 1px solid;">
-<% pageContext.include("/WEB-INF/views/organization/personalinfo.jsp"); %>
+</nav>
+<div id="getid" style="float: right ; border: 1px solid; width: 84%">
+<c:import url="/WEB-INF/views/organization/personalinfo.jsp" />
+			
 </div>
 </body>
 </html>

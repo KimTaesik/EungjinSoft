@@ -12,18 +12,6 @@
 <title></title>
 <script language="javascript">
 
-$(document).ready(function () {
-    $('#get').click(function () {
-        $.ajax({
-            url: "infomation.action?employeeid="+id,
-            type: 'get',
-            dataType: 'text',
-            success: function (data) {
-            }
-        });
-    });
-});
-	
 </script>
 </head>
 <body >
@@ -58,7 +46,7 @@ $(document).ready(function () {
 										<td >
 											<div style='width: 300px;'>
 												<nobr>
-													<span >${info.id}</span>
+													<span id="infoid" >${info.id}</span>
 													<!--a href="#blank-link" onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }ServiceGate('2','한상준| |desk02@whoisdesk.kr');" ><span><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_sticky-note-pin.gif" /> 쪽지</span></a-->
 
 												</nobr>
@@ -74,7 +62,7 @@ $(document).ready(function () {
 												</div>
 											</th>
 											<td>
-												<div id="di">
+												<div id="infoname">
 													<nobr>${info.name} </nobr>
 												</div>
 											</td>
@@ -87,7 +75,7 @@ $(document).ready(function () {
 											</th>
 											<td>
 												<div>
-													<nobr>${info.sex} </nobr>
+													<nobr id="infosex">${info.sex} </nobr>
 												</div>
 											</td>
 										</tr>
@@ -100,7 +88,7 @@ $(document).ready(function () {
 											<td>
 												<div>
 												
-													<nobr>${info.birthDate.substring(0,10)} </nobr>
+													<nobr id="infobirth">${info.birthDate.substring(0,10)} </nobr>
 												</div>
 											</td>
 										</tr>
@@ -112,7 +100,7 @@ $(document).ready(function () {
 											</th>
 											<td>
 												<div>
-													<nobr>${info.phoneNumber} </nobr>
+													<nobr id="infophone">${info.phoneNumber} </nobr>
 												</div>
 											</td>
 										</tr>
@@ -124,7 +112,7 @@ $(document).ready(function () {
 											</th>
 											<td>
 												<div>
-													<nobr>${info.email} </nobr>
+													<nobr id="infoemail">${info.email} </nobr>
 												</div>
 											</td>
 										</tr>
@@ -136,7 +124,7 @@ $(document).ready(function () {
 											</th>
 											<td>
 												<div>
-													<nobr>${info.address} </nobr>
+													<nobr id="infoaddress">${info.address} </nobr>
 												</div>
 											</td>
 										</tr>
@@ -153,22 +141,22 @@ $(document).ready(function () {
 									<col width=""></col>
 									<tr>
 										<th style="background-color: white;">소속부서</th>
-										<td>${info.dept.partName}</td>
+										<td id="infopartName">${info.dept.partName}</td>
 									</tr>
 									<tbody>
 										<tr>
 											<th style="background-color: white;">직급</th>
-											<td>${info.position.positionName}</td>
+											<td id="infopositionName">${info.position.positionName}</td>
 										</tr>
 
 									</tbody>
 										<tr>
 											<th style="background-color: white;">직통전화</th>
-											<td>${info.directLine}</td>
+											<td id="infodirectLine">${info.directLine}</td>
 										</tr>
 										<tr>
 											<th style="background-color: white;">입사일자</th>
-											<td>${info.joinDate.substring(0, 10)}</td>
+											<td id="infojoinDate">${info.joinDate.substring(0, 10)}</td>
 											
 										</tr>
 								</table>

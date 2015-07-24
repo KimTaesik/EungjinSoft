@@ -65,8 +65,9 @@
 				주소록
 			</td>
 			
-			<td onclick="window.open('/groupware/approval/approval.action','전자결제','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
-			<img src="/groupware/resources/image//admin/organization.png" /><br />
+			<td onclick="window.open('/groupware/approval/approvalheader.action','전자결제','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
+			<img src="/groupware/resources/image/admin/organization.png" /><br />
+
 				전자결제
 			</td>
 			<td onclick="window.open('/groupware/schedule/scheduleheader.action','일정관리','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">

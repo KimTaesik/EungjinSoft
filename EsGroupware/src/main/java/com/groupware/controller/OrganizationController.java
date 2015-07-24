@@ -1,5 +1,6 @@
 package com.groupware.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.dao.EmployeeDao;
@@ -42,17 +44,24 @@ public class OrganizationController {
 	}
 
 	@RequestMapping(value = "infomation.action", method = RequestMethod.GET)
-	public ModelAndView info(String employeeid) {
+	@ResponseBody
+	public Employee info(String employeeid) {
+		System.out.println(employeeid);
 		Employee info = employeeDao.getEmployeeInfomationList(employeeid);
 		List<Dept> depts = employeeDao.getDeptList();
 		List<Employee> employees = employeeDao.getemList();
 
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("depts", depts);
-		mav.addObject("employees", employees);
-		mav.addObject("info", info);
-		mav.setViewName("organization/organization");
-		return mav;
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("depts", depts);
+//		mav.addObject("employees", employees);
+//		mav.addObject("info", info);
+		
+		
+		
+		
+	
+		
+		return info;
 	}
 
 }
