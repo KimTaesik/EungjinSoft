@@ -34,9 +34,9 @@ $(document).ready(function() {
 		style="width: 83%; float: right; margin-left: 10px; border: 1px solid;">
 		<!--  검색 버튼 영역 -->
 		<div id="title" style="border: 1px solid;">
-			<h2>
+			<h1 style="text-align: center">
 				<span>전자결재 메인</span>
-			</h2>
+			</h1>
 		</div>
 		<div class="under"></div>
 		<!--  //검색 버튼 영역 -->
@@ -76,12 +76,12 @@ $(document).ready(function() {
 						</div>
 					</td>
 				</tr>
-				<tr style="vertical-align: top;">
+				<tr id=trdown style="vertical-align: top;">
 					<td>
 						<div>
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 								<thead>
-									<tr>
+									<tr >
 										<th>
 											<div>
 												<nobr> 미결재 </nobr>
@@ -90,7 +90,7 @@ $(document).ready(function() {
 										<td>
 											<div>
 												<nobr>
-													<a> 3건 </a>
+													<a href="#"> 0건 </a>
 												</nobr>
 											</div>
 										</td>
@@ -106,7 +106,7 @@ $(document).ready(function() {
 										<td>
 											<div>
 												<nobr>
-													<a> 5건</a>
+													<a href=#> 0건</a>
 												</nobr>
 											</div>
 										</td>
@@ -128,19 +128,19 @@ $(document).ready(function() {
 										<td>
 											<div>
 												<nobr>
-													<a> 11건</a>
+													<a  href="#"> 0건</a>
 												</nobr>
 											</div>
 										</td>
 										<th>
 											<div>
-												<nobr> 반려문서 </nobr>
+												<nobr > 반려문서 </nobr>
 											</div>
 										</th>
 										<td>
 											<div>
 												<nobr>
-													<a> 3건</a>
+													<a href="#"> 0건</a>
 												</nobr>
 											</div>
 										</td>
@@ -156,7 +156,7 @@ $(document).ready(function() {
 										<td>
 											<div>
 												<nobr>
-													<a> 0건</a>
+													<a href="#"> 0건</a>
 												</nobr>
 											</div>
 										</td>
@@ -168,7 +168,7 @@ $(document).ready(function() {
 										<td>
 											<div>
 												<nobr>
-													<a> 7건</a>
+													<a href="#"> 0건</a>
 												</nobr>
 											</div>
 										</td>
@@ -183,7 +183,7 @@ $(document).ready(function() {
 										<td>
 											<div>
 												<nobr>
-													<a> 0건</a>
+													<a href="#"> 0건</a>
 												</nobr>
 											</div>
 										</td>
@@ -207,7 +207,7 @@ $(document).ready(function() {
 										<td>
 											<div>
 												<nobr>
-													<a> 0건 </a>
+													<a href="#"> 0건 </a>
 												</nobr>
 											</div>
 										</td>
@@ -223,7 +223,7 @@ $(document).ready(function() {
 										<td>
 											<div>
 												<nobr>
-													<a> 0건 </a>
+													<a href="#"> 0건 </a>
 												</nobr>
 											</div>
 										</td>
@@ -245,7 +245,7 @@ $(document).ready(function() {
 										<td>
 											<div>
 												<nobr>
-													<a> 0 건</a>
+													<a href="#"> 0 건</a>
 												</nobr>
 											</div>
 										</td>
@@ -261,7 +261,7 @@ $(document).ready(function() {
 										<td>
 											<div>
 												<nobr>
-													<a> 0 건</a>
+													<a href="#"> 0 건</a>
 												</nobr>
 											</div>
 										</td>
@@ -278,7 +278,7 @@ $(document).ready(function() {
 			<div class="table2  clear">
 				<table class="table_layout">
 					<thead>
-						<tr>
+						<tr id="trdown">
 							<th><div>
 									<nobr>문서번호</nobr>
 								</div></th>
@@ -308,18 +308,18 @@ $(document).ready(function() {
 					<tbody>
 						<tr>
 							<td class="txt_ce"><div>
-									<nobr> 1012-0009 </nobr>
+									<nobr> 11111</nobr>
 								</div></td>
 							<td class="txt_ce"><div>
-									<nobr> 10.12.03 </nobr>
+									<nobr> 2015-07-24 </nobr>
 								</div></td>
 							<td class="txt_ce"><div>
 									<nobr>
-										<a>비공개문서2</a>
+										<a>비공개문서1</a>
 									</nobr>
 								</div></td>
 							<td class="txt_ce"><div>
-									<nobr> 최진성 사원 </nobr>
+									<nobr> 안대건 사원 </nobr>
 								</div></td>
 							<td class="txt_ce"><div>
 									<nobr> 미결재 </nobr>
@@ -328,72 +328,13 @@ $(document).ready(function() {
 									<nobr> 진행중 </nobr>
 								</div></td>
 							<td class="txt_ce"><div>
-									<nobr> 김철수 이사 </nobr>
+									<nobr> 김태식 과장 </nobr>
 								</div></td>
 							<td class="bdr_none txt_ce"><div>
 									<nobr>1개</nobr>
 								</div></td>
 						</tr>
 
-
-						<tr>
-							<td class="txt_ce"><div>
-									<nobr> 1012-0007 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr> 10.12.03 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr>
-										<a>비공개문서</a>
-									</nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr> 최진성 사원 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr> 미결재 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr> 진행중 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr> 김철수 이사 </nobr>
-								</div></td>
-							<td class="bdr_none txt_ce"><div>
-									<nobr>4개</nobr>
-								</div></td>
-						</tr>
-
-
-						<tr>
-							<td class="txt_ce"><div>
-									<nobr> 1012-0005 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr> 10.12.03 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr>
-										<a>수신부서없는공개문서</a>
-									</nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr> 최진성 사원 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr> 미결재 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr> 진행중 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr> 김철수 이사 </nobr>
-								</div></td>
-							<td class="bdr_none txt_ce"><div>
-									<nobr>1개</nobr>
-								</div></td>
-						</tr>
 
 
 
@@ -411,7 +352,7 @@ $(document).ready(function() {
 			<div class="table2 clear">
 				<table class="table_layout">
 					<thead>
-						<tr>
+						<tr id="trdown">
 							<th><div>
 									<nobr>문서번호</nobr>
 								</div></th>
@@ -435,14 +376,14 @@ $(document).ready(function() {
 
 						<tr>
 							<td class="txt_ce"><div>
-									<nobr> 1412-0001 </nobr>
+									<nobr> 11111 </nobr>
 								</div></td>
 							<td class="txt_ce"><div>
-									<nobr> 14.12.30 </nobr>
+									<nobr> 15.7.24 </nobr>
 								</div></td>
 							<td class="txt_ce"><div>
 									<nobr>
-										<a>dfasdf</a></td>
+										<a>기안서</a></td>
 							<td class="txt_ce"><div>
 									<nobr> 진행중 </nobr>
 								</div></td>
@@ -450,41 +391,7 @@ $(document).ready(function() {
 									<nobr> 0개 </nobr>
 								</div></td>
 						</tr>
-						<tr>
-							<td class="txt_ce"><div>
-									<nobr> 1301-0001 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr> 13.01.09 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr>
-										<a>sdfsdf</a></td>
-							<td class="txt_ce"><div>
-									<nobr> 진행중 </nobr>
-								</div></td>
-							<td class="txt_ce bdr_none"><div>
-									<nobr> 1개 </nobr>
-								</div></td>
-						</tr>
-						<tr>
-							<td class="txt_ce"><div>
-									<nobr> 1105-0012 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr> 11.05.09 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr>
-										<a>개발팀 워크샵 지출 결의서</a></td>
-							<td class="txt_ce"><div>
-									<nobr> 진행중 </nobr>
-								</div></td>
-							<td class="txt_ce bdr_none"><div>
-									<nobr> 1개 </nobr>
-								</div></td>
-						</tr>
-
+						
 
 
 
@@ -503,7 +410,7 @@ $(document).ready(function() {
 			<div>
 				<table class="table_layout">
 					<thead>
-						<tr>
+						<tr id="trdown">
 							<th><div>
 									<nobr>문서번호</nobr>
 								</div></th>
@@ -573,13 +480,13 @@ $(document).ready(function() {
 			</div>
 			<h4>전자결재 문서함 설명</h4>
 			<div>
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<table id="trdown" width="100%" border="0" cellspacing="0" cellpadding="0">
 
 					<col width="20%" class="overf"></col>
 					<col width="80%" class="overf"></col>
 
-					<thead>
-						<tr>
+					<thead >
+						<tr >
 							<th rowspan="2">
 								<div>
 									<nobr>

@@ -34,6 +34,18 @@ public class ApprovalController {
 	public String approvalwrite() {	
 		return "approval/approvalwrite";	
 	}
+	@RequestMapping(value="approvalwrite.action", method = RequestMethod.POST)
+	public String approvalwrite2() {	
+		return "approval/approvalwrite";	
+	}
+	@RequestMapping(value="approvaling.action", method = RequestMethod.GET)
+	public String approvaling() {	
+		return "approval/documentbox";	
+	}
+	@RequestMapping(value="approvalend.action", method = RequestMethod.GET)
+	public String approvalend() {	
+		return "approval/documentbox";	
+	}
 	
 	
 }

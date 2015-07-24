@@ -35,6 +35,12 @@
 		$("#approvalmain").click(function() {
 			$("#frame").load("approvalmain.action");
 		});
+		$("#approvaling").click(function() {
+			$("#frame").load("approvalling.action");
+		});
+		$("#approvalend").click(function() {
+			$("#frame").load("approvalend.action");
+		});
 	});
 </script>
 </head>
@@ -52,8 +58,8 @@
 			</ul>
 			<h3>결재할 문서함</h3>
 			<ul>
-				<li><a href="#">결재할 문서</a></li>
-				<li><a href="#">결재완료 문서</a></li>
+				<li><a href="#" id="approvaling">결재할 문서</a></li>
+				<li><a href="#" id="approvalend">결재완료 문서</a></li>
 				
 			</ul>
 			<h3>개인 문서함</h3>
