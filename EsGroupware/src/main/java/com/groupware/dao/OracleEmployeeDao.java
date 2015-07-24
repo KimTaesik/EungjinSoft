@@ -68,12 +68,6 @@ public class OracleEmployeeDao implements EmployeeDao {
 	}
 	
 	@Override
-	public List<Employee> searchAdmin(String id) {
-		List<Employee> employees = employeeMapper.searchAdmin(id);
-		return employees;
-	}
-	
-	@Override
 	public List<Dept> getDeptList() {
 		return employeeMapper.getDeptList();
 	
@@ -121,6 +115,28 @@ public class OracleEmployeeDao implements EmployeeDao {
 	@Override
 	public void deletePosition(String id) {
 		employeeMapper.deletePosition(id);
+	}
+	@Override
+	public void registerApprovalAdmin(String id) {
+		employeeMapper.registerApprovalAdmin(id);
+	}
+	
+	
+	@Override
+	public List<Employee> searchDeptAdmin(String id) {
+		List<Employee> employees = employeeMapper.searchDeptAdmin(id);
+		return employees;
+	}
+	
+	@Override
+	public List<Employee> getApprovalAdminList() {
+		List<Employee> employees = employeeMapper.getApprovalAdminList();
+		return employees;
+	}
+	@Override
+	public List<Employee> searchAdmin() {
+		List<Employee> employees = employeeMapper.searchAdmin();
+		return employees;
 	}
 
 }

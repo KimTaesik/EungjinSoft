@@ -39,25 +39,36 @@ public class AdminGrantController {
 
 		List<Dept> depts = employeeDao.getDeptList();
 		List<Position> positions = employeeDao.getPositionList();
+		List<Employee> approvalAdmins = employeeDao.getApprovalAdminList();
 		
 		mav.addObject("depts", depts);
 		mav.addObject("positions", positions);
+		mav.addObject("approvalAdmins", approvalAdmins);
 		mav.setViewName("admin/admingrant");
 		
 		return mav;
 		
 	}
 	
-	@RequestMapping("adminsearch.action")
+	@RequestMapping("searchDeptAdmin.action")
 	@ResponseBody //별도의 뷰를 사용하지 말고 return 값을 응답본문으로 사용하세요
 	public List<Employee> ajaxTest(String option) {
 		System.out.println(option);
-		List<Employee> employees = employeeDao.searchAdmin(option);
-		
-		System.out.println(employees.size());
-		//System.out.println("searchadmin : " + employees.size());
-		
+		List<Employee> employees;
+		if(option != "") {
+			employees = employeeDao.searchDeptAdmin(option);
+		} else {
+			employees = employeeDao.searchAdmin();
+		}
+			
 		return employees;
+	}
+	
+	@RequestMapping(value="registerApprovalAdmin.action", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody //별도의 뷰를 사용하지 말고 return 값을 응답본문으로 사용하세요
+	public void registerApprovalAdmin(String id) {
+		System.out.println(id);
+		employeeDao.registerApprovalAdmin(id);
 	}
 		
 }

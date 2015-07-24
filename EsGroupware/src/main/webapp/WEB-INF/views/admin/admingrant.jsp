@@ -28,9 +28,9 @@
 
 	<script type="text/javascript">
 	$(function() {
-		$("#adminSearch").click(function(event) {
+		$("#searchAdmin").click(function(event) {
 			$.ajax({
-				url : "/groupware/admin/adminsearch.action",
+				url : "/groupware/admin/searchDeptAdmin.action",
 				async : true,
 				data : { "option": $("option:selected").val()},
 				method : "post",
@@ -41,7 +41,7 @@
 					var html = 
 						"<select name='TreeKey2' size='5' style='width:500px;height:100px;' onchange='getTreeKeyCode(this.value);'>";
 						for(var i= 0 ; i < result.length; i ++) {
-							html += "<option value='" + result[i].id + "'>" + result[i].name + "</option>";
+							html += "<option class='idoption' value='" + result[i].id + "'>" + result[i].name + "</option>";
 						}
 						
 						html += "</select>";
@@ -54,11 +54,24 @@
 						}	
 				},
 				error : function(xhr, status, ex) {
-
 				}
 			})		
 			event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
-		})	
+		})
+		
+		$("#registerApprovalAdmin").click(function(event) {
+			$.ajax({
+				url : "/groupware/admin/registerApprovalAdmin.action",
+				async : true,
+				data : { "id": $(".idoption:selected").val()},
+				method : "post",
+				success : function(result, status, xhr) {
+				},
+				error : function(xhr, status, ex) {
+				}
+			})		
+			event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
+		})
 	})
 	</script>
 </head>
@@ -98,8 +111,8 @@
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_layout">
 		<form name="form" method="post" action='indexPrc.php?dummy=1437557543' onsubmit='return submitPrc();'>	
-		<input type='hidden' name='No'		value=''>
-		<input type='hidden' name='Id'		value='' >
+		<input type='hidden' name='No' value=''>
+		<input type='hidden' name='Id' value='' >
 		<input type='hidden' name='TreeKeyVal' value='' >
 
 
@@ -183,7 +196,7 @@
 								<input name="userInfo" type="text" class="input vm" value="" style="width:200px" readonly />
 							</span>
 							<span class="btn_page">
-								<a href="#" id="adminSearch"><span><img src="/groupware/resources/image/icon_magnify.gif" class="vm"  /> 관리자 찾기</span></a>
+								<a href="#" id="searchAdmin"><span><img src="/groupware/resources/image/icon_magnify.gif" class="vm"  /> 관리자 찾기</span></a>
 							</span>
 						</nobr>
 					</div>
@@ -220,7 +233,7 @@
 
 			<span class="btn">
 			
-									<a href="#blank-link" onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }submitChk();"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_pencil.gif" alt="" align="absmiddle" /> 등록</a>
+				<a href="#blank-link" id="registerApprovalAdmin"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_pencil.gif" alt="" align="absmiddle" /> 등록</a>
 				
 			</span> 
 
@@ -477,6 +490,58 @@
 			</tr>
 			
 			<tr>
+               	<c:forEach var="approvals" items="${ approvalAdmins }" varStatus="status">
+               		<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ status.index }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ approvals.id }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								<c:forEach var="position" items="${ positions }">
+									<c:if test="${ approvals.positionNo ==  position.positionNo }">
+										${ position.positionName }										
+									</c:if>
+		                		</c:forEach>
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ approvals.name }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ approvals.name }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+					<div>
+						<nobr>
+								<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;
+								<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' class='vm'  title='삭제' /></a>
+						</nobr>
+					</div>
+				</td>
+               	</c:forEach>
+		    </tr>
+			
+			<!-- <tr>
 				<td class='txt_ce'>
 					<div>
 						<nobr>
@@ -515,12 +580,12 @@
 				<td class='txt_ce'>
 					<div>
 						<nobr>
-								<a href='#blank-link' onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }location.href='?dummy=1437557543&No=5';"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;
-								<a href='#blank-link' onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }prcDel('5', '8', 'desk01');"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' class='vm'  title='삭제' /></a>
+								<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;
+								<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' class='vm'  title='삭제' /></a>
 						</nobr>
 					</div>
 				</td>
-			</tr>
+			</tr> -->
 		
 
 			</tbody>

@@ -206,9 +206,21 @@
 		SELECT position_no, position_name FROM position where position_no =#{no}
 	</select>
 	
+	<select id="searchDeptAdmin" resultType="Employee"
+		parameterType="String">
+		SELECT id, name FROM employee where dept_no =#{no} and usertype = 0
+	</select>
 	<select id="searchAdmin" resultType="Employee"
 		parameterType="String">
-		SELECT id, name FROM employee where dept_no =#{no}
+		SELECT id, name FROM employee WHERE deleted = 0
+	</select>
+	
+	<update id="registerApprovalAdmin" parameterType="String">
+		UPDATE employee set usertype = 2 WHERE id = #{id}
+	</update>
+	
+	<select id="getApprovalAdminList" resultType="Employee">
+		SELECT id, name, position_no positionNo FROM employee where usertype = 2
 	</select>
 
 </mapper>                                                                                 

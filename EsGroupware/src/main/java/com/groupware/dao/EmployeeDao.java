@@ -40,6 +40,12 @@ public interface EmployeeDao {
 
 	List<Employee> getEmployeeList(String lineup);
 
-	List<Employee> searchAdmin(String id);
+	List<Employee> searchDeptAdmin(String id);
+	
+	List<Employee> searchAdmin();
+	
+	List<Employee> getApprovalAdminList();
+	
+	void registerApprovalAdmin(String id);
 
 }
