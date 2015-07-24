@@ -1,7 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<html>
-<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>일정관리</title>
 	<link rel="Stylesheet" href="/groupware/resources/styles/pschedule.css" />
@@ -14,14 +11,9 @@
   	<script>
 	$(function() {	
 	    $( "#accordion" ).accordion();
-	    
-	    $("#ps").click(function(){
-	        $("#frame").load("pschedule.action");
-	    });
-	    
 	});
 	</script>
-</head>
+
 <body>
 <nav>
 	<div id="accordion" style="font-size: 10pt">
@@ -38,6 +30,5 @@
 	</div>
 </nav>
 
-<div class="frame" id="frame"></div>
 </body>
-</html>
+
