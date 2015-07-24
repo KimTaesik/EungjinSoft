@@ -1,7 +1,5 @@
 <%@page import="java.util.stream.Stream"%>
 <%@page import="com.groupware.dto.Attendance"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -140,21 +138,19 @@
 				</c:when>
 				<c:otherwise>
 					<c:set var="date" value="${ date }" />
-					<c:set var="currentYear" value="${ ryear }" />
-					<c:set var="currentMonth" value="${ rmonth }" />
-					<c:set var="currentDate" value="1" />
+					<c:set var="currentYear" value="${ currentYear }" />
+					<c:set var="currentMonth" value="${ currentMonth }" />
+					<c:set var="currentDate" value="${ currentDate }" />
 					<c:set var="currentDay" value="${ currentDay }" />
 				</c:otherwise>
 			</c:choose>
 			<c:set var="dateString" value="${ dateString }" />
 			<c:set var="lastDate" value="${ lastDate }" />
-			<c:if test="${(currentYear % 4 == 0 && currentYear % 100 != 0) || currentYear % 400 == 0}">
-				<c:set var="lastDate[1]" value="29" />
-				${ lastDate[1] = 29}
+			<c:if test="${(currentYear % 4 == 0 && currentYear % 100 != 0) || currentYear % 400 == 0}">			
+				${ lastDate[1] = 29 }
 			</c:if>
-			<c:set var="currentLastDate" valye="${ lastDate[currentMonth-1] }"/>
-			<c:set var="week" value="${( currentDay + currentLastDate ) / 7+(1-(( currentDay + currentLastDate ) / 7%1))%1+1}" />
-				
+			<c:set var="currentLastDate" value="${ lastDate[currentMonth-1] }"/>
+			<c:set var="week" value="${((( currentDay + currentLastDate )/7) + (1-((( currentDay + currentLastDate )/7)%1))%1)+1}" />
 				<div id="header" class="kheader">
 					<span id="date">${ currentYear }년 ${ currentMonth }월</span>
 				</div>
@@ -205,26 +201,32 @@
 					
 					<tbody>
 			<c:set var="dateNum" value="${ 1 - currentDay }"></c:set>
-			<c:forEach var="week" items="${ week }">
+			<c:if test="${ dateNum eq 2 }">
+				<c:set var="dateNum" value="-6"></c:set>
+			</c:if>
+			<c:forEach begin="0" end="${ week +1 }" step="1">
 								<tr>
-				<c:forEach var="j" begin="0" end="7" step="1">
-					${ dateNum=dateNum+1 }
-					<c:if test="${dateNum < 1 || dateNum > currentLastDate}">
-											<td class="${ dateString[j] }"> </td>
-											<% continue; %>
-					</c:if>
-								<td class="${ dateString[j] }">${dateNum}<br />
-					<c:forEach var="allAtt" items="${ all }">
-					<c:if test="${ dateNum == att.getDays() && currentYear == att.getYears() && currentMonth == att.getMonths() }">
-										 ${ all.classify } : ${ all.hours }시 ${ minutes }분 <br />
-					</c:if>
-					</c:forEach>
-								</td>
-				</c:forEach>
+									<c:forEach var="j" begin="1" end="7" step="1">
+										<c:set var="dateNum" value="${ dateNum=dateNum+1 }"></c:set>
+										<c:choose>
+											<c:when test="${dateNum < 1 || dateNum > currentLastDate}">
+												<td class="${ dateString[j-1] }"></td>
+											</c:when>
+											<c:otherwise>
+												<td class="${ dateString[j-1] }">${dateNum}<br />
+														<c:forEach var="allAtt" items="${ all }">
+															<c:if test="${ dateNum eq allAtt.days && currentYear eq allAtt.years && currentMonth eq allAtt.months }">
+																				 ${ allAtt.classify } : ${ allAtt.hours }시 ${ allAtt.minutes }분 <br />
+															</c:if>
+														</c:forEach>
+													</td>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
 								</tr>
 			</c:forEach>
-							</tbody>
-						</table>
+						</tbody>
+			</table>
 			</form>
 		</section>
 		<script language="javascript">

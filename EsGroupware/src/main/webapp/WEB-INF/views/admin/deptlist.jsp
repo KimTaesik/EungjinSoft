@@ -15,6 +15,11 @@
 	<title>직원관리</title>
 	<link rel='Stylesheet' href='/groupware/resources/styles/default.css' />
 	<link rel='Stylesheet' href='/groupware/resources/styles/input.css' />
+	<style type="text/css">
+		td {
+			border-bottom: 1px solid #EAEAEA
+		}
+	</style>
 </head>
 <body>
 
@@ -34,8 +39,8 @@
 			<!------------------------------JSTL---------------------------------->
 			<c:choose>
 				<c:when test="${ depts != null && depts.size() > 0}">
-					<table id="listcss" border="2" bordercolor="#70a3f8" style="width:300px; border-spacing: 0px;" align="center">
-						<tr style="background-color:#70a3f8; text-align:left; " height="30px">
+					<table id="listcss" style="width:300px; border-spacing: 0px;" align="center">
+						<tr style="background-color:#E4E4E4; text-align:left; " height="30px">
 							<th>부서</th>
 							<th> </th>
 						</tr>

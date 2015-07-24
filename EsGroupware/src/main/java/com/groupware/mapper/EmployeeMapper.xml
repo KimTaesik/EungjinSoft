@@ -15,13 +15,13 @@
 		id,
 		password,
 		name,
-		<!-- sex,
+		sex,
 		home_number,
 		phone_number,
 		address,
-		marital_status,
+		<!-- marital_status, -->
 		postcode,
-		direct_line, -->
+		direct_line,
 		dept_no,
 		position_no,
 		<!-- ip_adress,
@@ -34,13 +34,13 @@
 		#{id},
 		#{password},
 		#{name},
-		<!-- #{sex},
+		#{sex},
 		#{homeNumber},
 		#{phoneNumber},
 		#{address},
-		#{maritalStatus},
+		<!-- #{maritalStatus}, -->
 		#{postcode},
-		#{directLine}, -->
+		#{directLine},
 		#{deptNo},
 		#{positionNo},
 <!-- 		#{ipAdress},
@@ -125,7 +125,7 @@
 
 	<select id="getEmployeeByIdAndPasswd" parameterType="hashMap"
 		resultType="Employee">
-		SELECT id, name,position_no positionNo
+		SELECT id, name,position_no positionNo,usertype userType
 		FROM employee
 		WHERE id = #{id} AND password = #{password}
 	</select>
@@ -204,10 +204,11 @@
 	<select id="selectPositionById" resultMap="PositionResult"
 		parameterType="int">
 		SELECT position_no, position_name FROM position where position_no =#{no}
-
-
 	</select>
-
-
+	
+	<select id="searchAdmin" resultType="Employee"
+		parameterType="String">
+		SELECT id, name FROM employee where dept_no =#{no}
+	</select>
 
 </mapper>                                                                                 

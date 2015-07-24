@@ -48,7 +48,7 @@ public class AuthFilter implements Filter{
 				
 		if (url.contains(".action")) {
 			if (url.contains("/admin")){		
-				if (employee == null || !(employee.getPositionNo().equals("12"))) {
+				if (employee == null || !(employee.getUserType() == 1)) {
 					resp.sendRedirect("/groupware/login/loginform.action?returnurl=" + url); 
 					return;
 				}
