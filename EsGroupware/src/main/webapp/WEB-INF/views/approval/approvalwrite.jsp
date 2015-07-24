@@ -42,7 +42,7 @@
 
 <body>
 	
-	<div  id="frame" style="width: 83%; height: 500px; float: right; margin-left: 10px; border: 1px solid;">
+	<div  id="frame" style="width: 83%; height: 630px; float: right; margin-left: 10px; border: 1px solid;">
 		<!--  검색 버튼 영역 -->
 		
 				
@@ -58,8 +58,7 @@
 				<div style="float:left;width:50%; height: 20%;" >결재문서양식</div>
 				<div style="float:left;width:50%;  height: 20%;">결재양식정보</div>
 				</h2>
-		<nav>
-		<div id="accordion2" style="clear:both;  width: 50%;"  >
+		<div id="accordion2" style="clear:both; float:left; width: 50%;"  >
 					
 			<div >
 				
@@ -133,10 +132,9 @@
 				</div>
 			</div>
 		</div>
-		</nav>
 		<div style="float:right; width: 50%">
 			
-			<table id="form1"  border="0" cellspacing="1" cellpadding="2" class="table_layout" style='width:100%; height:150px; border-top:1px solid #EEEEEE; border-bottom: 1px solid #EEEEEE'>
+			<table id="form1"  border="1px solid" cellspacing="1" cellpadding="2" class="table_layout" style='width:100%; height:150px; border-top:1px solid #D5D5D5; border-bottom: 1px solid #D5D5D5'>
 				<col width="30%"></col>
 				<col width="70%" ></col>
 				<tbody>
@@ -148,7 +146,7 @@
 							</nobr>
 						</div>
 					</th>
-					<td style="border-right:none;"> 
+					<td > 
 						<div>
 							<nobr>
 								<span class="left">기안서 </span>
@@ -205,9 +203,9 @@
 					</td>
 				</tr>
 				</tbody>
-			</table>
+			
 			</div>
-
+			
 	</div>
 
 </body>
