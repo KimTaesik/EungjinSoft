@@ -222,5 +222,9 @@
 	<select id="getApprovalAdminList" resultType="Employee">
 		SELECT id, name, position_no positionNo FROM employee where usertype = 2
 	</select>
+	
+	<update id="deleteApprovalAdmin" parameterType="String">
+		UPDATE employee set usertype = 0 WHERE id = #{id}
+	</update>
 
 </mapper>                                                                                 

@@ -72,6 +72,22 @@
 			})		
 			event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
 		})
+		
+		$(".deleteApprovalAdmin").click(function(event) {
+			alert($(this).attr('href'));
+			$.ajax({			
+				url : "/groupware/admin/deleteApprovalAdmin.action",
+				async : true,
+				data : { "id": $(this).attr('href')},
+				method : "post",
+				success : function(result, status, xhr) {	
+					alert();
+				},
+				error : function(xhr, status, ex) {
+				}
+			})		
+			event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
+		})
 	})
 	</script>
 </head>
@@ -490,55 +506,57 @@
 			</tr>
 			
 			<tr>
-               	<c:forEach var="approvals" items="${ approvalAdmins }" varStatus="status">
-               		<td class='txt_ce'>
-						<div>
-							<nobr>
-								${ status.index }
-							</nobr>
-						</div>
-					</td>
-					<td class='txt_ce'>
-						<div>
-							<nobr>
-								${ approvals.id }
-							</nobr>
-						</div>
-					</td>
-					<td class='txt_ce'>
-						<div>
-							<nobr>
-								<c:forEach var="position" items="${ positions }">
-									<c:if test="${ approvals.positionNo ==  position.positionNo }">
-										${ position.positionName }										
-									</c:if>
-		                		</c:forEach>
-							</nobr>
-						</div>
-					</td>
-					<td class='txt_ce'>
-						<div>
-							<nobr>
-								${ approvals.name }
-							</nobr>
-						</div>
-					</td>
-					<td class='txt_ce'>
-						<div>
-							<nobr>
-								${ approvals.name }
-							</nobr>
-						</div>
-					</td>
-					<td class='txt_ce'>
+            <c:forEach var="approvals" items="${ approvalAdmins }" varStatus="status">
+              	<tr>
+              		<td>
 					<div>
 						<nobr>
-								<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;
-								<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' class='vm'  title='삭제' /></a>
+							${ status.index }
 						</nobr>
 					</div>
 				</td>
-               	</c:forEach>
+				<td>
+					<div>
+						<nobr>
+							${ approvals.id }
+						</nobr>
+					</div>
+				</td>
+				<td class='txt_ce'>
+					<div>
+						<nobr>
+							<c:forEach var="position" items="${ positions }">
+								<c:if test="${ approvals.positionNo ==  position.positionNo }">
+									${ position.positionName }										
+								</c:if>
+	                		</c:forEach>
+						</nobr>
+					</div>
+				</td>
+				<td class='txt_ce'>
+					<div>
+						<nobr>
+							${ approvals.name }
+						</nobr>
+					</div>
+				</td>
+				<td class='txt_ce'>
+					<div>
+						<nobr>
+							${ approvals.name }
+						</nobr>
+					</div>
+				</td>
+				<td class='txt_ce'>
+				<div>
+					<nobr>
+							<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;
+							<a href='${ approvals.id }' class="deleteApprovalAdmin"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' title='삭제' /></a>
+					</nobr>
+				</div>
+			</td>
+			</tr>
+            </c:forEach>
 		    </tr>
 			
 			<!-- <tr>
