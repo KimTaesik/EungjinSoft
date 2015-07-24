@@ -66,6 +66,14 @@
 			value="com.groupware.mapper.AttendanceMapper"/>
 		<property name="sqlSessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="AddressBookMapper" 
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" 
+			value="com.groupware.mapper.AddressBookMapper"/>
+		<property name="sqlSessionFactory" ref="sessionFactory" />
+	</bean>
+	
 
 
 </beans>

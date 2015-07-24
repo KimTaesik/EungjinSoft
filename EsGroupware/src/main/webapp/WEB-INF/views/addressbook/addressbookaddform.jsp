@@ -19,8 +19,18 @@
 	$(function() {	
 	    $( "#accordion" ).accordion();	
 	});	
-	</script>
 	
+	function doCheck() {
+		//1. 필요하다면 유효성 검사 수행
+		if(document.getElementById("name").value.length == 0) {
+			alert("이름을 입력해주세요.");
+		}else if(document.getElementById("email").value.length == 0) {
+			alert("이메일을 입력해주세요.");
+		}else {
+			document.getElementById("addressbookaddform").submit();
+		}
+	}
+	</script>
 	
 </head>
 <body>
@@ -30,8 +40,9 @@
 		<div id='inputcontent'>
 		<div id='inputmain'>
 		<div class="subject">
-			<caption align="left"><font color="#0431B4" font size="2" ><b>개인주소록 주소수정</b></font></caption>
-		 </div>	
+			<caption align="left"><font color="#0431B4" font size="2" ><b>개인주소록 주소추가</b></font></caption>
+		</div>
+		<form id='addressbookadd' action='addressbookadd.action' method='post'>
 				 <table>
 			        	<tr>
 			            	<th style='background-color: #fffffc;text-align: left;'>
@@ -72,15 +83,15 @@
 			            <tr>
 			                <th>팩스번호</th>
 			                <td>
-			                	<input type='text' name='homePhone1' style='width:60px' />&nbsp;-&nbsp; 
-			                	<input type='text' name='homePhone2' style='width:60px' />&nbsp;-&nbsp;
-			                	<input type='text' name='homePhone3' style='width:60px' />
+			                	<input type='text' name='fax1' style='width:60px' />&nbsp;-&nbsp; 
+			                	<input type='text' name='fax2' style='width:60px' />&nbsp;-&nbsp;
+			                	<input type='text' name='fax3' style='width:60px' />
 			                </td>
 			            </tr>
 			            <tr>	
 			            	<th>국가</th>
 			            	<td>	
-							<select style='width=20px'>
+							<select style='width=20px' name="nation">
 								<option value="Korea, Republic of">한국, 대한민국</option>
 								<option value="Korea, Democratic People's Republic of">한국, 조선 민주주의 인민 공화국</option>
 								<option value="Japan">일본</option>
@@ -324,29 +335,19 @@
 			             <tr>
 			                <th>회사이름</th>
 			                <td>
-			                	<input id='name' type='text' name='name' style='width:280px' />
+			                	<input id='name' type='text' name='companyname' style='width:280px' />
 			                </td>
 			            </tr>
 			            <tr>
 			                <th>부서</th>
 			                <td>
-			                	<select id='dept' type='text' name='dept' style='width:80px'>
-			                	<option></option>
-			                	<c:forEach var="dept" items="${ depts }">
-			                		<option value=${ dept.deptNo }>${ dept.partName }</option>
-			                	</c:forEach>
-			                	</select>
+			                	<input id='name' type='text' name='dept' style='width:280px' />
 			                </td>
 			            </tr>
 			            <tr>
 			                <th>직책</th>
 			                <td>
-			                	<select id='position' type='text' name='position' style='width:80px'>
-			                	<option></option>
-			                	<c:forEach var="position" items="${ positions }">
-			                		<option value=${ position.positionNo }>${  position.positionName }</option>
-			                	</c:forEach>
-			                	</select>
+			                	<input id='name' type='text' name='position' style='width:280px' />
 			                </td>
 			            </tr>
 			            <tr>
@@ -359,18 +360,18 @@
 			                	<input type='text' name='extension' style='width:60px' />
 			                	※ 내선은 선택 입력사항입니다.
 			                </td>
-			            </tr>
-			            <tr>
+			              </tr>
+			              <tr>
 			           		<th>주소</th>
 			           		<td>
 			           			
-				            <input style="width: 50px;" name="postcode1" type="text" id="sample4_postcode1"> -
-							<input style="width: 50px;" name="postcode2" type="text" id="sample4_postcode2">
+				            <input style="width: 50px;" name="postcode3" type="text" id="sample4_postcode1"> -
+							<input style="width: 50px;" name="postcode4" type="text" id="sample4_postcode2">
 							<input style="height: 25px;" type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 							<br />
-							<input style="width: 300px;"  name="roadAddress" type="text" id="sample4_roadAddress" placeholder="도로명주소">
+							<input style="width: 300px;"  name="roadAddress2" type="text" id="sample4_roadAddress" placeholder="도로명주소">
 							<br /><br />
-							<input style="width: 300px;"  name="jibunAddress" type="text" id="sample4_jibunAddress" placeholder="지번주소">
+							<input style="width: 300px;"  name="jibunAddress2" type="text" id="sample4_jibunAddress" placeholder="지번주소">
 							<span id="guide" style="color:#999"></span>
 							
 							<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -430,15 +431,15 @@
 			            <tr>
 			                <th>메모</th>
 			                <td>
-			                	<textarea style='height: 120px; width:280px'></textarea>
+			                	<textarea name='memo' style='height: 120px; width:280px'></textarea>
 			                </td>
 			            </tr>
 			        </table>
 			        <div class='buttons'>
-			        <input type='button' value='목록보기' style='height:25px'; />
-		        	<input type='button' value='수정' style='height:25px'; />
-		        	<input type='button' value='취소' style='height:25px'; />
+			        <input type='button' value='목록보기' style='height:25px'; onclick="location.href='addressbooklist.action';" />
+		        	<input type='button' value='주소추가' style='height:25px'; onclick="javascript:doCheck();"/>
 		        	</div>
+		        </form>
 			</div>
 		</div>
 	</div>		
