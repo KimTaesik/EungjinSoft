@@ -2,6 +2,11 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<!DOCTYPE html>
+<html>
+<head>
+<title>groupware</title>
+
 <link rel="stylesheet"
 	href="/groupware/resources/styles/jquery/jquery-ui.css">
 <script src="/groupware/resources/styles/script/jquery.js"></script>
@@ -9,6 +14,7 @@
 <link rel="stylesheet" href="/groupware/resources/styles/approval.css">
 
 <script type="text/javascript">
+
 $(document).ready(function() {
 	$(function() {	
 		$("#accordion").accordion({
@@ -18,6 +24,9 @@ $(document).ready(function() {
 			handle : "h3",
 			stop : function(event, ui) {
 
+	$(document).ready(function() {
+		$('#get').click(function() {
+
 				ui.item.children("h3").triggerHandler("focusout");
 				$(this).accordion("refresh");
 			}
@@ -25,6 +34,18 @@ $(document).ready(function() {
 		
 	});
 });
+
+			$.ajax({
+				url : "infomation.action?employeeid=" + id,
+				method : 'get',
+				dataType : 'text',
+				success : function(data) {
+					$('#output').val(data);
+				}
+			});
+		});
+	});
+
 </script>
 </head>
 
@@ -37,6 +58,20 @@ $(document).ready(function() {
 			<h1 style="text-align: center">
 				<span>전자결재 메인</span>
 			</h1>
+
+	<div style="float: left; border: 1px solid;">
+		<%
+			pageContext.include("/WEB-INF/views/include/approvalheader.jsp");
+		%>
+	</div>
+	<div
+		style="width: 85%; float: right; margin-left: 10px; border: 1px solid;">
+		<!--  검색 버튼 영역 -->
+		<div id="title" style="border: 1px solid;">
+			<h2>
+				<span>전자결재 메인</span>
+			</h2>
+
 		</div>
 		<div class="under"></div>
 		<!--  //검색 버튼 영역 -->
@@ -76,6 +111,7 @@ $(document).ready(function() {
 						</div>
 					</td>
 				</tr>
+
 				<tr id=trdown style="vertical-align: top;">
 					<td>
 						<div>
@@ -487,6 +523,512 @@ $(document).ready(function() {
 
 					<thead >
 						<tr >
+
+				<tr style="vertical-align: top;">
+					<td>
+						<div>
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<thead>
+									<tr>
+										<th>
+											<div>
+												<nobr> 미결재 </nobr>
+											</div>
+										</th>
+										<td>
+											<div>
+												<nobr>
+													<a> 3건 </a>
+												</nobr>
+											</div>
+										</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th>
+											<div>
+												<nobr> 결재완료 </nobr>
+											</div>
+										</th>
+										<td>
+											<div>
+												<nobr>
+													<a> 5건</a>
+												</nobr>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</td>
+					<td>
+						<div>
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<thead>
+									<tr>
+										<th>
+											<div>
+												<nobr> 상신문서 </nobr>
+											</div>
+										</th>
+										<td>
+											<div>
+												<nobr>
+													<a> 11건</a>
+												</nobr>
+											</div>
+										</td>
+										<th>
+											<div>
+												<nobr> 반려문서 </nobr>
+											</div>
+										</th>
+										<td>
+											<div>
+												<nobr>
+													<a> 3건</a>
+												</nobr>
+											</div>
+										</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th>
+											<div>
+												<nobr> 임시저장 </nobr>
+											</div>
+										</th>
+										<td>
+											<div>
+												<nobr>
+													<a> 0건</a>
+												</nobr>
+											</div>
+										</td>
+										<th>
+											<div>
+												<nobr> 결재완료 </nobr>
+											</div>
+										</th>
+										<td>
+											<div>
+												<nobr>
+													<a> 7건</a>
+												</nobr>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<!-- 상신취소 -->
+										<th>
+											<div>
+												<nobr> 상신취소 </nobr>
+											</div>
+										</th>
+										<td>
+											<div>
+												<nobr>
+													<a> 0건</a>
+												</nobr>
+											</div>
+										</td>
+										<td colspan="2"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</td>
+					<td>
+						<div>
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<thead>
+									<tr>
+										<th>
+											<div>
+												<nobr> 미결재 </nobr>
+											</div>
+										</th>
+										<td>
+											<div>
+												<nobr>
+													<a> 0건 </a>
+												</nobr>
+											</div>
+										</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th>
+											<div>
+												<nobr> 결재완료 </nobr>
+											</div>
+										</th>
+										<td>
+											<div>
+												<nobr>
+													<a> 0건 </a>
+												</nobr>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</td>
+					<td>
+						<div>
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<thead>
+									<tr>
+										<th>
+											<div>
+												<nobr> 부서 수신함 </nobr>
+											</div>
+										</th>
+										<td>
+											<div>
+												<nobr>
+													<a> 0 건</a>
+												</nobr>
+											</div>
+										</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th>
+											<div>
+												<nobr> 참조 수신함 </nobr>
+											</div>
+										</th>
+										<td>
+											<div>
+												<nobr>
+													<a> 0 건</a>
+												</nobr>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<h4 class="mar5b left">결재할 문서함 &gt; 미결재 문서</h4>
+			<span class="right"><a onfocus='this.blur();'><img
+					src="http://static.whoisdesk.net/Src/Img/Renewal/btn_more.gif" /></a></span>
+			<div class="table2  clear">
+				<table class="table_layout">
+					<thead>
+						<tr>
+							<th><div>
+									<nobr>문서번호</nobr>
+								</div></th>
+							<th><div>
+									<nobr>기안일자</nobr>
+								</div></th>
+							<th><div>
+									<nobr>문서명</nobr>
+								</div></th>
+							<th><div>
+									<nobr>기안자</nobr>
+								</div></th>
+							<th><div>
+									<nobr>나의결재</nobr>
+								</div></th>
+							<th><div>
+									<nobr>상태</nobr>
+								</div></th>
+							<th><div>
+									<nobr>다음결재자</nobr>
+								</div></th>
+							<th><div>
+									<nobr>의견 </nobr>
+								</div></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="txt_ce"><div>
+									<nobr> 1012-0009 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 10.12.03 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr>
+										<a>비공개문서2</a>
+									</nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 최진성 사원 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 미결재 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 진행중 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 김철수 이사 </nobr>
+								</div></td>
+							<td class="bdr_none txt_ce"><div>
+									<nobr>1개</nobr>
+								</div></td>
+						</tr>
+
+
+						<tr>
+							<td class="txt_ce"><div>
+									<nobr> 1012-0007 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 10.12.03 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr>
+										<a>비공개문서</a>
+									</nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 최진성 사원 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 미결재 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 진행중 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 김철수 이사 </nobr>
+								</div></td>
+							<td class="bdr_none txt_ce"><div>
+									<nobr>4개</nobr>
+								</div></td>
+						</tr>
+
+
+						<tr>
+							<td class="txt_ce"><div>
+									<nobr> 1012-0005 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 10.12.03 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr>
+										<a>수신부서없는공개문서</a>
+									</nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 최진성 사원 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 미결재 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 진행중 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 김철수 이사 </nobr>
+								</div></td>
+							<td class="bdr_none txt_ce"><div>
+									<nobr>1개</nobr>
+								</div></td>
+						</tr>
+
+
+
+					</tbody>
+				</table>
+			</div>
+
+
+			<h4 class="mar5b left">개인 문서함 &gt; 상신문서</h4>
+			<span class="right"><a
+				onclick="javascript:subTabActive('', '3-15-00', '상신문서', '../EWord/?dummy=1437467164&gubun=1');"
+				onfocus='this.blur();'><img
+					src="http://static.whoisdesk.net/Src/Img/Renewal/btn_more.gif"
+					class="pad10t mar5t mar5r" /></a></span>
+			<div class="table2 clear">
+				<table class="table_layout">
+					<thead>
+						<tr>
+							<th><div>
+									<nobr>문서번호</nobr>
+								</div></th>
+							<th><div>
+									<nobr>기안일자</nobr>
+								</div></th>
+							<th><div>
+									<nobr>문서명</nobr>
+								</div></th>
+							<th><div>
+									<nobr>상태</nobr>
+								</div></th>
+							<th><div>
+									<nobr>의견 </nobr>
+								</div></th>
+						</tr>
+					</thead>
+					<tbody>
+
+
+
+						<tr>
+							<td class="txt_ce"><div>
+									<nobr> 1412-0001 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 14.12.30 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr>
+										<a>dfasdf</a></td>
+							<td class="txt_ce"><div>
+									<nobr> 진행중 </nobr>
+								</div></td>
+							<td class="txt_ce bdr_none"><div>
+									<nobr> 0개 </nobr>
+								</div></td>
+						</tr>
+						<tr>
+							<td class="txt_ce"><div>
+									<nobr> 1301-0001 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 13.01.09 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr>
+										<a>sdfsdf</a></td>
+							<td class="txt_ce"><div>
+									<nobr> 진행중 </nobr>
+								</div></td>
+							<td class="txt_ce bdr_none"><div>
+									<nobr> 1개 </nobr>
+								</div></td>
+						</tr>
+						<tr>
+							<td class="txt_ce"><div>
+									<nobr> 1105-0012 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr> 11.05.09 </nobr>
+								</div></td>
+							<td class="txt_ce"><div>
+									<nobr>
+										<a>개발팀 워크샵 지출 결의서</a></td>
+							<td class="txt_ce"><div>
+									<nobr> 진행중 </nobr>
+								</div></td>
+							<td class="txt_ce bdr_none"><div>
+									<nobr> 1개 </nobr>
+								</div></td>
+						</tr>
+
+
+
+
+
+					</tbody>
+				</table>
+			</div>
+
+			<h4>협조 문서함 &gt; 미결재 문서</h4>
+			<span class="right"><a
+				onclick="javascript:subTabActive('', '3-20-00', '미결재 문서', '../EWord/orderList.php?dummy=1437467164&gubun=3');"
+				onfocus='this.blur();'><img
+					src="http://static.whoisdesk.net/Src/Img/Renewal/btn_more.gif"
+					class="pad10t mar5t mar5r" /></a></span>
+
+			<div>
+				<table class="table_layout">
+					<thead>
+						<tr>
+							<th><div>
+									<nobr>문서번호</nobr>
+								</div></th>
+							<th><div>
+									<nobr>기안일자</nobr>
+								</div></th>
+							<th><div>
+									<nobr>문서명</nobr>
+								</div></th>
+							<th><div>
+									<nobr>기안자</nobr>
+								</div></th>
+							<th><div>
+									<nobr>나의결재</nobr>
+								</div></th>
+							<th><div>
+									<nobr>상태</nobr>
+								</div></th>
+							<th><div>
+									<nobr>다음결재자</nobr>
+								</div></th>
+							<th><div>
+									<nobr>의견 </nobr>
+								</div></th>
+						</tr>
+					</thead>
+					<tbody>
+
+
+						<tr>
+							<td colspan='8'>
+								<div>
+									<nobr> 해당 문서 정보가 없습니다. </nobr>
+								</div>
+							</td>
+						</tr>
+
+
+
+
+
+
+						<tr>
+							<td colspan='8'>
+								<div>
+									<nobr>
+										&nbsp;
+										<!--해당 문서 정보가 없습니다.-->
+									</nobr>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan='8'>
+								<div>
+									<nobr>
+										&nbsp;
+										<!--해당 문서 정보가 없습니다.-->
+									</nobr>
+								</div>
+							</td>
+						</tr>
+
+
+					</tbody>
+				</table>
+			</div>
+			<h4>전자결재 문서함 설명</h4>
+			<div>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+					<col width="20%" class="overf"></col>
+					<col width="80%" class="overf"></col>
+
+					<thead>
+						<tr>
+
 							<th rowspan="2">
 								<div>
 									<nobr>
@@ -630,5 +1172,9 @@ $(document).ready(function() {
 			<!-- //전자결재 컨텐츠 -->
 		</div>
 	</div>
+<
+
+
+
 </body>
 
