@@ -51,4 +51,5 @@ public interface EmployeeMapper {
 
 	List<Employee> getApprovalAdminList();
 
+	void deleteApprovalAdmin(String id);
 }

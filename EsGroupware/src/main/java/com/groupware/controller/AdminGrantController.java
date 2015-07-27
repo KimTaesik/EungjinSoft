@@ -66,16 +66,21 @@ public class AdminGrantController {
 	
 	@RequestMapping(value="registerApprovalAdmin.action", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody //별도의 뷰를 사용하지 말고 return 값을 응답본문으로 사용하세요
-	public void registerApprovalAdmin(String id) {
+	public List<Employee> registerApprovalAdmin(String id) {
 		System.out.println(id);
 		employeeDao.registerApprovalAdmin(id);
+		
+		ModelAndView mav = new ModelAndView();
+		List<Employee> approvalAdmins = employeeDao.getApprovalAdminList();	
+
+		return approvalAdmins;
 	}
 	
 	@RequestMapping(value="deleteApprovalAdmin.action", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody //별도의 뷰를 사용하지 말고 return 값을 응답본문으로 사용하세요
 	public void deleteApprovalAdmin(String id) {
 		System.out.println(id);
-		//employeeDao.registerApprovalAdmin(id);
+		employeeDao.deleteApprovalAdmin(id);
 	}
 		
 }

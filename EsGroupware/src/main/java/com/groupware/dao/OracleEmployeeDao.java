@@ -139,6 +139,10 @@ public class OracleEmployeeDao implements EmployeeDao {
 		List<Employee> employees = employeeMapper.searchAdmin();
 		return employees;
 	}
+	@Override
+	public void deleteApprovalAdmin(String id) {
+		employeeMapper.deleteApprovalAdmin(id);
+	}
 
 }
 

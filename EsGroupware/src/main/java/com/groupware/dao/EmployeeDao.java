@@ -48,4 +48,5 @@ public interface EmployeeDao {
 	
 	void registerApprovalAdmin(String id);
 
+	void deleteApprovalAdmin(String id);
 }

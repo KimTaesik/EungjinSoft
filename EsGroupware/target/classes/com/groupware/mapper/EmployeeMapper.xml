@@ -212,7 +212,7 @@
 	</select>
 	<select id="searchAdmin" resultType="Employee"
 		parameterType="String">
-		SELECT id, name FROM employee WHERE deleted = 0
+		SELECT id, name FROM employee WHERE deleted = 0 and usertype != 1
 	</select>
 	
 	<update id="registerApprovalAdmin" parameterType="String">
