@@ -70,7 +70,7 @@
 
 				전자결제
 			</td>
-			<td onclick="window.open('/groupware/schedule/scheduleheader.action','일정관리','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
+			<td onclick="window.open('/groupware/schedule/pschedule.action','일정관리','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
 			<img src="/groupware/resources/image//admin/home.png" /><br />
 				일정관리
 			</td>
