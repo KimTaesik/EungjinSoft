@@ -23,8 +23,15 @@ public class AddressBook implements Serializable{
 	private String directLine;
 	private String extension;
 	private String postcode2;
+	private String classify;
 	
 	
+	public String getClassify() {
+		return classify;
+	}
+	public void setClassify(String classify) {
+		this.classify = classify;
+	}
 	public String getPostcode() {
 		return postcode;
 	}

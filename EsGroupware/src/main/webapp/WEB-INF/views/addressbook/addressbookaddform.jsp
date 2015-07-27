@@ -19,7 +19,11 @@
 	$(function() {	
 	    $( "#accordion" ).accordion();	
 	});	
+
+	</script>
 	
+	<script type="text/javascript">
+
 	function doCheck() {
 		//1. 필요하다면 유효성 검사 수행
 		if(document.getElementById("name").value.length == 0) {
@@ -27,13 +31,29 @@
 		}else if(document.getElementById("email").value.length == 0) {
 			alert("이메일을 입력해주세요.");
 		}else {
-			document.getElementById("addressbookaddform").submit();
+			//document.getElementById("addressbookadd").submit();
+			document.forms[0].submit();
 		}
 	}
+	
 	</script>
 	
 </head>
 <body>
+<div class="left_menu" style="background-color: #88cbff">
+	<div id="accordion" style="font-size: 10pt;width: 100pt;">
+	<h3>
+	주소록</h3>
+	<ul>
+        <li>개인 주소록</li>
+        <br />
+        <li>공용 주소록</li>
+        <br />
+        <li>명함철</li>
+	</ul>
+	</div>
+</div>
+	
 	<section>
 	<div id='pageContainer'>	
 		
@@ -42,7 +62,7 @@
 		<div class="subject">
 			<caption align="left"><font color="#0431B4" font size="2" ><b>개인주소록 주소추가</b></font></caption>
 		</div>
-		<form id='addressbookadd' action='addressbookadd.action' method='post'>
+		<form id='addressbookadd' action='/groupware/address/addressbookadd.action' method='post'>
 				 <table>
 			        	<tr>
 			            	<th style='background-color: #fffffc;text-align: left;'>

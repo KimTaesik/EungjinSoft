@@ -93,7 +93,7 @@
 						
 			<table id="menubar">
 				<tr>
-					<th scope="col"><img src="/groupware/resources/image/add.png" />주소추가</th>
+					<th scope="col" onclick="location.href='addressbookadd.action'" style="cursor:pointer";><img src="/groupware/resources/image/add.png" />주소추가</th>
 			        <th scope="col"><img src="/groupware/resources/image/add.png" />그룹추가</th>
 			        <th scope="col"><img src="/groupware/resources/image/minus.png" />삭제</th>
 			        <th scope="col">

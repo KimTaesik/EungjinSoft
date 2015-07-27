@@ -11,36 +11,13 @@
 
 		INSERT INTO addressbook
 		(
-		name,
-		email,
-		phoneNumber,
-		homeNumber,
-		fax,
-		nation,
-		address,
-		companyName,
-		deptName,
-		positionName,
-		companyNumber,
-		companyAddress,
-		memo
-		)
-		VALUES
-		(
-		#{name},
-		#{email},
-		#{phoneNumber},
-		#{homeNumber},
-		#{fax},
-		#{nation},
-		#{address},
-		#{companyName},
-		#{deptName},
-		#{positionName},
-		#{companyNumber},
-		#{companyAddress},
-		#{memo}
-		)
+		addressno, name, email, phone_number, home_number,
+		fax, nation, address, company_name, department_name,
+		position_name, company_number, company_address, memo)
+		VALUES(
+		addressno_sequence.nextval,#{name}, #{email}, #{phoneNumber}, #{homeNumber}, #{fax},
+		#{nation}, #{address}, #{companyName}, #{deptName},
+		#{positionName}, #{companyNumber}, #{companyAddress}, #{memo})
 	</insert>
 
 

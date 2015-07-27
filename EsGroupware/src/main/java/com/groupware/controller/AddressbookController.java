@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.groupware.dao.AddressBookDao;
 import com.groupware.dto.AddressBook;
@@ -31,57 +32,51 @@ public class AddressbookController {
 		return "addressbook/addressbookaddform";
 	}
 	@RequestMapping(value="addressbookadd.action", method = RequestMethod.POST)
-	public String addressadd(HttpServletRequest req) throws UnsupportedEncodingException{
+	public String addressadd(AddressBook book, @RequestParam String cellPhone1,String cellPhone2,String cellPhone3,
+			String homePhone1, String homePhone2, String homePhone3, String fax1, String fax2, String fax3, String postcode1, String postcode2,
+			String roadAddress, String roadAddress2, String postcode3, String postcode4) throws UnsupportedEncodingException{
 		
-		req.setCharacterEncoding("utf-8");
+		AddressBook addressbook = new AddressBook();
+		addressbook = book;
+		System.out.println("gyhghghghghgh");
+		
 		
 		String homenumber = null;
 		String phonenumber = null;
 		String fax = null;
 		String nation = null;
 		String directLine = null;
-		String postcode = null;
-		String postcode2 = null;
-		
-		AddressBook addressbook = new AddressBook();
-		
-		addressbook.setName(req.getParameter("name"));
-		addressbook.setEmail(req.getParameter("email"));
-		if(req.getParameter("cellPhone1") != null) {
-			phonenumber = req.getParameter("cellPhone1") + "-" + req.getParameter("cellPhone2") + "-" + req.getParameter("cellPhone3");
+		String homepostcode = null;
+		String compostcode = null;
+	
+		if(cellPhone1 != null) {
+			phonenumber = cellPhone1 + "-" + cellPhone2 + "-" + cellPhone3;
 		}
 		addressbook.setPhoneNumber(phonenumber);
 		
-		if(req.getParameter("homePhone1") != null) {
-			homenumber = req.getParameter("homePhone1") + "-" + req.getParameter("homePhone2") + "-" + req.getParameter("homePhone3");
+		if(homePhone1 != null) {
+			homenumber = homePhone1 + "-" + homePhone2 + "-" +homePhone3;
 		}
 		addressbook.setHomeNumber(homenumber);
 		
-		if(req.getParameter("fax1") != null) {
-			fax = req.getParameter("fax1") + "-" + req.getParameter("fax2") + "-" + req.getParameter("fax3");
+		if(fax1 != null) {
+			fax = fax1+ "-" + fax2 + "-" + fax3 ;
 		}
 		addressbook.setFax(fax);
 		
-		addressbook.setNation(req.getParameter("nation"));
 		
-		if (req.getParameter("postcode1") != null) {
-			postcode =  req.getParameter("postcode1") + "-" + req.getParameter("postcode2");
+		if (postcode1 != null) {
+			homepostcode = postcode1 + "-" + postcode2;
 		}
-		addressbook.setPostcode(postcode);
+		addressbook.setPostcode(homepostcode);
 		
-		addressbook.setAddress(req.getParameter("roadAddress"));
-		addressbook.setCompanyName(req.getParameter("companyname"));
-		addressbook.setPositionName(req.getParameter("position"));
-		addressbook.setDeptName(req.getParameter("dept"));
-		addressbook.setExtension(req.getParameter("extension"));
-		if (req.getParameter("postcode3") != null) {
-			postcode2 =  req.getParameter("postcode3") + "-" + req.getParameter("postcode4");
+		if (postcode3 != null) {
+			compostcode =  postcode3 + "-" + postcode4;
 		}
-		addressbook.setPostcode2(postcode2);
-		addressbook.setCompanyAddress(req.getParameter("roadAddress2"));
-		
-		addressbook.setMemo(req.getParameter("memo"));
-		
+		addressbook.setPostcode2(compostcode);
+		addressbook.setCompanyAddress(roadAddress2);
+		System.out.println(addressbook.getName());
+		addressbookDao.insertAddressBook(addressbook);
 		
 		return "redirect:/addressbook/addressbooklist.action";
 	}
