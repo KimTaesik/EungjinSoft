@@ -135,13 +135,21 @@ public class OracleEmployeeDao implements EmployeeDao {
 		return employees;
 	}
 	@Override
-	public List<Employee> searchAdmin() {
-		List<Employee> employees = employeeMapper.searchAdmin();
+	public List<Employee> searchSelectAdmin(String radio) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("radio", radio);
+		List<Employee> employees = employeeMapper.searchSelectAdmin(params);
 		return employees;
 	}
+	
 	@Override
 	public void deleteApprovalAdmin(String id) {
 		employeeMapper.deleteApprovalAdmin(id);
+	}
+	@Override
+	public List<Employee> searchAdmin() {
+		List<Employee> employees = employeeMapper.searchAdmin();
+		return employees;
 	}
 
 }

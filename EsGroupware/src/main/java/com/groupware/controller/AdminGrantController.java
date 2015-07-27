@@ -52,35 +52,51 @@ public class AdminGrantController {
 	
 	@RequestMapping("searchDeptAdmin.action")
 	@ResponseBody //별도의 뷰를 사용하지 말고 return 값을 응답본문으로 사용하세요
-	public List<Employee> ajaxTest(String option) {
+	public List<Employee> ajaxTest(String option, String radio) {
 		System.out.println(option);
-		List<Employee> employees;
-		if(option != "") {
-			employees = employeeDao.searchDeptAdmin(option);
-		} else {
+		List<Employee> employees = null;
+		System.out.println(radio);
+		if(radio.equals("1")) {
 			employees = employeeDao.searchAdmin();
 		}
+		else if(radio.equals("3")) {
+			employees = employeeDao.searchDeptAdmin(option);
+		} 
+		else if(radio.equals("8")) {
+			employees = employeeDao.searchSelectAdmin(radio);
+		} 
 			
 		return employees;
 	}
 	
 	@RequestMapping(value="registerApprovalAdmin.action", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody //별도의 뷰를 사용하지 말고 return 값을 응답본문으로 사용하세요
-	public List<Employee> registerApprovalAdmin(String id) {
-		System.out.println(id);
+	public ModelAndView registerApprovalAdmin(String id) {
+		//System.out.println(id);
 		employeeDao.registerApprovalAdmin(id);
-		
-		ModelAndView mav = new ModelAndView();
-		List<Employee> approvalAdmins = employeeDao.getApprovalAdminList();	
 
-		return approvalAdmins;
+		ModelAndView mav = new ModelAndView();
+
+		List<Employee> approvalAdmins = employeeDao.getApprovalAdminList();
+		List<Position> positions = employeeDao.getPositionList();
+		
+		mav.addObject("positions", positions);
+		mav.addObject("approvalAdmins", approvalAdmins);
+		mav.setViewName("admin/admingrant2");
+		
+		return mav;
 	}
 	
 	@RequestMapping(value="deleteApprovalAdmin.action", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody //별도의 뷰를 사용하지 말고 return 값을 응답본문으로 사용하세요
-	public void deleteApprovalAdmin(String id) {
-		System.out.println(id);
+	public String deleteApprovalAdmin(String id) {
+		//System.out.println(id);
 		employeeDao.deleteApprovalAdmin(id);
+		
+	
+		return "success";
 	}
+	
+	
 		
 }

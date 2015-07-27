@@ -49,4 +49,6 @@ public interface EmployeeDao {
 	void registerApprovalAdmin(String id);
 
 	void deleteApprovalAdmin(String id);
+
+	List<Employee> searchSelectAdmin(String radio);
 }

@@ -28,11 +28,12 @@
 
 	<script type="text/javascript">
 	$(function() {
-		$("#searchAdmin").click(function(event) {		
+		$("#searchAdmin").click(function(event) {
+			alert($(":radio[name='AdminGb']:checked").val());
 			$.ajax({
 				url : "/groupware/admin/searchDeptAdmin.action",
 				async : true,
-				data : { "option": $("option:selected").val()},
+				data : { "option": $("option:selected").val(), "radio" : $(":radio[name='AdminGb']:checked").val() },
 				method : "post",
 				success : function(result, status, xhr) {
 					/* $("#result").text(result); */
@@ -67,35 +68,30 @@
 				data : { "id": $(".idoption:selected").val()},
 				method : "post",
 				success : function(result, status, xhr) {
-						var html;
-						//alert(result.length);
-
-						for(var i= 0 ; i < result.length; i ++) {
-		              	
-						html += "<tr><td class='txt_ce'><div><nobr>" +
-						i +
-						"</nobr></div></td><td class='txt_ce'><div><nobr>" +
-						result[i].id +
-						//"</nobr></div></td><td class='txt_ce'><div><nobr>" +
-						"<c:forEach var='position' items='${ positions }'>" +
-						"<c:if test='${ approvals.positionNo ==  position.positionNo }'>" +
-						"${ position.positionName }"+									
-						"</c:if></c:forEach>" + 
-						"</nobr></div></td><td class='txt_ce'><div><nobr>" +
-						result[i].name +
-						"</nobr></div></td><td class='txt_ce'><div><nobr>" +
-						result[i].name +
-						"</nobr></div></td><td class='txt_ce'><div><nobr>" +
-						result[i].name +
-						"</nobr></div></td><td class='txt_ce'><div><nobr>" +
-						"<a href='#blank-link' onclick='javascript:'><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;" +
-						"<a href='${ approvals.id }' class='deleteApprovalAdmin'><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' title='삭제' /></a>" +
-						"</nobr></div></td></tr>"; 
 						
-						}
-
 						//alert(html);
-						$(".table1").html(html);
+						$(".table1").html(result);
+						
+						$(".deleteApprovalAdmin").click(function(event) {
+							var id = $(this).attr("href");
+							$.ajax({			
+								url : "/groupware/admin/deleteApprovalAdmin.action",
+								async : true,
+								data : { "id": id},
+								method : "post",
+								success : function(result, status, xhr) {
+														
+									var ids = "#tr" + id;
+
+									$(ids).remove();
+									
+								},
+								error : function(xhr, status, ex) {
+									alert(status + ex);
+								}
+							})		
+							event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
+						})
 				},
 				error : function(xhr, status, ex) {
 				}
@@ -104,16 +100,21 @@
 		})
 		
 		$(".deleteApprovalAdmin").click(function(event) {
-			alert($(this).attr('href'));
+			var id = $(this).attr("href");
 			$.ajax({			
 				url : "/groupware/admin/deleteApprovalAdmin.action",
 				async : true,
-				data : { "id": $(this).attr('href')},
+				data : { "id": id},
 				method : "post",
-				success : function(result, status, xhr) {	
-					alert();
+				success : function(result, status, xhr) {
+										
+					var ids = "#tr" + id;
+
+					$(ids).remove();
+					
 				},
 				error : function(xhr, status, ex) {
+					alert(status + ex);
 				}
 			})		
 			event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
@@ -535,9 +536,17 @@
 				</th>
 			</tr>
 			<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="table1">
+			
+			<col width="10%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			<col width="30%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			
 			<tr id="approvalListTable">
 	            <c:forEach var="approvals" items="${ approvalAdmins }" varStatus="status">
-	            <tr>
+	            <tr id="tr${ approvals.id }">
 	             	<td class='txt_ce'>
 						<div>
 							<nobr>

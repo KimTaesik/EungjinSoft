@@ -45,11 +45,13 @@ public interface EmployeeMapper {
 	
 	List<Employee> searchDeptAdmin(String id);
 	
-	List<Employee> searchAdmin();
+	List<Employee> searchSelectAdmin(HashMap<String, String> params);
 	
 	void registerApprovalAdmin(String id);
 
 	List<Employee> getApprovalAdminList();
 
 	void deleteApprovalAdmin(String id);
+
+	List<Employee> searchAdmin();
 }

@@ -210,8 +210,7 @@
 		parameterType="String">
 		SELECT id, name FROM employee where dept_no =#{no} and usertype = 0
 	</select>
-	<select id="searchAdmin" resultType="Employee"
-		parameterType="String">
+	<select id="searchAdmin" resultType="Employee">
 		SELECT id, name FROM employee WHERE deleted = 0 and usertype != 1
 	</select>
 	
@@ -226,5 +225,16 @@
 	<update id="deleteApprovalAdmin" parameterType="String">
 		UPDATE employee set usertype = 0 WHERE id = #{id}
 	</update>
+	
+	<select id="searchSelectAdmin" resultType="Employee"  parameterType="hashMap" >
+		SELECT id, name 
+		FROM employee 
+		WHERE deleted = 0 		
+		<choose>
+			<when test='radio == "8"'>
+			and usertype != 2
+			</when>
+		</choose>
+	</select>
 
 </mapper>                                                                                 
