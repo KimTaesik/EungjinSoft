@@ -24,7 +24,7 @@ public class ScheduleController {
 	}
 	
 	@RequestMapping(value = "pschedule.action", method = RequestMethod.GET)
-	public ModelAndView calendarcheck(String yyear, String mmonth, HttpSession session, HttpServletRequest req) {
+	public ModelAndView calendarcheck(String yyear, String mmonth) {
 		ModelAndView mav = new ModelAndView();
 		
 		String[] dateString = new String[]{"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
@@ -36,15 +36,16 @@ public class ScheduleController {
 		mav.addObject("currentYear", date.getYear()+1900);
 		mav.addObject("currentMonth", date.getMonth() + 1);
 		mav.addObject("currentDate", date.getDate());
-		mav.addObject("currentDay",date.getDay()-2);
+		mav.addObject("currentDay",date.getDay()+2);
 		mav.addObject("date", date);
 		mav.setViewName("schedule/pschedule");
+		System.out.println("시작?"+(int)(date.getYear()+1900)+"년"+(int)(date.getMonth() + 1)+"월"+date.getDate()+"일"+date.getDay()+"요일");
 		return mav;
 	}
 	
 	@RequestMapping(value = "pschedule2.action", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView calendarcheck2(String yyear, String mmonth, HttpSession session, HttpServletRequest req) {
+	public ModelAndView calendarcheck2(String yyear, String mmonth) {
 		ModelAndView mav = new ModelAndView();
 		
 		String[] dateString = new String[]{"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
@@ -62,9 +63,10 @@ public class ScheduleController {
 		mav.addObject("rmonth", rmonth);
 		mav.addObject("currentDay",date.getDay()-1);
 		System.out.println("2액션이지롱");
-		
+		System.out.println("2///"+(int)(ryear)+"년"+(int)(rmonth)+"월"+date.getDate()+"일"+(int)(date.getDay()-1)+"요일");
 		mav.setViewName("schedule/pschedule2");
 		
 		return mav;
 	}
+	
 }

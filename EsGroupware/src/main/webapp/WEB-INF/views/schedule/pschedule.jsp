@@ -37,12 +37,43 @@
 			    });
 			    
 			    $('#minus').click(function(e){
+			    	var y = $("#currentYear").val();
+			    	var m = $("#currentMonth").val()-1;
+			    	if(m==0){
+			    		m=12;
+			    		y-=1;
+			    	}
 			    	$.ajax({
 			    		type:"post",
 			    		url: "pschedule2.action",
-			    		data:{ "yyear": $("#yyear").val(), "mmonth":$("#mmonth").val()-1  },
+			    		data:{ "yyear": y, "mmonth":m  },
 			    		async : true,
 			            success: function(result,status,xhr){
+			            	$("#currentMonth").val(m);
+			            	$("#currentYear").val(y);
+			            	$("#calendarContainer").html(result)
+			            },
+			            error: function(xhr, status, er){
+			            	alert(xhr+"/"+status+"/"+er)
+			            }
+			    	});
+			    })
+			    
+			    $('#plus').click(function(e){
+			    	var y = $("#currentYear").val();
+			    	var m = parseInt($("#currentMonth").val())+parseInt(1);
+			    	if(m>12){
+			    		m=1;
+			    		y=parseInt(y)+parseInt(1);
+			    	}
+			    	$.ajax({
+			    		type:"post",
+			    		url: "pschedule2.action",
+			    		data:{ "yyear": y, "mmonth": m  },
+			    		async : true,
+			            success: function(result,status,xhr){
+			            	$("#currentMonth").val(m);
+			            	$("#currentYear").val(y);
 			            	$("#calendarContainer").html(result)
 			            },
 			            error: function(xhr, status, er){
@@ -64,16 +95,16 @@
 			    </h2>
 			</div>
 			<div class="toparea">		
-				<div class="leftarea" style="width:50%;">
-					<span class="tab"><a href="index.php?action=schedule_day&year=2015&month=7&day=23&auth=PRIVATE&schedule_open=">DAY</a></span>
-					<span class="tab"><a href="index.php?action=schedule_week&year=2015&month=7&day=23&auth=PRIVATE&schedule_open=">WEEK</a></span>
-					<span class="selected"><a href="">MONTH</a></span>
-					<span class="tab"><a href="index.php?action=schedule_year&year=2015&month=7&day=23&auth=PRIVATE&schedule_open=">YEAR</a></span>
-				</div>
+		<div class="leftarea" style="width:50%;">
+			<span class="tab"><a href="#">DAY</a></span>
+			<span class="tab"><a href="#">WEEK</a></span>
+			<span class="selected"><a href="#">MONTH</a></span>
+			<span class="tab"><a href="#">YEAR</a></span>
+		</div>
 				<div class="rightarea" style="width:250px;">
 					<span class="btn">
-						<span><a href="#" onclick="quickAddFormView();"><img src="/groupware/resources/image/plus.png" border="0" /> 빠른 일정추가</a></span>	
-						<span><a href="index.php?action=schedule_addform&schedule_type=schedule_month&year=2015&month=7&day=23&auth=PRIVATE&schedule_open=" ><img src="/groupware/resources/image/plus.png" border="0" /> 일정추가</a></span>
+						<span><img src="/groupware/resources/image/plus.png" border="0" /> 빠른 일정추가</span>	
+						<span><img src="/groupware/resources/image/plus.png" border="0" /> 일정추가</span>
 					</span>
 				</div>
 			</div>
@@ -130,16 +161,19 @@
 							</select>
 							월
 						</div>
-						 
-				<div id="calendarContainer">
 					<div class="today">
-						<div class="left big bold">
-							<img id="minus" src="/groupware/resources/image/left.png" width="11" height="11" border="0">
-							${ currentYear }년 ${ currentMonth }월 ${ currentDate }일
-							<img id="plus" src="/groupware/resources/image/right.png" width="11" height="11" border="0">
+						<div class="center big bold">
+							이전달<img class="cursor" id="minus" src="/groupware/resources/image/left.png" width="11" height="11" border="0">
+							다음달
+							<img class="cursor" id="plus" src="/groupware/resources/image/right.png" width="11" height="11" border="0">
 						</div>
+						<input type="hidden" id="currentMonth" value="${ currentMonth }">
+						<input type="hidden" id="currentYear" value="${ currentYear }">
 					</div>
-					<hr/>
+				<div id="calendarContainer">
+					<div id="header" class="kheader">
+						<span id="date">${ currentYear }년 ${ currentMonth }월</span>
+					</div>
 					<table border="1" cellspacing="0" cellpadding="0" class="cal" style="width:99%">
 						<thead>
 							<tr>
@@ -164,8 +198,9 @@
 												<td class="${ dateString[j-1] }"></td>
 											</c:when>
 											<c:otherwise>
-												<td class="${ dateString[j-1] }" height="70" align="left" valign="top">${dateNum}<a href="index.php?action=schedule_addform&schedule_type=schedule_month&year=2015&month=7&day=1&auth=PRIVATE&schedule_open="><font class="org8"><img class="plus" src="/groupware/resources/image/cal_plus.png" align="absmiddle" border="0"  /></font></a>
-												<br />
+												<td class="${ dateString[j-1] }" height="70" align="left" valign="top">
+													<font class="org8">${dateNum}<img class="plus" id="${ currentMonth }-${dateNum}" src="/groupware/resources/image/cal_plus.png" border="0"  /></font>
+													<br />
 												</td>
 											</c:otherwise>
 										</c:choose>
@@ -174,6 +209,13 @@
 								</tr>
 							</c:forEach>
 					</table>
+					<script type="text/javascript">
+					    $(".plus").click(function(){
+							var id = $(this).attr('id');
+							var url = 'addschedule.action?dayid='+id+"&year="+${ currentYear };
+							$(location).attr('href', url);
+						});
+					</script>
 				</div>
 			</form>
 		</div>

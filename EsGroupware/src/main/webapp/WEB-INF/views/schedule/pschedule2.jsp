@@ -25,14 +25,9 @@
 			</c:if>
 			<c:set var="currentLastDate" value="${ lastDate[currentMonth-1] }"/>
 			<c:set var="week" value="${((( currentDay + currentLastDate )/7) + (1-((( currentDay + currentLastDate )/7)%1))%1)+1}" />
-			<div class="today">
-				<div class="left big bold">
-					<img id="minus" src="/groupware/resources/image/left.png" width="11" height="11" border="0">
-					${ currentYear }년 ${ currentMonth }월 ${ currentDate }일
-					<img id="plus" src="/groupware/resources/image/right.png" width="11" height="11" border="0">
-				</div>
+			<div id="header" class="kheader">
+				<span id="date">${ currentYear }년 ${ currentMonth }월</span>
 			</div>
-			<hr/>
 			<table border="1" cellspacing="0" cellpadding="0" class="cal" style="width:99%">
 					<thead>
 						<tr>
@@ -58,8 +53,9 @@
 												<td class="${ dateString[j-1] }"></td>
 											</c:when>
 											<c:otherwise>
-												<td class="${ dateString[j-1] }" height="70" align="left" valign="top">${dateNum}<a href="index.php?action=schedule_addform&schedule_type=schedule_month&year=2015&month=7&day=1&auth=PRIVATE&schedule_open="><font class="org8"><img class="plus" src="/groupware/resources/image/cal_plus.png" align="absmiddle" border="0"  /></font></a>
-												<br />
+												<td class="${ dateString[j-1] }" height="70" align="left" valign="top">
+													<font class="org8">${dateNum}<img class="plus" id="${ currentMonth }-${dateNum}" src="/groupware/resources/image/cal_plus.png" border="0"  /></font>
+													<br />
 												</td>
 											</c:otherwise>
 										</c:choose>
@@ -69,3 +65,10 @@
 			</c:forEach>
 			</tbody>
 			</table>
+					<script type="text/javascript">
+					    $(".plus").click(function(){
+							var id = $(this).attr('id');
+							var url = 'addschedule.action?dayid='+id+"&year="+${ currentYear };
+							$(location).attr('href', url);
+						});
+					</script>

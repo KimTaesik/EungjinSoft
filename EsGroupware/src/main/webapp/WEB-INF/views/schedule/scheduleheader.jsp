@@ -8,10 +8,14 @@
   	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   	
+  	
   	<script>
-	$(function() {	
-	    $( "#accordion" ).accordion();
-	});
+		$(function() {	
+		    $( "#accordion" ).accordion();
+		    $("#ps").click(function(){
+				$(location).attr('href', '/groupware/schedule/pschedule.action');
+		    });
+		});
 	</script>
 
 <body>
@@ -19,13 +23,13 @@
 	<div id="accordion" style="font-size: 10pt">
 			<h3>내 일정</h3>
 		  		<ul>
-			        <li><a href="#" id="ps">개인일정</a></li>
+			        <li><span id="ps" style="cursor:pointer">개인일정</span></li>
 		    	</ul>
 		    <h3>공개일정</h3>
 		    	<ul>
-			        <li><a href="" id="pus">공개일정</a></li>
-			        <li><a href="">부서일정</a></li>
-			        <li><a href="">회사일정</a></li>
+			        <li>공개일정</li>
+			        <li>부서일정</li>
+			        <li>회사일정</li>
 		    	</ul>
 	</div>
 </nav>
