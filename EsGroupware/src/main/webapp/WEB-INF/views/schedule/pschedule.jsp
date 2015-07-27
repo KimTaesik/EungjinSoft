@@ -81,6 +81,19 @@
 			            }
 			    	});
 			    })
+			    
+			    $("#add_sc").click(function(){
+					var id = "7-1";
+					var url = 'addschedule.action?dayid='+id+"&year="+${ currentYear };
+					$(location).attr('href', url);
+				});
+				
+			    $("#quick_add").click(function(){
+			    	$("#quickaddform").show();
+				});
+			    $("#quick_add_submit").click(function(){
+			    	$("#quickaddform").hide();
+				});
 		});
 	</script>
 </head>
@@ -95,16 +108,16 @@
 			    </h2>
 			</div>
 			<div class="toparea">		
-		<div class="leftarea" style="width:50%;">
-			<span class="tab"><a href="#">DAY</a></span>
-			<span class="tab"><a href="#">WEEK</a></span>
-			<span class="selected"><a href="#">MONTH</a></span>
-			<span class="tab"><a href="#">YEAR</a></span>
-		</div>
-				<div class="rightarea" style="width:250px;">
+				<div class="leftarea" style="width:50%;">
+					<span class="tab"><a href="#">DAY</a></span>
+					<span class="tab"><a href="#">WEEK</a></span>
+					<span class="selected"><a href="#">MONTH</a></span>
+					<span class="tab"><a href="#">YEAR</a></span>
+				</div>
+				<div class="rightarea">
 					<span class="btn">
-						<span><img src="/groupware/resources/image/plus.png" border="0" /> 빠른 일정추가</span>	
-						<span><img src="/groupware/resources/image/plus.png" border="0" /> 일정추가</span>
+						<span><a id="quick_add" href="#"><img src="/groupware/resources/image/plus.png" border="0" /> 빠른 일정추가</a></span>
+						<span><a id="add_sc" href="#"><img src="/groupware/resources/image/plus.png" border="0" /> 일정추가</a></span>
 					</span>
 				</div>
 			</div>
@@ -133,6 +146,78 @@
 					</c:if>
 					<c:set var="currentLastDate" value="${ lastDate[currentMonth-1] }"/>
 					<c:set var="week" value="${((( currentDay + currentLastDate )/7) + (1-((( currentDay + currentLastDate )/7)%1))%1)+1}" />
+					<div id="quickaddform" class="mar5t" hidden>
+						<form id="quickadd" action="schedule_qadd.action" method="post">
+							<table width="100%" height="30" border="0" cellpadding="0" cellspacing="1" bgcolor="81A5C8">
+								<input type="hidden" name="schedule_type" value="schedule_month">
+								<input type="hidden" name="auth" value="PRIVATE">
+								<input type="hidden" name="groupkey" value="">
+								<input type="hidden" name="schedule_open" value="">
+						        	<tr>
+						        		<td bgcolor="EBF6FD" class="padding10w"> 
+							    		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						        			<tr>
+						        				<td height="14">제목
+						                      		<input name="schedule_title" type="text" class="blueinput" style="width:300px">
+						                    	</td>
+							                    <td align="right">
+													<select name="year" class="input">
+							                        	<option value="2013">2013</option>
+														<option value="2014">2014</option>
+														<option value="2015" selected="">2015</option>
+														<option value="2016">2016</option>
+														<option value="2017">2017</option>
+													</select>년
+													<select name="month" class="input">
+							                        	<option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7" selected="">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option>
+													</select>월
+							                      	<select name="day" class="input">
+							                        	<option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28" selected="">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+							                      	</select>일
+							                      	<select name="hour" class="input">
+							                        	<option value="" selected="">하루</option>
+														<option value="0">자정</option>
+							                        	<option value="1">오전 1</option>
+							                        	<option value="2">오전 2</option>
+							                        	<option value="3">오전 3</option>
+							                        	<option value="4">오전 4</option>
+							                        	<option value="5">오전 5</option>
+							                        	<option value="6">오전 6</option>
+							                        	<option value="7">오전 7</option>
+							                        	<option value="8">오전 8</option>
+							                        	<option value="9">오전 9</option>
+							                        	<option value="10">오전 10</option>
+							                        	<option value="11">오전 11</option>
+							                        	<option value="12">정오 12</option>
+							                        	<option value="13">오후 1</option>
+							                        	<option value="14">오후 2</option>
+							                        	<option value="15">오후 3</option>
+							                        	<option value="16">오후 4</option>
+							                        	<option value="17">오후 5</option>
+							                        	<option value="18">오후 6</option>
+							                        	<option value="19">오후 7</option>
+							                        	<option value="20">오후 8</option>
+							                        	<option value="21">오후 9</option>
+							                        	<option value="22">오후 10</option>
+							                        	<option value="23">오후 11</option>
+							                      	</select>시
+							                      	<select name="min" class="input">
+							                      		<option value="0" selected="">00</option>
+							                        	<option value="15">15</option>
+							                        	<option value="30">30</option>
+							                        	<option value="45">45</option>
+							                      	</select>분
+							                      	<input id="quick_add_submit" type="image" src="/groupware/resources/image/addsc.png" width="36" height="15" align="absmiddle" border="0">
+												</td>
+											</tr>
+						                </table>
+						               </td>
+						            </tr>	  
+						         </table>
+								<br>
+							</form>
+						</div>
+						<%-- 빠른추가잼 --%>
 						<div class="sheader">
 							<select id="yyear" name="yyear" style="WIDTH: 60px" class="sinput"> 
 								<option value='2008' ${ currentYear==2008 ? "selected":"" } >2008</option>

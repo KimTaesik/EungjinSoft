@@ -137,7 +137,7 @@ a.s_menu:hover {font-size: 12px; font-family:"돋움";text-decoration:none; colo
 .selected a {display:inline;float:left; font-weight:bold; height:20px; background:#FFFFFF; margin-top:0px; padding-top:5px; padding-left:19px;padding-right:19px; border:1px solid #D4D4D4; border-bottom:none; color:#555555}
 .selected a.bb {border-bottom:#FFFFFF 1px solid; z-index:10;}/* 익스6 */
 
-.today {padding:17px 10px 0 10px; height:30px;}
+.today {padding:17px 10px 0 10px; height:10px;}
 .today .left {float:left; width:250px; text-align:left;}
 .today .right {float:right; width:400px; display:inline; text-align:right}
 

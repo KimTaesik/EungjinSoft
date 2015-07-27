@@ -3,7 +3,7 @@
 
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
-.kheader {height: 50px; line-height: 50px; text-align: center; font-size: 18px; font-weight: bold}
+.kheader {height: 40px; text-align: center; font-size: 18px; font-weight: bold}
 .sheader {text-align: right; font-size: 15px; font-weight: bold; margin-top: 5px;}
 .kbutton {color: #000; text-decoration: none;}
 .cal {width: 970px; height: 300px; font-size: 13px;}
