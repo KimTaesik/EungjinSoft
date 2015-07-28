@@ -7,6 +7,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	
 	<context:component-scan base-package="com.groupware.dao" />
+	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 <!-- 		<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource"
@@ -67,5 +68,10 @@
 		<property name="sqlSessionFactory" ref="sessionFactory" />
 	</bean>
 
-
+	<bean id="ApprovalMapper" 
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" 
+			value="com.groupware.mapper.ApprovalMapper"/>
+		<property name="sqlSessionFactory" ref="sessionFactory" />
+	</bean>
 </beans>

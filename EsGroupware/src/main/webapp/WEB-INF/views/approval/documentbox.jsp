@@ -5,26 +5,20 @@
 
 <head>
 <title>Whois Groupware - Ubiquitous Collaboration!</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=7" />
-<!--[if IE 6]>
-	<link href="http://css.whoisdesk.net/Src/Skin/Renewal/board_ie6.css" rel="stylesheet" type="text/css" />
-	<![endif]-->
-<link type="text/css"
-	href="http://css.whoisdesk.net/Src/WebCommon/Jquery/Jquery_ui_1_7_2/blitzer/jquery-ui-1.7.2.custom.css"
-	rel="stylesheet" />
+
+
+<link rel="stylesheet"
+	href="/groupware/resources/styles/jquery/jquery-ui.css">
+<script src="/groupware/resources/styles/script/jquery.js"></script>
+<script src="/groupware/resources/styles/script/jquery-ui.js"></script>
+<link rel="stylesheet" href="/groupware/resources/styles/approval.css">
+
 </head>
 
 <body>
 
-	<script type="text/javascript"
-		src="http://gw.whoisdesk.kr/Src/WebCommon/Jquery/Plugin/DatePicker/ui.datepicker.js"></script>
-	<script type="text/javascript"
-		src="http://gw.whoisdesk.kr/Src/WebCommon/Jquery/Plugin/DatePicker/jquery.datepick-ko.js"></script>
-	<link type="text/css"
-		href="http://gw.whoisdesk.kr/Src/WebCommon/Jquery/Plugin/DatePicker/Demos/demos.css"
-		rel="stylesheet" />
-	<div id="sub">
+	
+	<div style="width: 90%; float: right; margin-left: 10px; border: 1px solid;">
 		<!--  검색 버튼 영역 -->
 		<form name="form" action="" method="post"
 			onsubmit="return setSearchSubmit();">
@@ -346,20 +340,6 @@
 		</form>
 		<!--  //검색 버튼 영역 -->
 	</div>
-	<!-- light box -->
-	<div id="light" name="light" class="white_content">
-		<table width='100%' height='100%' border='0'>
-			<tr>
-				<td align="center" valign="middle"><iframe id='iframePopup'
-						name='iframePopup' frameborder='0' marginwidth='0'
-						marginheight='0' scrolling='no'></iframe></td>
-			</tr>
-		</table>
-	</div>
-
-	<div id="fade" class="black_overlay"></div>
-	<!-- /lignt box -->
-
 
 </body>
 </html>

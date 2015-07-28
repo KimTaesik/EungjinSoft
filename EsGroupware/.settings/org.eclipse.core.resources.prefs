@@ -7,11 +7,8 @@ encoding//src/main/java/com/groupware/dao/OracleEmployeeDao.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/admingrant.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/approval/approvalheader.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/approval/approvalmain.jsp=UTF-8
-<<<<<<< HEAD
+encoding//src/main/webapp/WEB-INF/views/approval/approvalwriteform.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/approval/documentbox.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/approval/test.jsp=UTF-8
-=======
-encoding//src/main/webapp/WEB-INF/views/approval/test.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/include/approvalheader.jsp=UTF-8
->>>>>>> branch 'master' of https://github.com/KimTaesik/EungjinSoft.git
 encoding//src/main/webapp/WEB-INF/views/index.jsp=UTF-8

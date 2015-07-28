@@ -16,6 +16,7 @@
 		<typeAlias type="com.groupware.dto.BoardComment" alias="BoardComment" />
 		<typeAlias type="com.groupware.dto.Attendance" alias="Attendance" />
 		<typeAlias type="com.groupware.dto.Employee" alias="Employee" />
+		<typeAlias type="com.groupware.dto.ApprovalForm" alias="ApprovalForm" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/groupware/mapper/BoardMapper.xml" />
@@ -23,6 +24,7 @@
 		<mapper resource="com/groupware/mapper/EmployeeMapper.xml" />
 
 		<mapper resource="com/groupware/mapper/AttendanceMapper.xml" />
+		<mapper resource="com/groupware/mapper/ApprovalMapper.xml" />
 
 	</mappers>
 
