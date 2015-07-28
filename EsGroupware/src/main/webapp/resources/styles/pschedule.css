@@ -5,12 +5,16 @@ width:100%;
 background-color:white;
 margin:0 auto;      /*가운데정렬*/
 }
- 
+.addbody {margin:0px;font-size:9pt; background:#FFFFFF; color:#333333; font-family:돋움,arial}
+section{width:84%;height:100px;float:right;}
+
 a{
 text-decoration:none;
 color:#ffffff;
 }
-
+.cursor{
+	cursor:pointer;
+}
 nav{
 text-align:left;
 border:20x solid #a8a8a8;
@@ -37,9 +41,11 @@ li{
 li:hover, li:focus {
 	background-color: #dfefff;
 }
+.plus{ float: right; margin-right: 100px;margin-top: 2px}
 
 
 .left {float:left}
+.center {float:none;}
 .right {float:right}
 .check {margin:0px 0 1px 0;}
 
@@ -97,7 +103,10 @@ a.s_menu:link {font-size:12px; font-family:"돋움"; text-decoration:none; color
 a.s_menu:visited {font-size:12px; font-family:"돋움"; text-decoration:none; color:#FFFFFF}
 a.s_menu:hover {font-size: 12px; font-family:"돋움";text-decoration:none; color:#FFFFF; font-weight: bold;}
 
-
+#sub a:link {font-family:Dotum, "돋움"; color:#777777; text-decoration:none;}
+#sub a:visited {font-family:Dotum, "돋움"; color:#777777; text-decoration:none;}
+#sub a:active {font-family:Dotum, "돋움"; color:#777777; text-decoration:none;}
+#sub a:hover {font-family:Dotum, "돋움"; color:#FF6600; text-decoration:none;}
 
 #sub #title {height:40px;}
 #sub #title h2  {font-family:Dotum, "돋움"; font-size:14px; color:#333333; font-weight:bold; display:inline; float:left; padding-left:15px; padding-top:10px}
@@ -128,6 +137,12 @@ a.s_menu:hover {font-size: 12px; font-family:"돋움";text-decoration:none; colo
 .selected a {display:inline;float:left; font-weight:bold; height:20px; background:#FFFFFF; margin-top:0px; padding-top:5px; padding-left:19px;padding-right:19px; border:1px solid #D4D4D4; border-bottom:none; color:#555555}
 .selected a.bb {border-bottom:#FFFFFF 1px solid; z-index:10;}/* 익스6 */
 
-.today {padding:17px 10px 0 10px; height:30px;}
+.today {padding:17px 10px 0 10px; height:10px;}
 .today .left {float:left; width:250px; text-align:left;}
 .today .right {float:right; width:400px; display:inline; text-align:right}
+
+
+td {margin:0px;font-size:9pt; color:#333333; font-family:돋움,arial}
+TD {font-size:12px; font-family:"굴림"; text-decoration:none;line-height:18px; color:#4F4F4F}
+.TD {FONT-SIZE: 9pt; COLOR: #666666; FONT-FAMILY: "굴림"; }
+
