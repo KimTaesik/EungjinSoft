@@ -8,13 +8,12 @@
 	<link rel='Stylesheet' href='/groupware/resources/styles/input.css' />
 	<link rel="Stylesheet" href="/groupware/resources/styles/admin.css" />
 	<link rel="Stylesheet" href="/groupware/resources/styles/addressframe.css" /> 
-	<script type="text/javascript">
 	
-	</script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  	<link rel="stylesheet" href="/resources/demos/style.css">
+	<link rel="stylesheet" href="/groupware/resources/styles/jquery/jquery-ui.css">
+	<script src="/groupware/resources/styles/script/jquery.js"></script>
+	<script src="/groupware/resources/styles/script/jquery-ui.js"></script>
+
+	
   	<script>
 	$(function() {	
 	    $( "#accordion" ).accordion();	
@@ -31,8 +30,8 @@
 		}else if(document.getElementById("email").value.length == 0) {
 			alert("이메일을 입력해주세요.");
 		}else {
-			//document.getElementById("addressbookadd").submit();
-			document.forms[0].submit();
+			document.getElementById("addressbookaddform").submit();
+			//document.forms[0].submit();
 		}
 	}
 	
@@ -60,9 +59,9 @@
 		<div id='inputcontent'>
 		<div id='inputmain'>
 		<div class="subject">
-			<caption align="left"><font color="#0431B4" font size="2" ><b>개인주소록 주소추가</b></font></caption>
+			<caption align="left"><font color="#0431B4" size="2" ><b>개인주소록 주소추가</b></font></caption>
 		</div>
-		<form id='addressbookadd' action='/groupware/address/addressbookadd.action' method='post'>
+		<form id='addressbookaddform' action='addressbookadd.action' method='post'>
 				 <table>
 			        	<tr>
 			            	<th style='background-color: #fffffc;text-align: left;'>
@@ -81,7 +80,7 @@
 			            <tr>
 			                <th id="essential">* 메일주소</th>
 			                <td>
-			                	<input type='text' name='email' style='width:280px' />
+			                	<input id='email' type='text' name='email' style='width:280px' />
 			                </td>
 			            </tr>
 			            <tr>

@@ -7,18 +7,40 @@
 <!-- namespace:패키지명,클래스이름을 논리적으로 선언 -->
 <mapper namespace="com.groupware.mapper.AddressBookMapper">
 
+	
 	<insert id="insertAddressBook" parameterType="AddressBook">
 
 		INSERT INTO addressbook
 		(
-		addressno, name, email, phone_number, home_number,
-		fax, nation, address, company_name, department_name,
-		position_name, company_number, company_address, memo)
+		addressno, id, name, email, phone_number, home_number, groupno,
+		fax, nation)
 		VALUES(
-		addressno_sequence.nextval,#{name}, #{email}, #{phoneNumber}, #{homeNumber}, #{fax},
-		#{nation}, #{address}, #{companyName}, #{deptName},
-		#{positionName}, #{companyNumber}, #{companyAddress}, #{memo})
+		addressno_sequence.nextval, #{id}, #{name}, #{email}, #{phoneNumber}, #{homeNumber}, #{groupNo},  #{fax}, #{nation})
 	</insert>
+	
+	 
+	<!--  	페이징 처리 [목록 조회] -->
+	<select id="getAddressbookList" parameterType="hashMap" resultType="AddressBook">
+	SELECT
+	
+	FROM
+		(	
+		SELECT
+			rownum idx, s.*
+		FROM (
+			SELECT
+				addressno, id, groupno, classify, name, email, phone_number, home_number, fax
+			FROM 
+				addressbook
+			WHERE classify = #{ classify }
+			ORDER BY 
+				addressno DESC
+			)s
+		)
+	WHERE
+		idx	&gt; =  #{ first } AND idx &lt; #{ last }
+	</select>
+	
 
 
 </mapper>                                                                                 

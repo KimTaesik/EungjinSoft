@@ -33,7 +33,7 @@
 			}
 		});
 	});
-
+	
 	$(document).ready(function() {
 		$('.get').click(function(event) {
 			var id = $(this).attr('id');

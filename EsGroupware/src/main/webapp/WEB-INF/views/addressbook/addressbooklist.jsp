@@ -1,5 +1,10 @@
+<%@page import="com.groupware.dto.AddressBook"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE>
 <html>
 <head>
@@ -29,6 +34,10 @@
   	<script>
 	$(function() {	
 	    $( "#accordion" ).accordion();	
+	    $("personaladdressbook").click(function() {
+	    	$("#")
+	    });
+	    
 	});	
 	</script>
 	
@@ -37,15 +46,19 @@
 <body>
 <div class="left_menu" style="background-color: #88cbff">
 	<div id="accordion" style="font-size: 10pt;width: 100pt;">
-	<h3>
-	주소록</h3>
+	<h3>개인 주소록</h3>
 	<ul>
-        <li>개인 주소록</li>
-        <br />
-        <li>공용 주소록</li>
-        <br />
-        <li>명함철</li>
+        <li><a href="#" id="personaladdressbook">개인 주소록</a></li>
+    </ul>
+    <h3>공용 주소록</h3>
+    <ul>
+        <li><a href="#" id="shareaddressbook">공용 주소록</a></li>
+    </ul>
+    <h3>명함철</h3>
+    <ul>
+        <li><a href="#" id="idcard">명함철</a></li>
 	</ul>
+	
 	</div>
 </div>
 
@@ -119,86 +132,17 @@
 					<th style="width:40px;text-align:center">수정</th>
 					<th style="width:90px;text-align:center">삭제</th>
 				</tr>
+				<% List<AddressBook> addressbook = (List<AddressBook>)request.getAttribute("addressbook"); %> 
+				<%-- <c:forEach var="addressbook" items="${ addressbook }"> --%>
+				
+				
+				
+				<%-- </c:forEach> --%>
 			</table>
+			<!-- 	<div style="width:910px; height:370px">
 			
-		<div style="width:910px; height:370px">
-			<table class="contacts">
-				<tbody>
-			    	<tr>
-			        	<td width="10%">홍길동</td>
-			            <td width="20%">abc@naver.com</td>
-			            <td width="20%">010-1234-5678</td>
-			            <td width="18%">02-123-4567</td>
-			            <td width="18%">02-000-0000</td>
-			            <td width="7%"><img src="/groupware/resources/image/edit.png" /></td>
-			            <td width="7%"><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			        <tr>
-			        	<td>홍길동</td>
-			            <td>abc@naver.com</td>
-			            <td>010-1234-5678</td>
-			            <td>02-123-4567</td>
-			            <td>02-000-0000</td>
-			            <td><img src="/groupware/resources/image/edit.png" /></td>
-			            <td><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			        <tr>
-			        	<td>홍길동</td>
-			            <td>abc@naver.com</td>
-			            <td>010-1234-5678</td>
-			            <td>02-123-4567</td>
-			            <td>02-000-0000</td>
-			            <td><img src="/groupware/resources/image/edit.png" /></td>
-			            <td><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			        <tr>
-			        	<td>홍길동</td>
-			            <td>abc@naver.com</td>
-			            <td>010-1234-5678</td>
-			            <td>02-123-4567</td>
-			            <td>02-000-0000</td>
-			            <td><img src="/groupware/resources/image/edit.png" /></td>
-			            <td><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			        <tr>
-			        	<td>홍길동</td>
-			            <td>abc@naver.com</td>
-			            <td>010-1234-5678</td>
-			            <td>02-123-4567</td>
-			            <td>02-000-0000</td>
-			            <td><img src="/groupware/resources/image/edit.png" /></td>
-			            <td><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			        <tr>
-			        	<td>홍길동</td>
-			            <td>abc@naver.com</td>
-			            <td>010-1234-5678</td>
-			            <td>02-123-4567</td>
-			            <td>02-000-0000</td>
-			            <td><img src="/groupware/resources/image/edit.png" /></td>
-			            <td><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			        <tr>
-			        	<td width="10%">홍길동</td>
-			            <td width="20%">abc@naver.com</td>
-			            <td width="20%">010-1234-5678</td>
-			            <td width="18%">02-123-4567</td>
-			            <td width="18%">02-000-0000</td>
-			            <td width="7%"><img src="/groupware/resources/image/edit.png" /></td>
-			            <td width="7%"><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			        <tr>
-			        	<td width="10%">홍길동</td>
-			            <td width="20%">abc@naver.com</td>
-			            <td width="20%">010-1234-5678</td>
-			            <td width="18%">02-123-4567</td>
-			            <td width="18%">02-000-0000</td>
-			            <td width="7%"><img src="/groupware/resources/image/edit.png" /></td>
-			            <td width="7%"><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			    </tbody>
-			</table>
-		</div>
+				</div> -->
+		
 
 		</div>
 		
