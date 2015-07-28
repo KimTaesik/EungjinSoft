@@ -64,7 +64,7 @@ public class ScheduleController {
 		mav.addObject("currentDay",date.getDay()-1);
 		System.out.println("2액션이지롱");
 		System.out.println("2///"+(int)(ryear)+"년"+(int)(rmonth)+"월"+date.getDate()+"일"+(int)(date.getDay()-1)+"요일");
-		mav.setViewName("schedule/pschedule2");
+		mav.setViewName("schedule/pscheduleCalendar");
 		
 		return mav;
 	}

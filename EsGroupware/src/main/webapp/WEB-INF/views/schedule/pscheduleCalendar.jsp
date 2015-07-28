@@ -68,7 +68,7 @@
 					<script type="text/javascript">
 					    $(".plus").click(function(){
 							var id = $(this).attr('id');
-							var url = 'addschedule.action?dayid='+id+"&year="+${ currentYear };
+							var url = 'addScheduleForm.action?dayid='+id+"&year="+${ currentYear };
 							$(location).attr('href', url);
 						});
 					</script>
