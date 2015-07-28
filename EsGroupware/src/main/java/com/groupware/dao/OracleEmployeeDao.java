@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.groupware.dto.Board;
 import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
 import com.groupware.dto.Position;
@@ -118,8 +119,12 @@ public class OracleEmployeeDao implements EmployeeDao {
 		employeeMapper.deletePosition(id);
 	}
 	@Override
-	public void registerApprovalAdmin(String id) {
-		employeeMapper.registerApprovalAdmin(id);
+	public void registerAdmin(String id, String usertype) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("id", id);
+		params.put("usertype", usertype);
+		
+		employeeMapper.registerAdmin(params);
 	}
 	
 	
@@ -129,11 +134,19 @@ public class OracleEmployeeDao implements EmployeeDao {
 		return employees;
 	}
 	
-	@Override
+	/*@Override
 	public List<Employee> getApprovalAdminList() {
 		List<Employee> employees = employeeMapper.getApprovalAdminList();
 		return employees;
+	}*/
+	@Override
+	public List<Employee> getAdminList(String radio) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("radio", radio);
+		List<Employee> employees = employeeMapper.getAdminList(params);
+		return employees;
 	}
+	
 	@Override
 	public List<Employee> searchSelectAdmin(String radio) {
 		HashMap<String, String> params = new HashMap<String, String>();
@@ -150,6 +163,25 @@ public class OracleEmployeeDao implements EmployeeDao {
 	public List<Employee> searchAdmin() {
 		List<Employee> employees = employeeMapper.searchAdmin();
 		return employees;
+	}
+	@Override
+	public int getEmployeeCount() { 
+		return employeeMapper.getEmployeeCount();
+	}
+	
+	@Override
+	public List<Employee> getEmployeeList2(int first, int last, String lineup) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("first", first);
+		params.put("last", last);
+		params.put("lineup", lineup);
+		
+		return	employeeMapper.getEmployeeList2(params);
+
+	}
+	@Override
+	public void registerApprovalAdmin(String id) {
+		employeeMapper.registerApprovalAdmin(id);	
 	}
 
 }

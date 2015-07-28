@@ -3,6 +3,7 @@ package com.groupware.mapper;
 import java.util.HashMap;
 import java.util.List;
 
+import com.groupware.dto.Board;
 import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
 import com.groupware.dto.Position;
@@ -47,11 +48,20 @@ public interface EmployeeMapper {
 	
 	List<Employee> searchSelectAdmin(HashMap<String, String> params);
 	
+	void registerAdmin(HashMap<String, String> params);
+
 	void registerApprovalAdmin(String id);
-
-	List<Employee> getApprovalAdminList();
-
+	
+	//List<Employee> getApprovalAdminList();
+	List<Employee> getAdminList(HashMap<String, String> params);
+	
 	void deleteApprovalAdmin(String id);
 
 	List<Employee> searchAdmin();
+	
+	int getEmployeeCount();
+	
+	List<Employee> getEmployeeList(String lineup);
+	
+	List<Employee> getEmployeeList2(HashMap<String, Object> params);
 }

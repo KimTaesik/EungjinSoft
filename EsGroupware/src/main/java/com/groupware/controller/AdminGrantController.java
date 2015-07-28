@@ -39,11 +39,15 @@ public class AdminGrantController {
 
 		List<Dept> depts = employeeDao.getDeptList();
 		List<Position> positions = employeeDao.getPositionList();
-		List<Employee> approvalAdmins = employeeDao.getApprovalAdminList();
+		String radio="8";
+		List<Employee> approvalAdmins = employeeDao.getAdminList(radio);
+		radio="1";
+		List<Employee> approvalAdmins2 = employeeDao.getAdminList(radio);
 		
 		mav.addObject("depts", depts);
 		mav.addObject("positions", positions);
 		mav.addObject("approvalAdmins", approvalAdmins);
+		mav.addObject("approvalAdmins2", approvalAdmins2);
 		mav.setViewName("admin/admingrant");
 		
 		return mav;
@@ -53,11 +57,12 @@ public class AdminGrantController {
 	@RequestMapping("searchDeptAdmin.action")
 	@ResponseBody //별도의 뷰를 사용하지 말고 return 값을 응답본문으로 사용하세요
 	public List<Employee> ajaxTest(String option, String radio) {
-		System.out.println(option);
+		//System.out.println(option);
 		List<Employee> employees = null;
-		System.out.println(radio);
+		//System.out.println(radio);
 		if(radio.equals("1")) {
-			employees = employeeDao.searchAdmin();
+			//employees = employeeDao.searchAdmin();
+			employees = employeeDao.searchSelectAdmin(radio);
 		}
 		else if(radio.equals("3")) {
 			employees = employeeDao.searchDeptAdmin(option);
@@ -69,20 +74,39 @@ public class AdminGrantController {
 		return employees;
 	}
 	
-	@RequestMapping(value="registerApprovalAdmin.action", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="registerAdmin.action", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody //별도의 뷰를 사용하지 말고 return 값을 응답본문으로 사용하세요
-	public ModelAndView registerApprovalAdmin(String id) {
+	public ModelAndView registerApprovalAdmin(String id, String radio) {
 		//System.out.println(id);
-		employeeDao.registerApprovalAdmin(id);
+		if(radio.equals("1")) {
+			employeeDao.registerAdmin(id, radio);
+		}
+		if(radio.equals("8")) {
+			employeeDao.registerAdmin(id, radio);
+		}
+		//employeeDao.registerApprovalAdmin(id);
+		//System.out.println(radio);
 
 		ModelAndView mav = new ModelAndView();
 
-		List<Employee> approvalAdmins = employeeDao.getApprovalAdminList();
+		//List<Employee> approvalAdmins = employeeDao.getApprovalAdminList();
+		List<Employee> approvalAdmins = employeeDao.getAdminList(radio);
+		System.out.println(approvalAdmins);
 		List<Position> positions = employeeDao.getPositionList();
 		
-		mav.addObject("positions", positions);
+		if(radio.equals("1")) {
+			mav.addObject("positions", positions);
+			mav.addObject("approvalAdmins2", approvalAdmins);
+			mav.setViewName("admin/admingrant3");
+		}
+		if(radio.equals("8")) {
+			mav.addObject("positions", positions);
+			mav.addObject("approvalAdmins", approvalAdmins);
+			mav.setViewName("admin/admingrant2");
+		}
+/*		mav.addObject("positions", positions);
 		mav.addObject("approvalAdmins", approvalAdmins);
-		mav.setViewName("admin/admingrant2");
+		mav.setViewName("admin/admingrant2");*/
 		
 		return mav;
 	}

@@ -29,7 +29,7 @@
 	<script type="text/javascript">
 	$(function() {
 		$("#searchAdmin").click(function(event) {
-			alert($(":radio[name='AdminGb']:checked").val());
+			/* alert($(":radio[name='AdminGb']:checked").val()); */
 			$.ajax({
 				url : "/groupware/admin/searchDeptAdmin.action",
 				async : true,
@@ -62,17 +62,27 @@
 		})
 		
 		$("#registerApprovalAdmin").click(function(event) {
+			alert($(":radio[name='AdminGb']:checked").val());
+			var radio = $(":radio[name='AdminGb']:checked").val()
 			$.ajax({
-				url : "/groupware/admin/registerApprovalAdmin.action",
+				url : "/groupware/admin/registerAdmin.action",
 				async : true,
-				data : { "id": $(".idoption:selected").val()},
+				data : { "id": $(".idoption:selected").val(), "radio" : $(":radio[name='AdminGb']:checked").val() },
 				method : "post",
 				success : function(result, status, xhr) {
-						
+						alert("radio?" + radio);
 						//alert(html);
-						$(".table1").html(result);
+						if(radio == "8") {
+							alert("radio8 -" + radio);
+							$(".table1").html(result);
+						}
+						else if (radio == "1") {
+							alert("radio1 -" + radio);
+							$(".table4").html(result);
+						}
 						
 						$(".deleteApprovalAdmin").click(function(event) {
+							/* var selected = $(":select[name='TreeKey2']:selected").val() */
 							var id = $(this).attr("href");
 							$.ajax({			
 								url : "/groupware/admin/deleteApprovalAdmin.action",
@@ -373,7 +383,7 @@
 
 	</div>
 
-	<div class="under"></div>
+	<div id="admintable" class="under"></div>
 
 		<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="table">
 			
@@ -383,12 +393,6 @@
 			<col width="15%" class="overf"></col>
 			<col width="30%" class="overf"></col>
 			<col width="15%" class="overf"></col>
-
-			<thead>
-
-			</thead>
-
-			<tbody>
 
 			<tr>
 				<td colspan='6' align='left'><img src='/groupware/resources/image/admin/bull_arr_gray.gif' alt='' /><b>전체관리자</b></td>
@@ -431,57 +435,89 @@
 					</div>
 				</th>
 			</tr>
-
-
-			<tr>
-				<td class='txt_ce'>
-					<div>
-						<nobr>
-							1
-						</nobr>
-					</div>
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>				
-							admin
-						</nobr>
-					</div>							
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>				
-							대표						
-						</nobr>
-					</div>							
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>				
-							김응진
-						</nobr>
-					</div>							
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>
-							전체관리자
-						</nobr>
-					</div>
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>
-								<a href='#blank-link' onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }location.href='?dummy=1437557543&No=1';"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;
-								<a href='#blank-link' onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }prcDel('1', '1', 'admin');"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' class='vm'  title='삭제' /></a>
-						</nobr>
-					</div>
-				</td>
-			</tr>
-		
-			<tr height='20'>
+			
+			<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="table4">
+			
+			<col width="10%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			<col width="30%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			
+			<tr id="approvalListTable">
+	            <c:forEach var="approvals2" items="${ approvalAdmins2 }" varStatus="status">
+	            <tr id="tr${ approvals2.id }">
+	             	<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ status.index }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ approvals2.id }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								<c:forEach var="position" items="${ positions }">
+									<c:if test="${ approvals.positionNo ==  position.positionNo }">
+										${ position.positionName }										
+									</c:if>
+		                		</c:forEach>
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ approvals2.name }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ approvals2.name }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+									<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;
+									<a href='${ approvals2.id }' class="deleteApprovalAdmin"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' title='삭제' /></a>
+							</nobr>
+						</div>
+					</td>
+				</tr>
+	            </c:forEach>
+		    </tr>
+		    </table>
+		    
+		    <tr height='20'>
 				<td colspan='6' style='border-bottom:0px;'>&nbsp;</td>
 			</tr>
+		    </table>
+		    
+			<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="table2">
+					
+				<col width="10%" class="overf"></col>
+				<col width="15%" class="overf"></col>
+				<col width="15%" class="overf"></col>
+				<col width="15%" class="overf"></col>
+				<col width="30%" class="overf"></col>
+				<col width="15%" class="overf"></col>
+	
+				<thead>
+	
+				</thead>
+		
 			<tr>
 				<td colspan='6'>
 					<div>

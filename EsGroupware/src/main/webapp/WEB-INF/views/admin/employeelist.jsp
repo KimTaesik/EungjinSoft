@@ -81,7 +81,13 @@
 								</c:forEach>							
 							</tr>
 						</c:forEach>
-						</table>					
+						</table>
+						
+						<div style="text-align:center">
+							${ pager.toString() }
+						<br/><br/>
+						</div>
+			<br/><br/>					
 				</c:when>
 				<c:otherwise>
 					<h3 style='text-align:center'>등록된 사용자가 없습니다.</h3>
