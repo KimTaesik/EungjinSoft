@@ -6,7 +6,7 @@
 
 <mapper namespace="com.groupware.mapper.ApprovalMapper">
 
-	<select id="getApprovalForm" parameterType="int" resultType="ApprovalForm">
+	<select id="getApprovalForm" parameterType="String" resultType="ApprovalForm">
 		SELECT form_no,form_name,form_explain,fixedDate 
 		FROM APPROVAL_FORM
 		WHERE form_no =#{form_No}
@@ -15,6 +15,12 @@
 	<select id="getApprovalForm2" resultType="ApprovalForm">
 		SELECT form_no,form_name,form_explain,fixedDate 
 		FROM APPROVAL_FORM
+	</select>
+
+	<select id="getApprovalForm3" parameterType="String" resultType="ApprovalForm">
+		SELECT form_no,form_name,form_explain,fixedDate 
+		FROM APPROVAL_FORM
+		WHERE form_no =#{form_No}
 	</select>
 
 </mapper>

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.dto.ApprovalForm;
 import com.groupware.mapper.ApprovalMapper;
@@ -21,7 +22,7 @@ public class OracleApprovalDao implements ApprovalDao {
 	}
 	
 
-	public ApprovalForm getApprovalForm(int form_No) {
+	public ApprovalForm getApprovalForm(String form_No) {
 		
 	
 		return approvalMapper.getApprovalForm(form_No);
@@ -31,5 +32,13 @@ public class OracleApprovalDao implements ApprovalDao {
 	
 		return approvalMapper.getApprovalForm2();
 
+	}
+
+
+	@Override
+	public ApprovalForm getApprovalForm3(String form_No) {
+		// TODO Auto-generated method stub
+		return approvalMapper.getApprovalForm3(form_No);
+		
 	}
 }
