@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.dao.AddressBookDao;
@@ -42,7 +43,7 @@ public class AddressbookController {
 			String homePhone1, String homePhone2, String homePhone3, String fax1, String fax2, String fax3, String postcode1, String postcode2,
 			String roadAddress, String roadAddress2, String postcode3, String postcode4, String directLine1,String directLine2, String directLine3) throws UnsupportedEncodingException{
 		
-		
+		System.out.println(addressbook.getClassify());
 		Employee loginUser = new Employee();
 		loginUser.setId(((Employee)session.getAttribute("loginuser")).getId());
 		addressbook.setId(loginUser.getId());
@@ -98,7 +99,7 @@ public class AddressbookController {
 	}
 	
 	//2. 주소 리스트 보기[페이징 처리로]
-	@RequestMapping(value="addressbooklist.action", method = RequestMethod.GET)
+/*	@RequestMapping(value="addressbooklist.action", method = RequestMethod.GET)
 	public ModelAndView addressList(String classify, HttpServletRequest req, String type, String search ,Integer pageno){
 		
 		//******* 페이징 관련 데이터 처리 ********* 
@@ -106,7 +107,7 @@ public class AddressbookController {
 		int pageSize = 10; //한 페이지에 표시할 데이터 갯수
 		int pagerSize = 10; //번호로 표시할 페이지 갯수
 		int dataCount = 0; //전체 데이터 갯수 (pageSize와 dataCount를 알아야, 페이지가 얼마나? 있는지 알 수 있다.)
-		String url = "list.action"; // 페이징 관련 링크를 누르면, 페이지번호와 함께 요청할 경로
+		String url = "addressbooklist.action"; // 페이징 관련 링크를 누르면, 페이지번호와 함께 요청할 경로
 		String queryString = "classify="+classify ;
 		//요청한 페이지 번호가 있다면, 읽어서 현재 페이지 번호로 설정 (없다면, 1페이지)
 		if (pageno != null ) {
@@ -120,14 +121,51 @@ public class AddressbookController {
 		//List<AddressBook> addressbook = addressbookDao.getAddressbookList(first, last, classify); //데이터 베이스에서 전화번호 가져오기
 		
 		ThePager pager = new ThePager(dataCount, pageNo, pageSize, pagerSize, url, queryString);
+	
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("classify", classify);
 		mav.addObject("pager", pager);
 		mav.addObject("pageno", pageNo);
 		mav.addObject("addressbook", addressbook);//위에서 DB에서 가져온 전화번호 리스트 
-		mav.setViewName("addressbook/addressbooklist"); //페이지 넘기는 위치 설정
+		mav.setViewName("include/addressheader"); //페이지 넘기는 위치 설정
+		return mav;
+	}*/
+	
+	@RequestMapping(value="addressbooklist.action", method = RequestMethod.GET)
+	public ModelAndView addressList(AddressBook addressbook, String classify, HttpServletRequest req){
+		System.out.println(classify);
+		List<AddressBook> addressbook1 = addressbookDao.getAddressbookList(classify);
+		
+		System.out.println(addressbook1.size());
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("classify", classify);
+		mav.addObject("addresbook", addressbook1);
+		mav.setViewName("/addressbooklist");
+		
 		return mav;
 	}
 	
+	@RequestMapping(value="addressheader.action", method = RequestMethod.GET)
+	public String addresshearder(){
+	
+		return "include/addressheader";
+	}
+	
+	
+	@RequestMapping(value="addresslist.action", method = RequestMethod.GET)
+	@ResponseBody
+	public String addressList2(String classify, HttpServletRequest req, String type, String search ,Integer pageno){
+	
+		List<AddressBook> addressbook = null;
+
+		String name = "";
+		if(classify.equals("1")) {
+			name ="개인 주소록";
+		}else if(classify.equals("2")) {
+			name = "공용 주소록";
+		}
+	
+		return name;
+	}
 }

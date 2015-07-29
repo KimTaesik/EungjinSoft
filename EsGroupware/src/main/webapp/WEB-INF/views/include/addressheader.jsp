@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+
 <!DOCTYPE>
 <html>
 <head>
@@ -10,11 +12,29 @@
   	<script>
 	$(function() {	
 	    $( "#accordion" ).accordion();	
-	    $("personaladdressbook").click(function() {
-	    	$("#")
+	   
 	    });
 	    
-	});	
+
+	
+	$(document).ready(function() {
+		$('.getclassify').click(function(event) {
+			var classify = $(this).attr("id");
+			alert(classify);
+			$.ajax({
+				url : "addresslist.action?classify="+classify,
+				method : 'get',
+				data : {},
+				dataType : 'text',
+				success: function(result, status, xhr) {
+					alert(result)
+			 	$("#get").text(result);	
+				}
+			})
+			event.preventDefault();
+		})
+		
+	})
 	</script>
 </head>
 <body>
@@ -22,17 +42,16 @@
 	<div id="accordion" style="font-size: 10pt;width: 100pt;">
 	<h3>개인 주소록</h3>
 	<ul>
-        <li><a href="#" id="personaladdressbook">개인 주소록</a></li>
+        <li><a href="#" id="1" class="getclassify">개인 주소록</a></li>
+        <br />
+        <li><a href="#" id="2" class="getclassify">공용 주소록</a></li>
+        <br />
+        <li><a href="#" id="3" class="getclassify">명함철</a></li>
     </ul>
-    <h3>공용 주소록</h3>
-    <ul>
-        <li><a href="#" id="shareaddressbook">공용 주소록</a></li>
-    </ul>
-    <h3>명함철</h3>
-    <ul>
-        <li><a href="#" id="idcard">명함철</a></li>
-	</ul>
 	
 	</div>
 </div>
+<div id="getclassify" >
+		<c:import url="/WEB-INF/views/addressbook/addressbooklist.jsp" />
+	</div>
 </body>

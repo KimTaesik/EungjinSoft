@@ -1,7 +1,7 @@
 <%@page import="com.groupware.dto.AddressBook"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -28,23 +28,10 @@
 	}	
 	</script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  	<link rel="stylesheet" href="/resources/demos/style.css">
-  	<script>
-	$(function() {	
-	    $( "#accordion" ).accordion();	
-	    $("personaladdressbook").click(function() {
-	    	$("#")
-	    });
-	    
-	});	
-	</script>
-	
-	
+ 
 </head>
 <body>
-<div class="left_menu" style="background-color: #88cbff">
+<!-- <div class="left_menu" style="background-color: #88cbff">
 	<div id="accordion" style="font-size: 10pt;width: 100pt;">
 	<h3>개인 주소록</h3>
 	<ul>
@@ -60,12 +47,15 @@
 	</ul>
 	
 	</div>
-</div>
+</div> -->
+<%-- 
+<% pageContext.include("/WEB-INF/views/include/addressheader.jsp"); %> --%>
 
 <div class="content" style="background-color: #88cbff">
 	<div class="subject">
 		
-		<caption align="left"><font color="#0431B4" font size="3" ><b>개인주소록관리</b></font></caption>
+		<caption align="left"><font color="#0431B4" font size="3" ><b>${ name }</b></font></caption>
+		
 			<br><br>
 			<input type="button" value="전체">
 			<input type="button" value="ㄱ">
@@ -132,10 +122,21 @@
 					<th style="width:40px;text-align:center">수정</th>
 					<th style="width:90px;text-align:center">삭제</th>
 				</tr>
-				<% List<AddressBook> addressbook = (List<AddressBook>)request.getAttribute("addressbook"); %> 
+				<%-- <% List<AddressBook> addressbook = (List<AddressBook>)request.getAttribute("addressbook"); %> 
+				<% for (AddressBook addressbook1 : addressbook) { %>
+				
+				<tr>
+			        	<td width="45px" ><%= addressbook1.getName() %></td>
+			            <td width="170px"><%= addressbook1.getEmail() %></td>
+			            <td width="180px"><%= addressbook1.getPhoneNumber() %></td>
+			            <td width="170px"><%= addressbook1.getHomeNumber() %></td>
+			            <td width="190px"><%= addressbook1.getFax() %></td>
+			            <td width="40px"><img src="/groupware/resources/image/edit.png" /></td>
+			            <td width="90px"><img src="/groupware/resources/image/del.png" /></td>
+			        </tr>
+				
+				<% } %> --%>
 				<%-- <c:forEach var="addressbook" items="${ addressbook }"> --%>
-				
-				
 				
 				<%-- </c:forEach> --%>
 			</table>

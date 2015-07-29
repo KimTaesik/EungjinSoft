@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE>
 <html>
 <head>
@@ -62,6 +65,7 @@
 			<caption align="left"><font color="#0431B4" size="2" ><b>개인주소록 주소추가</b></font></caption>
 		</div>
 		<form id='addressbookaddform' action='addressbookadd.action' method='post'>
+		<input type="hidden" name="classify" value=${ classify } />
 				 <table>
 			        	<tr>
 			            	<th style='background-color: #fffffc;text-align: left;'>
@@ -453,6 +457,7 @@
 			                	<textarea name='memo' style='height: 120px; width:280px'></textarea>
 			                </td>
 			            </tr>
+			            
 			        </table>
 			        <div class='buttons'>
 			        <input type='button' value='목록보기' style='height:25px'; onclick="location.href='addressbooklist.action';" />

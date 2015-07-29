@@ -13,14 +13,14 @@
 		INSERT INTO addressbook
 		(
 		addressno, id, name, email, phone_number, home_number, groupno,
-		fax, nation)
+		fax, nation ,classify)
 		VALUES(
-		addressno_sequence.nextval, #{id}, #{name}, #{email}, #{phoneNumber}, #{homeNumber}, #{groupNo},  #{fax}, #{nation})
+		addressno_sequence.nextval, #{id}, #{name}, #{email}, #{phoneNumber}, #{homeNumber}, #{groupNo},  #{fax}, #{nation}, #{classify})
 	</insert>
 	
 	 
 	<!--  	페이징 처리 [목록 조회] -->
-	<select id="getAddressbookList" parameterType="hashMap" resultType="AddressBook">
+	<!-- <select id="getAddressbookList" parameterType="hashMap" resultType="AddressBook">
 	SELECT
 	
 	FROM
@@ -39,8 +39,19 @@
 		)
 	WHERE
 		idx	&gt; =  #{ first } AND idx &lt; #{ last }
-	</select>
+	</select> -->
 	
+	
+	<!--  목록 조회하기  -->
+	<select id="getAddressbookList" parameterType="String" resultType="AddressBook">
+	SELECT
+	addressno, id, name, groupno, classify, email, phone_number, home_number, fax
+	FROM
+	addressbook
+	WHERE classify = #{ classify }
+	ORDER BY 
+	addressno DESC
+	</select>
 
 
 </mapper>                                                                                 
