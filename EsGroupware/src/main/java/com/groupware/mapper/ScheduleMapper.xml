@@ -7,9 +7,14 @@
  <mapper namespace="com.groupware.mapper.ScheduleMapper">
  
  	<insert id="insertSchedule" parameterType="hashMap" >
-		INSERT INTO schedule(key, title, cont, stdate, eddate, classify, piority, category, makepublic, s_id) 
-		values(sc_seq.nextval,#{tile},#{cont},#{stDate},#{edDate},#{classify},#{priority},#{category},#{makepublic},#{s_id})
+		INSERT INTO schedule(key, title, cont, stdate, eddate, classify, priority, category, makepublic, s_id) 
+		values(sc_seq.nextval,#{title},#{cont},#{stDate},#{edDate},#{classify},#{priority},#{category},#{makepublic},#{s_id})
  	</insert>
+ 	
+ 	<select id="selectSchedule" parameterType="hashMap" resultType="Schedule">
+ 		SELECT title, cont, stdate, eddate, classify, priority, category, makepublic, s_id FROM Schedule 
+ 		WHERE s_id = #{s_id} and TO_CHAR(stdate, 'YYYY-MM') = #{stDate} and category= #{category}
+ 	</select>
  	
  </mapper>
   

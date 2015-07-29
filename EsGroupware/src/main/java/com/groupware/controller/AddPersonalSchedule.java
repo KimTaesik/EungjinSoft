@@ -1,5 +1,8 @@
 package com.groupware.controller;
 
+import java.text.ParseException;
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +41,15 @@ public class AddPersonalSchedule {
 	
 	@RequestMapping(value = "insertSchedule.action", method = RequestMethod.GET)
 	public String insertSchedule(HttpSession session,
-			String title, String cont, String stdate, int classify, int priority, String makepublic) {
+			String title, String cont, String stdate, int classify, int priority, String makepublic) throws ParseException {
+		System.out.println("빠른일정="+title+"/"+cont+"/"+stdate+"/"+classify+"/"+priority+"/"+makepublic+"/");	
 		Employee loginUser = new Employee();
 //		loginUser.setId(((Employee)session.getAttribute("loginuser")).getId());
 		loginUser.setId("admin");
 		String logUser = loginUser.getId();
+		
+		String[] spDate = stdate.split("-");
+		Date cvDate = new Date(Integer.parseInt(spDate[0]),Integer.parseInt(spDate[1]),Integer.parseInt(spDate[2]));
 		
 		Schedule sc = new Schedule();
 		sc.setTitle(title);
@@ -55,9 +62,7 @@ public class AddPersonalSchedule {
 		sc.setCategory("개인일정");
 		sc.setS_id(logUser);
 		
-		System.out.println(title+"/"+cont+"/"+stdate+"/"+classify+"/"+priority+"/"+makepublic+"/"+logUser);	
 		scheduleDao.insertSchedule(sc);
-		
 		
 		return "redirect:pschedule.action";
 	}

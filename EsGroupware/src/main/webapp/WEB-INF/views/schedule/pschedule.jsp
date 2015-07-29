@@ -93,7 +93,11 @@
 			    	$("#quickaddform").show();
 				});
 			    $("#quick_add_submit").click(function(){
-			    	
+			    	var title = $("#schedule_title").val()
+			    	var stdate = $("#year").val()+"-"+$("#month").val()+"-"+$("#day").val();
+			    	alert(stdate)
+					var url = "insertSchedule.action?title="+title+"&cont=&stdate="+stdate+"&classify=0&priority=0&makepublic=closed";
+					$(location).attr('href', url);			    	
 			    	$("#quickaddform").hide();
 				});
 		});
@@ -124,28 +128,23 @@
 				</div>
 			</div>
 			<div id="quickaddform" class="mar5t" hidden>
-				<form id="quickadd">
 					<table width="100%" height="30" border="0" cellpadding="0" cellspacing="1" bgcolor="81A5C8">
-						<input type="hidden" name="schedule_type" value="schedule_month">
-						<input type="hidden" name="auth" value="PRIVATE">
-						<input type="hidden" name="groupkey" value="">
-						<input type="hidden" name="schedule_open" value="">
 				        	<tr>
 				        		<td bgcolor="EBF6FD" class="padding10w"> 
 					    		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				        			<tr>
 				        				<td height="14">제목
-				                      		<input name="schedule_title" type="text" class="blueinput" style="width:300px">
+				                      		<input id="schedule_title" type="text" class="blueinput" style="width:300px">
 				                    	</td>
 					                    <td align="right">
-											<select name="year" class="input">
+											<select id="year" class="input">
 					                        	<option value="2013" ${ currentYear==2013 ? "selected":"" }>2013</option>
 												<option value="2014" ${ currentYear==2014 ? "selected":"" }>2014</option>
 												<option value="2015" ${ currentYear==2015 ? "selected":"" }>2015</option>
 												<option value="2016" ${ currentYear==2016 ? "selected":"" }>2016</option>
 												<option value="2017" ${ currentYear==2017 ? "selected":"" }>2017</option>
 											</select>년
-											<select name="month" class="input">
+											<select id="month" class="input">
 					                        	<option value="1" ${ currentMonth==1 ? "selected":"" }>1</option>
 					                        	<option value="2" ${ currentMonth==2 ? "selected":"" }>2</option>
 					                        	<option value="3" ${ currentMonth==3 ? "selected":"" }>3</option>
@@ -159,7 +158,7 @@
 					                        	<option value="11" ${ currentMonth==11 ? "selected":"" }>11</option>
 					                        	<option value="12" ${ currentMonth==12 ? "selected":"" }>12</option>
 											</select>월
-					                      	<select name="day" class="input">
+					                      	<select id="day" class="input">
 					                        	<option value="1" ${ currentDate==1 ? "selected":"" }>1</option>
 					                        	<option value="2" ${ currentDate==2 ? "selected":"" }>2</option>
 					                        	<option value="3" ${ currentDate==3 ? "selected":"" }>3</option>
@@ -233,7 +232,6 @@
 				            </tr>	  
 				         </table>
 						<br>
-					</form>
 				</div>
 				<%-- 빠른추가잼 --%>
 				<form id="calendar">
@@ -328,6 +326,11 @@
 												<td class="${ dateString[j-1] }" height="70" align="left" valign="top">
 													<font class="org8">${dateNum}<img class="plus" id="${ currentMonth }-${dateNum}" src="/groupware/resources/image/cal_plus.png" border="0"  /></font>
 													<br />
+														<c:forEach var="scList" items="${ scList }">
+															<c:if test="${ dateNum eq scList.date && currentYear eq scList.year && currentMonth eq scList.month }">
+																				 ${ scList.title } : ${ scList.cont }<br />
+															</c:if>
+														</c:forEach>
 												</td>
 											</c:otherwise>
 										</c:choose>

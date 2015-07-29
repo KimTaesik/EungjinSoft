@@ -99,7 +99,7 @@
 			</tr>
 		
 			<tr bgcolor="#FFFFFF">
-				<td height="80" bgcolor="#efefef" align="center">일정 날짜</td>
+				<td height="100%" bgcolor="#efefef" align="center">일정 날짜</td>
 				<td style="padding-left:10px;">
 					<input id="addcalendar" type="date" value="${ date }">
 					<input type=radio name=time_type id="day_day" value="DAY" >일일 일정
