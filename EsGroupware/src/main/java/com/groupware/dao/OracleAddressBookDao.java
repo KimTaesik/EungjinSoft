@@ -27,10 +27,10 @@ public class OracleAddressBookDao implements AddressBookDao {
 		
 	}
 	
-	// 페이징 처리 (목록조회)
+/*	// 페이징 처리 (목록조회)
 	//전달인자 : 전체 목록에서 조회할 데이터의 시작위치 , 끝위치
 	@Override
-	public List<AddressBook> getAddressbookList(int first, int last ,String classify) {
+	public List<AddressBook> getAddressbookList(int first, int last, String classify) {
 	
 	HashMap<String, Object> params = new HashMap<String, Object>();
 	params.put("first", first);
@@ -38,8 +38,11 @@ public class OracleAddressBookDao implements AddressBookDao {
 	params.put("classify", classify);
 	
 	return	addressMapper.getAddressbookList(params);
-}
+}*/
 	
-	
+	@Override
+	public List<AddressBook> getAddressbookList(String classify) {
 
+	return addressMapper.getAddressbookList(classify);
+	}
 }
