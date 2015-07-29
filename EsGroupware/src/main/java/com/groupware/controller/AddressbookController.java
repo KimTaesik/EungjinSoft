@@ -147,9 +147,13 @@ public class AddressbookController {
 	}
 	
 	@RequestMapping(value="addressheader.action", method = RequestMethod.GET)
-	public String addresshearder(){
+	public ModelAndView addresshearder(AddressBook addressbook, String classify, HttpServletRequest req){
 	
-		return "include/addressheader";
+		if(classify.equals("1")) {
+			ModelAndView ma = new ModelAndView();
+			
+		}
+		//return "include/addressheader";
 	}
 	
 	

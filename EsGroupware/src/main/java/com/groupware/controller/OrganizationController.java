@@ -48,8 +48,8 @@ public class OrganizationController {
 	public Employee info(String employeeid) {
 		System.out.println(employeeid);
 		Employee info = employeeDao.getEmployeeInfomationList(employeeid);
-		List<Dept> depts = employeeDao.getDeptList();
-		List<Employee> employees = employeeDao.getemList();
+//		List<Dept> depts = employeeDao.getDeptList();
+//		List<Employee> employees = employeeDao.getemList();
 
 //		ModelAndView mav = new ModelAndView();
 //		mav.addObject("depts", depts);
