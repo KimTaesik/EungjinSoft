@@ -1,0 +1,183 @@
+﻿@charset 'utf-8';
+table {
+	border-collapse:collapse;
+	padding:0;
+	font-family:gulim, Verdana;
+	font-size:12px;
+	color:#000000;
+}
+
+.eword_meta {
+	table-layout:fixed;
+	width:100%;
+}
+table.eword_meta tr td,
+table.eword_meta tr th {
+	border:1px solid #000;
+}
+
+table#opinionTable tr th,
+table#opinionTable tr td {
+	border:1px solid #000;
+}
+
+.boldline {
+	border:2px solid #000;
+}
+
+.eword_maincolumn {
+	margin-left: auto;
+	margin-right: auto;
+	width: 700px;
+}
+
+input {
+	height:18px;
+	color:#000000;
+	border:1px solid #97AABB;
+	font-size:12px;
+}
+select {
+	height:18px;
+	color:#000000;
+	border:1px solid #CDCDCD;
+	font-size:12px;
+}
+textarea {
+	height:18px;
+	color:#000000;
+	border:1px solid #97AABB;
+	font-size:12px;
+}
+h2 {
+	display: block;
+	margin: 0 auto;
+	padding:0;
+	width:700px;
+	height:80px;
+	line-height:80px;
+	color:#000;
+	font-family:dotum, Verdana;
+	font-size:25px;
+	font-weight:bold;
+	letter-spacing:-1px;
+	text-align:center;
+}
+th {
+	background-color: #E9E9E9;
+	font-weight: normal;
+	text-align:center;
+}
+.company {
+	font-family:dotum, Verdana;
+	font-size:15px;
+	font-weight:bold;
+	text-align:right;
+	letter-spacing:-1px;
+}
+.cash {
+	padding-right:15px;
+	text-align:right;
+}
+.date {
+	font-family:dotum, Verdana;
+	font-size:11px;
+	letter-spacing:-0.04em;
+	text-align:center;
+}
+.date_red {
+	font-family:dotum, Verdana;
+	color:#FF0000;
+	font-size:11px;
+	letter-spacing:-0.04em;
+	text-align:center;
+	border-right:1px solid #000000;
+}
+.form_transparent {
+	font-family:default, Verdana;
+	border:0pt;
+	text-align:center;
+}
+
+
+/* 결재선/협조선 */
+#eword_orderline tr th,
+#eword_orderline tr td {
+	border-right:none;
+}
+#eword_orderline {
+	*margin-top:-2px;
+}
+
+/* 결재선 너비 */
+.orderline_th_width {
+	width:10%;
+}
+.orderline_width {
+	width:18%;
+}
+.orderline_th_width_10 {
+	width:5%;
+}
+.orderline_width_10 {
+	width:9.5%;
+}
+
+/* 결재문서 상단 */
+#eword_header_part > tr > th,
+#eword_header_part > tr > td,
+#eword_header_part > tbody > tr > th,
+#eword_header_part > tbody > tr > td {
+	border-right:none;
+	border-bottom: none;
+}
+#eword_header_common tr th,
+#eword_header_common tr td {
+	border-right:none;
+}
+
+/* 결재문서 본문 */
+#eword_content {
+	border: 1px solid #000;
+	border-top: none;
+}
+
+/* 휴가계, 출장계 */
+#eword_special tr th,
+#eword_special tr td {
+	border-right:none;
+	border-bottom:none;
+}
+#expense_detail tr th,
+#expense_detail tr td {
+	border-right:none;
+	border-bottom:none;
+}
+
+/* 설정형 레이아웃 본문 */
+.eword_content_layout {
+	border-left: 2px solid #000;
+	border-right: 2px solid #000;
+}
+#eword_content_layout_middle {
+	table-layout: auto;
+}
+
+/* 결재문서 본문 너비 */
+.eword_th_width {
+	width:12.5%;
+	*width:90px;
+}
+.eword_td_min_width {
+	width:12.5%;
+}
+
+/* 결재문서 본문 너비 */
+.eword_th_width_10 {
+	width:14.5%;
+	*width: 103px;
+}
+/* 결재문서 본문 높이 */
+.eword_meta_height {
+	height:33px;
+}

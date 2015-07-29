@@ -1,0 +1,11 @@
+@charset 'utf-8';
+input {
+	line-height:18px;
+}
+input[type=checkbox],
+input[type=radio] {
+	height:initial;
+}
+input.not_modifyable {
+	border:none;
+}
