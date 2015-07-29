@@ -1,17 +1,25 @@
 package com.groupware.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.dao.AddressBookDao;
+import com.groupware.dao.EmployeeDao;
 import com.groupware.dto.AddressBook;
+import com.groupware.dto.Employee;
+import com.groupware.ui.ThePager;
 
 @Controller
 @RequestMapping(value="address")
@@ -31,66 +39,137 @@ public class AddressbookController {
 		return "addressbook/addressbookaddform";
 	}
 	@RequestMapping(value="addressbookadd.action", method = RequestMethod.POST)
-	public String addressadd(HttpServletRequest req) throws UnsupportedEncodingException{
+	public String addressadd(HttpSession session, AddressBook addressbook, String cellPhone1,String cellPhone2,String cellPhone3,
+			String homePhone1, String homePhone2, String homePhone3, String fax1, String fax2, String fax3, String postcode1, String postcode2,
+			String roadAddress, String roadAddress2, String postcode3, String postcode4, String directLine1,String directLine2, String directLine3) throws UnsupportedEncodingException{
 		
-		req.setCharacterEncoding("utf-8");
+		System.out.println(addressbook.getClassify());
+		Employee loginUser = new Employee();
+		loginUser.setId(((Employee)session.getAttribute("loginuser")).getId());
+		addressbook.setId(loginUser.getId());
+		
+		
 		
 		String homenumber = null;
 		String phonenumber = null;
 		String fax = null;
 		String nation = null;
 		String directLine = null;
-		String postcode = null;
-		String postcode2 = null;
+		String homepostcode = null;
+		String compostcode = null;
 		
-		AddressBook addressbook = new AddressBook();
+		addressbook.setGroupNo(1);
 		
-		addressbook.setName(req.getParameter("name"));
-		addressbook.setEmail(req.getParameter("email"));
-		if(req.getParameter("cellPhone1") != null) {
-			phonenumber = req.getParameter("cellPhone1") + "-" + req.getParameter("cellPhone2") + "-" + req.getParameter("cellPhone3");
+		if(cellPhone1 != null) {
+			phonenumber = cellPhone1 + "-" + cellPhone2 + "-" + cellPhone3;
 		}
 		addressbook.setPhoneNumber(phonenumber);
 		
-		if(req.getParameter("homePhone1") != null) {
-			homenumber = req.getParameter("homePhone1") + "-" + req.getParameter("homePhone2") + "-" + req.getParameter("homePhone3");
+		if(homePhone1 != null) {
+			homenumber = homePhone1 + "-" + homePhone2 + "-" +homePhone3;
 		}
 		addressbook.setHomeNumber(homenumber);
 		
-		if(req.getParameter("fax1") != null) {
-			fax = req.getParameter("fax1") + "-" + req.getParameter("fax2") + "-" + req.getParameter("fax3");
+		if(fax1 != null) {
+			fax = fax1+ "-" + fax2 + "-" + fax3 ;
 		}
 		addressbook.setFax(fax);
 		
-		addressbook.setNation(req.getParameter("nation"));
 		
-		if (req.getParameter("postcode1") != null) {
-			postcode =  req.getParameter("postcode1") + "-" + req.getParameter("postcode2");
+		if (postcode1 != null) {
+			homepostcode = postcode1 + "-" + postcode2;
 		}
-		addressbook.setPostcode(postcode);
+		addressbook.setPostcode(homepostcode);
 		
-		addressbook.setAddress(req.getParameter("roadAddress"));
-		addressbook.setCompanyName(req.getParameter("companyname"));
-		addressbook.setPositionName(req.getParameter("position"));
-		addressbook.setDeptName(req.getParameter("dept"));
-		addressbook.setExtension(req.getParameter("extension"));
-		if (req.getParameter("postcode3") != null) {
-			postcode2 =  req.getParameter("postcode3") + "-" + req.getParameter("postcode4");
+		if (postcode3 != null) {
+			compostcode =  postcode3 + "-" + postcode4;
 		}
-		addressbook.setPostcode2(postcode2);
-		addressbook.setCompanyAddress(req.getParameter("roadAddress2"));
+		addressbook.setPostcode2(compostcode);
 		
-		addressbook.setMemo(req.getParameter("memo"));
-		
-		
-		return "redirect:/addressbook/addressbooklist.action";
-	}
+		if(directLine1 != null ) {
+			directLine = directLine1 + "-"+ directLine2 + "-" + directLine3;
+		}
+		addressbook.setDirectLine(directLine);
+		addressbook.setNation(addressbook.getNation());
+		addressbook.setCompanyAddress(roadAddress2);
 	
-	//2. 주소 리스트 보기
-	@RequestMapping(value="addressbooklist.action", method = RequestMethod.GET)
-	public String addressListform(){
+		addressbookDao.insertAddressBook(addressbook);
 		
 		return "addressbook/addressbooklist";
 	}
 	
+	//2. 주소 리스트 보기[페이징 처리로]
+/*	@RequestMapping(value="addressbooklist.action", method = RequestMethod.GET)
+	public ModelAndView addressList(String classify, HttpServletRequest req, String type, String search ,Integer pageno){
+		
+		//******* 페이징 관련 데이터 처리 ********* 
+		int pageNo = 1; // 현재 페이지 번호
+		int pageSize = 10; //한 페이지에 표시할 데이터 갯수
+		int pagerSize = 10; //번호로 표시할 페이지 갯수
+		int dataCount = 0; //전체 데이터 갯수 (pageSize와 dataCount를 알아야, 페이지가 얼마나? 있는지 알 수 있다.)
+		String url = "addressbooklist.action"; // 페이징 관련 링크를 누르면, 페이지번호와 함께 요청할 경로
+		String queryString = "classify="+classify ;
+		//요청한 페이지 번호가 있다면, 읽어서 현재 페이지 번호로 설정 (없다면, 1페이지)
+		if (pageno != null ) {
+			pageNo =pageno;
+		}
+		
+		//현재 페이지의 첫 번째 데이터의 순서번호를 계산하는 방법.
+		int first = (pageNo - 1) * pageSize + 1; //1 page -> 1, 2 page -> 4, 3 page -> 7		
+				
+		List<AddressBook> addressbook = null;
+		//List<AddressBook> addressbook = addressbookDao.getAddressbookList(first, last, classify); //데이터 베이스에서 전화번호 가져오기
+		
+		ThePager pager = new ThePager(dataCount, pageNo, pageSize, pagerSize, url, queryString);
+	
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("classify", classify);
+		mav.addObject("pager", pager);
+		mav.addObject("pageno", pageNo);
+		mav.addObject("addressbook", addressbook);//위에서 DB에서 가져온 전화번호 리스트 
+		mav.setViewName("include/addressheader"); //페이지 넘기는 위치 설정
+		return mav;
+	}*/
+	
+	@RequestMapping(value="addressbooklist.action", method = RequestMethod.GET)
+	public ModelAndView addressList(AddressBook addressbook, String classify, HttpServletRequest req){
+		System.out.println(classify);
+		List<AddressBook> addressbook1 = addressbookDao.getAddressbookList(classify);
+		
+		System.out.println(addressbook1.size());
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("classify", classify);
+		mav.addObject("addresbook", addressbook1);
+		mav.setViewName("/addressbooklist");
+		
+		return mav;
+	}
+	
+/*	@RequestMapping(value="addressheader.action", method = RequestMethod.GET)
+	public ModelAndView addresshearder(AddressBook addressbook, String classify, HttpServletRequest req){
+	
+		if(classify.equals("1")) {
+			ModelAndView ma = new ModelAndView();
+			
+		}
+		//return "include/addressheader";
+	}*/
+	
+	
+	@RequestMapping(value="addresslist.action", method = RequestMethod.GET)
+	@ResponseBody
+	public String addressList2(String classify, HttpServletRequest req, String type, String search ,Integer pageno){
+	
+		List<AddressBook> addressbook = null;
+
+		String name = "";
+		if(classify.equals("1")) {
+			name ="개인 주소록";
+		}else if(classify.equals("2")) {
+			name = "공용 주소록";
+		}
+	
+		return name;
+	}
 }

@@ -17,14 +17,28 @@ public class AddressBook implements Serializable{
 	private String companyNumber;
 	private String companyAddress;
 	private String memo;
-	private String groupNo;
+	private int groupNo;
 	private String addressNo;
 	private String postcode;
 	private String directLine;
 	private String extension;
 	private String postcode2;
+	private String classify;
+	private String id;
 	
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getClassify() {
+		return classify;
+	}
+	public void setClassify(String classify) {
+		this.classify = classify;
+	}
 	public String getPostcode() {
 		return postcode;
 	}
@@ -122,10 +136,10 @@ public class AddressBook implements Serializable{
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
-	public String getGroupNo() {
+	public int getGroupNo() {
 		return groupNo;
 	}
-	public void setGroupNo(String groupNo) {
+	public void setGroupNo(int groupNo) {
 		this.groupNo = groupNo;
 	}
 	public String getAddressNo() {

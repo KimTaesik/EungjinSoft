@@ -2,7 +2,7 @@ package com.groupware.dto;
 
 import java.util.List;
 
-public class addressGroup {
+public class AddressGroup {
 
 	private String groupNo;
 	private String groupName;

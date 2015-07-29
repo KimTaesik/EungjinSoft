@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE>
 <html>
 <head>
@@ -8,18 +11,21 @@
 	<link rel='Stylesheet' href='/groupware/resources/styles/input.css' />
 	<link rel="Stylesheet" href="/groupware/resources/styles/admin.css" />
 	<link rel="Stylesheet" href="/groupware/resources/styles/addressframe.css" /> 
-	<script type="text/javascript">
 	
-	</script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  	<link rel="stylesheet" href="/resources/demos/style.css">
+	<link rel="stylesheet" href="/groupware/resources/styles/jquery/jquery-ui.css">
+	<script src="/groupware/resources/styles/script/jquery.js"></script>
+	<script src="/groupware/resources/styles/script/jquery-ui.js"></script>
+
+	
   	<script>
 	$(function() {	
 	    $( "#accordion" ).accordion();	
 	});	
+
+	</script>
 	
+	<script type="text/javascript">
+
 	function doCheck() {
 		//1. 필요하다면 유효성 검사 수행
 		if(document.getElementById("name").value.length == 0) {
@@ -28,21 +34,38 @@
 			alert("이메일을 입력해주세요.");
 		}else {
 			document.getElementById("addressbookaddform").submit();
+			//document.forms[0].submit();
 		}
 	}
+	
 	</script>
 	
 </head>
 <body>
+<div class="left_menu" style="background-color: #88cbff">
+	<div id="accordion" style="font-size: 10pt;width: 100pt;">
+	<h3>
+	주소록</h3>
+	<ul>
+        <li>개인 주소록</li>
+        <br />
+        <li>공용 주소록</li>
+        <br />
+        <li>명함철</li>
+	</ul>
+	</div>
+</div>
+	
 	<section>
 	<div id='pageContainer'>	
 		
 		<div id='inputcontent'>
 		<div id='inputmain'>
 		<div class="subject">
-			<caption align="left"><font color="#0431B4" font size="2" ><b>개인주소록 주소추가</b></font></caption>
+			<caption align="left"><font color="#0431B4" size="2" ><b>개인주소록 주소추가</b></font></caption>
 		</div>
-		<form id='addressbookadd' action='addressbookadd.action' method='post'>
+		<form id='addressbookaddform' action='addressbookadd.action' method='post'>
+		<input type="hidden" name="classify" value=${ classify } />
 				 <table>
 			        	<tr>
 			            	<th style='background-color: #fffffc;text-align: left;'>
@@ -61,7 +84,7 @@
 			            <tr>
 			                <th id="essential">* 메일주소</th>
 			                <td>
-			                	<input type='text' name='email' style='width:280px' />
+			                	<input id='email' type='text' name='email' style='width:280px' />
 			                </td>
 			            </tr>
 			            <tr>
@@ -434,6 +457,7 @@
 			                	<textarea name='memo' style='height: 120px; width:280px'></textarea>
 			                </td>
 			            </tr>
+			            
 			        </table>
 			        <div class='buttons'>
 			        <input type='button' value='목록보기' style='height:25px'; onclick="location.href='addressbooklist.action';" />

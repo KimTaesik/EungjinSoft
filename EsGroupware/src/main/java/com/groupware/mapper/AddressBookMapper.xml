@@ -7,41 +7,51 @@
 <!-- namespace:패키지명,클래스이름을 논리적으로 선언 -->
 <mapper namespace="com.groupware.mapper.AddressBookMapper">
 
+	
 	<insert id="insertAddressBook" parameterType="AddressBook">
 
 		INSERT INTO addressbook
 		(
-		name,
-		email,
-		phoneNumber,
-		homeNumber,
-		fax,
-		nation,
-		address,
-		companyName,
-		deptName,
-		positionName,
-		companyNumber,
-		companyAddress,
-		memo
-		)
-		VALUES
-		(
-		#{name},
-		#{email},
-		#{phoneNumber},
-		#{homeNumber},
-		#{fax},
-		#{nation},
-		#{address},
-		#{companyName},
-		#{deptName},
-		#{positionName},
-		#{companyNumber},
-		#{companyAddress},
-		#{memo}
-		)
+		addressno, id, name, email, phone_number, home_number, groupno,
+		fax, nation ,classify)
+		VALUES(
+		addressno_sequence.nextval, #{id}, #{name}, #{email}, #{phoneNumber}, #{homeNumber}, #{groupNo},  #{fax}, #{nation}, #{classify})
 	</insert>
+	
+	 
+	<!--  	페이징 처리 [목록 조회] -->
+	<!-- <select id="getAddressbookList" parameterType="hashMap" resultType="AddressBook">
+	SELECT
+	
+	FROM
+		(	
+		SELECT
+			rownum idx, s.*
+		FROM (
+			SELECT
+				addressno, id, groupno, classify, name, email, phone_number, home_number, fax
+			FROM 
+				addressbook
+			WHERE classify = #{ classify }
+			ORDER BY 
+				addressno DESC
+			)s
+		)
+	WHERE
+		idx	&gt; =  #{ first } AND idx &lt; #{ last }
+	</select> -->
+	
+	
+	<!--  목록 조회하기  -->
+	<select id="getAddressbookList" parameterType="String" resultType="AddressBook">
+	SELECT
+	addressno, id, name, groupno, classify, email, phone_number, home_number, fax
+	FROM
+	addressbook
+	WHERE classify = #{ classify }
+	ORDER BY 
+	addressno DESC
+	</select>
 
 
 </mapper>                                                                                 
