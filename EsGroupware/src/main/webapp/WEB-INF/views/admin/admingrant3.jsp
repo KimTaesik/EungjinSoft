@@ -38,7 +38,7 @@
 						<div>
 							<nobr>
 								<c:forEach var="position" items="${ positions }">
-									<c:if test="${ approvals.positionNo ==  position.positionNo }">
+									<c:if test="${ approvals2.positionNo ==  position.positionNo }">
 										${ position.positionName }										
 									</c:if>
 		                		</c:forEach>
@@ -62,7 +62,7 @@
 					<td class='txt_ce'>
 						<div>
 							<nobr>
-									<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;
+									<!-- <a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp; -->
 									<a href='${ approvals2.id }' class="deleteApprovalAdmin"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' title='삭제' /></a>
 							</nobr>
 						</div>

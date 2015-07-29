@@ -258,10 +258,10 @@
 		WHERE deleted = 0 		
 		<choose>
 			<when test='radio == "8"'>
-			and usertype != 8 and usertype!=1
+			and usertype != 8 and usertype = 0
 			</when>
 			<when test='radio == "1"'>
-			and usertype != 1
+			and usertype != 1 and usertype = 0
 			</when>
 		</choose>
 	</select>

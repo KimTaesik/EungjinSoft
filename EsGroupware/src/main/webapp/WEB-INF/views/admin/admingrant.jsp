@@ -13,18 +13,17 @@
 <title>Whois Groupware - Ubiquitous Collaboration!</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=7" />
-	<link href="/groupware/resources/styles/admin/common.css?dummy=20150702" rel="stylesheet" type="text/css" />
-	<link href="/groupware/resources/styles/admin/board.css?dummy=20120223" rel="stylesheet" type="text/css" />
-	<link href="/groupware/resources/styles/admin/subpage.css?dummy=20120223" rel="stylesheet" type="text/css" />
-	<link href="/groupware/resources/styles/admin/popup.css?dummy=20140507" rel="stylesheet" type="text/css" />
+	<link href="/groupware/resources/styles/admin/common.css" rel="stylesheet" type="text/css" />
+	<link href="/groupware/resources/styles/admin/board.css" rel="stylesheet" type="text/css" />
+	<link href="/groupware/resources/styles/admin/subpage.css" rel="stylesheet" type="text/css" />
+	<link href="/groupware/resources/styles/admin/popup.css" rel="stylesheet" type="text/css" />
 	<!--[if IE 6]>
 	<link href="http://css.whoisdesk.net/Src/Skin/Renewal/board_ie6.css" rel="stylesheet" type="text/css" />
 	<![endif]-->
 	<link type="text/css" href="http://css.whoisdesk.net/Src/WebCommon/Jquery/Jquery_ui_1_7_2/blitzer/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
 
-	<script type="text/javascript" src="http://js.whoisdesk.net/Src/WebCommon/Script/Common.js?v=20150702"></script>
-	<script type="text/javascript" src="http://js.whoisdesk.net/Src/WebCommon/Jquery/jquery.js?dt=20110117"></script>
-	<script type="text/javascript" src="http://js.whoisdesk.net/Src/WebCommon/Jquery/Plugin/jquery.DOMWindow.js"></script>
+	<script src="/groupware/resources/styles/script/jquery.js"></script>
+	<script src="/groupware/resources/styles/script/jquery-ui.js"></script>
 
 	<script type="text/javascript">
 	$(function() {
@@ -148,8 +147,8 @@
         <h2><span class="join">관리자 지정</span></h2> 
 	</div> 
 
-	<div class="toparea"> 
-		<span class="leftarea"> 
+	<div class="toparea" style="height: 10px;"> 
+<!-- 		<span class="leftarea"> 
 
 			<span class="btn">
 			<a href="#blank-link" onclick="javascript:setHelpGuide();"><img src="/groupware/resources/image/admin/icon_clock.gif" alt="" align="absmiddle" /> 관리자 설명</a>
@@ -161,7 +160,7 @@
 			<span class="btn">		
 				<a href="#blank-link" onclick="javascript:"><img src="/groupware/resources/image/admin/icon_pencil.gif" alt="" align="absmiddle" /> 등록</a>			
 			</span> 
-		</span>
+		</span> -->
 	</div> 
 
     <div class="table_view"> 
@@ -466,7 +465,7 @@
 						<div>
 							<nobr>
 								<c:forEach var="position" items="${ positions }">
-									<c:if test="${ approvals.positionNo ==  position.positionNo }">
+									<c:if test="${ approvals2.positionNo ==  position.positionNo }">
 										${ position.positionName }										
 									</c:if>
 		                		</c:forEach>
@@ -490,7 +489,7 @@
 					<td class='txt_ce'>
 						<div>
 							<nobr>
-									<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;
+									<!-- <a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp; -->
 									<a href='${ approvals2.id }' class="deleteApprovalAdmin"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' title='삭제' /></a>
 							</nobr>
 						</div>
@@ -625,7 +624,7 @@
 					<td class='txt_ce'>
 						<div>
 							<nobr>
-									<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;
+									<!-- <a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp; -->
 									<a href='${ approvals.id }' class="deleteApprovalAdmin"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' title='삭제' /></a>
 							</nobr>
 						</div>
