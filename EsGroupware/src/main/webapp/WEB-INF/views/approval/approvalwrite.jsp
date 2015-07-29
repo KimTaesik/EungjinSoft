@@ -38,7 +38,7 @@
 		$(".form").click(function() {
 				
 				var form_No=$(this).attr('id');
-				
+				var form_Name=$(".formName").attr('value');
 			$.ajax({
 				url : "approvalwrite.action?form_No="+form_No,
 				method : 'post',
@@ -52,7 +52,8 @@
 					$('#fixeddate').text(r.fixedDate);
 					$('#formexplain').text(r.form_Explain);
 					$('button').click(function(){
-						$("#frame").load("approvalform.action");
+						$("#frame").load("approvalform.action",{form_No:form_No,form_Name:form_Name});
+						
 					});
 				},
 				error : function(xhr, status, ex) {
@@ -92,9 +93,11 @@
 					<h3>${approvalform.form_Name}</h3>
 					<div>
 						<div>
-							<a id="${approvalform.form_No}" class="form" href="#"> <img
-								src='/groupware/resources/image/re.gif' />&nbsp;
-								${approvalform.form_No}.${approvalform.form_Name}
+							<a id="${approvalform.form_No}" class="form" href="#"> 
+							<img src='/groupware/resources/image/re.gif' />
+							<input type="hidden" value="${approvalform.form_Name}" class="formName" >
+							&nbsp;
+								${approvalform.form_No}&nbsp;&nbsp;&nbsp;${approvalform.form_Name}
 							</a>
 						</div>
 						<br />

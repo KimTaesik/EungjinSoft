@@ -1,5 +1,7 @@
 package com.groupware.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -43,7 +45,7 @@ public class ApprovalController {
 	}
 	@ResponseBody
 	@RequestMapping(value="approvalwrite.action", method = RequestMethod.POST)
-	public ApprovalForm approvalwrite2(int form_No) {	
+	public ApprovalForm approvalwrite2(String form_No) {	
 		
 		ApprovalForm approvalform=approvalService.getApprovalForm(form_No);
 		return 	approvalform;
@@ -55,10 +57,13 @@ public class ApprovalController {
 		return "approval/documentbox";	
 	}
 	
-	@RequestMapping(value="approvalform.action", method = RequestMethod.GET)
-	public String approvalend() {	
-		return "approval/approvalwriteform";	
+	@RequestMapping(value="approvalform.action", method = RequestMethod.POST)
+	public ModelAndView approvalform(String form_No,HttpSession session) {
+		
+		
+		ModelAndView mav=approvalService.getApprovalForm3(form_No,session);
+		
+		return mav;
+	
 	}
-	
-	
 }

@@ -2,14 +2,14 @@ package com.groupware.dto;
 
 public class ApprovalForm {
 
-		private int form_No;
+		private String form_No;
 		private String form_Name;
 		private String form_Explain;
 		private String fixedDate;
-		public int getForm_No() {
+		public String getForm_No() {
 			return form_No;
 		}
-		public void setForm_No(int form_No) {
+		public void setForm_No(String form_No) {
 			this.form_No = form_No;
 		}
 		public String getForm_Name() {
