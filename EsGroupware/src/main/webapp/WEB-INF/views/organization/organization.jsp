@@ -11,7 +11,7 @@
 <script src="/groupware/resources/styles/script/jquery.js"></script>
 <script src="/groupware/resources/styles/script/jquery-ui.js"></script>
 <link rel="stylesheet"
-	href="/groupware/resources/styles/organizaion.css">
+	href="/groupware/resources/styles/organization.css">
 <style>
 /* IE has layout issues when sorting (see #5413) */
 .group {
@@ -33,7 +33,7 @@
 			}
 		});
 	});
-
+	
 	$(document).ready(function() {
 		$('.get').click(function(event) {
 			var id = $(this).attr('id');
@@ -74,6 +74,7 @@
 <body>
 	<nav>
 	<div>
+
 		<div id="accordion">
 			<c:forEach var="dept" items="${depts}">
 				<div class="group">
@@ -95,11 +96,12 @@
 				</div>
 			</c:forEach>
 		</div>
+
 	</div>
 	</nav>
 	<div id="getid" style="float: right; border: 1px solid; width: 84%">
 		<c:import url="/WEB-INF/views/organization/personalinfo.jsp" />
-
+			
 	</div>
 </body>
 </html>

@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.groupware.dto.Board;
 import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
 import com.groupware.dto.Position;
 import com.groupware.mapper.EmployeeMapper;
+
 @Repository(value = "employeeDao")
 public class OracleEmployeeDao implements EmployeeDao {
 	private EmployeeMapper employeeMapper;
@@ -68,12 +70,6 @@ public class OracleEmployeeDao implements EmployeeDao {
 	}
 	
 	@Override
-	public List<Employee> searchAdmin(String id) {
-		List<Employee> employees = employeeMapper.searchAdmin(id);
-		return employees;
-	}
-	
-	@Override
 	public List<Dept> getDeptList() {
 		return employeeMapper.getDeptList();
 	
@@ -121,6 +117,71 @@ public class OracleEmployeeDao implements EmployeeDao {
 	@Override
 	public void deletePosition(String id) {
 		employeeMapper.deletePosition(id);
+	}
+	@Override
+	public void registerAdmin(String id, String usertype) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("id", id);
+		params.put("usertype", usertype);
+		
+		employeeMapper.registerAdmin(params);
+	}
+	
+	
+	@Override
+	public List<Employee> searchDeptAdmin(String id) {
+		List<Employee> employees = employeeMapper.searchDeptAdmin(id);
+		return employees;
+	}
+	
+	/*@Override
+	public List<Employee> getApprovalAdminList() {
+		List<Employee> employees = employeeMapper.getApprovalAdminList();
+		return employees;
+	}*/
+	@Override
+	public List<Employee> getAdminList(String radio) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("radio", radio);
+		List<Employee> employees = employeeMapper.getAdminList(params);
+		return employees;
+	}
+	
+	@Override
+	public List<Employee> searchSelectAdmin(String radio) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("radio", radio);
+		List<Employee> employees = employeeMapper.searchSelectAdmin(params);
+		return employees;
+	}
+	
+	@Override
+	public void deleteApprovalAdmin(String id) {
+		employeeMapper.deleteApprovalAdmin(id);
+	}
+	@Override
+	public List<Employee> searchAdmin() {
+		List<Employee> employees = employeeMapper.searchAdmin();
+		return employees;
+	}
+	@Override
+	public int getEmployeeCount() { 
+		return employeeMapper.getEmployeeCount();
+	}
+	
+	@Override
+	public List<Employee> getEmployeeList2(int first, int last, String lineup) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("first", first);
+		params.put("last", last);
+		params.put("lineup", lineup);
+		
+		return	employeeMapper.getEmployeeList2(params);
+
+	}
+	@Override
+	public void registerApprovalAdmin(String id) {
+		employeeMapper.registerApprovalAdmin(id);	
 	}
 
 }
