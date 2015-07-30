@@ -15,6 +15,7 @@
 	$(function() {	
 	    $( "#accordion" ).accordion();	
 	});	
+	
 	</script>	
 	
 </head>

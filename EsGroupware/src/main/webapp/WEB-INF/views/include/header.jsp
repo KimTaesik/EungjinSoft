@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel='Stylesheet' href='/groupware/resources/styles/default.css' />
+<link rel='Stylesheet' href='/groupware/resources/styles/admin/default.css' />
 <title>Insert title here</title>
 
 </head>
@@ -39,7 +39,8 @@
             </div>
 		</div>
 		
-	<table id="menu" style="width: 500px;height: 110px;padding-left: 20px;text-align: center;color: white;">
+	<div style="float: left;width: 49%">
+	<table id="menu" style="width: 500px;height: 110px;padding-left: 20px;text-align: center;color: #999999; font-weight: bolder;">
 		<tr height="100px">
 			<td onclick="window.open('/groupware/admin/admin.action','관리자','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
 				<img src="/groupware/resources/image/admin/admin.png" /><br />
@@ -56,8 +57,7 @@
 			<td onclick="window.open('/groupware/organization/organization.action','조직도','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
 			<img src="/groupware/resources/image/admin/organization.png" /><br />
 				조직도
-			</td>
- 			
+			</td>		
 		</tr>
 		<tr>
 			<td onclick="window.open('/groupware/address/addressheader.action?classify=1','주소록','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
@@ -71,11 +71,11 @@
 				전자결제
 			</td>
 			<td onclick="window.open('/groupware/schedule/pschedule.action','일정관리','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
-			<img src="/groupware/resources/image//admin/home.png" /><br />
+			<img src="/groupware/resources/image/admin/home.png" /><br />
 				일정관리
 			</td>
 			<td onclick="window.open('/groupware/report/reportForm.do','업로드','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
-			<img src="/groupware/resources/image//admin/home.png" /><br />
+			<img src="/groupware/resources/image/admin/home.png" /><br />
 				업로드
 			</td>
 		</tr>
@@ -136,5 +136,8 @@
 			</td>
 		</tr> -->
 	</table>
+	</div>
+	<div style="float: right;width: 49%"><img  style="float: right;height: 20%;margin-top: 5%;margin-right: 5%;" src="/groupware/resources/image/admin/logo.png" /></div>
+	<h1 style=""></h1>
 </body>
 </html>

@@ -7,7 +7,8 @@
 <title>Groupware</title>
 <link rel="Stylesheet" href="/groupware/resources/styles/default.css" />
 </head>
-<body background="/groupware/resources/image/admin/background05.jpg">
+<body >
+<!-- background="/groupware/resources/image/admin/background05.jpg" style="background-repeat: no-repeat;"> -->
 
 	<div>
 		

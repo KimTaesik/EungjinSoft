@@ -45,7 +45,15 @@
 			event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
 		})
 	});
+	
 	</script>
+	<script type="text/javascript">
+		/* opener.document.location.reload(true); */
+		/* top.frame.window.opener.location.reload(true); */
+		/* top.frame.window.opener.location.reload(true); */
+		parent.window.opener.location.reload(true);
+	</script>
+
 </head>
 
 <body>
@@ -98,7 +106,7 @@
 	</div>
 	
 	
-	<form action="/groupware/upload/write.action" 
+	<!-- <form action="/groupware/upload/write.action" 
 		        	method="post" enctype="multipart/form-data">
 		        <table>
 		            <tr>
@@ -132,7 +140,7 @@
 		        	<input type="submit" value="자료등록" style="height:25px" onclick="document.forms[0].submit();" />
 		        	<input type="button" value="취소" style="height:25px" onclick="location.href='list.action';" />
 		        </div>
-	</form>
+	</form> -->
 	
 	
 	
@@ -151,7 +159,7 @@
 		<!-- 등록 -->
 		<span class="rightarea">
 			<span class="btn">
-				<a id="uploadlogo">
+				<a onclick="document.forms[0].submit();">
 					<img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_pencil.gif" alt="" align="absmiddle" />
 					등록
 				</a>
@@ -160,7 +168,7 @@
 	</div>
 
     <div class="table_view2 mar20t"> 
-		<form name="form" method="post" action='' enctype='multipart/form-data'>
+		<form name="form" method="post" action="/groupware/upload/write.action" enctype='multipart/form-data'>
 			<input type="hidden" name="quotaExceeded" id="quotaExceeded">
 			<table width="100%"  cellspacing="0" cellpadding="0" class="logo_table">
 				<col width="20%" class="overf"></col>
@@ -178,7 +186,7 @@
 						</div>
 						
 						<div class="pad20l pad10t">
-													<img src='http://static.whoisdesk.net/Src/Img/Cache/Logo/gw_signture2.png'  width=220 height=90 border=0 class='Png24'>
+							<img src='http://static.whoisdesk.net/Src/Img/Cache/Logo/gw_signture2.png'  width=220 height=90 border=0 class='Png24'>
 												</div>
 						
 						<!-- 이미지 등록 -->
@@ -186,7 +194,8 @@
 							<span class="vm left" style="padding-top:4px;" >이미지 등록 : </span> 
 							<input type="text" name="LogoPath" id="LogoPath" class="input left mar3r" style="width:40%;" readonly="readonly" />
 							<div id='file_find_atache' style='overflow:hidden;cursor:pointer;' alt="찾아보기" >
-								<input type='file' id="Logo" name='Logo' style="width:0px; height:20px; opacity:.0; -moz-opacity:.0; filter:alpha(opacity=0);" onchange="document.getElementById('LogoPath').value=this.value;">
+								<!-- <input type='file' id="Logo" name='Logo' style="width:0px; height:20px; opacity:.0; -moz-opacity:.0; filter:alpha(opacity=0);" onchange="document.getElementById('LogoPath').value=this.value;"> -->
+								<input type="file" id="Logo" style="width:0px; height:20px; opacity:.0; -moz-opacity:.0; filter:alpha(opacity=0);" onchange="document.getElementById('LogoPath').value=this.value;" name="attach" style="width:580px;height:20px" />
 							</div>
 						</div>
 						
