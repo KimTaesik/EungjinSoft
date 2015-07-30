@@ -74,6 +74,10 @@
 			<img src="/groupware/resources/image//admin/home.png" /><br />
 				일정관리
 			</td>
+			<td onclick="window.open('/groupware/report/reportForm.do','업로드','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
+			<img src="/groupware/resources/image//admin/home.png" /><br />
+				업로드
+			</td>
 		</tr>
 		<!--
 			<td>

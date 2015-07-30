@@ -43,6 +43,6 @@ public class OracleAddressBookDao implements AddressBookDao {
 	@Override
 	public List<AddressBook> getAddressbookList(String classify) {
 
-	return addressMapper.getAddressbookList(classify);
+		return addressMapper.getAddressbookList(classify);
 	}
 }

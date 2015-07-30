@@ -7,6 +7,8 @@ import com.groupware.dto.Board;
 import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
 import com.groupware.dto.Position;
+import com.groupware.dto.Upload;
+import com.groupware.dto.UploadFile;
 
 public interface EmployeeMapper {
 
@@ -64,4 +66,8 @@ public interface EmployeeMapper {
 	List<Employee> getEmployeeList(String lineup);
 	
 	List<Employee> getEmployeeList2(HashMap<String, Object> params);
+	
+	int insertUpload(HashMap<String, Object> params);
+
+	void insertUploadFile(HashMap<String, Object> params);
 }

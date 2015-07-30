@@ -23,6 +23,29 @@
 	<link type="text/css" href="http://css.whoisdesk.net/Src/WebCommon/Jquery/Jquery_ui_1_7_2/blitzer/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
 	<script src="/groupware/resources/styles/script/jquery.js"></script>
 	<script src="/groupware/resources/styles/script/jquery-ui.js"></script>
+	
+	<script type="text/javascript">
+	$(function() {
+		$("#uploadlogo").click(function(event) {
+			alert("asdasdsa");
+			/* alert($(":radio[name='AdminGb']:checked").val()); */
+			$.ajax({
+				url : "/groupware/upload/write.action",
+				async : true,
+				data : { "option": $("option:selected").val(), "radio" : $(":radio[name='AdminGb']:checked").val() },
+				method : "post",
+				enctype : "multipart/form-data",
+				success : function(result, status, xhr) {
+
+				},
+				error : function(xhr, status, ex) {
+					alert(ex);
+				}
+			})		
+			event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
+		})
+	});
+	</script>
 </head>
 
 <body>
@@ -73,6 +96,46 @@
 			<span class="recomm">회사정보 및 로고등록</span>
 		</h2>
 	</div>
+	
+	
+	<form action="/groupware/upload/write.action" 
+		        	method="post" enctype="multipart/form-data">
+		        <table>
+		            <tr>
+		                <th>제목</th>
+		                <td>
+		                    <input type="text" name="title" style="width:580px" />
+		                </td>
+		            </tr>
+		            <tr>
+		                <th>작성자</th>
+		                <td>
+		                	<input type="hidden" name="uploader" 
+		                		value='admin' />
+		                	admin
+		                </td>
+		            </tr>
+		            <tr>
+		                <th>첨부자료</th>
+		                <td>
+		                    <input type="file" name="attach" style="width:580px;height:20px" />
+		                </td>
+		            </tr>
+		            <tr>
+		                <th>자료설명</th>
+		                <td>
+		                	<textarea name="content" style="width:580px" rows="15"></textarea>
+		                </td>
+		            </tr>
+		        </table>
+		        <div class="buttons">
+		        	<input type="submit" value="자료등록" style="height:25px" onclick="document.forms[0].submit();" />
+		        	<input type="button" value="취소" style="height:25px" onclick="location.href='list.action';" />
+		        </div>
+	</form>
+	
+	
+	
 
 	<div class="toparea">		
 		<span class="leftarea">
@@ -88,7 +151,7 @@
 		<!-- 등록 -->
 		<span class="rightarea">
 			<span class="btn">
-				<a href="#blank-link" onclick="">
+				<a id="uploadlogo">
 					<img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_pencil.gif" alt="" align="absmiddle" />
 					등록
 				</a>

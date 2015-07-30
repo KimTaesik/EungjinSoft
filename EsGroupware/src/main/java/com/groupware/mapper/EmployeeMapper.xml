@@ -291,5 +291,18 @@
 				id
 		 ASC 
 	</select>
+	
+	<insert id="insertUpload" parameterType="hashMap">
+		INSERT INTO upload
+		(uploadno, title, uploader, content)
+		VALUES (upload_sequence.nextVal, #{title}, #{uploader}, #{content})
+	</insert>
+	
+	<insert id="insertUploadFile" parameterType="hashMap">
+
+		INSERT INTO uploadfile
+		(uploadfileno, uploadno, savedfilename, userfilename)
+		VALUES (uploadfile_sequence.nextVal, #{uploadno}, #{savedfilename}, #{userfilename})
+	</insert>
 
 </mapper>                                                                                 
