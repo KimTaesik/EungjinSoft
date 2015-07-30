@@ -6,20 +6,19 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ser.std.MapProperty;
 import com.groupware.dao.AddressBookDao;
-import com.groupware.dao.EmployeeDao;
 import com.groupware.dto.AddressBook;
 import com.groupware.dto.Employee;
-import com.groupware.ui.ThePager;
 
 @Controller
 @RequestMapping(value="address")
@@ -34,21 +33,26 @@ public class AddressbookController {
 
 	//1. 주소 추가
 	@RequestMapping(value="addressbookadd.action", method = RequestMethod.GET)
-	public String addressAddform(){
+	@ResponseBody
+	public ModelAndView addressAddform(String classify){
+		List<AddressBook> addressbook1 = null;
 		
-		return "addressbook/addressbookaddform";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("classify" , classify);
+		mav.setViewName("addressbook/addressbookaddform");
+
+		return mav;
 	}
 	@RequestMapping(value="addressbookadd.action", method = RequestMethod.POST)
-	public String addressadd(HttpSession session, AddressBook addressbook, String cellPhone1,String cellPhone2,String cellPhone3,
-			String homePhone1, String homePhone2, String homePhone3, String fax1, String fax2, String fax3, String postcode1, String postcode2,
-			String roadAddress, String roadAddress2, String postcode3, String postcode4, String directLine1,String directLine2, String directLine3) throws UnsupportedEncodingException{
+	public ModelAndView addressadd(HttpSession session, AddressBook addressbook, 
+			String cellPhone1,String cellPhone2,String cellPhone3,
+			String homePhone1, String homePhone2, String homePhone3, String fax1, String fax2, String fax3,
+			String postcode1, String postcode2, String roadAddress, String roadAddress2, String postcode3, 
+			String postcode4, String directLine1,String directLine2, String directLine3, String extention){
 		
-		System.out.println(addressbook.getClassify());
 		Employee loginUser = new Employee();
 		loginUser.setId(((Employee)session.getAttribute("loginuser")).getId());
 		addressbook.setId(loginUser.getId());
-		
-		
 		
 		String homenumber = null;
 		String phonenumber = null;
@@ -57,6 +61,7 @@ public class AddressbookController {
 		String directLine = null;
 		String homepostcode = null;
 		String compostcode = null;
+		String extension = null;
 		
 		addressbook.setGroupNo(1);
 		
@@ -79,23 +84,34 @@ public class AddressbookController {
 		if (postcode1 != null) {
 			homepostcode = postcode1 + "-" + postcode2;
 		}
-		addressbook.setPostcode(homepostcode);
+		addressbook.setHomepostcode(homepostcode);
 		
 		if (postcode3 != null) {
 			compostcode =  postcode3 + "-" + postcode4;
 		}
-		addressbook.setPostcode2(compostcode);
+		addressbook.setCompostcode(compostcode);
 		
 		if(directLine1 != null ) {
 			directLine = directLine1 + "-"+ directLine2 + "-" + directLine3;
 		}
 		addressbook.setDirectLine(directLine);
+		
 		addressbook.setNation(addressbook.getNation());
+		
+		addressbook.setExtension(extension);
+		
+		addressbook.setAddress(roadAddress);
 		addressbook.setCompanyAddress(roadAddress2);
 	
 		addressbookDao.insertAddressBook(addressbook);
 		
-		return "addressbook/addressbooklist";
+		ModelAndView mav = new ModelAndView();
+		List<AddressBook> addressbook1 =  addressbookDao.getAddressbookList(addressbook.getClassify());
+		
+		mav.addObject("addressbook1", addressbook1);
+		mav.addObject("classify", addressbook.getClassify());
+		mav.setViewName("include/addressheader");
+		return mav;
 	}
 	
 	//2. 주소 리스트 보기[페이징 처리로]
@@ -132,32 +148,40 @@ public class AddressbookController {
 		return mav;
 	}*/
 	
-	@RequestMapping(value="addressbooklist.action", method = RequestMethod.GET)
-	public ModelAndView addressList(AddressBook addressbook, String classify, HttpServletRequest req){
-		System.out.println(classify);
-		List<AddressBook> addressbook1 = addressbookDao.getAddressbookList(classify);
-		
-		System.out.println(addressbook1.size());
+	@RequestMapping(value="addressheader.action", method = RequestMethod.GET)
+	public ModelAndView addresshearder(String classify){
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("classify", classify);
-		mav.addObject("addresbook", addressbook1);
-		mav.setViewName("/addressbooklist");
+		List<AddressBook> addressbook1 =  addressbookDao.getAddressbookList(classify);
 		
+		mav.addObject("addressbook1", addressbook1);
+		mav.addObject("classify", classify);
+		mav.setViewName("include/addressheader");
+		return mav;
+	}
+	@RequestMapping(value="addresslist.action", method = RequestMethod.GET)
+	@ResponseBody
+	public 	ModelAndView addresslist(AddressBook addressbook, String classify, HttpServletRequest req){
+	
+		ModelAndView mav = new ModelAndView();
+		List<AddressBook> addressbook1 = null;
+		if(classify.equals("1")) {
+		 addressbook1 =  addressbookDao.getAddressbookList(classify);
+			mav.addObject("addressbook1", addressbook1);
+			mav.addObject("classify", classify);
+			mav.setViewName("addressbook/addressbooklist");
+			
+			}else if(classify.equals("2")) {
+			addressbook1 = addressbookDao.getAddressbookList(classify);
+			mav.addObject("addressbook1", addressbook1);
+			mav.addObject("classify", classify);
+			mav.setViewName("addressbook/addressbooklist");
+		}
+		//return addressbook1;
 		return mav;
 	}
 	
-/*	@RequestMapping(value="addressheader.action", method = RequestMethod.GET)
-	public ModelAndView addresshearder(AddressBook addressbook, String classify, HttpServletRequest req){
 	
-		if(classify.equals("1")) {
-			ModelAndView ma = new ModelAndView();
-			
-		}
-		//return "include/addressheader";
-	}*/
-	
-	
-	@RequestMapping(value="addresslist.action", method = RequestMethod.GET)
+	/*@RequestMapping(value="addresslist.action", method = RequestMethod.GET)
 	@ResponseBody
 	public String addressList2(String classify, HttpServletRequest req, String type, String search ,Integer pageno){
 	
@@ -171,5 +195,5 @@ public class AddressbookController {
 		}
 	
 		return name;
-	}
+	}*/
 }

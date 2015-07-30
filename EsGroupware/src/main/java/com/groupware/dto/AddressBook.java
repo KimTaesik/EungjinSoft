@@ -19,14 +19,27 @@ public class AddressBook implements Serializable{
 	private String memo;
 	private int groupNo;
 	private String addressNo;
-	private String postcode;
+	private String homepostcode;
+	private String compostcode;
 	private String directLine;
 	private String extension;
-	private String postcode2;
+	
 	private String classify;
 	private String id;
 	
 	
+	public String getHomepostcode() {
+		return homepostcode;
+	}
+	public void setHomepostcode(String homepostcode) {
+		this.homepostcode = homepostcode;
+	}
+	public String getCompostcode() {
+		return compostcode;
+	}
+	public void setCompostcode(String compostcode) {
+		this.compostcode = compostcode;
+	}
 	public String getId() {
 		return id;
 	}
@@ -38,12 +51,6 @@ public class AddressBook implements Serializable{
 	}
 	public void setClassify(String classify) {
 		this.classify = classify;
-	}
-	public String getPostcode() {
-		return postcode;
-	}
-	public void setPostcode(String postcode) {
-		this.postcode = postcode;
 	}
 	public String getDirectLine() {
 		return directLine;
@@ -148,12 +155,7 @@ public class AddressBook implements Serializable{
 	public void setAddressNo(String addressNo) {
 		this.addressNo = addressNo;
 	}
-	public String getPostcode2() {
-		return postcode2;
-	}
-	public void setPostcode2(String postcode2) {
-		this.postcode2 = postcode2;
-	}
+
 	
 	
 }

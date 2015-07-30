@@ -6,30 +6,33 @@
 <!DOCTYPE>
 <html>
 <head>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>  	
-
-	 <link rel="Stylesheet" href="/groupware/resources/styles/addressframe.css" />  
-	 
-	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>주소록</title>
 	<link rel='Stylesheet' href='/groupware/resources/styles/input.css' />
 	<link rel="Stylesheet" href="/groupware/resources/styles/admin.css" />
-	<link rel="stylesheet" href="/resources/demos/style.css">
+	<link rel="Stylesheet" href="/groupware/resources/styles/addressframe.css" /> 
 	
-<!-- 	<link rel="stylesheet" href="/groupware/resources/styles/jquery/jquery-ui.css"> -->
-	
-<!-- 	<script src="/groupware/resources/styles/script/jquery.js"></script>
-	<script src="/groupware/resources/styles/script/jquery-ui.js"></script>  -->
+	<!-- <link rel="stylesheet" href="/groupware/resources/styles/jquery/jquery-ui.css">
+	<script src="/groupware/resources/styles/script/jquery.js"></script>
+	<script src="/groupware/resources/styles/script/jquery-ui.js"></script> -->
 	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   	<link rel="stylesheet" href="/resources/demos/style.css">
 	
- 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> 
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	
-
+	
+	
+  	<script>
+	$(function() {	
+	    $( "#accordion" ).accordion();	
+	});	
+	$("#showlist").load("addressheader.action?classify=1")
+	
+	</script>
+	
 	<script type="text/javascript">
 
 	function doCheck() {
@@ -44,33 +47,33 @@
 		}
 	}
 	
+	function doAction() {
+		var classify = ${ classify }
+		if (classify = "1") {
+			
+		}else if(classify = "2"){
+			
+		}
+	}
 	
-	</script>
-	
-	<script>
-	$(document).ready(function() {
-		$('#showlist').click(function(event) {
-			alert("djkjkjkj");
-		
-			var classify = $(this).attr("id");
-			alert(classify);
-			$.ajax({
-				url : "addressheader.action",
-				method : 'get',
-				data : {"classify" : classify},
-				/* dataType : 'json', */
-				success: function(result, status, xhr) {
-				}
-
-		})
-		
-	})
 	
 	</script>
 	
 </head>
 <body>
-
+<div class="left_menu" style="background-color: #88cbff">
+	<div id="accordion" style="font-size: 10pt;width: 100pt;">
+		<h3>개인 주소록</h3>
+	<ul>
+        <li><a href="#" id="1" class="getclassify">개인 주소록</a></li>
+        <br />
+        <li><a href="#" id="2" class="getclassify">공용 주소록</a></li>
+        <br />
+        <li><a href="#" id="3" class="getclassify">명함철</a></li>
+    </ul>
+	
+	</div>
+</div>
 	
 	<section>
 	<div id='pageContainer'>	
@@ -91,8 +94,7 @@
 		</div>
 		<form id='addressbookaddform' action='addressbookadd.action' method='post'>
 		<input type="hidden" name="classify" value=${ classify } />
- 		<input type="hidden" name="groupno" value="1" />
- 				 <table>
+				 <table>
 			        	<tr>
 			            	<th style='background-color: #fffffc;text-align: left;'>
 			            		▶개인정보
@@ -311,8 +313,8 @@
 			           		<th>주소</th>
 			           		<td>
 			           			
-				            <input style="width: 50px;" name="homepostcode" type="text" id="sample4_postcode1"> -
-							<input style="width: 50px;" name="compostcode" type="text" id="sample4_postcode2">
+				            <input style="width: 50px;" name="postcode1" type="text" id="sample4_postcode1"> -
+							<input style="width: 50px;" name="postcode2" type="text" id="sample4_postcode2">
 							<input style="height: 25px;" type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 							<br />
 							<input style="width: 300px;"  name="roadAddress" type="text" id="sample4_roadAddress" placeholder="도로명주소">
@@ -322,56 +324,56 @@
 							
 							<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 							<script>
-						    function sample4_execDaumPostcode() {
-						        new daum.Postcode({
-						            oncomplete: function(data) {
-						                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-						
-						                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-						                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-						                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-						                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-						
-						                // 법정동명이 있을 경우 추가한다.
-						                if(data.bname !== ''){
-						                    extraRoadAddr += data.bname;
-						                }
-						                // 건물명이 있을 경우 추가한다.
-						                if(data.buildingName !== ''){
-						                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-						                }
-						                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-						                if(extraRoadAddr !== ''){
-						                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-						                }
-						                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-						                if(fullRoadAddr !== ''){
-						                    fullRoadAddr += extraRoadAddr;
-						                }
-						
-						                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-						                document.getElementById("sample4_postcode1").value = data.postcode1;
-						                document.getElementById("sample4_postcode2").value = data.postcode2;
-						                document.getElementById("sample4_roadAddress").value = fullRoadAddr;
-						                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
-						
-						                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-						                if(data.autoRoadAddress) {
-						                    //예상되는 도로명 주소에 조합형 주소를 추가한다.
-						                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-						                    document.getElementById("guide").innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-						
-						                } else if(data.autoJibunAddress) {
-						                    var expJibunAddr = data.autoJibunAddress;
-						                    document.getElementById("guide").innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-						
-						                } else {
-						                    document.getElementById("guide").innerHTML = '';
-						                }
-						            }
-						        }).open();
-						    }
-						</script>  
+							    function sample4_execDaumPostcode() {
+							        new daum.Postcode({
+							            oncomplete: function(data) {
+							                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+							
+							                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+							                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+							                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+							
+							                // 법정동명이 있을 경우 추가한다.
+							                if(data.bname !== ''){
+							                    extraRoadAddr += data.bname;
+							                }
+							                // 건물명이 있을 경우 추가한다.
+							                if(data.buildingName !== ''){
+							                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+							                }
+							                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+							                if(extraRoadAddr !== ''){
+							                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+							                }
+							                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+							                if(fullRoadAddr !== ''){
+							                    fullRoadAddr += extraRoadAddr;
+							                }
+							
+							                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+							                document.getElementById("sample4_postcode1").value = data.postcode1;
+							                document.getElementById("sample4_postcode2").value = data.postcode2;
+							                document.getElementById("sample4_roadAddress").value = fullRoadAddr;
+							                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+							
+							                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+							                if(data.autoRoadAddress) {
+							                    //예상되는 도로명 주소에 조합형 주소를 추가한다.
+							                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+							                    document.getElementById("guide").innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+							
+							                } else if(data.autoJibunAddress) {
+							                    var expJibunAddr = data.autoJibunAddress;
+							                    document.getElementById("guide").innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+							
+							                } else {
+							                    document.getElementById("guide").innerHTML = '';
+							                }
+							            }
+							        }).open();
+							    }
+							</script>  
 			           		</td>	           
 			           </tr>
 			           <tr>
@@ -486,8 +488,8 @@
 			            
 			        </table>
 			        <div class='buttons'>
-			        <input type='button' value='목록보기' style='height:25px;' id="showlist" />
-		        	<input type='button' value='주소추가' style='height:25px;' id="addressadd" onclick="javascript:doCheck();"/>
+			        <input type='button' value='목록보기' style='height:25px'; id="showlist" onclick="javascript:doAction();" />
+		        	<input type='button' value='주소추가' style='height:25px'; id="addressadd" onclick="javascript:doCheck();"/>
 		        	</div>
 		        </form>
 			</div>

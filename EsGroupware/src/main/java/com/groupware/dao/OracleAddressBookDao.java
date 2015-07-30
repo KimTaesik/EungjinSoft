@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.groupware.dto.AddressBook;
+import com.groupware.dto.Employee;
 import com.groupware.mapper.AddressBookMapper;
 
 
@@ -42,7 +43,9 @@ public class OracleAddressBookDao implements AddressBookDao {
 	
 	@Override
 	public List<AddressBook> getAddressbookList(String classify) {
+		//HashMap<String, String> params = new HashMap<String, String>();
+		//params.put("classify", classify);
+		return addressMapper.getAddressbookList(classify);
 
-	return addressMapper.getAddressbookList(classify);
 	}
 }

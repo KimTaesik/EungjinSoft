@@ -45,7 +45,7 @@
 	<!--  목록 조회하기  -->
 	<select id="getAddressbookList" parameterType="String" resultType="AddressBook">
 	SELECT
-	addressno, id, name, groupno, classify, email, phone_number, home_number, fax
+	addressno, id, name, groupno, classify, email, phone_number phoneNumber, home_number homeNumber, fax
 	FROM
 	addressbook
 	WHERE classify = #{ classify }

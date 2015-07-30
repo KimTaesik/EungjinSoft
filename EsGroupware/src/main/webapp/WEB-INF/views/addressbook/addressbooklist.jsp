@@ -12,7 +12,12 @@
 	<title>주소록</title>
 	<link rel="Stylesheet" href="/groupware/resources/styles/addressframe.css" /> 
 	<script type="text/javascript">
-	function search() {
+	
+	
+	
+	
+	
+/* 	function search() {
 		 var type = document.getElementById("type");
 		 var search = document.getElementById("search");
 		 location.href="list.action?type="+type.value+"&search="+search.value;
@@ -25,36 +30,32 @@
 			type2.selectedIndex=type-1;
 			
 		}
-	}	
+	}	 */
 	</script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
  
+ 
+   	
+
 </head>
 <body>
-<!-- <div class="left_menu" style="background-color: #88cbff">
-	<div id="accordion" style="font-size: 10pt;width: 100pt;">
-	<h3>개인 주소록</h3>
-	<ul>
-        <li><a href="#" id="personaladdressbook">개인 주소록</a></li>
-    </ul>
-    <h3>공용 주소록</h3>
-    <ul>
-        <li><a href="#" id="shareaddressbook">공용 주소록</a></li>
-    </ul>
-    <h3>명함철</h3>
-    <ul>
-        <li><a href="#" id="idcard">명함철</a></li>
-	</ul>
-	
-	</div>
-</div> -->
+
 <%-- 
 <% pageContext.include("/WEB-INF/views/include/addressheader.jsp"); %> --%>
 
 <div class="content" style="background-color: #88cbff">
 	<div class="subject">
 		
-		<caption align="left"><font color="#0431B4" font size="3" ><b>${ name }</b></font></caption>
+		<caption align="left"><font color="#0431B4" font size="3" ><b>
+		<c:choose>
+		<c:when test="${ classify.equals('1') }">
+		개인 주소록
+		</c:when>
+		<c:otherwise>
+		공용 주소록
+		</c:otherwise>
+		</c:choose>
+		</b></font></caption>
 		
 			<br><br>
 			<input type="button" value="전체">
@@ -96,7 +97,7 @@
 						
 			<table id="menubar">
 				<tr>
-					<th scope="col" onclick="location.href='addressbookadd.action'" style="cursor:pointer";><img src="/groupware/resources/image/add.png" />주소추가</th>
+					<th scope="col"><img src="/groupware/resources/image/add.png" /><a href='#' class="addform" id=${ classify }>주소추가</a></th>
 			        <th scope="col"><img src="/groupware/resources/image/add.png" />그룹추가</th>
 			        <th scope="col"><img src="/groupware/resources/image/minus.png" />삭제</th>
 			        <th scope="col">
@@ -112,7 +113,7 @@
 				</tr>
 			</table>
 			
-			<table id="menubar">
+			<table id="menubar" class="address">
 				<tr>
 					<th style="width:45px;text-align:center">이름</th>
 					<th style="width:170px;text-align:center">이메일</th>
@@ -122,24 +123,32 @@
 					<th style="width:40px;text-align:center">수정</th>
 					<th style="width:90px;text-align:center">삭제</th>
 				</tr>
-				<%-- <% List<AddressBook> addressbook = (List<AddressBook>)request.getAttribute("addressbook"); %> 
-				<% for (AddressBook addressbook1 : addressbook) { %>
+			 	<% List<AddressBook> addressbook1 = (List<AddressBook>)request.getAttribute("addressbook1"); %> 
+				<% for (AddressBook addressbook2 : addressbook1) { %>
+				 
+				 <!-- <tbody> -->
+				 	<tr>
+			        	<td id="name" style="width:45px;text-align:center" ><%= addressbook2.getName() %></td>
+			            <td id="email" style="width:170px;text-align:center"><%= addressbook2.getEmail() %></td>
+			            <td id="phonenumber" style="width:180px;text-align:center"><%= addressbook2.getPhoneNumber() %></td>
+			            <td id="homenumber" style="width:170px;text-align:center"><%= addressbook2.getHomeNumber() %></td>
+			            <td id="fax" style="width:190px;text-align:center"><%= addressbook2.getFax() %></td>
+			            <td style="width:40px;text-align:center"><img src="/groupware/resources/image/edit.png" /></td>
+			            <td style="width:90px;text-align:center"><img src="/groupware/resources/image/del.png" /></td>
+			        </tr>  
+				<!-- </tbody> -->
 				
-				<tr>
-			        	<td width="45px" ><%= addressbook1.getName() %></td>
-			            <td width="170px"><%= addressbook1.getEmail() %></td>
-			            <td width="180px"><%= addressbook1.getPhoneNumber() %></td>
-			            <td width="170px"><%= addressbook1.getHomeNumber() %></td>
-			            <td width="190px"><%= addressbook1.getFax() %></td>
-			            <td width="40px"><img src="/groupware/resources/image/edit.png" /></td>
-			            <td width="90px"><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
 				
-				<% } %> --%>
+		 		<% } %>  
 				<%-- <c:forEach var="addressbook" items="${ addressbook }"> --%>
 				
 				<%-- </c:forEach> --%>
 			</table>
+			
+			<div style="text-align:center">
+			${ pager.toString() }
+			<br/>
+			</div>
 			<!-- 	<div style="width:910px; height:370px">
 			
 				</div> -->
