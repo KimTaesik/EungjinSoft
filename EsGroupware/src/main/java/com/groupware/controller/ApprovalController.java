@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.dao.EmployeeDao;
 import com.groupware.dto.ApprovalForm;
+import com.groupware.dto.Employee;
 import com.groupware.service.ApprovalService;
 
 
@@ -65,5 +66,27 @@ public class ApprovalController {
 		
 		return mav;
 	
+	}
+	@RequestMapping(value = "infomation.action", method = RequestMethod.GET)
+	@ResponseBody
+	public Employee info(String employeeid) {
+		System.out.println(employeeid);
+		Employee info =approvalService.getEmployeeInfomationList(employeeid);
+//		List<Dept> depts = employeeDao.getDeptList();
+//		List<Employee> employees = employeeDao.getemList();
+
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("depts", depts);
+//		mav.addObject("employees", employees);
+//		mav.addObject("info", info);
+		
+
+	//	ArrayList<Object> list= new ArrayList<>();
+
+		
+		
+	
+		
+		return info;
 	}
 }
