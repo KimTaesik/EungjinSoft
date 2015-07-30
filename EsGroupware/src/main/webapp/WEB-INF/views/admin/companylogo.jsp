@@ -152,9 +152,9 @@
 				<a href="#blank-link" onclick="thisPageMove('');"> 로고 등록</a>
 			</span>
 			<!-- 회사정보 등록 -->
-			<span class="tab">
+			<!-- <span class="tab">
 				<a href="#blank-link" onclick="thisPageMove('index.php');"> 회사정보 등록</a>
-			</span>
+			</span> -->
 		</span>
 		<!-- 등록 -->
 		<span class="rightarea">
@@ -186,8 +186,9 @@
 						</div>
 						
 						<div class="pad20l pad10t">
-							<img src='http://static.whoisdesk.net/Src/Img/Cache/Logo/gw_signture2.png'  width=220 height=90 border=0 class='Png24'>
-												</div>
+							<!-- <img src='http://static.whoisdesk.net/Src/Img/Cache/Logo/gw_signture2.png'  width=220 height=90 border=0 class='Png24'> -->
+							<img src='/groupware/resources/image/admin/logo.png' height=70 border=0 class='Png24'>
+						</div>
 						
 						<!-- 이미지 등록 -->
 						<div class="pad20l pad10t" style="overflow: hidden;">
@@ -203,28 +204,28 @@
 						<div class="pad20l pad5t">* 최적 사이즈 : <span class=report_06>220 * 90</span> 픽셀, (확장자 : jpg, jpeg, gif, png)  </div>
 						
 						<!-- 로고이미지 링크사용 -->
-						<div class="pad20l pad10t" style="height: 1.5em; line-height: 1.5em;">
+	<!-- 					<div class="pad20l pad10t" style="height: 1.5em; line-height: 1.5em;">
 							<input type="checkbox" name="LogoLinkUse" value="Y" onclick="LogoLink_disabled();"  />
 							<label>로고 이미지 링크사용</label>
 						</div>
 						
-						<!-- 링크등록 -->
+						링크등록
 						<div class="pad20l pad5t pad20b">
 							<label>링크등록 : http://</label> 
 							<input type="text" name="LogoLink" value="" style="width:50%;" class="input" />
-						</div>
+						</div> -->
 					</td>
 				</tr>
-				
-				<!-- 로그인 페이지 디자인 설정 -->
-				<!-- 오른쪽 로고 이미지 등록 -->
+				<!-- 
+				로그인 페이지 디자인 설정
+				오른쪽 로고 이미지 등록
 				<tr>
 					<td rowspan="4" class="larea txt_ce bold nobr text_overf">로그인페이지<br>디자인설정</td>
 					<td>
 						<div class="logo_title nobr text_overf">
 							<span class="left title pad20l">
 								<span class="bold">오른쪽 로고 이미지 등록</span>&nbsp;
-								<!-- 미리보기 -->
+								미리보기
 								<span class="btn">
 									<a  href="#blank-link" onclick="PreviewOpen();">
 										<img width="16" height="16" align="absMiddle" alt="" src="/Src/Img/Renewal/icon_preview.gif" complete="complete"/>
@@ -232,7 +233,7 @@
 									</a>
 								</span>
 							</span>
-							<!-- 등록된 로고 이미지는 로그인 페이지 오른쪽 상단에 위치합니다 -->
+							등록된 로고 이미지는 로그인 페이지 오른쪽 상단에 위치합니다
 							<span class="right pad20r">등록된 로고 이미지는 로그인 페이지 오른쪽 상단에 위치합니다</span>
 						</div>
 						
@@ -248,7 +249,7 @@
 							<label>사용안함</label>
 						</div>
 						
-						<!-- 이미지 등록 -->
+						이미지 등록
 						<div class="pad20l pad10t" style="overflow: hidden;">
 							<span class="vm left" style="padding-top:4px;" >이미지 등록 : </span> 
 							<input type="text" name="MainImgPath" id="MainImgPath" class="input left mar3r" style="width:40%;" readonly="readonly" />
@@ -257,16 +258,16 @@
 							</div>
 						</div>
 						
-						<!-- * 최적 사이즈 : 220 * 90 픽셀, (확장자 : jpg, jpeg, gif, png) -->
+						* 최적 사이즈 : 220 * 90 픽셀, (확장자 : jpg, jpeg, gif, png)
 						<div class="pad20l pad5t">* 최적 사이즈 : <span class=report_06>220 * 90</span> 픽셀, (확장자 : jpg, jpeg, gif, png)</div>
 						
-						<!-- 로그인 페이지 링크 사용 -->
+						로그인 페이지 링크 사용
 						<div class="pad20l pad10t">
 							<input type="checkbox" name="MainImgLinkUse" value="Y"  />
 							<label>로그인 페이지 링크 사용</label>
 						</div> 
 						
-						<!-- 링크등록 -->
+						링크등록
 						<div class="pad20l pad5t pad20b">
 							링크등록 : 
 							http:// <input type="text" name="MainImgLink" id="MainImgLink" value="" style="width:50%;" class="input" />
@@ -274,13 +275,13 @@
 					</td>
 				</tr>
 				
-				<!-- 상단 로고 이미지 등록 -->
+				상단 로고 이미지 등록
 				<tr>
 					<td>
 						<div class="logo_title nobr text_overf">
 							<span class="left title pad20l">
 								<span class="bold">상단 로고 이미지 등록</span>&nbsp;
-								<!-- 미리보기 -->
+								미리보기
 								<span class="btn">
 									<a  href="#blank-link" onclick="PreviewOpen();">
 										<img width="16" height="16" align="absMiddle" alt="" src="/Src/Img/Renewal/icon_preview.gif" complete="complete"/>
@@ -288,7 +289,7 @@
 									</a>
 								</span>
 							</span>
-							<!-- 등록된 로고 이미지는 로그인창 상단에 위치합니다. -->
+							등록된 로고 이미지는 로그인창 상단에 위치합니다.
 							<span class="right pad20r">등록된 로고 이미지는 로그인창 상단에 위치합니다.</span>						
 						</div>
 						
@@ -304,7 +305,7 @@
 							<label>사용안함</label>
 						</div>
 						
-						<!-- 이미지 등록 -->
+						이미지 등록
 						<div class="pad20l pad10t" style="overflow: hidden;">
 							<span class="left" style="padding-top:4px;" >이미지 등록 :</span> 
 							<input type="text" name="LogoImgPath" id="LogoImgPath" class="input left mar3r" style="width:40%;" readonly="readonly" />
@@ -313,22 +314,22 @@
 							</div>
 						</div>
 						
-						<!-- * 최적 사이즈 : 330 * 50 픽셀, (확장자 : jpg, jpeg, gif, png) -->
+						* 최적 사이즈 : 330 * 50 픽셀, (확장자 : jpg, jpeg, gif, png)
 						<div class="pad20l pad5t">* 최적 사이즈 : <span class=report_06>330 * 50</span> 픽셀, (확장자 : jpg, jpeg, gif, png)</div>
 						
-						<!-- 로그인 페이지 링크 사용 -->
+						로그인 페이지 링크 사용
 						<div class="pad20l pad10t">
 							<input type="checkbox" name="LogoImgLinkUse" value="Y"  />
 							<label>로그인 페이지 링크 사용</label>
 						</div>
 						
-						<!-- 링크등록 --> 
+						링크등록 
 						<div class="pad20l pad5t">
 							<label>링크등록 : http:// </label> 
 							<input type="text" name="LogoImgLink" id="LogoImgLink" value="" style="width:50%;" class="input" />
 						</div>
 						
-						<!-- 배경색 등록 -->
+						배경색 등록
 						<div class="pad20l pad10t pad20b" style="overflow: hidden;">
 							<input type="checkbox" name="LogoBackgroundColorUse" id="LogoBackgroundColorUse" value="Y"  />
 							<span class="mar3r" >배경색등록 :</span>
@@ -360,13 +361,13 @@
 					</td>
 				</tr>
 				
-				<!-- 왼쪽 플래시 이미지 변경 -->
+				왼쪽 플래시 이미지 변경
 				<tr>
 					<td>
 						<div class="logo_title nobr text_overf">
 							<span class="left title pad20l">
 								<span class="bold">왼쪽 플래시 이미지 변경</span>&nbsp;
-								<!-- 미리보기 -->
+								미리보기
 								<span class="btn">
 									<a href="#blank-link" onclick="PreviewOpen();">
 										<img width="16" height="16" align="absMiddle" alt="" src="/Src/Img/Renewal/icon_preview.gif" complete="complete"/>
@@ -374,7 +375,7 @@
 									</a>
 								</span>
 							</span>
-							<!-- 로그인 페이지의 왼쪽 플래시 이미지를 변경하실 수 있습니다. -->
+							로그인 페이지의 왼쪽 플래시 이미지를 변경하실 수 있습니다.
 							<span class="right pad20r">로그인 페이지의 왼쪽 플래시 이미지를 변경하실 수 있습니다.</span>
 						</div>
 						
@@ -389,7 +390,7 @@
 							<label>사용안함</label>
 						</div>
 						
-						<!-- 이미지 등록 -->
+						이미지 등록
 						<div class="pad20l pad10t" style="overflow: hidden;">
 							<span class="left" style="padding-top:4px;" readonly="readonly">이미지 등록 :</span>
 							<input type="text" name="FlashImgPath" id="FlashImgPath" class="input left mar3r" style="width:40%;" readonly="readonly" />
@@ -398,19 +399,19 @@
 							</div>
 						</div>
 						
-						<!--  * 최적 사이즈 : 320 * 720 픽셀, (확장자 : jpg, jpeg, gif, png) -->
+						 * 최적 사이즈 : 320 * 720 픽셀, (확장자 : jpg, jpeg, gif, png)
 						<div class="pad20l pad5t pad20b">* 최적 사이즈 : <span class=report_06>320 * 720</span> 픽셀, (확장자 : jpg, jpeg, gif, png)  </div>
 						
 					</td>
 				</tr>
 				
-				<!-- 로그인 페이지 배경색 변경    -->
+				로그인 페이지 배경색 변경   
 				<tr>
 					<td>
 						<div class="logo_title nobr text_overf">
 							<span class="left title pad20l">
 								<span class="bold">로그인 페이지 배경색 변경</span>&nbsp;
-								<!-- 미리보기 -->
+								미리보기
 								<span class="btn">
 									<a  href="#blank-link" onclick="PreviewOpen();">
 										<img width="16" height="16" align="absMiddle" alt="" src="/Src/Img/Renewal/icon_preview.gif" complete="complete"/>
@@ -418,10 +419,10 @@
 									</a>
 								</span>
 							</span>
-							<!-- 로그인 페이지의 배경색을 변경하실 수 있습니다. -->
+							로그인 페이지의 배경색을 변경하실 수 있습니다.
 							<span class="right pad20r">로그인 페이지의 배경색을 변경하실 수 있습니다.</span>
 						</div>	
-						<!-- 배경색등록 -->
+						배경색등록
 						<div class="pad20l pad10t pad20b" style="overflow: hidden;">
 							<input type="checkbox" name="BackgroundColorUse" id="BackgroundColorUse" value="Y"  />
 							<span class="mar3r">배경색등록 :</span>
@@ -453,13 +454,13 @@
 					</td>
 				</tr>
 				
-				<!-- 모바일 페이지 로고 이미지 등록 -->
+				모바일 페이지 로고 이미지 등록
 				<tr>
 					<td class="larea txt_ce bold nobr text_overf">모바일 페이지<br> 로고 이미지 등록</td>
 					<td>
 						<div class="logo_title nobr text_overf">
 							<span class="left title pad20l bold">모바일 페이지 로고 이미지 등록</span>
-							<!-- 등록된 로고 이미지는 모바일 페이지 상단 중앙에 위치합니다. -->
+							등록된 로고 이미지는 모바일 페이지 상단 중앙에 위치합니다.
 							<span class="right pad20r">등록된 로고 이미지는 모바일 페이지 상단 중앙에 위치합니다.</span>
 						</div>
 						
@@ -467,10 +468,10 @@
 													<img src='http://static.whoisdesk.net/Src/Img/Mobile/gw2_logo.png'  width="201" height="31" border=0 class='Png24'>
 												</div>
 						
-						<!-- ※ 이미지 등록 후 모바일 기기에서 다시 로그인하면 변경된 이미지로 표시됩니다. -->
+						※ 이미지 등록 후 모바일 기기에서 다시 로그인하면 변경된 이미지로 표시됩니다.
 						<div class="pad20l pad5t">※ 이미지 등록 후 모바일 기기에서 다시 로그인하면 변경된 이미지로 표시됩니다.</div>
 						
-						<!-- 이미지 등록 -->
+						이미지 등록
 						<div class="pad20l pad10t" style="overflow: hidden;">
 							<span class="left" style="padding-top:4px;" >이미지 등록 : </span> 
 							<input type="text" name="MobileLogoPath" id="MobileLogoPath" class="input left mar3r" style="width:40%;" readonly="readonly" />
@@ -479,16 +480,16 @@
 							</div>
 						</div>
 						
-						<!-- * 최적 사이즈 : 200 * 55 픽셀, (확장자 : jpg, jpeg, gif, png) -->
+						* 최적 사이즈 : 200 * 55 픽셀, (확장자 : jpg, jpeg, gif, png)
 						<div class="pad20l pad5t pad20b">* 최적 사이즈 : 200 * 55 픽셀, (확장자 : jpg, jpeg, gif, png)</div>
 					</td>
 				</tr>
 				
-				<!-- 관리자 정보 설정 -->
+				관리자 정보 설정
 				<tr>
 					<td class="larea txt_ce bold">관리자 정보 설정</td>
 					<td>
-						<!-- 그룹웨어 사용자가 아이디/비밀번호를 분실했을 경우 확인할 수 있는 관리자정보를 설정할 수 있습니다. -->
+						그룹웨어 사용자가 아이디/비밀번호를 분실했을 경우 확인할 수 있는 관리자정보를 설정할 수 있습니다.
 						<div class="logo_title" >
 							그룹웨어 사용자가 아이디/비밀번호를 분실했을 경우 확인할 수 있는 관리자정보를 설정할 수 있습니다.
 							<span id="infoQuestion">
@@ -502,16 +503,16 @@
 이름 : 
 연락처 : </textarea>
 					</td>
-				</tr>
+				</tr> -->
 			</table>
 		</form>
 		
 	</div> 
 	<!-- //컨텐츠 --> 
 
-	<div class="btmarea">		
+	<!-- <div class="btmarea">		
 		<span class="rightarea">
-			<!-- 등록 -->
+			등록
 			<span class="btn">
 				<a href="#blank-link" onclick=" }SubmitChk();">
 					<img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_pencil.gif" alt="" align="absmiddle" />
@@ -519,7 +520,7 @@
 				</a>
 			</span>
 		</span>
-	</div>
+	</div> -->
 </div>
 
 <script type="text/javascript" src="/Src/WebCommon/Jquery/Plugin/Upload/ajaxupload.js"></script>
