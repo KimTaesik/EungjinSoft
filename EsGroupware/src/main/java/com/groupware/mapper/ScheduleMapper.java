@@ -11,4 +11,6 @@ public interface ScheduleMapper {
 
 	public abstract void insertSchedule(HashMap<String, Object> params);
 	public abstract List<Schedule> selectSchedule(HashMap<String, Object> params);
+	public abstract void editSchedule(HashMap<String, Object> params);
+	public abstract Schedule editSelectSchedule(int key);
 }

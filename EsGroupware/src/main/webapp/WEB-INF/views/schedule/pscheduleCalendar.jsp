@@ -2,24 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-			<c:choose>
-				<c:when test="${ ryear != null }">
-					<c:set var="date" value="${ rdate }" />
-					<c:set var="currentYear" value="${ ryear }" />
-					<c:set var="currentMonth" value="${ rmonth }" />
-					<c:set var="currentDate" value="1" />
-					<c:set var="currentDay" value="${ currentDay }" />
-				</c:when>
-				<c:otherwise>
-					<c:set var="date" value="${ date }" />
-					<c:set var="currentYear" value="${ currentYear }" />
-					<c:set var="currentMonth" value="${ currentMonth }" />
-					<c:set var="currentDate" value="${ currentDate }" />
-					<c:set var="currentDay" value="${ currentDay }" />
-				</c:otherwise>
-			</c:choose>
+			<c:set var="date" value="${ date }" />
+			<c:set var="currentYear" value="${ currentYear }" />
+			<c:set var="currentMonth" value="${ currentMonth }" />
+			<c:set var="currentDate" value="${ currentDate }" />
+			<c:set var="currentDay" value="${ currentDay }" />
 			<c:set var="dateString" value="${ dateString }" />
 			<c:set var="lastDate" value="${ lastDate }" />
+			
 			<c:if test="${(currentYear % 4 == 0 && currentYear % 100 != 0) || currentYear % 400 == 0}">			
 				<div style="width:0;height:0;display: none">${ lastDate[1] = 29 }</div>
 			</c:if>
@@ -56,11 +46,18 @@
 												<td class="${ dateString[j-1] }" height="70" align="left" valign="top">
 													<font class="org8">${dateNum}<img class="plus" id="${ currentMonth }-${dateNum}" src="/groupware/resources/image/cal_plus.png" border="0"  /></font>
 													<br />
-														<c:forEach var="scList" items="${ scList }">
-															<c:if test="${ dateNum eq scList.date && currentYear eq scList.year && currentMonth eq scList.month }">
-																				 ${ scList.title } : ${ scList.cont }<br />
-															</c:if>
-														</c:forEach>
+													<c:forEach var="scList" items="${ scList }">
+														<c:if test="${ dateNum eq scList.date && currentYear eq scList.year && currentMonth eq scList.month }">
+												          <c:choose>
+											          		<c:when test="${fn:length(scList.title) > 4}">
+											          			<div class="cursor" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
+											          		</c:when>
+											          		<c:otherwise>
+											          			<div class="cursor" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
+											          		</c:otherwise> 
+												          </c:choose>
+														</c:if>
+													</c:forEach>
 												</td>
 											</c:otherwise>
 										</c:choose>
@@ -70,10 +67,15 @@
 			</c:forEach>
 			</tbody>
 			</table>
-					<script type="text/javascript">
-					    $(".plus").click(function(){
-							var id = $(this).attr('id');
-							var url = 'addScheduleForm.action?dayid='+id+"&year="+${ currentYear };
-							$(location).attr('href', url);
-						});
-					</script>
+				<script type="text/javascript">
+				    $(".plus").click(function(){
+						var id = $(this).attr('id');
+						var url = 'addScheduleForm.action?dayid='+id+"&year="+${ currentYear };
+						$(location).attr('href', url);
+					});
+				    $(".uDate").click(function(){
+				    	var id = $(this).attr('id');
+						var url = 'editScheduleForm.action?dayid='+id;
+						$(location).attr('href', url);
+					});
+				</script>
