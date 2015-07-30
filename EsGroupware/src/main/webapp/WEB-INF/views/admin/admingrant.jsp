@@ -13,26 +13,26 @@
 <title>Whois Groupware - Ubiquitous Collaboration!</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=7" />
-	<link href="/groupware/resources/styles/admin/common.css?dummy=20150702" rel="stylesheet" type="text/css" />
-	<link href="/groupware/resources/styles/admin/board.css?dummy=20120223" rel="stylesheet" type="text/css" />
-	<link href="/groupware/resources/styles/admin/subpage.css?dummy=20120223" rel="stylesheet" type="text/css" />
-	<link href="/groupware/resources/styles/admin/popup.css?dummy=20140507" rel="stylesheet" type="text/css" />
+	<link href="/groupware/resources/styles/admin/common.css" rel="stylesheet" type="text/css" />
+	<link href="/groupware/resources/styles/admin/board.css" rel="stylesheet" type="text/css" />
+	<link href="/groupware/resources/styles/admin/subpage.css" rel="stylesheet" type="text/css" />
+	<link href="/groupware/resources/styles/admin/popup.css" rel="stylesheet" type="text/css" />
 	<!--[if IE 6]>
 	<link href="http://css.whoisdesk.net/Src/Skin/Renewal/board_ie6.css" rel="stylesheet" type="text/css" />
 	<![endif]-->
 	<link type="text/css" href="http://css.whoisdesk.net/Src/WebCommon/Jquery/Jquery_ui_1_7_2/blitzer/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
 
-	<script type="text/javascript" src="http://js.whoisdesk.net/Src/WebCommon/Script/Common.js?v=20150702"></script>
-	<script type="text/javascript" src="http://js.whoisdesk.net/Src/WebCommon/Jquery/jquery.js?dt=20110117"></script>
-	<script type="text/javascript" src="http://js.whoisdesk.net/Src/WebCommon/Jquery/Plugin/jquery.DOMWindow.js"></script>
+	<script src="/groupware/resources/styles/script/jquery.js"></script>
+	<script src="/groupware/resources/styles/script/jquery-ui.js"></script>
 
 	<script type="text/javascript">
 	$(function() {
-		$("#adminSearch").click(function(event) {
+		$("#searchAdmin").click(function(event) {
+			/* alert($(":radio[name='AdminGb']:checked").val()); */
 			$.ajax({
-				url : "/groupware/admin/adminsearch.action",
+				url : "/groupware/admin/searchDeptAdmin.action",
 				async : true,
-				data : { "option": $("option:selected").val()},
+				data : { "option": $("option:selected").val(), "radio" : $(":radio[name='AdminGb']:checked").val() },
 				method : "post",
 				success : function(result, status, xhr) {
 					/* $("#result").text(result); */
@@ -41,7 +41,7 @@
 					var html = 
 						"<select name='TreeKey2' size='5' style='width:500px;height:100px;' onchange='getTreeKeyCode(this.value);'>";
 						for(var i= 0 ; i < result.length; i ++) {
-							html += "<option value='" + result[i].id + "'>" + result[i].name + "</option>";
+							html += "<option class='idoption' value='" + result[i].id + "'>" + result[i].name + "</option>";
 						}
 						
 						html += "</select>";
@@ -54,11 +54,80 @@
 						}	
 				},
 				error : function(xhr, status, ex) {
-
+					alert(ex);
 				}
 			})		
 			event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
-		})	
+		})
+		
+		$("#registerApprovalAdmin").click(function(event) {
+			alert($(":radio[name='AdminGb']:checked").val());
+			var radio = $(":radio[name='AdminGb']:checked").val()
+			$.ajax({
+				url : "/groupware/admin/registerAdmin.action",
+				async : true,
+				data : { "id": $(".idoption:selected").val(), "radio" : $(":radio[name='AdminGb']:checked").val() },
+				method : "post",
+				success : function(result, status, xhr) {
+						alert("radio?" + radio);
+						//alert(html);
+						if(radio == "8") {
+							alert("radio8 -" + radio);
+							$(".table1").html(result);
+						}
+						else if (radio == "1") {
+							alert("radio1 -" + radio);
+							$(".table4").html(result);
+						}
+						
+						$(".deleteApprovalAdmin").click(function(event) {
+							/* var selected = $(":select[name='TreeKey2']:selected").val() */
+							var id = $(this).attr("href");
+							$.ajax({			
+								url : "/groupware/admin/deleteApprovalAdmin.action",
+								async : true,
+								data : { "id": id},
+								method : "post",
+								success : function(result, status, xhr) {
+														
+									var ids = "#tr" + id;
+
+									$(ids).remove();
+									
+								},
+								error : function(xhr, status, ex) {
+									alert(status + ex);
+								}
+							})		
+							event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
+						})
+				},
+				error : function(xhr, status, ex) {
+				}
+			})		
+			event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
+		})
+		
+		$(".deleteApprovalAdmin").click(function(event) {
+			var id = $(this).attr("href");
+			$.ajax({			
+				url : "/groupware/admin/deleteApprovalAdmin.action",
+				async : true,
+				data : { "id": id},
+				method : "post",
+				success : function(result, status, xhr) {
+										
+					var ids = "#tr" + id;
+
+					$(ids).remove();
+					
+				},
+				error : function(xhr, status, ex) {
+					alert(status + ex);
+				}
+			})		
+			event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
+		})
 	})
 	</script>
 </head>
@@ -78,8 +147,8 @@
         <h2><span class="join">관리자 지정</span></h2> 
 	</div> 
 
-	<div class="toparea"> 
-		<span class="leftarea"> 
+	<div class="toparea" style="height: 10px;"> 
+<!-- 		<span class="leftarea"> 
 
 			<span class="btn">
 			<a href="#blank-link" onclick="javascript:setHelpGuide();"><img src="/groupware/resources/image/admin/icon_clock.gif" alt="" align="absmiddle" /> 관리자 설명</a>
@@ -91,15 +160,15 @@
 			<span class="btn">		
 				<a href="#blank-link" onclick="javascript:"><img src="/groupware/resources/image/admin/icon_pencil.gif" alt="" align="absmiddle" /> 등록</a>			
 			</span> 
-		</span>
+		</span> -->
 	</div> 
 
     <div class="table_view"> 
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_layout">
 		<form name="form" method="post" action='indexPrc.php?dummy=1437557543' onsubmit='return submitPrc();'>	
-		<input type='hidden' name='No'		value=''>
-		<input type='hidden' name='Id'		value='' >
+		<input type='hidden' name='No' value=''>
+		<input type='hidden' name='Id' value='' >
 		<input type='hidden' name='TreeKeyVal' value='' >
 
 
@@ -183,7 +252,7 @@
 								<input name="userInfo" type="text" class="input vm" value="" style="width:200px" readonly />
 							</span>
 							<span class="btn_page">
-								<a href="#" id="adminSearch"><span><img src="/groupware/resources/image/icon_magnify.gif" class="vm"  /> 관리자 찾기</span></a>
+								<a href="#" id="searchAdmin"><span><img src="/groupware/resources/image/icon_magnify.gif" class="vm"  /> 관리자 찾기</span></a>
 							</span>
 						</nobr>
 					</div>
@@ -220,7 +289,7 @@
 
 			<span class="btn">
 			
-									<a href="#blank-link" onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }submitChk();"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_pencil.gif" alt="" align="absmiddle" /> 등록</a>
+				<a href="#blank-link" id="registerApprovalAdmin"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_pencil.gif" alt="" align="absmiddle" /> 등록</a>
 				
 			</span> 
 
@@ -313,7 +382,7 @@
 
 	</div>
 
-	<div class="under"></div>
+	<div id="admintable" class="under"></div>
 
 		<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="table">
 			
@@ -323,12 +392,6 @@
 			<col width="15%" class="overf"></col>
 			<col width="30%" class="overf"></col>
 			<col width="15%" class="overf"></col>
-
-			<thead>
-
-			</thead>
-
-			<tbody>
 
 			<tr>
 				<td colspan='6' align='left'><img src='/groupware/resources/image/admin/bull_arr_gray.gif' alt='' /><b>전체관리자</b></td>
@@ -371,57 +434,89 @@
 					</div>
 				</th>
 			</tr>
-
-
-			<tr>
-				<td class='txt_ce'>
-					<div>
-						<nobr>
-							1
-						</nobr>
-					</div>
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>				
-							admin
-						</nobr>
-					</div>							
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>				
-							대표						
-						</nobr>
-					</div>							
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>				
-							김응진
-						</nobr>
-					</div>							
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>
-							전체관리자
-						</nobr>
-					</div>
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>
-								<a href='#blank-link' onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }location.href='?dummy=1437557543&No=1';"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;
-								<a href='#blank-link' onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }prcDel('1', '1', 'admin');"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' class='vm'  title='삭제' /></a>
-						</nobr>
-					</div>
-				</td>
-			</tr>
-		
-			<tr height='20'>
+			
+			<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="table4">
+			
+			<col width="10%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			<col width="30%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			
+			<tr id="approvalListTable">
+	            <c:forEach var="approvals2" items="${ approvalAdmins2 }" varStatus="status">
+	            <tr id="tr${ approvals2.id }">
+	             	<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ status.index }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ approvals2.id }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								<c:forEach var="position" items="${ positions }">
+									<c:if test="${ approvals2.positionNo ==  position.positionNo }">
+										${ position.positionName }										
+									</c:if>
+		                		</c:forEach>
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ approvals2.name }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ approvals2.name }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+									<!-- <a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp; -->
+									<a href='${ approvals2.id }' class="deleteApprovalAdmin"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' title='삭제' /></a>
+							</nobr>
+						</div>
+					</td>
+				</tr>
+	            </c:forEach>
+		    </tr>
+		    </table>
+		    
+		    <tr height='20'>
 				<td colspan='6' style='border-bottom:0px;'>&nbsp;</td>
 			</tr>
+		    </table>
+		    
+			<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="table2">
+					
+				<col width="10%" class="overf"></col>
+				<col width="15%" class="overf"></col>
+				<col width="15%" class="overf"></col>
+				<col width="15%" class="overf"></col>
+				<col width="30%" class="overf"></col>
+				<col width="15%" class="overf"></col>
+	
+				<thead>
+	
+				</thead>
+		
 			<tr>
 				<td colspan='6'>
 					<div>
@@ -475,8 +570,70 @@
 					</div>
 				</th>
 			</tr>
+			<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="table1">
 			
-			<tr>
+			<col width="10%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			<col width="30%" class="overf"></col>
+			<col width="15%" class="overf"></col>
+			
+			<tr id="approvalListTable">
+	            <c:forEach var="approvals" items="${ approvalAdmins }" varStatus="status">
+	            <tr id="tr${ approvals.id }">
+	             	<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ status.index }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ approvals.id }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								<c:forEach var="position" items="${ positions }">
+									<c:if test="${ approvals.positionNo ==  position.positionNo }">
+										${ position.positionName }										
+									</c:if>
+		                		</c:forEach>
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ approvals.name }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+								${ approvals.name }
+							</nobr>
+						</div>
+					</td>
+					<td class='txt_ce'>
+						<div>
+							<nobr>
+									<!-- <a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp; -->
+									<a href='${ approvals.id }' class="deleteApprovalAdmin"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' title='삭제' /></a>
+							</nobr>
+						</div>
+					</td>
+				</tr>
+	            </c:forEach>
+		    </tr>
+		    </table>
+			<!-- <tr>
 				<td class='txt_ce'>
 					<div>
 						<nobr>
@@ -515,12 +672,12 @@
 				<td class='txt_ce'>
 					<div>
 						<nobr>
-								<a href='#blank-link' onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }location.href='?dummy=1437557543&No=5';"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;
-								<a href='#blank-link' onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }prcDel('5', '8', 'desk01');"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' class='vm'  title='삭제' /></a>
+								<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;
+								<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' class='vm'  title='삭제' /></a>
 						</nobr>
 					</div>
 				</td>
-			</tr>
+			</tr> -->
 		
 
 			</tbody>

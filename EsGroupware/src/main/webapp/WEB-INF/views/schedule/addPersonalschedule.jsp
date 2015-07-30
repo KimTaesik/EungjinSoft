@@ -45,17 +45,20 @@
 		        }
 		    });
 		    
-		    $('#yyear').click(function(e) {
-		        $.ajax({
-		            type: "post",
-		            url: "pschedule2.action",
-		            data: $('#calendar').serialize(),
-		            success: function(result,status,xhr){
-		            	$("#calendarContainer").html(result)
-		            },
-		            error: function(xhr, status, er){}
-		        });
-		        e.preventDefault();
+		    $('#schedule_add').click(function(e) {
+		    	var title = $("#schedule_title").val()
+		    	var cont = $("#schedule_detail").val()
+		    	var stdate = $("#addcalendar").val()
+		    	var classify = $("#schedule_kind").val()
+		    	var priority = $("#schedule_priority").val()
+		    	var makepublic = $("#schedule_group").val()
+				var url = 'insertSchedule.action?title='+title+"&cont="+cont+"&stdate="+stdate+"&classify="+classify+"&priority="+priority+"&makepublic="+makepublic;
+				$(location).attr('href', url);
+		    });
+		    
+		    $('#schedule_return').click(function(e) {
+				var url = 'reSchedule.action';
+				$(location).attr('href', url);
 		    });
 		});
 	</script>
@@ -72,32 +75,31 @@
 		<span class="rightarea">
 			<span class="btn">
 				<span><a id="schedule_add" href='#'><img id="schedule_add" src="/groupware/resources/image/save.png" border="0" />일정저장</a></span>
-				<span><a href='#'><img src="/groupware/resources/image/back.png" border="0" />돌아가기</a></span>
+				<span><a id="schedule_return" href='#'><img src="/groupware/resources/image/back.png" border="0" />돌아가기</a></span>
 			</span>
 		</span>
 	</div>
 	
 	<div>
 		<br>
-		<form action="schedule_add.php" name=compose method=post>
+		<form id="asd">
 		<table width="100%" border="0" cellspacing="1" cellpadding="3" bgcolor="#C9C9C9">
 			<tr bgcolor="#FFFFFF" valign="middle"> 
-					<input type=hidden name=continue_flag value="">
-					<input type=hidden name=groupkey value="">
-					<input type=hidden name=schedule_type value="schedule_month">
-					<input type=hidden name=auth value="PRIVATE">
-					<input type=hidden name=schedule_open value="">
 				<td width="90" height="28" bgcolor="#efefef" align="center">일정 제목</td>
-				<td style="padding-left:5px;"><input type=text name=schedule_title maxlength=128 class="input" style="width:98%"></td>
+				<td style="padding-left:5px;">
+					<input type=text id="schedule_title" maxlength=128 class="input" style="width:98%">
+				</td>
 			</tr>
 		
 			<tr bgcolor="#FFFFFF">
 				<td bgcolor="#efefef" align="center">일정 내용</td>
-				<td style="padding-left:5px;"><textarea name=schedule_detail class="memo" style="width:100%;height:200px"></textarea></td>
+				<td style="padding-left:5px;">
+					<textarea id="schedule_detail" class="memo" style="width:100%;height:200px"></textarea>
+				</td>
 			</tr>
 		
 			<tr bgcolor="#FFFFFF">
-				<td height="80" bgcolor="#efefef" align="center">일정 날짜</td>
+				<td height="100%" bgcolor="#efefef" align="center">일정 날짜</td>
 				<td style="padding-left:10px;">
 					<input id="addcalendar" type="date" value="${ date }">
 					<input type=radio name=time_type id="day_day" value="DAY" >일일 일정
@@ -113,19 +115,19 @@
 			
 			<tr bgcolor="#FFFFFF">
 				<td height="28" bgcolor="#efefef" align="center">일정 종류</td>
-				<td style="padding-left:5px;"><select name=schedule_kind class="input"><option value='0'><option value='1'>기념일<option value='2'>생일<option value='3'>일반 약속<option value='4'>아침식사 약속<option value='5'>점심식사 약속<option value='6'>저녁식사 약속<option value='7'>면접<option value='8'>술자리<option value='9'>결혼식<option value='10'>졸업식<option value='11'>동창회<option value='12'>전화<option value='13'>채팅<option value='14'>클럽 이벤트<option value='15'>넷 이벤트<option value='16'>콘서트<option value='17'>공연<option value='18'>영화<option value='19'>파티<option value='20'>휴일<option value='21'>휴가<option value='22'>스포츠<option value='23'>모임<option value='24'>여행<option value='25'>TV 프로그램<option value='26'>요금 납부<option value='27'>기타</select></td>
+				<td style="padding-left:5px;"><select id="schedule_kind" name=schedule_kind class="input"><option value='0'><option value='1'>기념일<option value='2'>생일<option value='3'>일반 약속<option value='4'>아침식사 약속<option value='5'>점심식사 약속<option value='6'>저녁식사 약속<option value='7'>면접<option value='8'>술자리<option value='9'>결혼식<option value='10'>졸업식<option value='11'>동창회<option value='12'>전화<option value='13'>채팅<option value='14'>클럽 이벤트<option value='15'>넷 이벤트<option value='16'>콘서트<option value='17'>공연<option value='18'>영화<option value='19'>파티<option value='20'>휴일<option value='21'>휴가<option value='22'>스포츠<option value='23'>모임<option value='24'>여행<option value='25'>TV 프로그램<option value='26'>요금 납부<option value='27'>기타</select></td>
 			</tr>
 			
 			<tr bgcolor="#FFFFFF">
 				<td height="28" bgcolor="#efefef" align="center">우선 순위</td>
-				<td style="padding-left:5px;"><select name=schedule_priority class="input"><option value='0'>없음<option value='1'>낮음<option value='2'>중간<option value='3'>높음</select></td>
+				<td style="padding-left:5px;"><select id="schedule_priority" name=schedule_priority class="input"><option value='0'>없음<option value='1'>낮음<option value='2'>중간<option value='3'>높음</select></td>
 			</tr>
 			
 			<tr bgcolor="#FFFFFF">
 				<td height="28" bgcolor="#efefef" align="center">일정 공개</td>
 				<td style="padding-left:5px;">
-					<select name=schedule_group class="input">					
-						<option value='' selected>=비공개=<option value='%2Fwhoisdesk_kr'>공개
+					<select id="schedule_group" name=schedule_group class="input">					
+						<option value='closed' selected>=비공개=<option value='open'>공개
 					</select>
 				</td>
 			</tr>

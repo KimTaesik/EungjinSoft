@@ -56,6 +56,11 @@
 												<td class="${ dateString[j-1] }" height="70" align="left" valign="top">
 													<font class="org8">${dateNum}<img class="plus" id="${ currentMonth }-${dateNum}" src="/groupware/resources/image/cal_plus.png" border="0"  /></font>
 													<br />
+														<c:forEach var="scList" items="${ scList }">
+															<c:if test="${ dateNum eq scList.date && currentYear eq scList.year && currentMonth eq scList.month }">
+																				 ${ scList.title } : ${ scList.cont }<br />
+															</c:if>
+														</c:forEach>
 												</td>
 											</c:otherwise>
 										</c:choose>
@@ -68,7 +73,7 @@
 					<script type="text/javascript">
 					    $(".plus").click(function(){
 							var id = $(this).attr('id');
-							var url = 'addschedule.action?dayid='+id+"&year="+${ currentYear };
+							var url = 'addScheduleForm.action?dayid='+id+"&year="+${ currentYear };
 							$(location).attr('href', url);
 						});
 					</script>

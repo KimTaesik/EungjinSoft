@@ -206,9 +206,103 @@
 		SELECT position_no, position_name FROM position where position_no =#{no}
 	</select>
 	
-	<select id="searchAdmin" resultType="Employee"
+	<select id="searchDeptAdmin" resultType="Employee"
 		parameterType="String">
-		SELECT id, name FROM employee where dept_no =#{no}
+		SELECT id, name FROM employee where dept_no =#{no} and usertype = 0
 	</select>
+	<select id="searchAdmin" resultType="Employee">
+		SELECT id, name FROM employee WHERE deleted = 0 and usertype != 1 and usertype = 0
+	</select>
+	
+	<update id="registerAdmin" parameterType="hashMap">
+		UPDATE employee 
+		set
+		<choose>
+			<when test='usertype == "8"'>
+				usertype = 8
+			</when>
+			<when test='usertype == "1"'>
+				usertype = 1
+			</when>
+		</choose> 
+		WHERE id = #{id}
+	</update>
+	<update id="registerApprovalAdmin" parameterType="String">
+		UPDATE employee 
+		set
+			usertype = 8
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getAdminList" resultType="Employee"  parameterType="hashMap">
+		SELECT id, name, position_no positionNo 
+		FROM employee 
+		where 
+ 		<choose>
+			<when test='radio == "8"'>
+			usertype = 8
+			</when>
+			<when test='radio == "1"'>
+			usertype = 1
+			</when>
+		</choose>
+	</select>
+	
+	<update id="deleteApprovalAdmin" parameterType="String">
+		UPDATE employee set usertype = 0 WHERE id = #{id}
+	</update>
+	
+	<select id="searchSelectAdmin" resultType="Employee"  parameterType="hashMap" >
+		SELECT id, name 
+		FROM employee 
+		WHERE deleted = 0 		
+		<choose>
+			<when test='radio == "8"'>
+			and usertype != 8 and usertype = 0
+			</when>
+			<when test='radio == "1"'>
+			and usertype != 1 and usertype = 0
+			</when>
+		</choose>
+	</select>
+	<select id="getEmployeeCount" parameterType="String" resultType="int">
+ 	SELECT 
+ 	COUNT (id)
+ 	FROM 
+ 		employee
+ 	</select>
+ 	
+ 	<select id="getEmployeeList2" resultType="Employee" parameterType="hashMap" >
+		SELECT id, name, dept_no deptNo, position_no positionNo, sex
+		FROM 
+ 		(
+ 			SELECT 
+ 				rownum idx, s.*
+ 			FROM (
+ 				SELECT 
+ 					id, name, dept_no, position_no, sex, deleted
+				FROM 
+					employee
+ 				)s
+ 		)
+	 	WHERE
+	 		idx &gt;= #{ first } AND idx &lt; #{ last } AND deleted = 0
+		ORDER BY 
+				id
+		 ASC 
+	</select>
+	
+	<insert id="insertUpload" parameterType="hashMap">
+		INSERT INTO upload
+		(uploadno, title, uploader, content)
+		VALUES (upload_sequence.nextVal, #{title}, #{uploader}, #{content})
+	</insert>
+	
+	<insert id="insertUploadFile" parameterType="hashMap">
+
+		INSERT INTO uploadfile
+		(uploadfileno, uploadno, savedfilename, userfilename)
+		VALUES (uploadfile_sequence.nextVal, #{uploadno}, #{savedfilename}, #{userfilename})
+	</insert>
 
 </mapper>                                                                                 

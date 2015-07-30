@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.groupware.mapper.ScheduleMapper">
+ 
+ 	<insert id="insertSchedule" parameterType="hashMap" >
+		INSERT INTO schedule(key, title, cont, stdate, eddate, classify, priority, category, makepublic, s_id) 
+		values(sc_seq.nextval,#{title},#{cont},#{stDate},#{edDate},#{classify},#{priority},#{category},#{makepublic},#{s_id})
+ 	</insert>
+ 	
+ 	<select id="selectSchedule" parameterType="hashMap" resultType="Schedule">
+ 		SELECT title, cont, stdate, eddate, classify, priority, category, makepublic, s_id FROM Schedule 
+ 		WHERE s_id = #{s_id} and TO_CHAR(stdate, 'YYYY-MM') = #{stDate} and category= #{category}
+ 	</select>
+ 	
+ </mapper>
+  

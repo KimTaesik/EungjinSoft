@@ -22,8 +22,6 @@ public interface EmployeeMapper {
 	List<Employee> getemList();
 	
 	List<Employee> getEmployeeList(HashMap<String, String> params);
-	
-	List<Employee> searchAdmin(String id);
 
 	List<Dept> getDeptList();
 
@@ -44,6 +42,29 @@ public interface EmployeeMapper {
 	void deleteDept(String id);
 
 	void deletePosition(String id);
+	
+	List<Employee> searchDeptAdmin(String id);
+	
+	List<Employee> searchSelectAdmin(HashMap<String, String> params);
+	
+	void registerAdmin(HashMap<String, String> params);
 
+	void registerApprovalAdmin(String id);
+	
+	//List<Employee> getApprovalAdminList();
+	List<Employee> getAdminList(HashMap<String, String> params);
+	
+	void deleteApprovalAdmin(String id);
 
+	List<Employee> searchAdmin();
+	
+	int getEmployeeCount();
+	
+	List<Employee> getEmployeeList(String lineup);
+	
+	List<Employee> getEmployeeList2(HashMap<String, Object> params);
+	
+	int insertUpload(HashMap<String, Object> params);
+
+	void insertUploadFile(HashMap<String, Object> params);
 }
