@@ -61,7 +61,7 @@
 		})
 		
 		$("#registerApprovalAdmin").click(function(event) {
-			alert($(":radio[name='AdminGb']:checked").val());
+			/* alert($(":radio[name='AdminGb']:checked").val()); */
 			var radio = $(":radio[name='AdminGb']:checked").val()
 			$.ajax({
 				url : "/groupware/admin/registerAdmin.action",
@@ -69,14 +69,14 @@
 				data : { "id": $(".idoption:selected").val(), "radio" : $(":radio[name='AdminGb']:checked").val() },
 				method : "post",
 				success : function(result, status, xhr) {
-						alert("radio?" + radio);
+						/* alert("radio?" + radio); */
 						//alert(html);
 						if(radio == "8") {
-							alert("radio8 -" + radio);
+							/* alert("radio8 -" + radio); */
 							$(".table1").html(result);
 						}
 						else if (radio == "1") {
-							alert("radio1 -" + radio);
+							/* alert("radio1 -" + radio); */
 							$(".table4").html(result);
 						}
 						

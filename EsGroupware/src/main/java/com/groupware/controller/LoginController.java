@@ -40,7 +40,7 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 
 		Employee employee = employeeDao.getEmployeeByIdAndPasswd(memberId, passwd);
-		List<Menu> menu = employeeDao.menulist();
+		List<Menu> menus = employeeDao.menulist();
 		
 		if (employee != null) {
 			HttpSession session = request.getSession();
@@ -48,7 +48,7 @@ public class LoginController {
 			
 			String returnUrl = request.getParameter("returnurl");
 			if (returnUrl == null || returnUrl.length() == 0) {
-				mav.addObject("menu", menu);
+				mav.addObject("menus", menus);
 				mav.setViewName("index");
 			}
 			else {

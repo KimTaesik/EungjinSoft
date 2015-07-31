@@ -9,7 +9,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel='Stylesheet' href='/groupware/resources/styles/admin/default.css' />
 <title>Insert title here</title>
-
+<script src="/groupware/resources/styles/script/jquery.js"></script>
+<script src="/groupware/resources/styles/script/jquery-ui.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var rowCount = $('#menu tr').length;
+		alert($('#menu td').length);
+		
+		
+	});
+</script>
 </head>
 <body>
 	<div id="login">
@@ -42,7 +51,7 @@
 	<div style="float: left;width: 49%">
 	<table id="menu" style="width: 500px;height: 110px;padding-left: 20px;text-align: center;color: #999999; font-weight: bolder;">
 		<tr height="100px">
-			<td onclick="window.open('/groupware/attendance/check.action','근태현황','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1150, height=650');">
+			<!-- <td onclick="window.open('/groupware/attendance/check.action','근태현황','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1150, height=650');">
 			<img src="/groupware/resources/image/admin/assiduity.png" /><br />
 				근태현황
 			</td>
@@ -69,17 +78,60 @@
 			<td onclick="window.open('/groupware/schedule/pschedule.action','일정관리','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
 			<img src="/groupware/resources/image/admin/home.png" /><br />
 				일정관리
-			</td>
-			<td onclick="window.open('/groupware/report/reportForm.do','업로드','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
-			<img src="/groupware/resources/image/admin/home.png" /><br />
-				업로드
-			</td>
-			<c:if test="${ loginuser.userType == 1 }">
-				<td onclick="window.open('/groupware/admin/admin.action','관리자','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
-					<img src="/groupware/resources/image/admin/admin.png" /><br />
-					관리자
-				</td>
-			</c:if>
+			</td> -->
+			
+			<c:forEach var="menu" items="${ menus }">
+			<c:set var="test" value="1" />	
+				<c:if test="${ menu.use == 1 }">
+					<c:if test="${ menu.menuno == 1 }">
+						<c:if test="${ loginuser.userType == 1 }">
+							<td onclick="window.open('/groupware/admin/admin.action','관리자','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
+								<img src="/groupware/resources/image/admin/admin.png" /><br />
+								관리자
+							</td>
+						</c:if>
+						${ test }
+					</c:if>
+					<c:if test="${ menu.menuno == 2 }">
+						<td onclick="window.open('/groupware/attendance/check.action','근태현황','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1150, height=650');">
+							<img src="/groupware/resources/image/admin/assiduity.png" /><br />
+							근태현황
+						</td>
+						${ test }	
+					</c:if>
+					<c:if test="${ menu.menuno == 3 }">
+						<td onclick="window.open('/groupware/board/list.action?classify=1','커뮤니티','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
+							<img src="/groupware/resources/image/admin/community.png" /><br />
+							커뮤니티
+						</td>
+					</c:if>	
+					<c:if test="${ menu.menuno == 4 }">
+						<td onclick="window.open('/groupware/organization/organization.action','조직도','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
+							<img src="/groupware/resources/image/admin/organization.png" /><br />
+							조직도
+						</td>
+					</c:if>
+					<c:if test="${ menu.menuno == 5 }">
+						<td onclick="window.open('/groupware/address/addressheader.action?classify=1','주소록','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
+							<img src="/groupware/resources/image/admin/home.png" /><br />
+							주소록
+						</td>
+					</c:if>
+					<c:if test="${ menu.menuno == 6 }">
+						<td onclick="window.open('/groupware/schedule/pschedule.action','일정관리','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
+							<img src="/groupware/resources/image/admin/assiduity.png" /><br />
+							일정관리
+						</td>
+					</c:if>
+					<c:if test="${ menu.menuno == 7 }">
+						<td onclick="window.open('/groupware/approval/approvalheader.action','전자결제','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
+							<img src="/groupware/resources/image/admin/organization.png" /><br />
+							전자결제
+						</td>
+					</c:if>		
+	
+				</c:if>			
+			</c:forEach>
 		</tr>
 		<!--
 			<td>
