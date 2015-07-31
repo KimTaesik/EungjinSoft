@@ -49,7 +49,7 @@
 <!--  	페이징 처리 [목록 조회] -->
     <select id="getBoardList" parameterType="hashMap" resultType="Board">
  	SELECT 
- 	board_no board_No,boardno , title, id writer, readcount, regdate, groupno,
+ 	board_no, boardno , title, id writer, readcount, regdate, groupno,
  	step, depth, deleted, classify
  	FROM 
  		(

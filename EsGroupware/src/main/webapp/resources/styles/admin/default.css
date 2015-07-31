@@ -1,0 +1,83 @@
+@CHARSET "utf-8";
+a{
+	text-decoration: none;
+}
+
+body {
+	font-family: Tahoma, Arial, Helvetica;
+	font-size: 12px;
+}
+
+body {
+/* 	background: transparent url('/groupware/image/background05.jpg');
+	background-size: 100%;
+	margin: 0;
+	padding: 0;	 */
+}
+
+
+h1 {
+	color: white;
+}
+#menu td {
+	width: 70px;
+}
+
+#menu td img {
+	width: 50px;
+}
+
+#menu tr {
+	height: 100px;	
+}
+
+#menu td:hover, #menu td:focus {
+	background-color: #dfefff;
+}
+
+#login {
+	text-align: right;
+	/*background-color: #69baf5;*/
+	background-color: #404040;
+	color: #ffffff;
+	padding: 5px 15px 5px /* bottom - left - top - 0*/
+}
+
+#login ul {
+	display: inline;
+	margin-left: 0;
+	padding-left: 0;	
+}
+
+#login ul li {
+	display: inline;
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+	margin-left: 0;
+}
+
+#login ul li a {
+	color: #ffffff;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 8px;
+}
+
+#login ul li a:hover, #login ul li a:focus {
+	background-color: #5a5a5a;
+}
+
+#pageContainer {
+
+	margin: 0 auto;
+	max-width: 600px;
+	min-width: 600px;
+	padding:0 0;
+	text-align: left;
+
+}
+
+#listcss th, td{
+	padding-left: 10px;
+}

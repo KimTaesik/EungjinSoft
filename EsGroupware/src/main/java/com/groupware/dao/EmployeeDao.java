@@ -2,8 +2,10 @@ package com.groupware.dao;
 
 import java.util.List;
 
+import com.groupware.dto.Board;
 import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
+import com.groupware.dto.Menu;
 import com.groupware.dto.Position;
 
 public interface EmployeeDao {
@@ -40,6 +42,26 @@ public interface EmployeeDao {
 
 	List<Employee> getEmployeeList(String lineup);
 
-	List<Employee> searchAdmin(String id);
+	List<Employee> searchDeptAdmin(String id);
+	
+	List<Employee> searchAdmin();
+	
+	//List<Employee> getApprovalAdminList();
+	List<Employee> getAdminList(String radio);
+	
+	//void registerApprovalAdmin(String id);
 
+	void deleteApprovalAdmin(String id);
+
+	List<Employee> searchSelectAdmin(String radio);
+
+	int getEmployeeCount();
+	
+	List<Employee> getEmployeeList2(int first, int last, String lineup);
+
+	void registerAdmin(String id, String usertype);
+
+	void registerApprovalAdmin(String id);
+	
+	List<Menu> menulist();
 }

@@ -23,9 +23,9 @@
 	
 	<div >
 		
-		<div id="inputcontent">
+		<div id="inputcontent" >
 			<br /><br />
-		    <div id="inputmain" style="margin-top: 20%;">
+		    <div id="inputmain" style="margin-top: 25%;">
 		        <div class="inputsubtitle">로그인정보</div>
 		        
 		        <!--  <form action="/demoweb/account/login.action" method="post"> -->
@@ -61,7 +61,7 @@
 		    </div>
 		</div>   	
 	</div>
-	<footer>
+	<footer style="margin-top: 19%">
 		<h4>copyright 응진Soft</h4>
 	</footer>
 </body>

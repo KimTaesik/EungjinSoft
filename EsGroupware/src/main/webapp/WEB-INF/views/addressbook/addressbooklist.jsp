@@ -1,5 +1,11 @@
+<%@page import="com.groupware.dto.AddressBook"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE>
 <html>
 <head>
@@ -7,7 +13,8 @@
 	<title>주소록</title>
 	<link rel="Stylesheet" href="/groupware/resources/styles/addressframe.css" /> 
 	<script type="text/javascript">
-	function search() {
+	
+/* 	function search() {
 		 var type = document.getElementById("type");
 		 var search = document.getElementById("search");
 		 location.href="list.action?type="+type.value+"&search="+search.value;
@@ -20,39 +27,47 @@
 			type2.selectedIndex=type-1;
 			
 		}
-	}	
+	}	 */
+	
+	function deleteAddress(addressNo, classify) {
+		
+		//1. 삭제 확인 (사용자 선택)
+		var yes = confirm("삭제할까요?");
+		//2. 1의 결과에 따라 삭제하거나 또는 취소
+		if (yes) {
+			location.href = 'addressdelete.action?addressNo=' + addressNo + "&classify=" + classify;
+		}
+	}
+	
+	function editAddress(addressNo, classify) {
+		location.href = 'addressedit.action?addressNo=' + addressNo + "&classify=" + classify;
+	}
 	</script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  	<link rel="stylesheet" href="/resources/demos/style.css">
-  	<script>
-	$(function() {	
-	    $( "#accordion" ).accordion();	
-	});	
-	</script>
-	
-	
+ 
+ 
+   	
+
 </head>
 <body>
-<div class="left_menu" style="background-color: #88cbff">
-	<div id="accordion" style="font-size: 10pt;width: 100pt;">
-	<h3>
-	주소록</h3>
-	<ul>
-        <li>개인 주소록</li>
-        <br />
-        <li>공용 주소록</li>
-        <br />
-        <li>명함철</li>
-	</ul>
-	</div>
-</div>
 
-<div class="content" style="background-color: #88cbff">
+<%-- 
+<% pageContext.include("/WEB-INF/views/include/addressheader.jsp"); %> --%>
+
+<div class="content" style="background-color: #ffffff">
 	<div class="subject">
 		
-		<caption align="left"><font color="#0431B4" font size="3" ><b>개인주소록관리</b></font></caption>
+		<caption align="left"><font color="#000000" font size="3" ><b>
+		<c:choose>
+		<c:when test="${ classify.equals('1') }">
+		개인 주소록
+		</c:when>
+		<c:otherwise>
+		공용 주소록
+		</c:otherwise>
+		</c:choose>
+		</b></font></caption>
+		
 			<br><br>
 			<input type="button" value="전체">
 			<input type="button" value="ㄱ">
@@ -93,9 +108,9 @@
 						
 			<table id="menubar">
 				<tr>
-					<th scope="col"><img src="/groupware/resources/image/add.png" />주소추가</th>
+					<th scope="col"><img src="/groupware/resources/image/add.png" /><a href='#' class="addform" id=${ classify }>주소추가</a></th>
 			        <th scope="col"><img src="/groupware/resources/image/add.png" />그룹추가</th>
-			        <th scope="col"><img src="/groupware/resources/image/minus.png" />삭제</th>
+			     <!--    <th scope="col"><img src="/groupware/resources/image/minus.png" />삭제</th> -->
 			        <th scope="col">
 			        <select name="menu" style='width=30px'>
 						<option selected>개인주소록/</option>
@@ -109,7 +124,7 @@
 				</tr>
 			</table>
 			
-			<table id="menubar">
+			<table id="menubar" class="address">
 				<tr>
 					<th style="width:45px;text-align:center">이름</th>
 					<th style="width:170px;text-align:center">이메일</th>
@@ -119,86 +134,43 @@
 					<th style="width:40px;text-align:center">수정</th>
 					<th style="width:90px;text-align:center">삭제</th>
 				</tr>
+			 	
+			 	<% List<AddressBook> addressbook1 = (List<AddressBook>)request.getAttribute("addressbook1"); %> 
+				<%-- <% String loginUser = (String)request.getAttribute("loginUser");%> --%>
+				<% for (AddressBook addressbook2 : addressbook1) { %>
+				  	<%-- <% if (addressbook2.getId().equals(loginUser)) { %>  --%>
+				 	<%-- <%= loginUser.getId() %> --%>
+				 <!-- <tbody> -->
+				 	<tr>
+			        	<td id="name" style="width:45px;text-align:center" ><%= addressbook2.getName() %></td>
+			            <td id="email" style="width:170px;text-align:center"><%= addressbook2.getEmail() %></td>
+			            <td id="phonenumber" style="width:180px;text-align:center"><%= addressbook2.getPhoneNumber() %></td>
+			            <td id="homenumber" style="width:170px;text-align:center"><%= addressbook2.getHomeNumber() %></td>
+			            <td id="fax" style="width:190px;text-align:center"><%= addressbook2.getFax() %></td>
+			            <td style="width:40px;text-align:center">
+			            	<img class="editaddress" src="/groupware/resources/image/edit.gif" tag="<%= addressbook2.getAddressNo() %>" />
+			            </td>
+			            <td style="width:90px;text-align:center"><img src="/groupware/resources/image/delete.gif" 
+			            onclick="javascript:deleteAddress(<%= addressbook2.getAddressNo()%>,<%= addressbook2.getClassify() %>)" />
+			            </td>
+			        </tr>  
+				<!-- </tbody> -->
+				 	<% }  %> 
+				
+		 	<%-- 	<% } %>   --%>
+				<%-- <c:forEach var="addressbook" items="${ addressbook }"> --%>
+				
+				<%-- </c:forEach> --%>
 			</table>
 			
-		<div style="width:910px; height:370px">
-			<table class="contacts">
-				<tbody>
-			    	<tr>
-			        	<td width="10%">홍길동</td>
-			            <td width="20%">abc@naver.com</td>
-			            <td width="20%">010-1234-5678</td>
-			            <td width="18%">02-123-4567</td>
-			            <td width="18%">02-000-0000</td>
-			            <td width="7%"><img src="/groupware/resources/image/edit.png" /></td>
-			            <td width="7%"><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			        <tr>
-			        	<td>홍길동</td>
-			            <td>abc@naver.com</td>
-			            <td>010-1234-5678</td>
-			            <td>02-123-4567</td>
-			            <td>02-000-0000</td>
-			            <td><img src="/groupware/resources/image/edit.png" /></td>
-			            <td><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			        <tr>
-			        	<td>홍길동</td>
-			            <td>abc@naver.com</td>
-			            <td>010-1234-5678</td>
-			            <td>02-123-4567</td>
-			            <td>02-000-0000</td>
-			            <td><img src="/groupware/resources/image/edit.png" /></td>
-			            <td><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			        <tr>
-			        	<td>홍길동</td>
-			            <td>abc@naver.com</td>
-			            <td>010-1234-5678</td>
-			            <td>02-123-4567</td>
-			            <td>02-000-0000</td>
-			            <td><img src="/groupware/resources/image/edit.png" /></td>
-			            <td><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			        <tr>
-			        	<td>홍길동</td>
-			            <td>abc@naver.com</td>
-			            <td>010-1234-5678</td>
-			            <td>02-123-4567</td>
-			            <td>02-000-0000</td>
-			            <td><img src="/groupware/resources/image/edit.png" /></td>
-			            <td><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			        <tr>
-			        	<td>홍길동</td>
-			            <td>abc@naver.com</td>
-			            <td>010-1234-5678</td>
-			            <td>02-123-4567</td>
-			            <td>02-000-0000</td>
-			            <td><img src="/groupware/resources/image/edit.png" /></td>
-			            <td><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			        <tr>
-			        	<td width="10%">홍길동</td>
-			            <td width="20%">abc@naver.com</td>
-			            <td width="20%">010-1234-5678</td>
-			            <td width="18%">02-123-4567</td>
-			            <td width="18%">02-000-0000</td>
-			            <td width="7%"><img src="/groupware/resources/image/edit.png" /></td>
-			            <td width="7%"><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			        <tr>
-			        	<td width="10%">홍길동</td>
-			            <td width="20%">abc@naver.com</td>
-			            <td width="20%">010-1234-5678</td>
-			            <td width="18%">02-123-4567</td>
-			            <td width="18%">02-000-0000</td>
-			            <td width="7%"><img src="/groupware/resources/image/edit.png" /></td>
-			            <td width="7%"><img src="/groupware/resources/image/del.png" /></td>
-			        </tr>
-			    </tbody>
-			</table>
-		</div>
+			<div style="text-align:center">
+			${ pager.toString() }
+			<br/>
+			</div>
+			<!-- 	<div style="width:910px; height:370px">
+			
+				</div> -->
+		
 
 		</div>
 		
