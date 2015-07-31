@@ -54,13 +54,16 @@
 	</select>
 	
  	<!-- 주소록 수정  --> 
- <!-- 	<update id="editAddress" parameterType="hashMap">
+  	<update id="editAddress" parameterType="hashMap">
  	UPDATE 
  		addressbook
- 	SET title = #{ title } , content = #{ content }
- 	WHERE boardno = #{ boardno }
+ 	SET name = #{ name },  email = #{ email }, phone_number = #{phoneNumber}, home_number = #{homeNumber}, fax = #{fax},
+ 	 	nation = #{ nation }, address = #{ address }, company_name = #{ companyName }, department_name = #{ deptName },
+ 	 	position_name = #{ positionName }, company_number = #{ companyNumber }, company_address = #{ companyAddress },
+ 	 	memo = #{ memo }
+ 	WHERE addressno = #{ addressNo } and classify = #{ classify }
  	</update> 
-  -->
+ 
  	
  	<!-- 주소록 삭제-->
  	<delete id="deleteAddress" parameterType="hashMap" >

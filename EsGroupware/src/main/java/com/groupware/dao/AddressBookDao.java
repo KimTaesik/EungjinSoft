@@ -17,5 +17,5 @@ public interface AddressBookDao {
 	void deleteAddress(String addressNo, String classify);
 	
 	//**********주소록 수정************
-/*	void editAddress(AddressBook addressbook);*/
+	void editAddress(String addressNo,String classify, AddressBook addressbook);
 }

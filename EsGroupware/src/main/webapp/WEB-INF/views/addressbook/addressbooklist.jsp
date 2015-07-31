@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -37,6 +38,10 @@
 			location.href = 'addressdelete.action?addressNo=' + addressNo + "&classify=" + classify;
 		}
 	}
+	
+	function editAddress(addressNo, classify) {
+		location.href = 'addressedit.action?addressNo=' + addressNo + "&classify=" + classify;
+	}
 	</script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
  
@@ -49,10 +54,10 @@
 <%-- 
 <% pageContext.include("/WEB-INF/views/include/addressheader.jsp"); %> --%>
 
-<div class="content" style="background-color: #88cbff">
+<div class="content" style="background-color: #ffffff">
 	<div class="subject">
 		
-		<caption align="left"><font color="#0431B4" font size="3" ><b>
+		<caption align="left"><font color="#000000" font size="3" ><b>
 		<c:choose>
 		<c:when test="${ classify.equals('1') }">
 		개인 주소록
@@ -129,9 +134,12 @@
 					<th style="width:40px;text-align:center">수정</th>
 					<th style="width:90px;text-align:center">삭제</th>
 				</tr>
+			 	
 			 	<% List<AddressBook> addressbook1 = (List<AddressBook>)request.getAttribute("addressbook1"); %> 
+				<%-- <% String loginUser = (String)request.getAttribute("loginUser");%> --%>
 				<% for (AddressBook addressbook2 : addressbook1) { %>
-				 
+				  	<%-- <% if (addressbook2.getId().equals(loginUser)) { %>  --%>
+				 	<%-- <%= loginUser.getId() %> --%>
 				 <!-- <tbody> -->
 				 	<tr>
 			        	<td id="name" style="width:45px;text-align:center" ><%= addressbook2.getName() %></td>
@@ -139,17 +147,17 @@
 			            <td id="phonenumber" style="width:180px;text-align:center"><%= addressbook2.getPhoneNumber() %></td>
 			            <td id="homenumber" style="width:170px;text-align:center"><%= addressbook2.getHomeNumber() %></td>
 			            <td id="fax" style="width:190px;text-align:center"><%= addressbook2.getFax() %></td>
-			            <td style="width:40px;text-align:center"><img src="/groupware/resources/image/edit.png" 
-			            onclick="javascript:editAddress(<%= addressbook2.getAddressNo()%>,<%= addressbook2.getClassify() %>)" />
+			            <td style="width:40px;text-align:center">
+			            	<img class="editaddress" src="/groupware/resources/image/edit.gif" tag="<%= addressbook2.getAddressNo() %>" />
 			            </td>
-			            <td style="width:90px;text-align:center"><img src="/groupware/resources/image/del.png" 
+			            <td style="width:90px;text-align:center"><img src="/groupware/resources/image/delete.gif" 
 			            onclick="javascript:deleteAddress(<%= addressbook2.getAddressNo()%>,<%= addressbook2.getClassify() %>)" />
 			            </td>
 			        </tr>  
 				<!-- </tbody> -->
+				 	<% }  %> 
 				
-				
-		 		<% } %>  
+		 	<%-- 	<% } %>   --%>
 				<%-- <c:forEach var="addressbook" items="${ addressbook }"> --%>
 				
 				<%-- </c:forEach> --%>
