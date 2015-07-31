@@ -1,7 +1,8 @@
 package com.groupware.controller;
 
+import java.sql.Date;
 import java.text.ParseException;
-import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpSession;
 
@@ -39,6 +40,21 @@ public class AddPersonalSchedule {
 		return mav;
 	}
 	
+	@RequestMapping(value = "editScheduleForm.action", method = RequestMethod.GET)
+	public ModelAndView editScheduleForm(int key) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+		String[] sd;
+		Schedule eSchedule = scheduleDao.editSelectSchedule(key);
+		eSchedule.setStDate(sdf.format(sdf.parse(eSchedule.getStDate())));
+		
+		mav.addObject("eSchedule", eSchedule);
+		System.out.println(eSchedule.getTitle());
+		mav.setViewName("schedule/editPersonalschedule");
+		return mav;
+	}
+	
 	@RequestMapping(value = "insertSchedule.action", method = RequestMethod.GET)
 	public String insertSchedule(HttpSession session,
 			String title, String cont, String stdate, int classify, int priority, String makepublic) throws ParseException {
@@ -47,7 +63,7 @@ public class AddPersonalSchedule {
 //		loginUser.setId(((Employee)session.getAttribute("loginuser")).getId());
 		loginUser.setId("admin");
 		String logUser = loginUser.getId();
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		String[] spDate = stdate.split("-");
 		Date cvDate = new Date(Integer.parseInt(spDate[0]),Integer.parseInt(spDate[1]),Integer.parseInt(spDate[2]));
 		
@@ -67,6 +83,34 @@ public class AddPersonalSchedule {
 		return "redirect:pschedule.action";
 	}
 	
+	@RequestMapping(value = "editSchedule.action", method = RequestMethod.GET)
+	public String editSchedule(HttpSession session,
+			String title, String cont, String stdate, int classify, int priority, String makepublic, int key) throws ParseException {
+		System.out.println("edit="+title+"/"+cont+"/"+stdate+"/"+classify+"/"+priority+"/"+makepublic+"/"+key);	
+		Employee loginUser = new Employee();
+//		loginUser.setId(((Employee)session.getAttribute("loginuser")).getId());
+		loginUser.setId("admin");
+		String logUser = loginUser.getId();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+		String[] spDate = stdate.split("-");
+//		Date cvDate =  Date(Integer.parseInt(spDate[0]),Integer.parseInt(spDate[1]),Integer.parseInt(spDate[2]));
+		Date cvDate = new Date(Integer.parseInt(spDate[0]),Integer.parseInt(spDate[1]),Integer.parseInt(spDate[2]));
+		Schedule sc = new Schedule();
+		sc.setTitle(title);
+		sc.setCont(cont);
+
+		sc.setEstDate(cvDate);
+		sc.setEedDate(cvDate);
+		sc.setClassify(classify);
+		sc.setPriority(priority);
+		sc.setMakepublic(makepublic);
+		sc.setCategory("개인일정");
+		sc.setS_id(logUser);
+		sc.setKey(key);
+		scheduleDao.editSchedule(sc);
+		
+		return "redirect:pschedule.action";
+	}
 	@RequestMapping(value = "reSchedule.action", method = RequestMethod.GET)
 	public String reSchedule() {
 		System.out.println("리턴 완료!");
