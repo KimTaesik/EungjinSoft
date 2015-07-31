@@ -128,12 +128,29 @@
 			             "확인": function() {
 			                 $( this ).dialog( "close" );
 			                 var check="";
-			                 $("input[class=box_class6]:checked").each(function(index) {
-								if(index==0)
-			                	 check += $(this).val();
-								else
-								check += ", " + $(this).val()
-			                 
+			                 var count=0;
+			                 var total = $("input.box_class6:checked").length; 
+			                 $("input.box_class6:checked").each(function(index, item) {
+			                	
+			                	
+			                	 if(index<5){
+			                		
+			                	 	check += $(this).val() 
+			                	 	if(index<4)
+			                		 	check += ", ";
+			                	 }
+								else if(5<=index && index < total){
+									count++;
+									
+									if(index == total-1)
+										check +=" "+"외"+ count+ "명";
+									}
+								/* else if(index == total-1){
+									check += "외"+ count+ "명";
+									
+										
+								} */
+					
 			                 });
 			              
 			                 $("#referenceUserName").attr('value', check);
@@ -147,8 +164,11 @@
 			close : function() {},
 			cancle : function() {}
 		});
+	
+	
 		$(".get").click(function(e) {
 			var id = $(this).attr('id');
+			$(".dialog-cancel"+i).css("display","block");
 			$.ajax({
 				url : "infomation.action?employeeid=" + id,
 				method : 'get',
@@ -174,11 +194,17 @@
 	
 		$(".dialog-confirm").click(function(event) {
 			i=$(this).attr('name');
-			
+			var temp =$(this);
 			$("#dialog-form").dialog("open");
 			$(this).css("display","none");
-			$(".dialog-cancel"+i).css("display","block");	
-			//event.preventDefault();
+			$(".dialog-cancel"+i).click(function(e) {
+				var a = $(this).attr('onclick');
+				
+				$('#positionName'+a).attr('value', "");
+				$('#selectName'+a).attr('value',"");
+				$(".dialog-cancel"+a).css("display","none");
+				$(temp).css("display","block");
+			});		
 		});
 		$(".dialog-confirm2").click(function(event) {
 			i=$(this).attr('name');
@@ -213,7 +239,7 @@
 			<h2 class="eword_maincolumn">
 				<c:forEach var="approvalform2" items="${approvalforms}">
 					<c:if test="${approvalform2.form_No eq approvalform.form_No}">
-						<div>${approvalform.form_Name}'</div>
+						<div>${approvalform.form_Name}</div>
 						<br />
 					</c:if>
 				</c:forEach>
@@ -235,7 +261,7 @@
 								<th style="border-top: none; border-left: none;">문서번호</th>
 								<td class="pad15l" colspan="3" style="border-top: none;">
 									<span id="sub_subject"> 
-										&nbsp;<input type="text" id="WordNo" name="WordNo" style="border: 0pt;" value="${approvalform.form_No}" size='10' readonly />
+										<input type="text" id="WordNo" name="WordNo" style="border: 0pt;" value="${approvalform.form_No}" size='10' readonly />
 									</span> 
 								</td>
 								<td rowspan="6" style="border-top: none; border-right: none;">
@@ -295,14 +321,14 @@
 														
 												</div>
 												<div align="center">
-													<input type="button" value="취소" class="dialog-cancel1" style="display: none"> 
+													<input type="button" value="취소" class="dialog-cancel1" onclick="1"  style="display: none"> 
 													<input type="button" value="지정" class="dialog-confirm" name="1">
 												</div> 
 											</td>
 											<td>
 											<input type="text" name="OrderName2" value="" readonly class="form_transparent" id="selectName2" style='width: 100%;'> 
 												<div align="center">
-													<input type="button" value="취소" class="dialog-cancel2" style="display: none"> 
+													<input type="button" value="취소" class="dialog-cancel2"  onclick="2" style="display: none"> 
 												<input type="button" value="지정" class="dialog-confirm" name="2">
 												</div>
 
@@ -314,7 +340,7 @@
 												readonly class="form_transparent" id="selectName3"
 												style='width: 100%;'> 
 												<div align="center">
-													<input type="button" value="취소" class="dialog-cancel3" style="display: none"> 
+													<input type="button" value="취소" class="dialog-cancel3" onclick="3"  style="display: none"> 
 													<input type="button" value="지정" class="dialog-confirm" name="3"> 
 												</div>
 												<div id="MembersFindCell3" class="btn_page pad15l overf">
@@ -325,7 +351,7 @@
 												readonly class="form_transparent" id="selectName4"
 												style='width: 100%;'>
 												<div align="center">
-													<input type="button" value="취소" class="dialog-cancel4" style="display: none"> 
+													<input type="button" value="취소" class="dialog-cancel4" onclick="4"  style="display: none"> 
 													<input type="button" value="지정" class="dialog-confirm" name="4"> 
 												</div> 
 												
@@ -337,7 +363,7 @@
 												readonly class="form_transparent" id="selectName5"
 												style='width: 100%;'>
 												 <div align="center">
-													<input type="button" value="취소" class="dialog-cancel5" style="display: none"> 
+													<input type="button" value="취소" class="dialog-cancel5" onclick="5"  style="display: none"> 
 													<input type="button" value="지정" class="dialog-confirm" name="5"> 
 												</div> 
 												<div id="MembersFindCell5" class="btn_page pad15l overf">
@@ -384,7 +410,7 @@
 												
 												<div id="MembersFindCell11" class="btn_page pad15l overf">
 													<div align="center">
-														<input type="button" value="취소" class="dialog-cancel6" style="display: none"> 
+														<input type="button" value="취소" class="dialog-cancel6" onclick="6" style="display: none"> 
 														<input type="button" value="지정" class="dialog-confirm" name="6"> 
 													</div> 
 												</div></td>
@@ -393,7 +419,7 @@
 												<input type="hidden" name="OrderId12" value=""> <!-- 지정/취소 버튼 -->
 												<div id="MembersFindCell12" class="btn_page pad15l overf">
 													<div align="center">
-														<input type="button" value="취소" class="dialog-cancel7" style="display: none"> 
+														<input type="button" value="취소" class="dialog-cancel7"  onclick="7" style="display: none"> 
 														<input type="button" value="지정" class="dialog-confirm" name="7"> 
 													</div> 
 												</div></td>
@@ -402,7 +428,7 @@
 												<input type="hidden" name="OrderId13" value=""> <!-- 지정/취소 버튼 -->
 												<div id="MembersFindCell13" class="btn_page pad15l overf">
 													<div align="center">
-														<input type="button" value="취소" class="dialog-cancel8" style="display: none"> 
+														<input type="button" value="취소" class="dialog-cancel8" onclick="8" style="display: none"> 
 														<input type="button" value="지정" class="dialog-confirm" name="8"> 
 													</div> 
 												</div></td>
@@ -411,7 +437,7 @@
 												<input type="hidden" name="OrderId14" value=""> <!-- 지정/취소 버튼 -->
 												<div id="MembersFindCell14" class="btn_page pad15l overf">
 													<div align="center">
-														<input type="button" value="취소" class="dialog-cancel9" style="display: none"> 
+														<input type="button" value="취소" class="dialog-cancel9" onclick="9" style="display: none"> 
 														<input type="button" value="지정" class="dialog-confirm" name="9"> 
 													</div> 
 												</div></td>
@@ -420,7 +446,7 @@
 												<input type="hidden" name="OrderId15" value=""> <!-- 지정/취소 버튼 -->
 												<div id="MembersFindCell15" class="btn_page pad15l overf">
 													<div align="center">
-														<input type="button" value="취소" class="dialog-cancel10" style="display: none"> 
+														<input type="button" value="취소" class="dialog-cancel10" onclick="10" style="display: none"> 
 														<input type="button" value="지정" class="dialog-confirm" name="10"> 
 													</div> 
 												</div></td>
