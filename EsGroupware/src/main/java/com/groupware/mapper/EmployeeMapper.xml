@@ -304,5 +304,9 @@
 		(uploadfileno, uploadno, savedfilename, userfilename)
 		VALUES (uploadfile_sequence.nextVal, #{uploadno}, #{savedfilename}, #{userfilename})
 	</insert>
+	
+	<select id="menulist" resultType="Menu">
+		SELECT menuno, name, use, image FROM menu
+	</select>
 
 </mapper>                                                                                 

@@ -1,6 +1,7 @@
 package com.groupware.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.dao.EmployeeDao;
 import com.groupware.dto.Employee;
+import com.groupware.dto.Menu;
 
 @Controller
 @RequestMapping(value="login")
@@ -38,13 +40,15 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 
 		Employee employee = employeeDao.getEmployeeByIdAndPasswd(memberId, passwd);
-
+		List<Menu> menu = employeeDao.menulist();
+		
 		if (employee != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginuser", employee);//로그인 처리
 			
 			String returnUrl = request.getParameter("returnurl");
 			if (returnUrl == null || returnUrl.length() == 0) {
+				mav.addObject("menu", menu);
 				mav.setViewName("index");
 			}
 			else {

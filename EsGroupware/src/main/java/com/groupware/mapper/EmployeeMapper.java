@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
+import com.groupware.dto.Menu;
 import com.groupware.dto.Position;
 
 public interface EmployeeMapper {
@@ -67,4 +68,6 @@ public interface EmployeeMapper {
 	int insertUpload(HashMap<String, Object> params);
 
 	void insertUploadFile(HashMap<String, Object> params);
+	
+	List<Menu> menulist();
 }

@@ -22,6 +22,7 @@
 		<typeAlias type="com.groupware.dto.AddressBook" alias="AddressBook" />
 
 		<typeAlias type="com.groupware.dto.ApprovalForm" alias="ApprovalForm" />
+		<typeAlias type="com.groupware.dto.Menu" alias="Menu" />
 
 	</typeAliases>
 	<mappers>

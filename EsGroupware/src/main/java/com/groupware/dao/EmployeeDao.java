@@ -5,6 +5,7 @@ import java.util.List;
 import com.groupware.dto.Board;
 import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
+import com.groupware.dto.Menu;
 import com.groupware.dto.Position;
 
 public interface EmployeeDao {
@@ -61,4 +62,6 @@ public interface EmployeeDao {
 	void registerAdmin(String id, String usertype);
 
 	void registerApprovalAdmin(String id);
+	
+	List<Menu> menulist();
 }

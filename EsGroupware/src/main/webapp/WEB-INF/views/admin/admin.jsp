@@ -39,6 +39,7 @@
 		  <h3>기본관리</h3>
 		  		<ul>
 			        <li><a href="/groupware/admin/companylogo.action" target="myframe">회사로고 등록</a></li>
+			        <li><a href="/groupware/admin/companymenu.action" target="myframe">메뉴 설정</a></li>
 		    	</ul>
 		  <h3>관리자 3</h3>
 			    <ul>

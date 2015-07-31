@@ -24,5 +24,12 @@ public class AdminCompanyController {
 		
 		return "admin/companylogo";
 		
-	}		
+	}
+	
+	@RequestMapping(value="companymenu.action")
+	public String logo2() {	
+		
+		return "admin/companymenu";
+		
+	}
 }

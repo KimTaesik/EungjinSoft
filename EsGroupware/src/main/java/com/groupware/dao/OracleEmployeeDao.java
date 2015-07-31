@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.groupware.dto.Board;
 import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
+import com.groupware.dto.Menu;
 import com.groupware.dto.Position;
 import com.groupware.mapper.EmployeeMapper;
 
@@ -182,6 +183,11 @@ public class OracleEmployeeDao implements EmployeeDao {
 	@Override
 	public void registerApprovalAdmin(String id) {
 		employeeMapper.registerApprovalAdmin(id);	
+	}
+	@Override
+	public List<Menu> menulist() {
+		List<Menu> menu = employeeMapper.menulist();
+		return menu;
 	}
 
 }
