@@ -12,9 +12,22 @@
  	</insert>
  	
  	<select id="selectSchedule" parameterType="hashMap" resultType="Schedule">
- 		SELECT title, cont, stdate, eddate, classify, priority, category, makepublic, s_id FROM Schedule 
+ 		SELECT key, title, cont, stdate, eddate, classify, priority, category, makepublic, s_id FROM Schedule 
  		WHERE s_id = #{s_id} and TO_CHAR(stdate, 'YYYY-MM') = #{stDate} and category= #{category}
  	</select>
+ 	
+ 	<select id="editSelectSchedule" parameterType="int" resultType="Schedule">
+ 		SELECT key, title, cont, stdate, eddate, classify, priority, category, makepublic, s_id FROM Schedule 
+ 		WHERE key = #{key}
+ 	</select>
+ 	
+ 	<update id="editSchedule" parameterType="hashMap">
+		update schedule set title='${title}', cont='${cont}', 
+				stdate=${stDate}, eddate=${edDate}, CLASSIFY= ${classify}, 
+				PRIORITY=${priority}, CATEGORY='${category}', MAKEPUBLIC= '${makepublic}' 
+		where key=${key}
+ 	</update>
+	
  	
  </mapper>
   

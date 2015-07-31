@@ -1,8 +1,10 @@
 package com.groupware.dto;
 
-import java.util.Date;
+import java.sql.Date;
+
 
 public class Schedule {
+	private int key;
 	private String title;
 	private String cont;
 	private String stDate;
@@ -15,7 +17,27 @@ public class Schedule {
 	private String year;
 	private String month;
 	private String date;
+	private Date estDate;
+	private Date eedDate;
 	
+	public Date getEstDate() {
+		return estDate;
+	}
+	public void setEstDate(Date estDate) {
+		this.estDate = estDate;
+	}
+	public Date getEedDate() {
+		return eedDate;
+	}
+	public void setEedDate(Date eedDate) {
+		this.eedDate = eedDate;
+	}
+	public int getKey() {
+		return key;
+	}
+	public void setKey(int key) {
+		this.key = key;
+	}
 	public String getYear() {
 		return year;
 	}

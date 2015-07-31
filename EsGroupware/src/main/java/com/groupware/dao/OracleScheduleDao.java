@@ -49,5 +49,29 @@ public class OracleScheduleDao implements ScheduleDao {
 		
 		return schedule;
 	}
+	
+	public void editSchedule(Schedule sc) {
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("title", sc.getTitle());
+		params.put("cont", sc.getCont());
+		params.put("stDate", sc.getEstDate());
+		params.put("edDate", sc.getEedDate());
+		params.put("classify", sc.getClassify());
+		params.put("priority", sc.getPriority());
+		params.put("category", sc.getCategory());
+		params.put("makepublic", sc.getMakepublic());
+		params.put("key", sc.getKey());
+		
+		scheduleMapper.editSchedule(params);
+
+	}
+	
+	public Schedule editSelectSchedule(int key) {
+		
+		Schedule schedule = scheduleMapper.editSelectSchedule(key);
+
+		return schedule;
+	}
 
 }
