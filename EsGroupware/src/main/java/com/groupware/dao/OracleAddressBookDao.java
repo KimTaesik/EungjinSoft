@@ -60,14 +60,15 @@ public class OracleAddressBookDao implements AddressBookDao {
 	}
 	
 	//**********주소록 수정************
-/*	@Override
-	public void editAddress(AddressBook addressbook, String classify) {
+	@Override
+	public void editAddress(String addressNo,String classify, AddressBook addressbook) {
 		
 		HashMap<String, Object> params =new HashMap<String, Object>();
-		params.put("title",board.getTitle());
-		params.put("content",board.getContent());
-		params.put("boardno",board.getBoardNo());
+		
+		params.put("addressNo", addressNo);
+		params.put("classify", classify);
+		
 		addressMapper.editAddress(params);
 		  
-	}*/
+	}
 }

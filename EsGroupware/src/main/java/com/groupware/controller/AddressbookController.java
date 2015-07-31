@@ -1,12 +1,10 @@
 package com.groupware.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.ser.std.MapProperty;
 import com.groupware.dao.AddressBookDao;
 import com.groupware.dto.AddressBook;
+import com.groupware.dto.Board;
 import com.groupware.dto.Employee;
 
 @Controller
@@ -149,10 +147,14 @@ public class AddressbookController {
 	}*/
 	
 	@RequestMapping(value="addressheader.action", method = RequestMethod.GET)
-	public ModelAndView addresshearder(String classify){
+	public ModelAndView addresshearder(String classify,HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		List<AddressBook> addressbook1 =  addressbookDao.getAddressbookList(classify);
 		
+		/*String loginUser = ((Employee)session.getAttribute("loginuser")).getId();*/
+
+		
+	/*	mav.addObject("loginUser", loginUser);*/
 		mav.addObject("addressbook1", addressbook1);
 		mav.addObject("classify", classify);
 		mav.setViewName("include/addressheader");
@@ -160,8 +162,9 @@ public class AddressbookController {
 	}
 	@RequestMapping(value="addresslist.action", method = RequestMethod.GET)
 	@ResponseBody
-	public 	ModelAndView addresslist(AddressBook addressbook, String classify, HttpServletRequest req){
+	public 	ModelAndView addresslist(AddressBook addressbook,  String classify, HttpServletRequest req){
 	
+		
 		ModelAndView mav = new ModelAndView();
 		List<AddressBook> addressbook1 = null;
 		if(classify.equals("1")) {
@@ -183,12 +186,41 @@ public class AddressbookController {
 	@RequestMapping(value="addressdelete.action", method = RequestMethod.GET)
 	public String addressdelete(String addressNo,String classify){
 		
-		System.out.println(addressNo + "::" + classify);
+		//System.out.println(addressNo + "::" + classify);
 		addressbookDao.deleteAddress(addressNo, classify);
 		
 		//return "redirect:/include/addressheader.action?addressno=" + addressNo + "&classify=" + classify;
 		return "redirect:/address/addressheader.action?classify="+ classify;
 	}
+	
+	@RequestMapping(value = "addressedit.action", method = RequestMethod.GET)
+	public ModelAndView editForm(String addressNo,String classify) {
+		
+		//addressbookDao.editAddress(addressNo, classify, addressbook);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("addressNo", addressNo);
+		mav.addObject("classify", classify);
+		mav.setViewName("addressbook/addressbookedit");
+		
+		return mav;
+	}
+	
+	/*@RequestMapping(value="addressedit.action", method= RequestMethod.POST)
+	public String update(String addressNo,String classify, AddressBook addressbook) {
+
+		ModelAndView mav = new ModelAndView();
+		addressbookDao.editAddress(addressNo, classify, addressbook);
+		System.out.println(addressbook1);
+		mav.addObject("addressbook1", addressbook1);
+		mav.addObject("addressNo", addressNo);
+		mav.addObject("classify", classify);
+		
+		return "redirect:/address/addressheader.action?classify="+ classify;
+	}
+	*/
+	
 	
 
 }

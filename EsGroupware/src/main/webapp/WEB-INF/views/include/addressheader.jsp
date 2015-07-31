@@ -31,7 +31,7 @@
 					
 					$('.addform').click(function(event) {
 						var classify = $(this).attr("id");
-						alert(classify);
+						//alert(classify);
 						$.ajax({
 							url : "addressbookadd.action?classify="+classify,
 							method : 'get',
@@ -45,9 +45,7 @@
 				}
 			});
 			event.preventDefault();
-			
-			
-			
+
 		/* 	 한 번 수행뒤, 다시 '주소추가'누르면, 실행안되서 이걸 또 넣어봣는데 안됨...
 			$('#showlist').click(function(event) {
 				
@@ -66,10 +64,9 @@
 				})
 			}) */
 			
-			
-			
 		})
 		
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		$('.addform').click(function(event) {
 			var classify = $(this).attr("id");
@@ -81,33 +78,68 @@
 				success: function(result, status, xhr) {
 					
 					$(".frame").html(result);
-									
-					$('#showlist').click(function(event) {
 						
-						$.ajax({
+				
+					
+					
+					 $('#showlist').click(function(event) {
+						
+							parent.location.reload(true);
+							
+					/* 	$.ajax({
 							url : "addresslist.action?classify="+classify,
 							method : 'get',
 							data : {},
 							success: function(result, status, xhr) {
-								
-							
 								$(".frame").html(result);
+							
+								
 							},
 							error : function(xhr, status, er) {
 								alert(status + " / " + er)
 							}
-						})
-					})
+						}) */
+					}) 
 				}
 			});
 			event.preventDefault();
+		})
+		
+		
+		$('.editaddress').click(function(event) {
+			
+			var classify = "${classify}"
+			var addressNo = $(this).attr("tag");
+			alert(classify)
+			/* $.ajax({
+				url : "addressedit.action",
+				method : 'get',
+				data : {
+					addressNo:addressNo,
+					classify : classify
+				},
+				success: function(result, status, xhr) {
+					
+					$(".frame").html(result);
+					
+				}
+			}); */
+			var url = "addressedit.action?classify="+ classify + "&addressNo"+ addressNo;
+			$(location).attr("href",url)
+			event.preventDefault();
+			
+			 $('#showlist').click(function(event) {
+					
+					parent.location.reload(true);
+		
+			}) 
 		})
 		
 	})
 	</script>
 </head>
 <body>
-<div class="left_menu" style="background-color: #88cbff">
+<div class="left_menu" style="background-color: #D5D5D5">
 	<div id="accordion" style="font-size: 10pt;width: 100pt;">
 	<h3>주소록</h3>
 	<ul>
@@ -124,5 +156,6 @@
 
 		<c:import url="/WEB-INF/views/addressbook/addressbooklist.jsp" />
 </div>
+
 
 </body>
