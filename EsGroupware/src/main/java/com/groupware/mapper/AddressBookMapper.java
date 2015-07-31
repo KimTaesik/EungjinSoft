@@ -21,4 +21,11 @@ public interface AddressBookMapper {
 	//전달인자 : 전체 목록에서 조회할 데이터의 시작위치 , 끝위치
 	/*List<AddressBook> getAddressbookList(HashMap<String, Object> params);*/
 	
+	
+	//*************주소록 삭제
+	void deleteAddress(HashMap<String, Object> params);
+		
+	//************ 주소록  수정
+	void editAddress(HashMap<String, Object> params);
+	
 }

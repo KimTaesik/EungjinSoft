@@ -180,20 +180,15 @@ public class AddressbookController {
 		return mav;
 	}
 	
+	@RequestMapping(value="addressdelete.action", method = RequestMethod.GET)
+	public String addressdelete(String addressNo,String classify){
+		
+		System.out.println(addressNo + "::" + classify);
+		addressbookDao.deleteAddress(addressNo, classify);
+		
+		//return "redirect:/include/addressheader.action?addressno=" + addressNo + "&classify=" + classify;
+		return "redirect:/address/addressheader.action?classify="+ classify;
+	}
 	
-	/*@RequestMapping(value="addresslist.action", method = RequestMethod.GET)
-	@ResponseBody
-	public String addressList2(String classify, HttpServletRequest req, String type, String search ,Integer pageno){
-	
-		List<AddressBook> addressbook = null;
 
-		String name = "";
-		if(classify.equals("1")) {
-			name ="개인 주소록";
-		}else if(classify.equals("2")) {
-			name = "공용 주소록";
-		}
-	
-		return name;
-	}*/
 }

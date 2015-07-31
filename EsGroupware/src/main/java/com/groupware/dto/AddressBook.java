@@ -26,8 +26,15 @@ public class AddressBook implements Serializable{
 	
 	private String classify;
 	private String id;
+	private String address_No;
 	
 	
+	public String getAddress_No() {
+		return address_No;
+	}
+	public void setAddress_No(String address_No) {
+		this.address_No = address_No;
+	}
 	public String getHomepostcode() {
 		return homepostcode;
 	}

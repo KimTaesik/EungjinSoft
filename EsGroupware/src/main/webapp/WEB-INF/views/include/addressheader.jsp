@@ -17,15 +17,7 @@
   	<script>
 	$(function() {	
 	    $( "#accordion" ).accordion();	
-	/* 	
-	    $("#shareaddressbook").click(function() {
-			$("#frame").load("addressbooklist.action"); */
 		
-		});
-		
-
-	
-	$(function() {
 		$('.addressbook').click(function(event) {
 			var classify = $(this).attr("id");
 			
@@ -33,8 +25,8 @@
 				url : "addresslist.action",
 				method : 'get',
 				data : {"classify" : classify},
-				/* dataType : 'json', */
 				success: function(result, status, xhr) {
+				
 					$('.frame').html(result);	
 					
 					$('.addform').click(function(event) {
@@ -45,62 +37,70 @@
 							method : 'get',
 							data : {},
 							success: function(result, status, xhr) {
-								//alert(result);
 								$(".frame").html(result);
 							}
 						});
 						event.preventDefault();
 					})
-/* 					var index=result.length;
-					
-				alert(index);
-				//("#menubar tbody")
-				$.each(result,function(index,item){
-					var html = "<tr><td>"+ item.name + "</td></tr>";
-							   "<tr><td>"+ item.email + "</td></tr>";
-							   "<tr><td>"+ item.phonenumber + "</td></tr>";
-							   "<tr><td>"+ item.homenumber + "</td></tr>";
-							   "<tr><td>"+ item.fax + "</td></tr>";
-					
-					$(".address tbody").append($(html));
-				});
-				 */
-			
-				/* eval("var r=" + result);
-				for(var i=0;i<=r.length;i++){
-				 $("#name").text(result[i].name);
-				 $("#email").text(r[i].email);
-				 $("#phonenumber").text(r[i].phonenumber);
-				 $("#homenumber").text(r[i].homenumber);
-				 $("#fax").text(r[i].fax);
-				} */
 				}
 			});
 			event.preventDefault();
+			
+			
+			
+		/* 	 한 번 수행뒤, 다시 '주소추가'누르면, 실행안되서 이걸 또 넣어봣는데 안됨...
+			$('#showlist').click(function(event) {
+				
+				$.ajax({
+					url : "addresslist.action?classify="+classify,
+					method : 'get',
+					data : {},
+					success: function(result, status, xhr) {
+						
+					
+						$(".frame").html(result);
+					},
+					error : function(xhr, status, er) {
+						alert(status + " / " + er)
+					}
+				})
+			}) */
+			
+			
+			
 		})
 		
 
 		$('.addform').click(function(event) {
 			var classify = $(this).attr("id");
+		
 			$.ajax({
 				url : "addressbookadd.action?classify="+classify,
 				method : 'get',
 				data : {},
 				success: function(result, status, xhr) {
+					
 					$(".frame").html(result);
+									
+					$('#showlist').click(function(event) {
+						
+						$.ajax({
+							url : "addresslist.action?classify="+classify,
+							method : 'get',
+							data : {},
+							success: function(result, status, xhr) {
+								
+							
+								$(".frame").html(result);
+							},
+							error : function(xhr, status, er) {
+								alert(status + " / " + er)
+							}
+						})
+					})
 				}
 			});
 			event.preventDefault();
-		})
-
-		
-	})
-	
-	
-		
-	$(document).ready(function() {
-		$('.showlist').click(function(event) {
-			$("#frame").load("addressbooklist.action");
 		})
 		
 	})

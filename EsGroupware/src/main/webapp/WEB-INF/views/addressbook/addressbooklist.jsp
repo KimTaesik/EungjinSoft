@@ -13,10 +13,6 @@
 	<link rel="Stylesheet" href="/groupware/resources/styles/addressframe.css" /> 
 	<script type="text/javascript">
 	
-	
-	
-	
-	
 /* 	function search() {
 		 var type = document.getElementById("type");
 		 var search = document.getElementById("search");
@@ -31,6 +27,16 @@
 			
 		}
 	}	 */
+	
+	function deleteAddress(addressNo, classify) {
+		
+		//1. 삭제 확인 (사용자 선택)
+		var yes = confirm("삭제할까요?");
+		//2. 1의 결과에 따라 삭제하거나 또는 취소
+		if (yes) {
+			location.href = 'addressdelete.action?addressNo=' + addressNo + "&classify=" + classify;
+		}
+	}
 	</script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
  
@@ -99,7 +105,7 @@
 				<tr>
 					<th scope="col"><img src="/groupware/resources/image/add.png" /><a href='#' class="addform" id=${ classify }>주소추가</a></th>
 			        <th scope="col"><img src="/groupware/resources/image/add.png" />그룹추가</th>
-			        <th scope="col"><img src="/groupware/resources/image/minus.png" />삭제</th>
+			     <!--    <th scope="col"><img src="/groupware/resources/image/minus.png" />삭제</th> -->
 			        <th scope="col">
 			        <select name="menu" style='width=30px'>
 						<option selected>개인주소록/</option>
@@ -133,8 +139,12 @@
 			            <td id="phonenumber" style="width:180px;text-align:center"><%= addressbook2.getPhoneNumber() %></td>
 			            <td id="homenumber" style="width:170px;text-align:center"><%= addressbook2.getHomeNumber() %></td>
 			            <td id="fax" style="width:190px;text-align:center"><%= addressbook2.getFax() %></td>
-			            <td style="width:40px;text-align:center"><img src="/groupware/resources/image/edit.png" /></td>
-			            <td style="width:90px;text-align:center"><img src="/groupware/resources/image/del.png" /></td>
+			            <td style="width:40px;text-align:center"><img src="/groupware/resources/image/edit.png" 
+			            onclick="javascript:editAddress(<%= addressbook2.getAddressNo()%>,<%= addressbook2.getClassify() %>)" />
+			            </td>
+			            <td style="width:90px;text-align:center"><img src="/groupware/resources/image/del.png" 
+			            onclick="javascript:deleteAddress(<%= addressbook2.getAddressNo()%>,<%= addressbook2.getClassify() %>)" />
+			            </td>
 			        </tr>  
 				<!-- </tbody> -->
 				

@@ -52,6 +52,23 @@
 	ORDER BY 
 	addressno DESC
 	</select>
+	
+ 	<!-- 주소록 수정  --> 
+ <!-- 	<update id="editAddress" parameterType="hashMap">
+ 	UPDATE 
+ 		addressbook
+ 	SET title = #{ title } , content = #{ content }
+ 	WHERE boardno = #{ boardno }
+ 	</update> 
+  -->
+ 	
+ 	<!-- 주소록 삭제-->
+ 	<delete id="deleteAddress" parameterType="hashMap" >
+ 	DELETE from 
+ 		addressbook 
+ 	WHERE addressno = #{ addressNo } and classify = #{ classify }
+ 	</delete>
+	
 
 
 </mapper>                                                                                 

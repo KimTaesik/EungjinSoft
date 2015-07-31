@@ -48,7 +48,7 @@
 	</script>
 	
 	<script>
-	$(document).ready(function() {
+ 	/* $(document).ready(function() {
 		$('#showlist').click(function(event) {
 			alert("djkjkjkj");
 		
@@ -58,13 +58,14 @@
 				url : "addressheader.action",
 				method : 'get',
 				data : {"classify" : classify},
-				/* dataType : 'json', */
+				
 				success: function(result, status, xhr) {
 				}
 
 		})
 		
 	})
+	})  */
 	
 	</script>
 	

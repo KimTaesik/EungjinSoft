@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.groupware.dto.AddressBook;
-import com.groupware.dto.Employee;
 import com.groupware.mapper.AddressBookMapper;
 
 
@@ -48,4 +47,27 @@ public class OracleAddressBookDao implements AddressBookDao {
 		return addressMapper.getAddressbookList(classify);
 
 	}
+	
+	//**********주소록 삭제************
+	
+	public void deleteAddress(String addressNo, String classify) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("addressNo", addressNo);
+		params.put("classify", classify);
+		
+	
+		addressMapper.deleteAddress(params);
+	}
+	
+	//**********주소록 수정************
+/*	@Override
+	public void editAddress(AddressBook addressbook, String classify) {
+		
+		HashMap<String, Object> params =new HashMap<String, Object>();
+		params.put("title",board.getTitle());
+		params.put("content",board.getContent());
+		params.put("boardno",board.getBoardNo());
+		addressMapper.editAddress(params);
+		  
+	}*/
 }
