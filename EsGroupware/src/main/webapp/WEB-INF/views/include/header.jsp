@@ -42,10 +42,12 @@
 	<div style="float: left;width: 49%">
 	<table id="menu" style="width: 500px;height: 110px;padding-left: 20px;text-align: center;color: #999999; font-weight: bolder;">
 		<tr height="100px">
+			<c:if test="${ loginuser.userType == 1 }">
 			<td onclick="window.open('/groupware/admin/admin.action','관리자','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
 				<img src="/groupware/resources/image/admin/admin.png" /><br />
 				관리자
 			</td>
+			</c:if>
 			<td onclick="window.open('/groupware/attendance/check.action','근태현황','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1150, height=650');">
 			<img src="/groupware/resources/image/admin/assiduity.png" /><br />
 				근태현황
@@ -58,12 +60,13 @@
 			<img src="/groupware/resources/image/admin/organization.png" /><br />
 				조직도
 			</td>		
-		</tr>
-		<tr>
 			<td onclick="window.open('/groupware/address/addressheader.action?classify=1','주소록','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
 			<img src="/groupware/resources/image/admin/home.png" /><br />
 				주소록
 			</td>
+			
+			</tr>
+			<tr>
 			
 			<td onclick="window.open('/groupware/approval/approvalheader.action','전자결제','left=100, top=100, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, width=1150, height=650');">
 			<img src="/groupware/resources/image/admin/organization.png" /><br />
