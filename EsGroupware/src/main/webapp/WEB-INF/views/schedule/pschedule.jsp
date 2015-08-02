@@ -5,9 +5,9 @@
 <html>
 <head>
 	<link rel="Stylesheet" href="/groupware/resources/styles/pschedule.css" />
-	<link rel="Stylesheet" href="/groupware/resources/styles/scalendar.css" >
-	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<link rel="Stylesheet" href="/groupware/resources/styles/scalendar.css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	<title>일정관리</title>
 	<script type="text/javascript">
 	 	$(document).ready(function(){
@@ -41,6 +41,7 @@
 			    $('#minus').click(function(e){
 			    	var y = $("#currentYear").val();
 			    	var m = $("#currentMonth").val()-1;
+			    	var z = $("#cate").val();
 			    	if(m==0){
 			    		m=12;
 			    		y-=1;
@@ -48,9 +49,10 @@
 			    	$.ajax({
 			    		type:"post",
 			    		url: "pschedule2.action",
-			    		data:{ "yyear": y, "mmonth":m  },
+			    		data:{ "yyear": y, "mmonth":m, "cate":z  },
 			    		async : true,
 			            success: function(result,status,xhr){
+			            	$("#cate").val(z);
 			            	$("#currentMonth").val(m);
 			            	$("#currentYear").val(y);
 			            	$("#calendarContainer").html(result)
@@ -62,6 +64,7 @@
 			    })
 			    
 			    $('#plus').click(function(e){
+			    	var z = $("#cate").val();
 			    	var y = $("#currentYear").val();
 			    	var m = parseInt($("#currentMonth").val())+parseInt(1);
 			    	if(m>12){
@@ -71,9 +74,10 @@
 			    	$.ajax({
 			    		type:"post",
 			    		url: "pschedule2.action",
-			    		data:{ "yyear": y, "mmonth": m  },
+			    		data:{ "yyear": y, "mmonth": m, "cate":z  },
 			    		async : true,
 			            success: function(result,status,xhr){
+			            	$("#cate").val(z);
 			            	$("#currentMonth").val(m);
 			            	$("#currentYear").val(y);
 			            	$("#calendarContainer").html(result)
@@ -85,21 +89,25 @@
 			    })
 			    
 			    $("#add_sc").click(function(){
-					var url = 'addScheduleForm.action?dayid='+${currentMonth}+"-"+${ currentDate}+"&year="+${ currentYear };
+			    	var cate = $("#cate").val();
+					var url = 'addScheduleForm.action?dayid='+${currentMonth}+"-"+${ currentDate}+"&year="+${ currentYear }+"&cate="+cate;
 					$(location).attr('href', url);
 				});
 				
 			    $("#quick_add").click(function(){
 			    	$("#quickaddform").show();
 				});
+			    
 			    $("#quick_add_submit").click(function(){
+			    	var cate = $("cate").val()
 			    	var title = $("#schedule_title").val()
 			    	var stdate = $("#year").val()+"-"+$("#month").val()+"-"+$("#day").val();
 			    	alert(stdate)
-					var url = "insertSchedule.action?title="+title+"&cont=&stdate="+stdate+"&classify=0&priority=0&makepublic=closed";
+					var url = "insertSchedule.action?title="+title+"&cont=&stdate="+stdate+"&classify=0&priority=0&makepublic=closed&cate="+cate;
 					$(location).attr('href', url);			    	
 			    	$("#quickaddform").hide();
 				});
+			    
 		});
 	</script>
 </head>
@@ -109,16 +117,27 @@
 		<div id="sub">
 			<div id="title">
 				<h2>
-					<span class="sched" >개인일정 &gt;
+					<span class="sched" >
+					<c:choose>
+						<c:when test="${cate eq 'ps' }">
+							개인일정 &gt;
+						</c:when>
+						<c:when test="${cate eq 'pus' }">
+							공개일정 &gt;
+						</c:when>
+						<c:when test="${cate eq 'ts' }">
+							부서일정 &gt;
+						</c:when>
+						<c:otherwise>
+							회사일정 &gt;
+						</c:otherwise>
+					</c:choose>
 			        <font color="0073BD">월간일정</font></span>
 			    </h2>
 			</div>
 			<div class="toparea">		
 				<div class="leftarea" style="width:50%;">
-					<span class="tab"><a href="#">DAY</a></span>
-					<span class="tab"><a href="#">WEEK</a></span>
 					<span class="selected"><a href="#">MONTH</a></span>
-					<span class="tab"><a href="#">YEAR</a></span>
 				</div>
 				<div class="rightarea">
 					<span class="btn">
@@ -134,7 +153,7 @@
 					    		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				        			<tr>
 				        				<td height="14">제목
-				                      		<input id="schedule_title" type="text" class="blueinput" style="width:300px">
+				                      		<input id="schedule_title" maxlength=60 type="text" class="blueinput" style="width:300px">
 				                    	</td>
 					                    <td align="right">
 											<select id="year" class="input">
@@ -242,6 +261,7 @@
 					<c:set var="currentDay" value="${ currentDay }" />
 					<c:set var="dateString" value="${ dateString }" />
 					<c:set var="lastDate" value="${ lastDate }" />
+					<c:set var="cate" value="${ cate }" />
 					
 					<c:if test="${(currentYear % 4 == 0 && currentYear % 100 != 0) || currentYear % 400 == 0}">			
 						<div style="width:0;height:0;display: none">${ lastDate[1] = 29 }</div>
@@ -284,6 +304,7 @@
 						</div>
 						<input type="hidden" id="currentMonth" value="${ currentMonth }">
 						<input type="hidden" id="currentYear" value="${ currentYear }">
+						<input type="hidden" id="cate" name="cate" value="${ cate }">
 					</div>
 				<div id="calendarContainer">
 					<div id="header" class="kheader">
@@ -319,12 +340,48 @@
 													<c:forEach var="scList" items="${ scList }">
 														<c:if test="${ dateNum eq scList.date && currentYear eq scList.year && currentMonth eq scList.month }">
 												          <c:choose>
-											          		<c:when test="${fn:length(scList.title) > 4}">
-											          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
+												          	<c:when test="${cate eq 'ps'}">
+												          		<c:if test="${ scList.category eq '개인일정' || scList.category eq '공개일정' }">
+											          			<c:choose>
+													          		<c:when test="${fn:length(scList.title) > 4}">
+													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
+													          		</c:when>
+													          		<c:otherwise>
+													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
+													          		</c:otherwise>
+												          		</c:choose>
+												          		</c:if>
 											          		</c:when>
-											          		<c:otherwise>
-											          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
-											          		</c:otherwise> 
+												          	<c:when test="${cate eq 'pus' and scList.makepublic eq 'open' }">
+											          			<c:choose>
+													          		<c:when test="${fn:length(scList.title) > 4}">
+													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
+													          		</c:when>
+													          		<c:otherwise>
+													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
+													          		</c:otherwise>
+												          		</c:choose>
+											          		</c:when>
+											          		<c:when test="${cate eq 'ts' and scList.dept eq scList.makepublic }">
+											          			<c:choose>
+													          		<c:when test="${fn:length(scList.title) > 4}">
+													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
+													          		</c:when>
+													          		<c:otherwise>
+													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
+													          		</c:otherwise>
+												          		</c:choose>
+											          		</c:when>
+											          		<c:when test="${cate eq 'cs' and scList.category eq '회사일정' }">
+											          			<c:choose>
+													          		<c:when test="${fn:length(scList.title) > 4}">
+													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
+													          		</c:when>
+													          		<c:otherwise>
+													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
+													          		</c:otherwise>
+												          		</c:choose>
+											          		</c:when>
 												          </c:choose>
 														</c:if>
 													</c:forEach>
@@ -339,14 +396,16 @@
 					<script type="text/javascript">
 						$(function(){
 						    $(".plus").click(function(){
+						    	var cate = $("#cate").val();
 								var id = $(this).attr('id');
-								var url = 'addScheduleForm.action?dayid='+id+"&year="+${ currentYear };
+								var url = 'addScheduleForm.action?dayid='+id+"&year="+${ currentYear }+"&cate="+cate;
 								$(location).attr('href', url);
 							});
 						    
 						    $(".uDate").click(function(){
+						    	var cate = $("#cate").val();
 						    	var id = $(this).attr('id');
-								var url = 'editScheduleForm.action?key='+id;
+								var url = 'editScheduleForm.action?key='+id+"&cate="+cate;
 								$(location).attr('href', url);
 							});
 						});

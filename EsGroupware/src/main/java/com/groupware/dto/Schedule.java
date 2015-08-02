@@ -19,7 +19,21 @@ public class Schedule {
 	private String date;
 	private Date estDate;
 	private Date eedDate;
+	private String position;
+	private String dept;
 	
+	public String getDept() {
+		return dept;
+	}
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
 	public Date getEstDate() {
 		return estDate;
 	}

@@ -9,6 +9,7 @@
 			<c:set var="currentDay" value="${ currentDay }" />
 			<c:set var="dateString" value="${ dateString }" />
 			<c:set var="lastDate" value="${ lastDate }" />
+			<c:set var="cate" value="${ cate }" />
 			
 			<c:if test="${(currentYear % 4 == 0 && currentYear % 100 != 0) || currentYear % 400 == 0}">			
 				<div style="width:0;height:0;display: none">${ lastDate[1] = 29 }</div>
@@ -49,12 +50,28 @@
 													<c:forEach var="scList" items="${ scList }">
 														<c:if test="${ dateNum eq scList.date && currentYear eq scList.year && currentMonth eq scList.month }">
 												          <c:choose>
-											          		<c:when test="${fn:length(scList.title) > 4}">
-											          			<div class="cursor" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
+												          	<c:when test="${cate eq 'ps' and scList.category eq '개인일정' }">
+											          			<c:choose>
+													          		<c:when test="${fn:length(scList.title) > 4}">
+													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
+													          		</c:when>
+													          		<c:otherwise>
+													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
+													          		</c:otherwise>
+												          		</c:choose>
+											          		</c:when>
+												          	<c:when test="${cate eq 'pus' and scList.makepublic eq 'open' }">
+											          			<c:choose>
+													          		<c:when test="${fn:length(scList.title) > 4}">
+													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
+													          		</c:when>
+													          		<c:otherwise>
+													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
+													          		</c:otherwise>
+												          		</c:choose>
 											          		</c:when>
 											          		<c:otherwise>
-											          			<div class="cursor" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
-											          		</c:otherwise> 
+											          		</c:otherwise>
 												          </c:choose>
 														</c:if>
 													</c:forEach>
@@ -67,15 +84,20 @@
 			</c:forEach>
 			</tbody>
 			</table>
-				<script type="text/javascript">
-				    $(".plus").click(function(){
-						var id = $(this).attr('id');
-						var url = 'addScheduleForm.action?dayid='+id+"&year="+${ currentYear };
-						$(location).attr('href', url);
-					});
-				    $(".uDate").click(function(){
-				    	var id = $(this).attr('id');
-						var url = 'editScheduleForm.action?dayid='+id;
-						$(location).attr('href', url);
-					});
-				</script>
+					<script type="text/javascript">
+						$(function(){
+						    $(".plus").click(function(){
+						    	var cate = $("#cate").val();
+								var id = $(this).attr('id');
+								var url = 'addScheduleForm.action?dayid='+id+"&year="+${ currentYear }+"&cate="+cate;
+								$(location).attr('href', url);
+							});
+						    
+						    $(".uDate").click(function(){
+						    	var cate = $("#cate").val();
+						    	var id = $(this).attr('id');
+								var url = 'editScheduleForm.action?key='+id+"&cate="+cate;
+								$(location).attr('href', url);
+							});
+						});
+					</script>

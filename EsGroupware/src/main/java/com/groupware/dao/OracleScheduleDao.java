@@ -34,25 +34,21 @@ public class OracleScheduleDao implements ScheduleDao {
 		params.put("s_id", sc.getS_id());
 		
 		scheduleMapper.insertSchedule(params);
-		
 	}
 	
 	public List<Schedule> selectSchedule(Schedule sc) {
-		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("stDate", sc.getStDate());
-		params.put("category", sc.getCategory());
 		params.put("s_id", sc.getS_id());
 		
 		List<Schedule> schedule = scheduleMapper.selectSchedule(params);
-
 		
 		return schedule;
 	}
 	
 	public void editSchedule(Schedule sc) {
-		
 		HashMap<String, Object> params = new HashMap<String, Object>();
+		
 		params.put("title", sc.getTitle());
 		params.put("cont", sc.getCont());
 		params.put("stDate", sc.getEstDate());
@@ -68,10 +64,12 @@ public class OracleScheduleDao implements ScheduleDao {
 	}
 	
 	public Schedule editSelectSchedule(int key) {
-		
 		Schedule schedule = scheduleMapper.editSelectSchedule(key);
 
 		return schedule;
+	}
+	public void deleteSchedule(int key){
+		scheduleMapper.deleteSchedule(key);
 	}
 
 }
