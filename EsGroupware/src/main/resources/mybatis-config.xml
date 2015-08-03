@@ -22,6 +22,10 @@
 		<typeAlias type="com.groupware.dto.AddressBook" alias="AddressBook" />
 
 		<typeAlias type="com.groupware.dto.ApprovalForm" alias="ApprovalForm" />
+		<typeAlias type="com.groupware.dto.Approval" alias="Approval" />
+		<typeAlias type="com.groupware.dto.ApprovalLine" alias="ApprovalLine" />
+		<typeAlias type="com.groupware.dto.ApprovalCooperation" alias="ApprovalCooperation" />
+		
 		<typeAlias type="com.groupware.dto.Menu" alias="Menu" />
 
 	</typeAliases>
@@ -33,6 +37,7 @@
 		<mapper resource="com/groupware/mapper/AttendanceMapper.xml" />
 	
 		<mapper resource="com/groupware/mapper/ScheduleMapper.xml" />
+		
 		<mapper resource="com/groupware/mapper/ApprovalMapper.xml" />
 
 		<mapper resource="com/groupware/mapper/AddressBookMapper.xml" />

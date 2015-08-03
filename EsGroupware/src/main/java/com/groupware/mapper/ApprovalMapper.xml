@@ -23,5 +23,97 @@
 		WHERE form_no =#{form_No}
 	</select>
 
+	<insert id="insertApproval" parameterType="Approval">
+
+		INSERT INTO E_APPROVAL
+		(
+			approval_no,title,content,reportdate,opening,storageperiod,receivedept,referrers,form_no,id
+		)
+		VALUES(
+			approvalno_sequence.nextval,#{title},#{content},#{reportDate},#{opening},#{storagePeriod},#{receiveDept},#{referrers},#{form_No},#{id}
+		)
+	</insert>
+	<insert id="insertApprovalLine" parameterType="ApprovalLine">
+
+		INSERT INTO ApprovalLine
+		(
+			approvalline_no,priority,approval_no,id
+		)
+		VALUES(
+			approvallineno_sequence.nextval,#{priority},approvalno_sequence.currval,#{id}
+		)
+	</insert>
+	
+	<insert id="insertApprovalCooperation" parameterType="ApprovalCooperation">
+
+	INSERT INTO ApprovalCooperation
+	(
+		approvalCooperation_no,id,approval_no
+	)
+	VALUES(
+		approvalcooperationno_sequence.nextval,#{id},approvalno_sequence.currval
+	)
+	</insert>
+	
+	<select id="getApprovalByNo" parameterType="int" resultMap="ApprovalResult">
+		SELECT * FROM E_APPROVAL WHERE approval_no={approval_No}
+	</select>
+	
+	
+	<select id="getApprovalList"  resultMap="ApprovalResult">
+		SELECT * FROM E_APPROVAL WHERE approvalconfirm='0'
+	</select>
+	<select id="getApprovalList2" resultMap="ApprovalResult">
+		SELECT * FROM E_APPROVAL WHERE approvalconfirm='1'
+	</select>
+	<resultMap type="Approval" id="ApprovalResult">
+		<id column="approval_no" property="approval_No" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="reportdate" property="reportDate" />
+		<result column="opening" property="opening" />
+		<result column="storageperiod" property="storagePeriod" />
+		<result column="receivedept" property="receiveDept" />
+		<result column="approvalconfirm" property="approvalConfirm" />
+		<result column="approvecheck" property="approveCheck" />
+		<result column="form_no" property="form_No" />
+		<result column="id" property="id" />
+		<association column="id" property="employee"  select="getEmployeeList" />
+		<collection column="approval_no" property="approvalLines" select="getApprovalLine"/>
+		<collection column="approval_no" property="cooperations"  select="getCooperation" />
+	</resultMap>
+	
+	<resultMap type="ApprovalLine" id="approvalLineResult">
+		<id column="approvalline_no" property="approvalLine_No" />
+		<result column="priority" property="priority" />
+		<result column="approvecheck" property="approveCheck" />
+		<result column="approvalday" property="approvalDay" />
+		<result column="approval_no" property="approval_No" />
+		<result column="id" property="id" />
+		<association property="employee" column="id" select="getEmployeeList" />
+	</resultMap>
+	
+	<resultMap type="ApprovalCooperation" id="cooperationResult">
+		<result column="approval_no" property="approval_No" />
+		<result column="id" property="id" />
+		<association property="employee" column="id" select="getEmployeeList" />
+	</resultMap>
+	
+	 <select id="getApprovalLine" resultMap="approvalLineResult">
+		SELECT *
+		FROM approvalLine
+		where approval_no=#{approval_no}
+	</select>
+	<select id="getCooperation" resultMap="cooperationResult">
+		SELECT id,approval_no
+		FROM ApprovalCooperation
+		where approval_no=#{approval_no}
+	</select> 
+	<select id="getEmployeeList" resultType="Employee">
+		SELECT id,name,d.partName deptName,p.position_Name positionName
+		FROM employee e,DEPT d,position p
+		where id=#{id} AND d.dept_no = e.dept_no AND e.position_no=p.position_no
+	</select>
+
 </mapper>
   

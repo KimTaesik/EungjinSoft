@@ -1,5 +1,6 @@
 package com.groupware.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,10 @@ import sun.security.provider.MD2;
 
 import com.groupware.dao.ApprovalDao;
 import com.groupware.dao.EmployeeDao;
+import com.groupware.dto.Approval;
+import com.groupware.dto.ApprovalCooperation;
 import com.groupware.dto.ApprovalForm;
+import com.groupware.dto.ApprovalLine;
 import com.groupware.dto.Board;
 import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
@@ -87,25 +91,72 @@ public class MyApprovalService implements ApprovalService {
 	public Employee getEmployeeInfomationList(String employeeid){
 		System.out.println(employeeid);
 		Employee info = employeeDao.getEmployeeInfomationList(employeeid);
-//		List<Dept> depts = employeeDao.getDeptList();
-//		List<Employee> employees = employeeDao.getemList();
 
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("depts", depts);
-//		mav.addObject("employees", employees);
-//		mav.addObject("info", info);
-		
-
-	//	ArrayList<Object> list= new ArrayList<>();
-
-		
-		
-	
-		
 		return info;
 	}
 
 
+
+	@Override
+	public void insertApproval(Approval approval) {
+		
+		approvalDao.insertApproval(approval);
+	}
+
+
+
+	@Override
+	public void insertApprovalLine(ApprovalLine approvalLine) {
+			
+			
+	
+		approvalDao.insertApprovalLine(approvalLine);
+	}
+
+
+
+	@Override
+	public void insertApprovalCooperation(
+			ApprovalCooperation approvalCooperation) {
+		approvalDao.insertApprovalCooperation(approvalCooperation);
+	}
+
+
+
+	@Override
+	public ModelAndView getApprovalList() {
+		
+		
+		ModelAndView mav= new ModelAndView();
+		List<Approval> approvals=approvalDao.getApprovalList();
+		
+		mav.addObject("approvals", approvals);
+		mav.setViewName("approval/documentbox");
+		return mav;
+	}
+	@Override
+	public ModelAndView getApprovalList2() {
+		
+		
+		ModelAndView mav= new ModelAndView();
+		List<Approval> approvals=approvalDao.getApprovalList2();
+		
+		mav.addObject("approvals", approvals);
+		mav.setViewName("approval/documentbox");
+		return mav;
+	}
+
+
+
+	@Override
+	public ModelAndView getApprovalByNo(int approval_No) {
+		// TODO Auto-generated method stub
+		ModelAndView mav= new ModelAndView();
+		Approval approval= approvalDao.getApprovalByNo(approval_No);
+		mav.addObject("approval", approval);
+		mav.setViewName("approval/approvalview");
+		return mav;
+	}
 
 	
 	

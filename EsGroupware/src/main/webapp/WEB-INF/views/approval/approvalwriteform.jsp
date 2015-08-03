@@ -16,8 +16,12 @@
 <link rel="stylesheet"
 	href="/groupware/resources/styles/eword_write.css">
 <script type="text/javascript">
+
+var get=null;
+var i;
+var temp =null;
+
 	
-	var i;
 	$(function() {
 		
 		$("#accordion").accordion({
@@ -82,7 +86,7 @@
 			close : function() {},
 			cancle : function() {}
 		});
-
+		//수신부서
 		$("#dialog-form2").dialog({
 			resizable : false,
 			autoOpen : false,
@@ -108,6 +112,7 @@
 			close : function() {},
 			cancle : function() {}
 		});
+		//참조자
 		$("#dialog-form3").dialog({
 			resizable : false,
 			autoOpen : false,
@@ -120,9 +125,10 @@
 			                 $("input.box_class6:checked").each(function(index, item) {
 			                	 if(index<5){
 			                		
-			                	 	check += $(this).val() 
-			                	 	if(index<4)
+			                	 	
+			                	 	if(index<4 && index>0)
 			                		 	check += ", ";
+			                	 	check += $(this).val() 
 			                	 }
 								else if(5<=index && index < total){
 									count++;
@@ -143,8 +149,11 @@
 			cancle : function() {}
 		});
 		$(".get").click(function(e) {
+			get=$(this);
 			var id = $(this).attr('id');
+			
 			$(".dialog-cancel"+i).css("display","block");
+			$(temp).css("display","none");
 			$.ajax({
 				url : "infomation.action?employeeid=" + id,
 				method : 'get',
@@ -155,7 +164,7 @@
 					eval("var r=" + result);
 	
 					$('#positionName'+i).attr('value', r.position.positionName);
-					
+					$('#selectId'+i).attr('value',id);
 					$('#selectName'+i).attr('value', r.name);
 					
 				},
@@ -168,30 +177,48 @@
 		});	
 	
 		$(".dialog-confirm").click(function(event) {
-			i=$(this).attr('name');
-			var temp =$(this);
+			i=$(this).attr('onclick');
+			var b =$(this);//취소에 씀
+			temp=$(this); //get에 씀
 			$("#dialog-form").dialog("open");
-			$(this).css("display","none");
+		
 			$(".dialog-cancel"+i).click(function(e) {
 				var a = $(this).attr('onclick');
 				
 				$('#positionName'+a).attr('value', "");
 				$('#selectName'+a).attr('value',"");
 				$(".dialog-cancel"+a).css("display","none");
-				$(temp).css("display","block");
+				$(b).css("display","block");
 			});		
 		});
+		//수신부서
 		$(".dialog-confirm2").click(function(event) {
-			i=$(this).attr('name');
+		
 			
 			$("#dialog-form2").dialog("open");
-			//event.preventDefault();
+			event.preventDefault();
 		});
+		//참조자
 		$(".dialog-confirm3").click(function(event) {
-			i=$(this).attr('name');
+		
 			$("#dialog-form3").dialog("open");
+			event.preventDefault();
 		});
+		
+		$('#submit').click(function() { 
+			$('form').submit(); 
+		}); 
+		 var  jqCalendar = {
+				
+				    dateFormat: "yy/mm/dd",
+				
+				   };
+		$('#datepicker').datepicker(
+			   jqCalendar);
+
 	});
+	
+
 </script>
 			
 </head>
@@ -217,7 +244,7 @@
 					</c:if>
 				</c:forEach>
 			</h2>
-
+			<form action="approvalwriteform.action" method="post">	
 			<!-- 결재문서 본문 -->
 			<table class="eword_maincolumn boldline mar10b">
 				<tr>
@@ -234,7 +261,7 @@
 								<th style="border-top: none; border-left: none;">문서번호</th>
 								<td class="pad15l" colspan="3" style="border-top: none;">
 									<span id="sub_subject"> 
-										<input type="text" id="WordNo" name="WordNo" style="border: 0pt;" value="${approvalform.form_No}" size='10' readonly />
+										<input type="text" id="WordNo" name="form_No" style="border: 0pt;" value="${approvalform.form_No}" size='10' readonly />
 									</span> 
 								</td>
 								<td rowspan="6" style="border-top: none; border-right: none;">
@@ -267,6 +294,7 @@
 										<tr class="date" style="height: 61px;">
 											<!-- 결재 버튼/결재완료 서명 표시 영역 -->
 											<td>
+											<input type="hidden" name="lineId1" value="" id="selectId1">
 											<input type="text" name="OrderName1" value=""readonly class="form_transparent" id="selectName1" style='width: 100%;'>
 												<div id="dialog-form" title="직원 리스트">
 													<div id="accordion">
@@ -292,35 +320,39 @@
 												</div>
 												<div align="center">
 													<input type="button" value="취소" class="dialog-cancel1" onclick="1"  style="display: none"> 
-													<input type="button" value="지정" class="dialog-confirm" name="1">
+													<input type="button" value="지정" class="dialog-confirm" onclick="1">
 												</div> 
 											</td>
 											<td>
+												<input type="hidden" name="lineId2" value="" id="selectId2">
 												<input type="text" name="OrderName2" value="" readonly class="form_transparent" id="selectName2" style='width: 100%;'> 
 													<div align="center">
 														<input type="button" value="취소" class="dialog-cancel2"  onclick="2" style="display: none"> 
-													<input type="button" value="지정" class="dialog-confirm" name="2">
+													<input type="button" value="지정" class="dialog-confirm" onclick="2">
 													</div>
 												</td>
 											<td>
+												<input type="hidden" name="lineId3" value="" id="selectId3">
 												<input type="text" name="OrderName3" value="" readonly class="form_transparent" id="selectName3" style='width: 100%;'> 
 													<div align="center">
 														<input type="button" value="취소" class="dialog-cancel3" onclick="3"  style="display: none"> 
-														<input type="button" value="지정" class="dialog-confirm" name="3"> 
+														<input type="button" value="지정" class="dialog-confirm" onclick="3"> 
 													</div>
 												</td>
 											<td>
+												<input type="hidden" name="lineId4" value="" id="selectId4">
 												<input type="text" name="OrderName4" value=""readonly class="form_transparent" id="selectName4" style='width: 100%;'>
 												<div align="center">
 													<input type="button" value="취소" class="dialog-cancel4" onclick="4"  style="display: none"> 
-													<input type="button" value="지정" class="dialog-confirm" name="4"> 
+													<input type="button" value="지정" class="dialog-confirm" onclick="4"> 
 												</div> 
 											</td>
 											<td>
+											<input type="hidden" name="lineId5" value="" id="selectId5">
 											<input type="text" name="OrderName5" value="" readonly class="form_transparent" id="selectName5" style='width: 100%;'>
 												 <div align="center">
 													<input type="button" value="취소" class="dialog-cancel5" onclick="5"  style="display: none"> 
-													<input type="button" value="지정" class="dialog-confirm" name="5"> 
+													<input type="button" value="지정" class="dialog-confirm" onclick="5"> 
 												</div> 
 											</td>
 										</tr>
@@ -339,62 +371,65 @@
 											</th>
 											<!-- 결재자/협조자 직급 표시 영역 -->
 											<td>
-												<input type="text" name="OrderTitle11" value="" readonly class="form_transparent" id="positionName6" style='width: 100%; line-height: 21px;'></td>
+												<input type="text" name="OrderTitle6" value="" readonly class="form_transparent" id="positionName6" style='width: 100%; line-height: 21px;'></td>
 											<td>
-												<input type="text" name="OrderTitle12" value="" readonly class="form_transparent" id="positionName7" style='width: 100%; line-height: 21px;'></td>
+												<input type="text" name="OrderTitle7" value="" readonly class="form_transparent" id="positionName7" style='width: 100%; line-height: 21px;'></td>
 											<td>
-												<input type="text" name="OrderTitle13" value="" readonly class="form_transparent" id="positionName8" style='width: 100%; line-height: 21px;'></td>
+												<input type="text" name="OrderTitle8" value="" readonly class="form_transparent" id="positionName8" style='width: 100%; line-height: 21px;'></td>
 											<td>
-												<input type="text" name="OrderTitle14" value="" readonly class="form_transparent" id="positionName9" style='width: 100%; line-height: 21px;'></td>
+												<input type="text" name="OrderTitle9" value="" readonly class="form_transparent" id="positionName9" style='width: 100%; line-height: 21px;'></td>
 											<td>
-											<input type="text" name="OrderTitle15" value="" readonly class="form_transparent" id="positionName10" style='width: 100%; line-height: 21px;'></td>
+											<input type="text" name="OrderTitle10" value="" readonly class="form_transparent" id="positionName10" style='width: 100%; line-height: 21px;'></td>
 										</tr>
 										<tr class="date" style="height: 61px;">
 											<!-- 결재 버튼/결재완료 서명 표시 영역 -->
 											<td>
+												<input type="hidden" name="lineId6" value="" id="selectId6">
 												<input type="text" name="OrderName11" value="" readonly class="form_transparent"  id="selectName6" style='width: 100%;'>
 											 	<div id="MembersFindCell11" class="btn_page pad15l overf">
 													<div align="center">
 														<input type="button" value="취소" class="dialog-cancel6" onclick="6" style="display: none"> 
-														<input type="button" value="지정" class="dialog-confirm" name="6"> 
+														<input type="button" value="지정" class="dialog-confirm" onclick="6"> 
 													</div> 
 												</div>
 											</td>
 											<td>
+												<input type="hidden" name="lineId7" value="" id="selectId7">
 												<input type="text" name="OrderName12" value="" readonly class="form_transparent"  id="selectName7"  style='width: 100%;'>
 													<div id="MembersFindCell12" class="btn_page pad15l overf">
 														<div align="center">
 															<input type="button" value="취소" class="dialog-cancel7"  onclick="7" style="display: none"> 
-															<input type="button" value="지정" class="dialog-confirm" name="7"> 
+															<input type="button" value="지정" class="dialog-confirm" onclick="7"> 
 														</div> 
 													</div>
 											</td>
 											<td>
+												<input type="hidden" name="lineId8" value="" id="selectId8">
 												<input type="text" name="OrderName13" value="" readonly class="form_transparent"  id="selectName8" style='width: 100%;'>
-													<input type="hidden" name="OrderId13" value=""> <!-- 지정/취소 버튼 -->
 													<div id="MembersFindCell13" class="btn_page pad15l overf">
 														<div align="center">
 															<input type="button" value="취소" class="dialog-cancel8" onclick="8" style="display: none"> 
-															<input type="button" value="지정" class="dialog-confirm" name="8"> 
+															<input type="button" value="지정" class="dialog-confirm" onclick="8"> 
 														</div> 
 													</div>
 											</td>
 											<td>
+												<input type="hidden" name="lineId9" value="" id="selectId9">
 												<input type="text" name="OrderName14" value="" readonly class="form_transparent"  id="selectName9" style='width: 100%;'>
-													<input type="hidden" name="OrderId14" value=""> <!-- 지정/취소 버튼 -->
 													<div id="MembersFindCell14" class="btn_page pad15l overf">
 														<div align="center">
 															<input type="button" value="취소" class="dialog-cancel9" onclick="9" style="display: none"> 
-															<input type="button" value="지정" class="dialog-confirm" name="9"> 
+															<input type="button" value="지정" class="dialog-confirm" onclick="9"> 
 														</div> 
 													</div>
 											</td>
 											<td>
+												<input type="hidden" name="lineId10" value="" id="selectId10">
 												<input type="text" name="OrderName15" value="" readonly class="form_transparent"  id="selectName10" style='width: 100%;'>
 													<div id="MembersFindCell15" class="btn_page pad15l overf">
 														<div align="center">
 															<input type="button" value="취소" class="dialog-cancel10" onclick="10" style="display: none"> 
-															<input type="button" value="지정" class="dialog-confirm" name="10"> 
+															<input type="button" value="지정" class="dialog-confirm" onclick="10"> 
 														</div> 
 													</div>
 											</td>
@@ -411,6 +446,7 @@
 											</td>
 											<td style="border-bottom: none;"><span id="appDate15">&nbsp;</span>
 											</td>
+											
 										</tr>
 									</table>
 								</td>
@@ -422,29 +458,33 @@
 							<tr class="eword_meta_height">
 								<th style="border-left: none;">부서</th>
 								<td class="pad15l" colspan="3">${drafter.dept.partName}</td>
+								
 							</tr>
+
 							<tr class="eword_meta_height">
 								<th style="border-left: none;">기안일</th>
 								<td class="pad15l" colspan="3">
-									<input name="DraftingY" type="date" value="2015" size="4" maxlength="4">
+									<input id="datepicker" name="reportDate" type="text" >
 								</td>
 							</tr>
 							<tr class="eword_meta_height">
 								<th style="border-left: none;">기안자</th>
-								<td class="pad15l " colspan="3">${drafter.name}</td>
+								<td class="pad15l " colspan="3">
+								<input type="hidden" name="id" value="${drafter.id}">
+								${drafter.name}</td>
 							</tr>
 							<tr class="eword_meta_height">
 								<th style="border-left: none;">공개여부</th>
 								<td class="txt_ce">
 									<!-- 작성 --> 
-									<select name="Opening" onchange="ReceiveTreeKeyButton();">
-									<option label="공개" value="Y" selected="selected">공개</option>
-									<option label="비공개" value="N">비공개</option>
-								</select>
+									<select name="opening">
+										<option label="공개" value="1" selected="selected">공개</option>
+										<option label="비공개" value="0">비공개</option>
+									</select>
 								</td>
 								<th>보존기간</th>
 								<td class="txt_ce">
-									<select name='StoragePeriod'>
+									<select name='storagePeriod'>
 										<option label="3 개월" value="3">3 개월</option>
 											<option label="6 개월" value="6">6 개월</option>
 											<option label="1 년" value="12">1 년</option>
@@ -472,7 +512,7 @@
 								<th style="border-left: none;">수신부서</th>
 								<td class="pad15l" style="padding-right: 7px;">
 									<span id="ReceiveTreeKeyButtonArea" style='width: 100%;'> 
-										<input type="text" name="ReceiveTreeKeyName" value="" id="ReceiveTreeKeyName" readonly class="left" style="width: 394px;" /> 
+										<input type="text" name="receiveDept" value="" id="ReceiveTreeKeyName" readonly class="left" style="width: 394px;" /> 
 											<div id="dialog-form2" title="부서 리스트">
 												<div id="accordion2">
 													<input type="checkbox" id="check_all" class="box_class1">전체선택하기
@@ -523,7 +563,7 @@
 							<tr class="eword_meta_height">
 								<th style="border-left: none;">참조자</th>
 								<td class="pad15l" style="padding-right: 7px;">
-									<input type="text" name="referenceUserName" id="referenceUserName" value="" readonly class="left" style="width: 394px;" /> 
+									<input type="text" name="referrers" id="referenceUserName" value="" readonly class="left" style="width: 394px;" /> 
 											<span class="txt_ce" style="width: 70px;">
 												<button class="dialog-confirm3" >참조자 지정</button>
 											</span>
@@ -532,7 +572,7 @@
 							<tr class="eword_meta_height">
 								<th style="border-left: none;">제목</th>
 								<td class="pad15l">
-								<input name="Subject" type="text" value="" style="width: 98%;" /></td>
+								<input name="title" type="text"  style="width: 98%;" /></td>
 							</tr>
 						</table>
 					</td>
@@ -540,11 +580,16 @@
 				<!-- 기본형 에디터 -->
 				<tr>
 					<td id="eword_content" class="pad5">
-						<textarea name="Contents" id="Contents" style="width: 100%; height: 400px; display: block;">&nbsp;</textarea>
+						<textarea name="content" id="Contents" style="width: 100%; height: 400px; display: block;">&nbsp;</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td id="eword_content" class="pad5" align="right">
+						<input id="submit" type="submit" value="상신 하기"> 
 					</td>
 				</tr>
 
 			</table>
-
+			</form>
 </body>
 </html>
