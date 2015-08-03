@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
+import com.groupware.dto.Log;
 import com.groupware.dto.Menu;
 import com.groupware.dto.Position;
 
@@ -70,4 +71,16 @@ public interface EmployeeMapper {
 	void insertUploadFile(HashMap<String, Object> params);
 	
 	List<Menu> menulist();
+	
+	void menuable(String menuno);
+	
+	void menudisable(String menuno);
+	
+	int insertLog(HashMap<String, Object> params);
+	
+	List<Log> loglist(HashMap<String, Object> params);
+	
+	int getlogCount();
+	
+	List<Log> logalllist();
 }

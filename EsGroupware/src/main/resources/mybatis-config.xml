@@ -23,6 +23,7 @@
 
 		<typeAlias type="com.groupware.dto.ApprovalForm" alias="ApprovalForm" />
 		<typeAlias type="com.groupware.dto.Menu" alias="Menu" />
+		<typeAlias type="com.groupware.dto.Log" alias="Log" />
 
 	</typeAliases>
 	<mappers>

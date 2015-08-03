@@ -1,7 +1,10 @@
 package com.groupware.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.dao.EmployeeDao;
+import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
+import com.groupware.dto.Log;
 import com.groupware.dto.Menu;
 
 @Controller
@@ -42,6 +47,20 @@ public class LoginController {
 		Employee employee = employeeDao.getEmployeeByIdAndPasswd(memberId, passwd);
 		List<Menu> menus = employeeDao.menulist();
 		
+		/////////////////log
+		Log log = new Log();
+		List<Dept> depts = employeeDao.getDeptList();
+		for( Dept dept : depts) {
+			if (employee.getDeptNo().equals(dept.getDeptNo()))
+				log.setDept(dept.getPartName());
+		}
+		log.setIp(request.getRemoteAddr());
+		log.setName(employee.getName());
+		
+		log.setLogdate(new Date());
+		employeeDao.insertLog(log);
+		/////////////////log
+
 		if (employee != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginuser", employee);//로그인 처리

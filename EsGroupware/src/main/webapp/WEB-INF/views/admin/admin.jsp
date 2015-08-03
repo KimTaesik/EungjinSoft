@@ -48,9 +48,9 @@
 				      <li>List item three</li>
 			    </ul>
 		  <h3>관리자 4</h3>
-		  <div>
-
-		  </div>
+			    <ul>
+				      <li><a href="/groupware/log/log.action" target="myframe">접속 로그</a></li>
+			    </ul>
 		</div>
 		
 </nav>

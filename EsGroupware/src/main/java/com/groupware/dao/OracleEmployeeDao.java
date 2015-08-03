@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.groupware.dto.Board;
 import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
+import com.groupware.dto.Log;
 import com.groupware.dto.Menu;
 import com.groupware.dto.Position;
 import com.groupware.mapper.EmployeeMapper;
@@ -188,6 +189,43 @@ public class OracleEmployeeDao implements EmployeeDao {
 	public List<Menu> menulist() {
 		List<Menu> menu = employeeMapper.menulist();
 		return menu;
+	}
+	@Override
+	public void menuable(String menuno) {
+		employeeMapper.menuable(menuno);
+	}
+	@Override
+	public void menudisable(String menuno) {
+		employeeMapper.menudisable(menuno);
+	}
+	
+	@Override
+	public void insertLog(Log log) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("name", log.getName());
+		params.put("dept", log.getDept());
+		params.put("ip", log.getIp());
+		params.put("logdate", log.getLogdate());
+		
+		employeeMapper.insertLog(params);
+	}
+	@Override
+	public List<Log> loglist(int first, int last) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("first", first);
+		params.put("last", last);
+		
+		return employeeMapper.loglist(params);
+	}
+	@Override
+	public int getlogCount() {
+		// TODO Auto-generated method stub
+		return employeeMapper.getlogCount();
+	}
+	@Override
+	public List<Log> logalllist() {
+		List<Log> logs = employeeMapper.logalllist();
+		return logs;
 	}
 
 }

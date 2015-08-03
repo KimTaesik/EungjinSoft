@@ -2,9 +2,9 @@ package com.groupware.dao;
 
 import java.util.List;
 
-import com.groupware.dto.Board;
 import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
+import com.groupware.dto.Log;
 import com.groupware.dto.Menu;
 import com.groupware.dto.Position;
 
@@ -64,4 +64,16 @@ public interface EmployeeDao {
 	void registerApprovalAdmin(String id);
 	
 	List<Menu> menulist();
+	
+	void menuable(String menuno);
+	
+	void menudisable(String menuno);
+	
+	void insertLog(Log log);
+	
+	List<Log> loglist(int first, int last);
+	
+	int getlogCount();
+	
+	List<Log> logalllist();
 }

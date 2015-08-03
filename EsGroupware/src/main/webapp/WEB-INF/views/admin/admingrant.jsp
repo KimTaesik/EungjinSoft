@@ -446,7 +446,6 @@
 			
 			<tr id="approvalListTable">
 	            <c:forEach var="approvals2" items="${ approvalAdmins2 }" varStatus="status">
-	            ${ status.index }
 	            <tr id="tr${ approvals2.id }">
 	             	<td class='txt_ce'>
 						<div>
