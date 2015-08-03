@@ -27,25 +27,30 @@ public class OracleAddressBookDao implements AddressBookDao {
 		
 	}
 	
-/*	// 페이징 처리 (목록조회)
+	// ***** 페이징 처리 (목록조회)
 	//전달인자 : 전체 목록에서 조회할 데이터의 시작위치 , 끝위치
 	@Override
-	public List<AddressBook> getAddressbookList(int first, int last, String classify) {
-	
-	HashMap<String, Object> params = new HashMap<String, Object>();
-	params.put("first", first);
-	params.put("last", last);
-	params.put("classify", classify);
-	
-	return	addressMapper.getAddressbookList(params);
-}*/
-	
-	@Override
 	public List<AddressBook> getAddressbookList(String classify) {
-		//HashMap<String, String> params = new HashMap<String, String>();
-		//params.put("classify", classify);
+		
 		return addressMapper.getAddressbookList(classify);
 
+	}
+	
+	@Override
+	public List<AddressBook> getAddressbookList2(int first, int last, String classify) {
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("first", first);
+		params.put("last", last);
+		params.put("classify", classify);
+		
+		return addressMapper.getAddressbookList2(params);
+
+	}
+	
+	public int getAddressBookCount(String classify) {
+		
+		return addressMapper.getAddressBookCount(classify);
 	}
 	
 	//**********주소록 삭제************
@@ -61,7 +66,7 @@ public class OracleAddressBookDao implements AddressBookDao {
 	
 	//**********주소록 수정************
 	@Override
-	public void editAddress(String addressNo,String classify, AddressBook addressbook) {
+	public void editAddress(String addressNo,String classify,AddressBook addressbook) {
 		
 		HashMap<String, Object> params =new HashMap<String, Object>();
 		
@@ -70,5 +75,14 @@ public class OracleAddressBookDao implements AddressBookDao {
 		
 		addressMapper.editAddress(params);
 		  
+	}
+	//++++++++ 주소 수정시, 기본 정보 가져오게 하는 것.
+	@Override
+	public AddressBook selectAddress(String addressNo) {
+		
+		
+		AddressBook addressbook3 = addressMapper.selectAddress(addressNo);
+		  
+		return addressbook3;
 	}
 }

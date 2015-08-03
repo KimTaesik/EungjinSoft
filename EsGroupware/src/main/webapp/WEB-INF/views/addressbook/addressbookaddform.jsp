@@ -21,13 +21,6 @@
 <!-- 	<script src="/groupware/resources/styles/script/jquery.js"></script>
 	<script src="/groupware/resources/styles/script/jquery-ui.js"></script>  -->
 	
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  	<link rel="stylesheet" href="/resources/demos/style.css">
-	
- 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> 
-	
 
 	<script type="text/javascript">
 
@@ -92,7 +85,7 @@
 		<form id='addressbookaddform' action='addressbookadd.action' method='post'>
 		<input type="hidden" name="classify" value=${ classify } />
  		<input type="hidden" name="groupno" value="1" />
-			 <table>
+			  <table>
 	        	<tr>
 	            	<th style='background-color: #fffffc;text-align: left;'>
 	            		▶개인정보
@@ -104,13 +97,13 @@
 	            <tr>
 	                <th id="essential">* 이름</th>
 	                <td>
-	                	<input id='name' type='text' name='name' style='width:280px' />
+	                	<input id='name' type='text' name='name' style='width:280px;height:18px;' />
 	                </td>
 	            </tr>
 	            <tr>
 	                <th id="essential">* 메일주소</th>
 	                <td>
-	                	<input type='text' name='email' style='width:280px' />
+	                	<input id='email' type='text' name='email' style='width:280px;height:18px;' />
 	                </td>
 	            </tr>
 	            <tr>
@@ -132,15 +125,15 @@
 	            <tr>
 	                <th>팩스번호</th>
 	                <td>
-	                	<input type='text' name='homePhone1' style='width:60px' />&nbsp;-&nbsp; 
-	                	<input type='text' name='homePhone2' style='width:60px' />&nbsp;-&nbsp;
-	                	<input type='text' name='homePhone3' style='width:60px' />
+	                	<input type='text' name='fax1' style='width:60px' />&nbsp;-&nbsp; 
+	                	<input type='text' name='fax2' style='width:60px' />&nbsp;-&nbsp;
+	                	<input type='text' name='fax3' style='width:60px' />
 	                </td>
 	            </tr>
 	            <tr>	
 	            	<th>국가</th>
 	            	<td>	
-					<select style='width=20px'>
+					<select style='width=20px' name='nation'>
 						<option value="Korea, Republic of">한국, 대한민국</option>
 						<option value="Korea, Democratic People's Republic of">한국, 조선 민주주의 인민 공화국</option>
 						<option value="Japan">일본</option>
@@ -384,29 +377,19 @@
 	             <tr>
 	                <th>회사이름</th>
 	                <td>
-	                	<input id='name' type='text' name='name' style='width:280px' />
+	                	<input id='name' type='text' name='companyName' style='width:280px' />
 	                </td>
 	            </tr>
 	            <tr>
 	                <th>부서</th>
 	                <td>
-	                	<select id='dept' type='text' name='dept' style='width:80px'>
-	                	<option></option>
-	                	<c:forEach var="dept" items="${ depts }">
-	                		<option value=${ dept.deptNo }>${ dept.partName }</option>
-	                	</c:forEach>
-	                	</select>
+	                	<input id='deptName' type='text' name='deptName' style='width:280px' />
 	                </td>
 	            </tr>
 	            <tr>
 	                <th>직책</th>
 	                <td>
-	                	<select id='position' type='text' name='position' style='width:80px'>
-	                	<option></option>
-	                	<c:forEach var="position" items="${ positions }">
-	                		<option value=${ position.positionNo }>${  position.positionName }</option>
-	                	</c:forEach>
-	                	</select>
+	              		<input id='positionName' type='text' name='positionName' style='width:280px' />
 	                </td>
 	            </tr>
 	            <tr>
@@ -490,7 +473,7 @@
 	            <tr>
 	                <th>메모</th>
 	                <td>
-	                	<textarea style='height: 120px; width:280px'></textarea>
+	                	<textarea name='memo' style='height: 120px; width:280px'></textarea>
 	                </td>
 	            </tr>
 	        </table>

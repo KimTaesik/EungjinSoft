@@ -2,7 +2,6 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -11,7 +10,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>주소록</title>
-	<link rel="Stylesheet" href="/groupware/resources/styles/addressframe.css" /> 
+	<link rel="Stylesheet" href="/groupware/resources/styles/addressframe.css" />
+	
+
 	<script type="text/javascript">
 	
 /* 	function search() {
@@ -126,13 +127,13 @@
 			
 			<table id="menubar" class="address">
 				<tr>
-					<th style="width:45px;text-align:center">이름</th>
-					<th style="width:170px;text-align:center">이메일</th>
-					<th style="width:180px;text-align:center">휴대폰</th>
-					<th style="width:170px;text-align:center">전화</th>
-					<th style="width:190px;text-align:center">팩스</th>
+					<th style="width:40px;text-align:center">이름</th>
+					<th style="width:150px;text-align:center">이메일</th>
+					<th style="width:130px;text-align:center">휴대폰</th>
+					<th style="width:130px;text-align:center">전화</th>
+					<th style="width:130px;text-align:center">팩스</th>
 					<th style="width:40px;text-align:center">수정</th>
-					<th style="width:90px;text-align:center">삭제</th>
+					<th style="width:40px;text-align:center">삭제</th>
 				</tr>
 			 	
 			 	<% List<AddressBook> addressbook1 = (List<AddressBook>)request.getAttribute("addressbook1"); %> 
@@ -142,15 +143,15 @@
 				 	<%-- <%= loginUser.getId() %> --%>
 				 <!-- <tbody> -->
 				 	<tr>
-			        	<td id="name" style="width:45px;text-align:center" ><%= addressbook2.getName() %></td>
-			            <td id="email" style="width:170px;text-align:center"><%= addressbook2.getEmail() %></td>
-			            <td id="phonenumber" style="width:180px;text-align:center"><%= addressbook2.getPhoneNumber() %></td>
-			            <td id="homenumber" style="width:170px;text-align:center"><%= addressbook2.getHomeNumber() %></td>
-			            <td id="fax" style="width:190px;text-align:center"><%= addressbook2.getFax() %></td>
+			        	<td id="name" style="width:40px;text-align:center" ><%= addressbook2.getName() %></td>
+			            <td id="email" style="width:150px;text-align:center" ><a href="" ><%= addressbook2.getEmail() %></a></td>
+			            <td id="phonenumber" style="width:130px;text-align:center"><%= addressbook2.getPhoneNumber() %></td>
+			            <td id="homenumber" style="width:130px;text-align:center"><%= addressbook2.getHomeNumber() %></td>
+			            <td id="fax" style="width:130px;text-align:center"><%= addressbook2.getFax() %></td>
 			            <td style="width:40px;text-align:center">
-			            	<img class="editaddress" src="/groupware/resources/image/edit.gif" tag="<%= addressbook2.getAddressNo() %>" />
+			            	<img class="editaddress" onchange="<%=addressbook2.getAddressNo() %>" src="/groupware/resources/image/edit.gif" />
 			            </td>
-			            <td style="width:90px;text-align:center"><img src="/groupware/resources/image/delete.gif" 
+			            <td style="width:40px;text-align:center"><img src="/groupware/resources/image/delete.gif" 
 			            onclick="javascript:deleteAddress(<%= addressbook2.getAddressNo()%>,<%= addressbook2.getClassify() %>)" />
 			            </td>
 			        </tr>  
@@ -164,8 +165,8 @@
 			</table>
 			
 			<div style="text-align:center">
-			${ pager.toString() }
-			<br/>
+			 ${ pager.toString() }
+			 <br/>
 			</div>
 			<!-- 	<div style="width:910px; height:370px">
 			

@@ -15,8 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.dao.AddressBookDao;
 import com.groupware.dto.AddressBook;
-import com.groupware.dto.Board;
 import com.groupware.dto.Employee;
+import com.groupware.ui.ThePager;
+
+
+
+//*****************  메일 보내기 관련 추가 사항.
+
+
+
 
 @Controller
 @RequestMapping(value="address")
@@ -33,7 +40,6 @@ public class AddressbookController {
 	@RequestMapping(value="addressbookadd.action", method = RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView addressAddform(String classify){
-		List<AddressBook> addressbook1 = null;
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("classify" , classify);
@@ -44,7 +50,7 @@ public class AddressbookController {
 	@RequestMapping(value="addressbookadd.action", method = RequestMethod.POST)
 	public ModelAndView addressadd(HttpSession session, AddressBook addressbook, 
 			String cellPhone1,String cellPhone2,String cellPhone3,
-			String homePhone1, String homePhone2, String homePhone3, String fax1, String fax2, String fax3,
+			String homePhone1, String homePhone2, String homePhone3, String fax1, String fax2, String fax3,String nation,
 			String postcode1, String postcode2, String roadAddress, String roadAddress2, String postcode3, 
 			String postcode4, String directLine1,String directLine2, String directLine3, String extention){
 		
@@ -55,7 +61,7 @@ public class AddressbookController {
 		String homenumber = null;
 		String phonenumber = null;
 		String fax = null;
-		String nation = null;
+
 		String directLine = null;
 		String homepostcode = null;
 		String compostcode = null;
@@ -94,7 +100,7 @@ public class AddressbookController {
 		}
 		addressbook.setDirectLine(directLine);
 		
-		addressbook.setNation(addressbook.getNation());
+		addressbook.setNation(nation);
 		
 		addressbook.setExtension(extension);
 		
@@ -148,39 +154,98 @@ public class AddressbookController {
 	
 	@RequestMapping(value="addressheader.action", method = RequestMethod.GET)
 	public ModelAndView addresshearder(String classify,HttpSession session){
+		
 		ModelAndView mav = new ModelAndView();
-		List<AddressBook> addressbook1 =  addressbookDao.getAddressbookList(classify);
+		
+		//******* 페이징 관련 데이터 처리 ********* 
+		int pageNo = 1; // 현재 페이지 번호
+		int pageSize = 5; //한 페이지에 표시할 데이터 갯수
+		int pagerSize = 10; //번호로 표시할 페이지 갯수
+		int dataCount = 0; //전체 데이터 갯수 (pageSize와 dataCount를 알아야, 페이지가 얼마나? 있는지 알 수 있다.)
+		String url = "addresslist.action"; // 페이징 관련 링크를 누르면, 페이지번호와 함께 요청할 경로
+		String queryString = "classify="+classify ;
+		//요청한 페이지 번호가 있다면, 읽어서 현재 페이지 번호로 설정 (없다면, 1페이지)
+		//현재 페이지의 첫 번째 데이터의 순서번호를 계산하는 방법.
+		int first = (pageNo - 1) * pageSize + 1;
+		
+		List<AddressBook> addressbook1 = null;
+		
+		//*********  페이지 개수 조정 (조건에 맞는 개수만큼만 페이징 조정) 작업.
+		dataCount = addressbookDao.getAddressBookCount(classify);
+		System.out.println(dataCount);
+		
+		ThePager pager = new ThePager(dataCount, pageNo, pageSize, pagerSize, url, queryString);
+
+		addressbook1 =  addressbookDao.getAddressbookList2(first, first+pageSize, classify);
 		
 		/*String loginUser = ((Employee)session.getAttribute("loginuser")).getId();*/
-
+		/*	mav.addObject("loginUser", loginUser);*/
 		
-	/*	mav.addObject("loginUser", loginUser);*/
-		mav.addObject("addressbook1", addressbook1);
-		mav.addObject("classify", classify);
-		mav.setViewName("include/addressheader");
+		if(classify.equals("1")) {
+		
+			addressbookDao.getAddressbookList2(first, first+pageSize, classify);
+			mav.addObject("addressbook1", addressbook1);
+			mav.addObject("pager", pager);
+			mav.addObject("pageno", pageNo);
+			mav.addObject("classify", classify);
+			mav.setViewName("include/addressheader");
+		}else if(classify.equals("2")) {
+			addressbookDao.getAddressbookList2(first, first + pageSize, classify);
+			mav.addObject("addressbook1", addressbook1);
+			mav.addObject("pager", pager);
+			mav.addObject("pageno", pageNo);
+			mav.addObject("classify", classify);
+			mav.setViewName("addressbook/addressbooklist");
+			}
 		return mav;
-	}
+		}
+	
+	
 	@RequestMapping(value="addresslist.action", method = RequestMethod.GET)
 	@ResponseBody
-	public 	ModelAndView addresslist(AddressBook addressbook,  String classify, HttpServletRequest req){
-	
+	public 	ModelAndView addresslist(AddressBook addressbook,  String classify, HttpServletRequest req, Integer pageno){
+	System.out.println(classify);
+		//******* 페이징 관련 데이터 처리 ********* 
+		int pageNo = 1; // 현재 페이지 번호
+		int pageSize = 5; //한 페이지에 표시할 데이터 갯수
+		int pagerSize = 10; //번호로 표시할 페이지 갯수
+		int dataCount = 0; //전체 데이터 갯수 (pageSize와 dataCount를 알아야, 페이지가 얼마나? 있는지 알 수 있다.)
+		String url = "addresslist.action"; // 페이징 관련 링크를 누르면, 페이지번호와 함께 요청할 경로
+		String queryString = "classify="+classify ;
+		//요청한 페이지 번호가 있다면, 읽어서 현재 페이지 번호로 설정 (없다면, 1페이지)
+		if (pageno != null ) {
+			pageNo =pageno;
+		}
+		//현재 페이지의 첫 번째 데이터의 순서번호를 계산하는 방법.
+		int first = (pageNo - 1) * pageSize + 1;
+		
+		List<AddressBook> addressbook1 = null;
+		
+		//*********  페이지 개수 조정 (조건에 맞는 개수만큼만 페이징 조정) 작업.
+		dataCount = addressbookDao.getAddressBookCount(classify);
+		System.out.println(dataCount);
+		
+		ThePager pager = new ThePager(dataCount, pageNo, pageSize, pagerSize, url, queryString);
 		
 		ModelAndView mav = new ModelAndView();
-		List<AddressBook> addressbook1 = null;
+		
 		if(classify.equals("1")) {
-		 addressbook1 =  addressbookDao.getAddressbookList(classify);
+			addressbook1 =  addressbookDao.getAddressbookList2(first, first + pageSize, classify);
 			mav.addObject("addressbook1", addressbook1);
+			mav.addObject("pager", pager);
+			mav.addObject("pageno", pageNo);
 			mav.addObject("classify", classify);
 			mav.setViewName("addressbook/addressbooklist");
 			
-			}else if(classify.equals("2")) {
-			addressbook1 = addressbookDao.getAddressbookList(classify);
+			}else if(classify.equals("2")) { 
+			addressbook1 = addressbookDao.getAddressbookList2(first, first + pageSize, classify);
 			mav.addObject("addressbook1", addressbook1);
+			mav.addObject("pager", pager);
+			mav.addObject("pageno", pageNo);
 			mav.addObject("classify", classify);
 			mav.setViewName("addressbook/addressbooklist");
 		}
-		//return addressbook1;
-		return mav;
+			return mav;
 	}
 	
 	@RequestMapping(value="addressdelete.action", method = RequestMethod.GET)
@@ -194,12 +259,14 @@ public class AddressbookController {
 	}
 	
 	@RequestMapping(value = "addressedit.action", method = RequestMethod.GET)
-	public ModelAndView editForm(String addressNo,String classify) {
+	public ModelAndView editForm(String addressNo,String classify, AddressBook addressbook) {
 		
-		//addressbookDao.editAddress(addressNo, classify, addressbook);
+		AddressBook add = addressbookDao.selectAddress(addressNo);
 		
 		ModelAndView mav = new ModelAndView();
-		
+		mav.addObject("addressbook", addressbook);
+		mav.addObject("selectAddr", add);
+		//++++++++++++++++++++++ addressbook3 그그그그ㅡ그그그 그 수정시, 기본값불러오는거
 		mav.addObject("addressNo", addressNo);
 		mav.addObject("classify", classify);
 		mav.setViewName("addressbook/addressbookedit");
@@ -207,20 +274,16 @@ public class AddressbookController {
 		return mav;
 	}
 	
-	/*@RequestMapping(value="addressedit.action", method= RequestMethod.POST)
+	@RequestMapping(value="addressedit.action", method= RequestMethod.POST)
 	public String update(String addressNo,String classify, AddressBook addressbook) {
-
-		ModelAndView mav = new ModelAndView();
-		addressbookDao.editAddress(addressNo, classify, addressbook);
-		System.out.println(addressbook1);
-		mav.addObject("addressbook1", addressbook1);
-		mav.addObject("addressNo", addressNo);
-		mav.addObject("classify", classify);
 		
-		return "redirect:/address/addressheader.action?classify="+ classify;
+		addressbookDao.editAddress(addressNo, classify, addressbook);
+		
+		return "redirect:/address/addressheader.action?addressno="+addressNo+"&classify="+ classify;
 	}
-	*/
 	
+	
+	//메일 보내기.
 	
 
 }
