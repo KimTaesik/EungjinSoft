@@ -47,8 +47,6 @@
 	</script>
 </head>
 <body class="addbody">
-<c:import url="/WEB-INF/views/schedule/scheduleheader.jsp"></c:import>
-
 <section>
 <div id="sub">
 	<div id="title">
