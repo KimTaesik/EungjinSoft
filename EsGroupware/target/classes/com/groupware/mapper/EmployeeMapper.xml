@@ -351,7 +351,7 @@
 	<select id="logalllist" resultType="Log" parameterType="hashMap" >
 		SELECT logno, dept, name, ip, logdate 
 		FROM log
-		ORDER By logno
+		ORDER By logno DESC
 	</select>
 
 </mapper>                                                                                 
