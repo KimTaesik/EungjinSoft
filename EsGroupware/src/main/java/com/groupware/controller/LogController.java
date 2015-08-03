@@ -172,7 +172,7 @@ public class LogController {
         // excel 파일 저장
 
         try {
-            File xlsFile = new File("testExcel.xls");
+            File xlsFile = new File("C:/testExcel.xls");
             FileOutputStream fileOut = new FileOutputStream(xlsFile);
             xlsWb.write(fileOut);
             xlsWb.close();
