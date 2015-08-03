@@ -21,6 +21,7 @@
 	$(function() {
 		$("#logexcel").click(function(event) {
 			/* alert($(":radio[name='AdminGb']:checked").val()); */
+			alert("C:/testExcel.xls에 저장 완료")
 			$.ajax({
 				url : "/groupware/log/logexcel.action",
 				async : true,
