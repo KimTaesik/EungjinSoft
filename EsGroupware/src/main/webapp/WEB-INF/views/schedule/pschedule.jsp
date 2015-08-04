@@ -88,10 +88,22 @@
 			    	});
 			    })
 			    
-			    $("#add_sc").click(function(){
-			    	var cate = $("#cate").val();
-					var url = 'addScheduleForm.action?dayid='+${currentMonth}+"-"+${ currentDate}+"&year="+${ currentYear }+"&cate="+cate;
-					$(location).attr('href', url);
+			    $("#add_sc").click(function(e){
+			    	var z = $("#cate").val();
+			    	var y = $("#currentYear").val();
+			    	var m = ${ currentMonth }+"-"+${ currentDate };
+			    	$.ajax({
+			    		type:"post",
+			    		url: "/groupware/schedule/addScheduleForm.action",
+			    		data:{ "year": y, "dayid": m, "cate":z  },
+			    		async : true,
+			            success: function(result,status,xhr){
+			            	$("#sub").html(result);
+			            },
+			            error: function(xhr, status, er){
+			            	alert(xhr+"/"+status+"/"+er)
+			            }
+			    	});
 				});
 				
 			    $("#quick_add").click(function(){
@@ -99,11 +111,13 @@
 				});
 			    
 			    $("#quick_add_submit").click(function(){
-			    	var cate = $("cate").val()
+			    	var cate = $("#cate").val()
+			    	var makep = (cate == 'pus' ? 'open' : 'closed')
+					alert(makep)
 			    	var title = $("#schedule_title").val()
 			    	var stdate = $("#year").val()+"-"+$("#month").val()+"-"+$("#day").val();
 			    	alert(stdate)
-					var url = "insertSchedule.action?title="+title+"&cont=&stdate="+stdate+"&classify=0&priority=0&makepublic=closed&cate="+cate;
+					var url = "insertSchedule.action?title="+title+"&cont=&stdate="+stdate+"&classify=0&priority=0&makepublic="+makep+"&cate="+cate;
 					$(location).attr('href', url);			    	
 			    	$("#quickaddform").hide();
 				});
@@ -112,7 +126,6 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/schedule/scheduleheader.jsp"></c:import>
 	<section>
 		<div id="sub">
 			<div id="title">
@@ -375,10 +388,10 @@
 											          		<c:when test="${cate eq 'cs' and scList.category eq '회사일정' }">
 											          			<c:choose>
 													          		<c:when test="${fn:length(scList.title) > 4}">
-													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
+													          			<div class="cursor uDate" id="${scList.key}">[회사일정] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
 													          		</c:when>
 													          		<c:otherwise>
-													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
+													          			<div class="cursor uDate" id="${scList.key}">[회사일정] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
 													          		</c:otherwise>
 												          		</c:choose>
 											          		</c:when>
@@ -396,17 +409,43 @@
 					<script type="text/javascript">
 						$(function(){
 						    $(".plus").click(function(){
-						    	var cate = $("#cate").val();
+						    	var z = $("#cate").val();
 								var id = $(this).attr('id');
-								var url = 'addScheduleForm.action?dayid='+id+"&year="+${ currentYear }+"&cate="+cate;
-								$(location).attr('href', url);
+								var y = $("#currentYear").val();
+/* 								var url = 'addScheduleForm.action?dayid='+id+"&year="+${ currentYear }+"&cate="+cate;
+								$(location).attr('href', url); */
+								
+						    	$.ajax({
+						    		type:"post",
+						    		url: "/groupware/schedule/addScheduleForm.action",
+						    		data:{ "year": y, "dayid": id, "cate":z  },
+						    		async : true,
+						            success: function(result,status,xhr){
+						            	$("#sub").html(result);
+						            },
+						            error: function(xhr, status, er){
+						            	alert(xhr+"/"+status+"/"+er)
+						            }
+						    	});
 							});
 						    
 						    $(".uDate").click(function(){
-						    	var cate = $("#cate").val();
+						    	var z = $("#cate").val();
 						    	var id = $(this).attr('id');
-								var url = 'editScheduleForm.action?key='+id+"&cate="+cate;
-								$(location).attr('href', url);
+						    	$.ajax({
+						    		type:"post",
+						    		url: "/groupware/schedule/editScheduleForm.action",
+						    		data:{ "key": id, "cate":z  },
+						    		async : true,
+						            success: function(result,status,xhr){
+						            	$("#sub").html(result);
+						            },
+						            error: function(xhr, status, er){
+						            	alert(xhr+"/"+status+"/"+er)
+						            }
+						    	});
+/* 								var url = 'editScheduleForm.action?key='+id+"&cate="+cate;
+								$(location).attr('href', url); */
 							});
 						});
 					</script>

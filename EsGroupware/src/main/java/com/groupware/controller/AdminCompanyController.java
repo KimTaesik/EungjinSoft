@@ -52,6 +52,7 @@ public class AdminCompanyController {
 		
 		for(int i = 1; i <= 7; i++)
 			employeeDao.menudisable(String.valueOf(i));
+		employeeDao.menuable("1");
 		for (int i = 0; i < checked.length ; i ++){
 			employeeDao.menuable(checked[i]);
 		}

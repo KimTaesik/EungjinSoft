@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -31,10 +32,11 @@ public class AddPersonalSchedule {
 		this.scheduleDao = scheduleDao;
 	}
 	
-	@RequestMapping(value = "addScheduleForm.action", method = RequestMethod.GET)
+	@RequestMapping(value = "addScheduleForm.action", method = RequestMethod.POST)
+	@ResponseBody
 	public ModelAndView addScheduleForm(String dayid, String year, String cate) {
 		ModelAndView mav = new ModelAndView();
-		
+		System.out.println("애두폼액션!");
 		String[] day = dayid.split("-");
 		mav.addObject("cate",cate);
 		mav.addObject("date", year+"-"+(Integer.parseInt(day[0])<10 ? "0"+day[0]:day[0])+"-"+(Integer.parseInt(day[1])<10 ? "0"+day[1]:day[1]));
@@ -43,17 +45,19 @@ public class AddPersonalSchedule {
 		return mav;
 	}
 	
-	@RequestMapping(value = "editScheduleForm.action", method = RequestMethod.GET)
+	@RequestMapping(value = "editScheduleForm.action", method = RequestMethod.POST)
 	public ModelAndView editScheduleForm(int key, String cate) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		String[] sd;
 		Schedule eSchedule = scheduleDao.editSelectSchedule(key);
+		
 		eSchedule.setStDate(sdf.format(sdf.parse(eSchedule.getStDate())));
 		mav.addObject("cate",cate);
 		mav.addObject("eSchedule", eSchedule);
 		System.out.println(eSchedule.getTitle()+"cate:"+cate);
+		
 		mav.setViewName("schedule/editPersonalschedule");
 		return mav;
 	}
@@ -100,7 +104,7 @@ public class AddPersonalSchedule {
 		
 		scheduleDao.insertSchedule(sc);
 		
-		return "redirect:pschedule.action?cate="+cate;
+		return "redirect:scheduleheader.action";
 	}
 	
 	@RequestMapping(value = "editSchedule.action", method = RequestMethod.GET)
@@ -121,7 +125,9 @@ public class AddPersonalSchedule {
 
 		
 		Calendar cal = Calendar.getInstance();
+		
 		cal.setTime(cvDate);
+		
 		java.util.Date uDate = cal.getTime();
 		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
 		sc.setEstDate(sDate);
@@ -132,23 +138,26 @@ public class AddPersonalSchedule {
 		sc.setCategory("개인일정");
 		sc.setS_id(logUser);
 		sc.setKey(key);
+		
 		scheduleDao.editSchedule(sc);
 		
-		return "redirect:pschedule.action?cate="+cate;
+		return "redirect:scheduleheader.action";
 	}
 	
 	@RequestMapping(value = "deleteSchedule.action", method = RequestMethod.GET)
 	public String deleteSchedule(int key, String cate){
+		
 		System.out.println("삭제");
 		scheduleDao.deleteSchedule(key);
-		return "redirect:pschedule.action?cate="+cate;
+		
+		return "redirect:scheduleheader.action";
 	}
 	
 	@RequestMapping(value = "reSchedule.action", method = RequestMethod.GET)
 	public String reSchedule(String cate) {
 		System.out.println("리턴 완료!");
 		
-		return "redirect:pschedule.action?cate="+cate;
+		return "redirect:scheduleheader.action";
 	}
 	
 	

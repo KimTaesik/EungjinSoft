@@ -21,19 +21,7 @@
 	$(function() {
 		$("#logexcel").click(function(event) {
 			/* alert($(":radio[name='AdminGb']:checked").val()); */
-			alert("C:/testExcel.xls에 저장 완료")
-			$.ajax({
-				url : "/groupware/log/logexcel.action",
-				async : true,
-				data : { },
-				method : "get",
-				success : function(result, status, xhr) {
-					
-				},
-				error : function(xhr, status, ex) {
-					/* alert("xhr :" + xhr + " status :" + status + " ex :" + ex); */
-				}
-			})		
+			$(location).attr("href","/groupware/log/logexcel.action");
 			event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
 		})
 		
@@ -53,10 +41,10 @@
 	<div id="title">
 		<h2><span class="join">접속 로그 통계</span></h2>
 		<span class="tb_num">
-			<a href="#blank-list" onclick="javascript:goPageSizeMove(15);"><img src="http://static.whoisdesk.net/Src/Img/Renewal/table_number15_on.gif" alt="" title="15" /></a>
+			<!-- <a href="#blank-list" onclick="javascript:goPageSizeMove(15);"><img src="http://static.whoisdesk.net/Src/Img/Renewal/table_number15_on.gif" alt="" title="15" /></a>
 			<a href="#blank-list" onclick="javascript:goPageSizeMove(20);"><img src="http://static.whoisdesk.net/Src/Img/Renewal/table_number20_off.gif" alt="" title="20" /></a>
 			<a href="#blank-list" onclick="javascript:goPageSizeMove(25);"><img src="http://static.whoisdesk.net/Src/Img/Renewal/table_number25_off.gif" alt="" title="25" /></a>
-			<a href="#blank-list" onclick="javascript:goPageSizeMove(30);"><img src="http://static.whoisdesk.net/Src/Img/Renewal/table_number30_off.gif" alt="" title="30" />&nbsp;</a>
+			<a href="#blank-list" onclick="javascript:goPageSizeMove(30);"><img src="http://static.whoisdesk.net/Src/Img/Renewal/table_number30_off.gif" alt="" title="30" />&nbsp;</a> -->
 		</span>
 	</div>
 	<div class="toparea">		
@@ -236,9 +224,9 @@
 		</span>
 		<span class="rightarea">
 			<span class="btn">
-				<a href="#blank-list" onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }getExportExcelDown();"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_document-excel.gif" alt="" align="absmiddle" /> 엑셀 파일로 저장</a>
+				<%-- <a href="#blank-list" onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }getExportExcelDown();"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_document-excel.gif" alt="" align="absmiddle" /> 엑셀 파일로 저장</a>
 				<a href="#blank-list" onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }getOpenUserLoginInfo();"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_list.gif" alt="" align="absmiddle" /> 전체 접속 통계</a>
-				<a href="#blank-list" onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }setDeleteAll();"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif" alt="" align="absmiddle" /> 삭제</a>
+				<a href="#blank-list" onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }setDeleteAll();"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif" alt="" align="absmiddle" /> 삭제</a> --%>
 			</span>
 		</span>
 	</div>

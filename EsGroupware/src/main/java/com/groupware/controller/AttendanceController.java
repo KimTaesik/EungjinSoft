@@ -132,7 +132,7 @@ public class AttendanceController {
 
 		String userIp   = req.getRemoteAddr();
 		mav.addObject("all",allAtt);
-		mav.addObject("userIp", userIp);		
+		mav.addObject("userIp", userIp);
 		mav.setViewName("attendance/check");
 		
 		return mav;
