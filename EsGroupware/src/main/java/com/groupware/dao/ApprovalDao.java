@@ -1,5 +1,6 @@
 package com.groupware.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.groupware.dto.Approval;
@@ -25,4 +26,8 @@ public interface ApprovalDao {
 	List<Approval> getApprovalList2();
 	
 	Approval getApprovalByNo(int approval_No);
+	
+	void updateApprovalLine(String approveCheck,String id,int approval_No);
+	void updateApproval(String approvalConfirm,int approval_No);
+	int getApprovalListCount(int approval_No);
 }

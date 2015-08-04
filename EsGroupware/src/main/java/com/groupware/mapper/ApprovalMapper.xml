@@ -56,13 +56,41 @@
 	</insert>
 	
 	<select id="getApprovalByNo" parameterType="int" resultMap="ApprovalResult">
-		SELECT * FROM E_APPROVAL WHERE approval_no={approval_No}
+		SELECT * FROM E_APPROVAL WHERE approval_no=#{approval_No}
 	</select>
 	
+	<update id="updateApprovalLine" parameterType="hashMap">
+			UPDATE
+				approvalline
+			SET
+				approvecheck=#{approveCheck} , approvalday = sysdate
+			WHERE
+				id=#{id} and approval_no = #{approval_no}		
+	</update>
+	
+	<select id="getApprovalLineApprovalDay" parameterType="hashMap" resultType="ApprovalLine">
+			select *
+			from approvalline
+			where id=#{id} and approval_no = #{approval_no}	
+	</select>
+	
+	<update id="updateApproval" parameterType="hashMap">
+			UPDATE
+				e.approval
+			SET
+				approvaldate = sysdate , approvalconfirm = #{approvalConfirm)
+			WHERE
+				approval_no=#{approval_no}		
+	</update>
+	
+	<select id="getApprovalListCount" parameterType="int" resultType="int">
+		select count(approval_no) from approvalline where approval_no=#{approval_No}
+	</select>
 	
 	<select id="getApprovalList"  resultMap="ApprovalResult">
 		SELECT * FROM E_APPROVAL WHERE approvalconfirm='0'
 	</select>
+	
 	<select id="getApprovalList2" resultMap="ApprovalResult">
 		SELECT * FROM E_APPROVAL WHERE approvalconfirm='1'
 	</select>
@@ -78,6 +106,7 @@
 		<result column="approvecheck" property="approveCheck" />
 		<result column="form_no" property="form_No" />
 		<result column="id" property="id" />
+		 <association column="form_no" property="approvalForm"  select="getApprovalForm4" />
 		<association column="id" property="employee"  select="getEmployeeList" />
 		<collection column="approval_no" property="approvalLines" select="getApprovalLine"/>
 		<collection column="approval_no" property="cooperations"  select="getCooperation" />
@@ -98,6 +127,12 @@
 		<result column="id" property="id" />
 		<association property="employee" column="id" select="getEmployeeList" />
 	</resultMap>
+	
+	<select id="getApprovalForm4" resultType="ApprovalForm">
+		SELECT *
+		FROM approval_form 
+		where form_no=#{form_no} 
+	</select>  
 	
 	 <select id="getApprovalLine" resultMap="approvalLineResult">
 		SELECT *

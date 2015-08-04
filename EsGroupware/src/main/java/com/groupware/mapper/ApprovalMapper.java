@@ -1,5 +1,7 @@
 package com.groupware.mapper;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import com.groupware.dto.Approval;
@@ -26,4 +28,8 @@ public interface ApprovalMapper {
 	
 	Approval getApprovalByNo(int approval_No);
 	
+	void updateApprovalLine(HashMap<String, Object> params);
+	void updateApproval(HashMap<String, Object> params);
+	int getApprovalListCount(int approval_No);
+	ApprovalLine getApprovalLineApprovalDay(HashMap<String, Object> params);
 }

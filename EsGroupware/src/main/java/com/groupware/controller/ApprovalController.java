@@ -127,4 +127,21 @@ public class ApprovalController {
  
 
 	}
+	@RequestMapping(value = "approvalconfirm.action", method = RequestMethod.POST)
+	public void approvalConfirm(
+			String approveCheck,
+			String id,
+			int approval_No,
+			int confirmNum) {
+
+		int count=approvalService.getApprovalListCount(approval_No);
+		
+		if(count == confirmNum){
+			
+			approvalService.updateApproval("1",approval_No);
+		}
+		
+		approvalService.updateApprovalLine(approveCheck,id,approval_No);
+
+	}
 }

@@ -158,6 +158,30 @@ public class MyApprovalService implements ApprovalService {
 		return mav;
 	}
 
+
+
+	@Override
+	public void updateApprovalLine(String approveCheck,String id,int approval_No) {
+		
+		approvalDao.updateApprovalLine(approveCheck, id, approval_No);
+	}
+
+
+
+	@Override
+	public void updateApproval(String approvalConfirm,int approval_No) {
+		
+		approvalDao.updateApproval(approvalConfirm, approval_No);
+	}
+
+
+
+	@Override
+	public int getApprovalListCount(int approval_No) {
+		
+		return approvalDao.getApprovalListCount(approval_No);
+	}
+
 	
 	
 }

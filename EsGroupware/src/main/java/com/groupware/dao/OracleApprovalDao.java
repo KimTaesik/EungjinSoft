@@ -84,6 +84,33 @@ public class OracleApprovalDao implements ApprovalDao {
 		// TODO Auto-generated method stub
 	return approvalMapper.getApprovalByNo(approval_No);
 	}
+
+
+	@Override
+	public void updateApprovalLine(String approveCheck,String id,int approval_No) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("approveCheck", approveCheck);
+		params.put("id", id);
+		params.put("approval_No", approval_No);
+		approvalMapper.updateApprovalLine(params);
+		
+	}
+
+
+	@Override
+	public void updateApproval(String approvalConfirm,int approval_No) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("approvalConfirm",approvalConfirm );
+		params.put("approval_No", approval_No);
+		approvalMapper.updateApproval(params);
+	}
+
+
+	@Override
+	public int getApprovalListCount(int approval_No) {
+		
+		return approvalMapper.getApprovalListCount(approval_No);
+	}
 	
 	
 }

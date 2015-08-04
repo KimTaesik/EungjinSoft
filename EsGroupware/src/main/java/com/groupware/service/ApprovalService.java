@@ -1,5 +1,6 @@
 package com.groupware.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -33,4 +34,8 @@ public interface ApprovalService {
 	ModelAndView getApprovalList2();
 	
 	ModelAndView getApprovalByNo(int approval_No);
+	
+	void updateApprovalLine(String approveCheck,String id,int approval_No);
+	void updateApproval(String Approvalconfirm,int approval_No);
+	int getApprovalListCount(int approval_No);
 }

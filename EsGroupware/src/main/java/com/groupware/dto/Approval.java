@@ -15,6 +15,7 @@ public class Approval {
 	private String referrers;
 	private String form_No;
 	private String id;
+	private ApprovalForm approvalForm;
 	private Employee employee;
 	private List<ApprovalLine> approvalLines;
 	private List<ApprovalCooperation> cooperations;
@@ -105,6 +106,13 @@ public class Approval {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
+	public ApprovalForm getApprovalForm() {
+		return approvalForm;
+	}
+	public void setApprovalForm(ApprovalForm approvalForm) {
+		this.approvalForm = approvalForm;
+	}
+	
 
 	
 	
