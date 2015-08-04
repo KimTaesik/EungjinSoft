@@ -28,7 +28,7 @@
         <li><a href="/groupware/admin/employeelist.action?lineup=position" target="myframe">사원관리</a></li>
     </ul> -->
      <div id="accordion" style="font-size: 10pt">
-		  <h3>관리자 3</h3>
+		  <h3>관리자 메인</h3>
 			    <ul>
 				      <li><a href="/groupware/admin/adminmain.action" target="myframe">관리자 메인</a></li>
 			    </ul>

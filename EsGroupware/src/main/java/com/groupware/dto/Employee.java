@@ -1,5 +1,6 @@
 package com.groupware.dto;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -20,6 +21,7 @@ public class Employee {
 	private String deptNo;
 	private String positionNo;
 	private String joinDate;
+	private Date joinDatetype;
 	private String ipAdress;
 	private String extension;
 	private String deptName;
@@ -183,5 +185,11 @@ public class Employee {
 	}
 	public void setUserType(int userType) {
 		this.userType = userType;
+	}
+	public Date getJoinDatetype() {
+		return joinDatetype;
+	}
+	public void setJoinDatetype(Date joinDatetype) {
+		this.joinDatetype = joinDatetype;
 	}
 }

@@ -57,7 +57,9 @@ public interface EmployeeDao {
 
 	int getEmployeeCount();
 	
-	List<Employee> getEmployeeList2(int first, int last, String lineup);
+	int getDeletedEmployeeCount();
+	
+	List<Employee> getEmployeeList2(int first, int last, String lineup, String sort);
 
 	void registerAdmin(String id, String usertype);
 
@@ -76,4 +78,6 @@ public interface EmployeeDao {
 	int getlogCount();
 	
 	List<Log> logalllist();
+	
+	Employee AllAdminSearch();
 }

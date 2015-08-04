@@ -34,8 +34,6 @@
 
 </style>
 
-<script type="text/javascript" src="http://gw.whoisdesk.kr/Src/WebCommon/Amcharts/Ampie/swfobject.js"></script>
-<script type="text/javascript" src="http://gw.whoisdesk.kr/Src/WebCommon/Script/addTab.js"></script>
 
 <div id="sub">
 	
@@ -49,71 +47,11 @@
 
 	<table width="100%"  border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td class="txt_le"><img src="http://static.whoisdesk.net/Src/Img/Renewal/Admin/title_img_left.gif" /></td>
+			<td class="txt_le"><img style="margin-left: 50px;" height="100px" src="/groupware/resources/image/admin/logo.png" /></td>
 			<td>&nbsp;</td>
-			<td class="txt_ri"><img src="http://static.whoisdesk.net/Src/Img/Renewal/Admin/title_img_right.gif" /></td>
+			<td class="txt_ri"><img src="/groupware/resources/image/admin/logo2.JPG" /></td>
 		</tr>
 	</table>
-
-	<!--  테이블 영역 -->
-	<div class="table">
-		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
-			<col width="40">
-			<col width="">
-			<col width="100">
-			<thead>
-			<tr>
-				<th class="bdr_top">NO</th>
-			    <th class="bdr_top">제목</th>
-			    <th class="bdr_top">작성일</th>
-			</tr>
-			</thead>
-			<tbody>
-
-						<tr>
-			    <td class="txt_ce">1</td>
-			    <td>
-					<nobr style='width: 99%;overflow: hidden;text-overflow:ellipsis'>
-						<a href='#blank-link' onclick='subTabActive("18", "18-00-05", "시스템 공지사항", "../Admin/SNotice/view.php?dummy=1438662874&No=306", true)' class='main_menu'>
-							[정기점검] 7월 09일(목) 새벽 0시 그룹웨어 서버 정기점검 안내						</a>
-											</nobr>				
-				</td>
-			    <td class="txt_ce bdr_none">15.07.06</td>
-			</tr>
-					<tr>
-			    <td class="txt_ce">2</td>
-			    <td>
-					<nobr style='width: 99%;overflow: hidden;text-overflow:ellipsis'>
-						<a href='#blank-link' onclick='subTabActive("18", "18-00-05", "시스템 공지사항", "../Admin/SNotice/view.php?dummy=1438662874&No=305", true)' class='main_menu'>
-							[긴급공지] 6월 12일(금) 서버 긴급점검 안내						</a>
-											</nobr>				
-				</td>
-			    <td class="txt_ce bdr_none">15.06.11</td>
-			</tr>
-					<tr>
-			    <td class="txt_ce">3</td>
-			    <td>
-					<nobr style='width: 99%;overflow: hidden;text-overflow:ellipsis'>
-						<a href='#blank-link' onclick='subTabActive("18", "18-00-05", "시스템 공지사항", "../Admin/SNotice/view.php?dummy=1438662874&No=304", true)' class='main_menu'>
-							[정기점검] 6월 11일(목) 새벽 0시 그룹웨어 서버 정기점검 안내						</a>
-											</nobr>				
-				</td>
-			    <td class="txt_ce bdr_none">15.06.09</td>
-			</tr>
-					<tr>
-			    <td class="txt_ce">4</td>
-			    <td>
-					<nobr style='width: 99%;overflow: hidden;text-overflow:ellipsis'>
-						<a href='#blank-link' onclick='subTabActive("18", "18-00-05", "시스템 공지사항", "../Admin/SNotice/view.php?dummy=1438662874&No=303", true)' class='main_menu'>
-							[공지] 후이즈 그룹웨어 2.0 기능 추가 업데이트						</a>
-											</nobr>				
-				</td>
-			    <td class="txt_ce bdr_none">15.05.22</td>
-			</tr>
-		
-			</tbody>
-		</table>
-	</div>
 
 
 	<!--  //테이블 영역 -->
@@ -136,40 +74,33 @@
 				</td>
 			    <th>가입된 회원수</th>
 			    <td>
-					<span class="left">19 명</span>
-					<span class="right btn_page"><a href="#blank-link" onclick="javascript:memberOk();"><span>가입회원 목록</span></a></span> 				
+					<span class="left">${ membercount } 명</span>
+					<span class="right btn_page"><a href="/groupware/admin/employeelist.action"><span>가입회원 목록</span></a></span> 				
 				</td>
 			</tr>
 			</thead>
 			<tbody>
 			<tr>
-			    <th>그룹웨어 개설일</th>
-			    <td class="bdr_none">2010.04.08 </td>
-			    <th>가입대기자</th>
-			    <td>
-					<span class="left">0 명</span><span class="right btn_page"><a href="#blank-link" onclick="javascript:memberWait();"><span>가입대기 목록</span></a></span>				
-				</td>
-			</tr>
-			<tr>
 			    <th>관리자 ID</th>
-			    <td class="bdr_none">admin </td>
+			    <td class="bdr_none">${ admin.id } </td>
 			    <th>퇴사처리 된 회원</th>
 			    <td>
-					<span class="left">1 명</span><span class="right btn_page"><a href="#blank-link" onclick="javascript:memberRetire();"><span>퇴사자 목록</span></a></span>	
+					<span class="left">${ deletedmembercount } 명</span><span class="right btn_page"><a href="#blank-link" onclick="javascript:memberRetire();"><span>퇴사자 목록</span></a></span>	
 				</td>
 			</tr>
 			<tr>
 			    <th>관리자명</th>
-			    <td class="bdr_none">이한용 </td>
+			    <td class="bdr_none">${ admin.name }</td>
 			    <th>최대 사용자 </th>
 			    <td>
-					<span class="left">20 명</span><span class="right btn_page"><a href="#blank-link" onclick="javascript:openPageOpen('http://whoisdesk.net/manage_gw20/');"><span>사용자 추가</span></a></span>	
+					<span class="left">${  membercount + deletedmembercount } 명</span><span class="right btn_page"><a href="/groupware/admin/registerform.action"><span>사용자 추가</span></a></span>	
 				</td>
 			</tr>
 
 			<tr>
 			    <th>관리자 연락처</th>
 			    <td class="bdr_none">
+			    	${ admin.phoneNumber }
 					<span class="left"> </span><span class="right btn_page"><a href="#blank-link" onclick="javascript:memberModify('YWRtaW46MQ==');"><span>관리자 정보수정</span></a></span>
 				</td>
 			    <th>그룹웨어 이용정보</th>

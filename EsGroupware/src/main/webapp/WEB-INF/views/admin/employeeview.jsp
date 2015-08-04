@@ -117,7 +117,7 @@
 		                <th>이름</th>
 		                <td>
 		                	<%-- <input id='name' type='text' name='name' style='width:280px' value=<%= employee.getName() %> readonly="readonly" /> --%>
-		                	<input id='name' type='text' name='name' style='width:280px' value=${ employee.name } readonly="readonly" />
+		                	<input id='name' type='text' name='name' style='width:280px' value=${ employee.name } />
 		                </td>
 		            </tr>	       
 		            <%-- <tr>

@@ -34,11 +34,18 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="adminmain.action", method = RequestMethod.GET)
-	public ModelAndView adminMain() throws UnknownHostException {
-		String host = InetAddress.getLocalHost().getHostAddress();
-		System.out.println(host);
+	public ModelAndView adminMain(HttpServletRequest req) throws UnknownHostException {
+		/*StringBuffer add = req.getRequestURL();
+		System.out.println(add);*/
+		int membercount = employeeDao.getEmployeeCount();
+		int deletedmembercount = employeeDao.getDeletedEmployeeCount();
+		Employee admin = employeeDao.AllAdminSearch();
+		
 		ModelAndView mav = new ModelAndView(); 
-		mav.addObject("host", host);
+		mav.addObject("host", "http://192.168.13.18:8081/groupware/");
+		mav.addObject("admin", admin);
+		mav.addObject("membercount", membercount);
+		mav.addObject("deletedmembercount", deletedmembercount);
 		mav.setViewName("admin/adminmain");
 		
 		return mav;	
@@ -159,17 +166,23 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="employeelist.action")
-	public ModelAndView list(String lineup,Integer pageno) {
+	public ModelAndView list(String lineup,Integer pageno, String sort) {
 		
 		//******* 페이징 관련 데이터 처리 ********* 
 		int pageNo = 1; // 현재 페이지 번호
-		int pageSize = 6; //한 페이지에 표시할 데이터 갯수
+		int pageSize = 10; //한 페이지에 표시할 데이터 갯수
 		int pagerSize = 10; //번호로 표시할 페이지 갯수
 		int dataCount = 0; //전체 데이터 갯수 (pageSize와 dataCount를 알아야, 페이지가 얼마나? 있는지 알 수 있다.)
 		String url = "employeelist.action"; // 페이징 관련 링크를 누르면, 페이지번호와 함께 요청할 경로
 		//요청한 페이지 번호가 있다면, 읽어서 현재 페이지 번호로 설정 (없다면, 1페이지)
 		if (pageno != null ) {
 			pageNo =pageno;
+		}
+		if (sort == null ) {
+			sort = "ASC";
+		}
+		if (lineup == null ) {
+			lineup = "id";
 		}
 		
 		//현재 페이지의 첫 번째 데이터의 순서번호를 계산하는 방법.
@@ -179,9 +192,13 @@ public class AdminController {
 		
 		//내가 조건에 맞게 검색한 정보만, (type별로) 나오게 하는 작업.
 		List<Employee> employees = null;
-
-		employees= employeeDao.getEmployeeList2(first, first + pageSize, lineup); // 페이징 처리로 해줬기 때문에 이런 처리를 해줘야한다.			
-
+		
+		System.out.println("first : " + first);
+		System.out.println("first+pageSize : " + first + pageSize);
+		System.out.println("lineup : " + lineup);
+		System.out.println("sort : " + sort);
+		employees= employeeDao.getEmployeeList2(first, first + pageSize, lineup, sort); // 페이징 처리로 해줬기 때문에 이런 처리를 해줘야한다.			
+		
 		
 		//$$$$$$$$$$$$$$$$  페이지 개수 조정 (조건에 맞는 개수만큼만 페이징 조정) 작업.
 		
