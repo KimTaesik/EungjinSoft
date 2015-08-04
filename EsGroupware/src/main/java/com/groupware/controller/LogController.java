@@ -47,13 +47,16 @@ public class LogController {
 	
 	@RequestMapping(value="userLoginInfo.action", method = RequestMethod.GET)
 	public ModelAndView log123(String id) {
-		int logAllcount = employeeDao.logAllcount(id);
+		int logAllcount = 0;
 		int[] logMonthcount = new int[12];
-		for (int i = 0; i < 12; i++) {
-			logMonthcount[i] = employeeDao.logMonthcount("15/" + ( (int)(i+1) >= 10 ? "" : "0" ) + (int)(i+1), id);
-			//logMonthcount[i-1] = employeeDao.logMonthcount("15/08");
-			System.out.println(logMonthcount[i]);
-			System.out.println("15/" + ( (int)(i+1) > 10 ? "" : "0" ) + (int)(i+1));
+		if (id != null) {
+			logAllcount = employeeDao.logAllcount(id);	
+			for (int i = 0; i < 12; i++) {
+				logMonthcount[i] = employeeDao.logMonthcount("15/" + ( (int)(i+1) >= 10 ? "" : "0" ) + (int)(i+1), id);
+				//logMonthcount[i-1] = employeeDao.logMonthcount("15/08");
+				System.out.println(logMonthcount[i]);
+				System.out.println("15/" + ( (int)(i+1) > 10 ? "" : "0" ) + (int)(i+1));
+			}
 		}
 
 		ModelAndView mav = new ModelAndView();

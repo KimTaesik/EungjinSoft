@@ -141,10 +141,12 @@
 			<c:forEach var="log" items="${ logs }">
 				<%-- <c:set var="now" value="${ log.logdate }" /> --%>					
 				<tr>
+					<td class="txt_ce">${ log.logno }</td>
 					<td class="txt_ce">
-						<a style='text-decoration:none;font-weight: bold' href='#' onclick="javascript:getOpenUserLoginInfo('${ log.id }');">${ log.logno }</a>
+					<a style='text-decoration:none;font-weight: bold' href='#' onclick="javascript:getOpenUserLoginInfo('${ log.id }');">
+					${ log.id }
+					</a>
 					</td>
-					<td class="txt_ce">${ log.id }</td>
 					<td class="txt_ce">${ log.dept }</td>
 					<td class="txt_ce">${ log.name }</td>
 					<td class="txt_ce">${ log.ip }</td>
