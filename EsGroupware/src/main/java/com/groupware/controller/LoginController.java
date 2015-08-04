@@ -1,6 +1,8 @@
 package com.groupware.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -40,7 +42,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="login.action", method = RequestMethod.POST)
-	public ModelAndView login(HttpServletRequest request,HttpServletResponse response, String memberId,String passwd) throws UnsupportedEncodingException {	
+	public ModelAndView login(HttpServletRequest request,HttpServletResponse response, String memberId,String passwd) throws UnsupportedEncodingException, UnknownHostException {	
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView();
 
@@ -48,18 +50,21 @@ public class LoginController {
 		List<Menu> menus = employeeDao.menulist();
 		
 		/////////////////log
-		Log log = new Log();
-		List<Dept> depts = employeeDao.getDeptList();
-		for( Dept dept : depts) {
-			if (employee.getDeptNo().equals(dept.getDeptNo()))
-				log.setDept(dept.getPartName());
+		if (employee != null) {
+			Log log = new Log();
+			List<Dept> depts = employeeDao.getDeptList();
+			for( Dept dept : depts) {
+				if (employee.getDeptNo().equals(dept.getDeptNo()))
+					log.setDept(dept.getPartName());
+			}
+			//log.setIp(request.getRemoteAddr());
+			log.setIp(InetAddress.getLocalHost().getHostAddress());
+			log.setName(employee.getName());
+			
+			log.setLogdate(new Date());
+			employeeDao.insertLog(log);
+			/////////////////log
 		}
-		log.setIp(request.getRemoteAddr());
-		log.setName(employee.getName());
-		
-		log.setLogdate(new Date());
-		employeeDao.insertLog(log);
-		/////////////////log
 
 		if (employee != null) {
 			HttpSession session = request.getSession();

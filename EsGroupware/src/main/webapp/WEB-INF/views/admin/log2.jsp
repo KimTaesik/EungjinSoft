@@ -41,10 +41,6 @@
 	<div id="title">
 		<h2><span class="join">접속 로그 통계</span></h2>
 		<span class="tb_num">
-			<!-- <a href="#blank-list" onclick="javascript:goPageSizeMove(15);"><img src="http://static.whoisdesk.net/Src/Img/Renewal/table_number15_on.gif" alt="" title="15" /></a>
-			<a href="#blank-list" onclick="javascript:goPageSizeMove(20);"><img src="http://static.whoisdesk.net/Src/Img/Renewal/table_number20_off.gif" alt="" title="20" /></a>
-			<a href="#blank-list" onclick="javascript:goPageSizeMove(25);"><img src="http://static.whoisdesk.net/Src/Img/Renewal/table_number25_off.gif" alt="" title="25" /></a>
-			<a href="#blank-list" onclick="javascript:goPageSizeMove(30);"><img src="http://static.whoisdesk.net/Src/Img/Renewal/table_number30_off.gif" alt="" title="30" />&nbsp;</a> -->
 		</span>
 	</div>
 	<div class="toparea">		
@@ -52,23 +48,6 @@
 			<table border='0' cellpadding='0' cellspacing='0'>
 				<tr>
 					<td class='pad1tb'>
-						<!-- <select name="key_field1" id="key_field1" onchange="setSearchField(1)">
-							<option value="" selected>
-								검색선택
-							</option>
-							<option value="all">
-								전체보기
-							</option>
-							<option value="TreeKey" >
-								부서
-							</option>
-							<option value="Name" >
-								이름
-							</option>
-							<option value="Register" >
-								접속 일자
-							</option>
-						</select> -->
 					</td>
 					<td>
 						<div id="search_Tree1" style="display:none;" class="pad5l">
@@ -96,7 +75,7 @@
 		</span>
 		<span class="rightarea">
 			<span class="btn">
-				<a href="#" id="logexcel"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_document-excel.gif" alt="" align="absmiddle" /> C:/ 엑셀 파일로 저장</a>
+				<a href="#" id="logexcel"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_document-excel.gif" alt="" align="absmiddle" />엑셀 파일로 저장</a>
 <%-- 				<a href="#blank-list" onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }getOpenUserLoginInfo();"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_list.gif" alt="" align="absmiddle" /> 전체 접속 통계</a>
 				<a href="#blank-list" onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }setDeleteAll();"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif" alt="" align="absmiddle" /> 삭제</a> --%>
 			</span>
@@ -129,14 +108,6 @@
 				<th>접속 IP</th>
 				<th>접속 일자</th>
 			</tr>
-				<!-- <a href="#blank-link" onclick="fieldSort(1)">
-				<img src="http://static.whoisdesk.net/Src/Img/Renewal/bullet_precon.gif" align="absmiddle" style="MARGIN: 0px 3px 0px 0px" border="0"></a>
-				<a href="#blank-link" onclick="fieldSort(2)"><img src="http://static.whoisdesk.net/Src/Img/Renewal/bullet_nextcon.gif" align="absmiddle" border="0"></a>
-				</th>
-				<th>이름 <a href="#blank-link" onclick="fieldSort(3)"><img src="http://static.whoisdesk.net/Src/Img/Renewal/bullet_precon.gif" align="absmiddle" style="MARGIN: 0px 3px 0px 0px" border="0"></a><a href="#blank-link" onclick="fieldSort(4)"><img src="http://static.whoisdesk.net/Src/Img/Renewal/bullet_nextcon.gif" align="absmiddle" border="0"></a></th>
-				<th>접속 IP</th>
-				<th>접속 일자 <a href="#blank-link" onclick="fieldSort(5)"><img src="http://static.whoisdesk.net/Src/Img/Renewal/bullet_precon.gif" align="absmiddle" style="MARGIN: 0px 3px 0px 0px" border="0"></a><a href="#blank-link" onclick="fieldSort(6)"><img src="http://static.whoisdesk.net/Src/Img/Renewal/bullet_nextcon.gif" align="absmiddle" border="0"></a></th>
-			</tr> -->
 
 			</thead>
 
@@ -177,56 +148,9 @@
 	<!--  버튼 영역 -->
 	<div class="btmarea">
 		<span class="leftarea">
-			<table border='0' cellpadding='0' cellspacing='0'>
-				<tr>
-					<td class='pad1tb'>
-						<select name="key_field2" id="key_field2" onchange="setSearchField(2)">
-							<option value="" selected>
-								검색선택
-							</option>
-							<option value="all">
-								전체보기
-							</option>
-							<option value="TreeKey" >
-								부서
-							</option>
-							<option value="Name" >
-								이름
-							</option>
-							<option value="Register" >
-								접속 일자
-							</option>
-						</select>
-					</td>
-					<td>
-						<div id="search_Tree2" style="display:none;" class="pad5l">
-							<select name="treeKeyOpt2" id="treeKeyOpt2">
-								<option value='0002' > L 경영지원실</option><option value='0004' > L 전략기획팀</option><option value='0005' > L 개발2팀</option><option value='0003' > L 개발1팀</option><option value='0001' > L 임원</option><option value='0000' > L 대표이사</option> 
-							</select>
-							<a href="#blank-link" onclick="execSearch(2)"><img src="http://static.whoisdesk.net/Src/Img/Renewal/btn_search.gif"  title='검색' width="55" height="18" border="0" class="vm" /></a>
-						</div>	
-					</td>
-					<td>
-						<div id="search_Field2" style="display:none;" class="pad5l">
-							<input type="text" name="inputForm2" id="inputForm2" class="input" value=""><a href="#blank-link" onclick="execSearch(2)"><img src="http://static.whoisdesk.net/Src/Img/Renewal/btn_search.gif"  title='검색' width="55" height="18" border="0" class="vm" /></a>
-						</div>	
-					</td>
-					<td>
-						<div id="search_Period2" style="display:none;" class="pad5l">
-							<input name="StartDate2" type="text" id="StartDate2" readonly class="pUpDate" style="width:100px;height:16px;  font-family:Dotum, '돋움'; line-height:16px; color:#666666; font-size:11px; border:1px solid #CDCDCD; vertical-align:top; margin-right:0px;" value='2015-08-03' />
-							~ 
-							<input name="EndDate2" type="text" id="EndDate2" readonly class="dOffDate" style="width:100px;height:16px;  font-family:Dotum, '돋움'; line-height:16px; color:#666666; font-size:11px; border:1px solid #CDCDCD; vertical-align:top; margin-right:0px;" value='2015-08-03' />
-							<a href="#blank-link" onclick="execSearch(2)"><img src="http://static.whoisdesk.net/Src/Img/Renewal/btn_search.gif"  title='검색' width="55" height="18" border="0" class="vm" /></a>
-						</div>
-					</td>
-				</tr>
-			</table>
 		</span>
 		<span class="rightarea">
 			<span class="btn">
-				<%-- <a href="#blank-list" onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }getExportExcelDown();"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_document-excel.gif" alt="" align="absmiddle" /> 엑셀 파일로 저장</a>
-				<a href="#blank-list" onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }getOpenUserLoginInfo();"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_list.gif" alt="" align="absmiddle" /> 전체 접속 통계</a>
-				<a href="#blank-list" onclick="javascript:try { parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { try { parent.parent.Ext.Msg.alert('Groupware Demo','<span style=color:#C8C9CA;><br />데모 체험하기는 글쓰기 등록 및 수정이 제한되어 있습니다. <br /><br />이점 양해해주시기 바랍니다.</span>');return false; } catch(e) { alert('그룹웨어 데모에서는 사용하실 수 없습니다.');return false; } }setDeleteAll();"><img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif" alt="" align="absmiddle" /> 삭제</a> --%>
 			</span>
 		</span>
 	</div>

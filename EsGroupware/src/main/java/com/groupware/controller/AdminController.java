@@ -1,6 +1,8 @@
 package com.groupware.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,12 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.dao.EmployeeDao;
-import com.groupware.dto.Board;
 import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
 import com.groupware.dto.Log;
 import com.groupware.dto.Position;
-import com.groupware.ui.ThePager;
 import com.groupware.ui.ThePager2;
 
 @Controller
@@ -31,6 +31,17 @@ public class AdminController {
 	@Qualifier("employeeDao")
 	public void setEmployeeDao(EmployeeDao employeeDao) {
 		this.employeeDao = employeeDao;
+	}
+	
+	@RequestMapping(value="adminmain.action", method = RequestMethod.GET)
+	public ModelAndView adminMain() throws UnknownHostException {
+		String host = InetAddress.getLocalHost().getHostAddress();
+		System.out.println(host);
+		ModelAndView mav = new ModelAndView(); 
+		mav.addObject("host", host);
+		mav.setViewName("admin/adminmain");
+		
+		return mav;	
 	}
 
 	@RequestMapping(value="admin.action", method = RequestMethod.GET)
