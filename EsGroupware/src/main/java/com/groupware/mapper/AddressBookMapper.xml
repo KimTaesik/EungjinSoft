@@ -19,7 +19,7 @@
 	</insert>
 	
 	 
-	<!--  	페이징 처리 [목록 조회] -->
+	<!--  	페이징 처리 [전체 목록 조회] -->
 	<select id="getAddressbookList2" parameterType="hashMap" resultType="AddressBook">
 	SELECT
 	addressno, id, name, groupno, classify, email, phone_number phoneNumber, home_number homeNumber, fax
@@ -40,6 +40,76 @@
 	WHERE
 		idx	&gt; =  #{ first } AND idx &lt; #{ last }
 	</select> 
+
+	<!--  	페이징 처리 [name-으로 목록 조회] -->
+	<select id="getAddressbookListByName" parameterType="hashMap" resultType="AddressBook">
+	SELECT
+	addressno, id, name, groupno, classify, email, phone_number phoneNumber, home_number homeNumber, fax
+	FROM
+		(	
+			SELECT
+				rownum idx, s.*
+			FROM (
+				SELECT
+					addressno, id, name, groupno, classify, email, phone_number , home_number, fax
+			FROM 
+				addressbook
+			WHERE 
+				name LIKE '%' || #{ name } || '%' AND classify = #{ classify }
+			ORDER BY 
+				addressno DESC
+			)s
+		)
+	WHERE
+		idx	&gt; =  #{ first } AND idx &lt; #{ last }
+	</select> 
+	
+	<!--  	페이징 처리 [email-으로 목록 조회] -->
+	<select id="getAddressbookListByEmail" parameterType="hashMap" resultType="AddressBook">
+	SELECT
+	addressno, id, name, groupno, classify, email, phone_number phoneNumber, home_number homeNumber, fax
+	FROM
+		(	
+			SELECT
+				rownum idx, s.*
+			FROM (
+				SELECT
+					addressno, id, name, groupno, classify, email, phone_number , home_number, fax
+			FROM 
+				addressbook
+			WHERE 
+				email LIKE '%' || #{ email } || '%' AND classify = #{ classify }
+			ORDER BY 
+				addressno DESC
+			)s
+		)
+	WHERE
+		idx	&gt; =  #{ first } AND idx &lt; #{ last }
+	</select> 
+	
+	<!--  	페이징 처리 [phonenumber-으로 목록 조회] -->
+	
+	<select id="getAddressbookListByPhoneNumber" parameterType="hashMap" resultType="AddressBook">
+	SELECT
+	addressno, id, name, groupno, classify, email, phone_number phoneNumber, home_number homeNumber, fax
+	FROM
+		(	
+			SELECT
+				rownum idx, s.*
+			FROM (
+				SELECT
+					addressno, id, name, groupno, classify, email, phone_number , home_number, fax
+			FROM 
+				addressbook
+			WHERE 
+				 phone_number LIKE '%' || #{phoneNumber} '%' AND classify = #{ classify }
+			ORDER BY 
+				addressno DESC
+			)s
+		)
+	WHERE
+		idx	&gt; =  #{ first } AND idx &lt; #{ last }
+	</select> 
 	
 	<!--  	주소록 전체 목록 수 조회하는 작업  -->
 	<select id="getAddressBookCount" parameterType="String" resultType="int">
@@ -50,8 +120,38 @@
  	WHERE classify = #{ classify }
  	</select>
  	
-	<!--  목록 조회하기  -->
-	<!-- <select id="getAddressbookList" parameterType="String" resultType="AddressBook">
+ 	<!--  	검색해서, 검색 조건에 맞는 주소록 수 (name) 으로 조회하는 작업  -->
+ 	<select id="getAddressbookCountByName"  parameterType="hashMap" resultType="int">
+ 	SELECT 
+ 	COUNT (addressno)
+ 	FROM 
+ 		addressbook
+ 	WHERE 
+ 		name LIKE '%' || #{ name } || '%' AND classify = #{ classify }
+ 	</select>
+ 	
+ 	<!--  	검색해서, 검색 조건에 맞는 주소록 수 (email) 으로 조회하는 작업  -->
+ 	<select id="getAddressbookCountByEmail"  parameterType="hashMap" resultType="int">
+ 	SELECT 
+ 	COUNT (addressno)
+ 	FROM 
+ 		addressbook
+ 	WHERE 
+ 		email LIKE '%' || #{ email } || '%' AND classify = #{ classify }
+ 	</select>
+ 	
+ 	<!--  	검색해서, 검색 조건에 맞는 주소록 수 (phonenumber) 으로 조회하는 작업  -->
+ 	<select id="getAddressbookCountByPhoneNumber"  parameterType="hashMap" resultType="int">
+ 	SELECT 
+ 	COUNT (addressno)
+ 	FROM 
+ 		addressbook
+ 	WHERE 
+ 		phone_number LIKE '%' || #{ phoneNumber } || '%' AND classify = #{ classify }
+ 	</select>
+ 	
+	<!--  ****엑셀로 주소록 내보내기  -->
+	 <select id="getAddressbookList" parameterType="String" resultType="AddressBook">
 	SELECT
 	addressno, id, name, groupno, classify, email, phone_number phoneNumber, home_number homeNumber, fax
 	FROM
@@ -59,7 +159,7 @@
 	WHERE classify = #{ classify }
 	ORDER BY 
 	addressno DESC
-	</select> -->
+	</select> 
 	
  	<!-- 주소록 수정  --> 
   	<update id="editAddress" parameterType="hashMap">

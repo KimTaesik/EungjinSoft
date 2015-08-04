@@ -36,20 +36,20 @@ public class ThePager {
 		if (currentPage > 1) {
 			if(queryString != null && queryString.length()>0 ) {
 				linkString.append(
-						String.format("[<a href='%s?pageno=1&%s'>처음</a>]",linkUrl,queryString));
+						String.format("[<a href='%s?pageno=1&%s'><<</a>]",linkUrl,queryString));
 			} else {
 				linkString.append(
-						String.format("[<a href='%s?pageno=1'>처음</a>]",linkUrl));
+						String.format("[<a href='%s?pageno=1'><<</a>]",linkUrl));
 			}
 			
 			linkString.append("&nbsp;");
 			linkString.append("&nbsp;");
 			if(queryString != null && queryString.length()>0 ) {
 				linkString.append(String.format(
-					"[<a href='%s?pageno=%d&%s'>이전</a>]", linkUrl ,currentPage - 1 , queryString));
+					"[<a href='%s?pageno=%d&%s'><</a>]", linkUrl ,currentPage - 1 , queryString));
 			} else {
 				linkString.append(String.format(
-					"[<a href='%s?pageno=%d'>이전</a>]", linkUrl,currentPage - 1));
+					"[<a href='%s?pageno=%d'><</a>]", linkUrl,currentPage - 1));
 			}
 			linkString.append("&nbsp;");
 		}
@@ -75,20 +75,20 @@ public class ThePager {
 			linkString.append("&nbsp;");
 			if(queryString != null && queryString.length()>0 ) {
 				linkString.append(String.format(
-						"[<a href='%s?pageno=%d&%s'>다음</a>]",linkUrl, currentPage + 1,queryString));
+						"[<a href='%s?pageno=%d&%s'>></a>]",linkUrl, currentPage + 1,queryString));
 			}else  {
 				linkString.append(String.format(
-						"[<a href='%s?pageno=%d'>다음</a>]",linkUrl, currentPage + 1));
+						"[<a href='%s?pageno=%d'>></a>]",linkUrl, currentPage + 1));
 			}
 			
 			linkString.append("&nbsp;");
 			linkString.append("&nbsp;");
 			if(queryString != null && queryString.length()>0 ) {
 				linkString.append(String.format(
-						"[<a href='%s?pageno=%d&%s'>마지막</a>]", linkUrl, pageCount,queryString));
+						"[<a href='%s?pageno=%d&%s'>>></a>]", linkUrl, pageCount,queryString));
 			}else {
 				linkString.append(String.format(
-						"[<a href='%s?pageno=%d'>마지막</a>]", linkUrl, pageCount));
+						"[<a href='%s?pageno=%d'>>></a>]", linkUrl, pageCount));
 			}
 			
 		}
