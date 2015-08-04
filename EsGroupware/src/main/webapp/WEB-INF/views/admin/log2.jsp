@@ -21,19 +21,7 @@
 	$(function() {
 		$("#logexcel").click(function(event) {
 			/* alert($(":radio[name='AdminGb']:checked").val()); */
-			alert("C:/testExcel.xls에 저장 완료")
-			$.ajax({
-				url : "/groupware/log/logexcel.action",
-				async : true,
-				data : { },
-				method : "get",
-				success : function(result, status, xhr) {
-					
-				},
-				error : function(xhr, status, ex) {
-					/* alert("xhr :" + xhr + " status :" + status + " ex :" + ex); */
-				}
-			})		
+			$(location).attr("href","/groupware/log/logexcel.action");
 			event.preventDefault();//원래 요쇼의 이벤트에 대한 기본 동작 수행 막는 코드
 		})
 		
