@@ -45,6 +45,24 @@ public class LogController {
 		this.employeeDao = employeeDao;
 	}
 	
+	@RequestMapping(value="userLoginInfo.action", method = RequestMethod.GET)
+	public ModelAndView log123(String id) {
+		int logAllcount = employeeDao.logAllcount(id);
+		int[] logMonthcount = new int[12];
+		for (int i = 0; i < 12; i++) {
+			logMonthcount[i] = employeeDao.logMonthcount("15/" + ( (int)(i+1) >= 10 ? "" : "0" ) + (int)(i+1), id);
+			//logMonthcount[i-1] = employeeDao.logMonthcount("15/08");
+			System.out.println(logMonthcount[i]);
+			System.out.println("15/" + ( (int)(i+1) > 10 ? "" : "0" ) + (int)(i+1));
+		}
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("logAllcount", logAllcount);
+		mav.addObject("logMonthcount", logMonthcount);
+		mav.setViewName("admin/logview");
+		return mav;
+	}
+	
 	@RequestMapping(value="log.action", method = RequestMethod.GET)
 	public ModelAndView log(Integer pageno) {
 		
@@ -74,10 +92,8 @@ public class LogController {
 		
 		
 		dataCount = employeeDao.getlogCount(); //전체 게시물 갯수 조회
-		System.out.println(dataCount);
 			
 		ThePager2 pager = new ThePager2(dataCount, pageNo, pageSize, pagerSize, url);
-		System.out.println(pager);
 		
 		ModelAndView mav = new ModelAndView();
 
@@ -133,15 +149,18 @@ public class LogController {
         cell.setCellValue("NO");
 
         cell = row.createCell(1);
+        cell.setCellValue("ID");
+        
+        cell = row.createCell(2);
         cell.setCellValue("부서");
 
-        cell = row.createCell(2);
+        cell = row.createCell(3);
         cell.setCellValue("이름");
         
-        cell = row.createCell(3);
+        cell = row.createCell(4);
         cell.setCellValue("IP");
         
-        cell = row.createCell(4);
+        cell = row.createCell(5);
         cell.setCellValue("접속일");
         //---------------------------------
 
@@ -155,16 +174,19 @@ public class LogController {
             cell.setCellValue(log.getLogno());
 
             cell = row.createCell(1);
+            cell.setCellValue(log.getId());
+            
+            cell = row.createCell(2);
             cell.setCellValue(log.getDept());
 
-            cell = row.createCell(2);
+            cell = row.createCell(3);
             cell.setCellValue(log.getName());
             
-            cell = row.createCell(3);
+            cell = row.createCell(4);
             cell.setCellValue(log.getIp());
             
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            cell = row.createCell(4);
+            cell = row.createCell(5);
             cell.setCellValue(format.format(log.getLogdate()));
             //cell.setCellStyle(cellStyle); // 셀 스타일 적용
             i++;

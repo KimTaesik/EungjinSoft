@@ -203,6 +203,7 @@ public class OracleEmployeeDao implements EmployeeDao {
 	@Override
 	public void insertLog(Log log) {
 		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("id", log.getId());
 		params.put("name", log.getName());
 		params.put("dept", log.getDept());
 		params.put("ip", log.getIp());
@@ -235,6 +236,19 @@ public class OracleEmployeeDao implements EmployeeDao {
 	@Override
 	public int getDeletedEmployeeCount() {
 		return employeeMapper.getDeletedEmployeeCount();
+	}
+	@Override
+	public int logAllcount(String id) {
+	
+		return employeeMapper.logAllcount(id);
+	}
+	@Override
+	public int logMonthcount(String month, String id) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("month", month);
+		params.put("id", id);
+		
+		return employeeMapper.logMonthcount(params);
 	}
 
 }

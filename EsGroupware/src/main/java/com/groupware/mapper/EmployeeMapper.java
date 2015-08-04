@@ -84,6 +84,10 @@ public interface EmployeeMapper {
 	
 	int getlogCount();
 	
+	int logAllcount(String id);
+	
+	int logMonthcount(HashMap<String, String> params);
+	
 	List<Log> logalllist();
 	
 	Employee AllAdminSearch();

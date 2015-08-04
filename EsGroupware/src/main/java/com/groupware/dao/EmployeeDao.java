@@ -77,6 +77,10 @@ public interface EmployeeDao {
 	
 	int getlogCount();
 	
+	int logAllcount(String id);
+	
+	int logMonthcount(String month, String id);
+	
 	List<Log> logalllist();
 	
 	Employee AllAdminSearch();

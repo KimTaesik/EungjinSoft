@@ -26,6 +26,31 @@
 		})
 	})
 	</script>
+	
+	<script type="text/javascript">
+		function getOpenUserLoginInfo(Id)
+		{
+			var dateObj = new Date();
+			var dummy = dateObj.getTime();
+		
+			if( !Id ) Id = '';
+		
+			document.getElementById('light').style.display = 'block';
+			document.getElementById('fade').style.display = 'block';
+			
+			var url = 'userLoginInfo.action?id='+Id;
+			setIframeSrc(url, 600, 525);
+			//window.open('userLoginInfo.php?Id='+Id, 'Login_'+Id ,'top=0,left=0,width=570,height=324,enubar=yes,scrollbars=yes,status=yes,resizable=yes');
+		}
+		
+		function setIframeSrc(url, width, height) 
+		{
+			var iframePopup = document.getElementById('iframePopup');
+			iframePopup.src = url;
+			iframePopup.width = width;
+			iframePopup.height = height;
+		}
+	</script>
 </head>
 
 <body>
@@ -102,6 +127,7 @@
 			<tr>
 				
 				<th>NO</th>
+				<th>ID</th>
 				<th>부서 </th>
 				<th>이름</th>
 				<th>접속 IP</th>
@@ -116,8 +142,9 @@
 				<%-- <c:set var="now" value="${ log.logdate }" /> --%>					
 				<tr>
 					<td class="txt_ce">
-						<a style='text-decoration:none;font-weight: bold' href='#' >${ log.logno }</a>
+						<a style='text-decoration:none;font-weight: bold' href='#' onclick="javascript:getOpenUserLoginInfo('${ log.id }');">${ log.logno }</a>
 					</td>
+					<td class="txt_ce">${ log.id }</td>
 					<td class="txt_ce">${ log.dept }</td>
 					<td class="txt_ce">${ log.name }</td>
 					<td class="txt_ce">${ log.ip }</td>

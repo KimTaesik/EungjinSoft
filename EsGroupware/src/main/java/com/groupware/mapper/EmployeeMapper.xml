@@ -357,8 +357,8 @@
 	
 	<insert id="insertLog" parameterType="hashMap">
 		INSERT INTO log
-		(logno, dept, name, ip, logdate)
-		VALUES (log_sequence.nextVal, #{dept}, #{name}, #{ip}, #{logdate})
+		(logno, id, dept, name, ip, logdate)
+		VALUES (log_sequence.nextVal, #{id}, #{dept}, #{name}, #{ip}, #{logdate})
 	</insert>
 	
 	<select id="getlogCount" parameterType="String" resultType="int">
@@ -369,14 +369,14 @@
  	</select>
  	
 	<select id="loglist" resultType="Log" parameterType="hashMap" >
-		SELECT logno, dept, name, ip, logdate 
+		SELECT logno, id, dept, name, ip, logdate 
 		FROM 
  		(
  			SELECT 
  				rownum idx, s.*
  			FROM (
  				SELECT 
- 					logno, dept, name, ip, logdate
+ 					logno, id, dept, name, ip, logdate
 				FROM 
 					log
 				ORDER BY 
@@ -389,7 +389,7 @@
 	</select>
 	
 	<select id="logalllist" resultType="Log" parameterType="hashMap" >
-		SELECT logno, dept, name, ip, logdate 
+		SELECT logno, id, dept, name, ip, logdate 
 		FROM log
 		ORDER By logno DESC
 	</select>
@@ -397,4 +397,19 @@
 	<select id="AllAdminSearch" resultType="Employee">
 		SELECT id, name, phone_number phoneNumber FROM employee where usertype = 1 AND deleted = 0
 	</select>
+	
+	<select id="logAllcount" resultType="int" parameterType="String" >
+		SELECT 
+			COUNT(id)
+		FROM log
+		WHERE id = #{id}
+	</select>
+	
+	<select id="logMonthcount" resultType="int" parameterType="hashMap" >
+		SELECT COUNT(id)
+		FROM log
+		WHERE TO_CHAR(logdate, 'yy/MM') = #{month} AND id = #{id}
+	</select>
+	
+	
 </mapper>                                                                                 

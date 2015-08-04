@@ -10,6 +10,7 @@ public class Log{
 	private String name;
 	private String ip;
 	private Date logdate;
+	private String id;
 
 	
 	public String getDept() {
@@ -47,6 +48,12 @@ public class Log{
 	}
 	public void setLogno(int logno) {
 		this.logno = logno;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	

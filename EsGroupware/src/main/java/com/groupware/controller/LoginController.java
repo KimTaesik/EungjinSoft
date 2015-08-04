@@ -57,8 +57,9 @@ public class LoginController {
 				if (employee.getDeptNo().equals(dept.getDeptNo()))
 					log.setDept(dept.getPartName());
 			}
-			//log.setIp(request.getRemoteAddr());
-			log.setIp(InetAddress.getLocalHost().getHostAddress());
+			log.setIp(request.getRemoteAddr());
+			log.setId(employee.getId());
+			//log.setIp(InetAddress.getLocalHost().getHostAddress());
 			log.setName(employee.getName());
 			
 			log.setLogdate(new Date());
