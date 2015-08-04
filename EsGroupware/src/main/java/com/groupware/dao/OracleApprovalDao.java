@@ -78,13 +78,12 @@ public class OracleApprovalDao implements ApprovalDao {
 		return approvalMapper.getApprovalList2();
 	}
 
-
+	//문서명 클릭하면 뷰 뛰움
 	@Override
 	public Approval getApprovalByNo(int approval_No) {
 		// TODO Auto-generated method stub
 	return approvalMapper.getApprovalByNo(approval_No);
 	}
-
 
 	@Override
 	public void updateApprovalLine(String approveCheck,String id,int approval_No) {
@@ -110,6 +109,15 @@ public class OracleApprovalDao implements ApprovalDao {
 	public int getApprovalListCount(int approval_No) {
 		
 		return approvalMapper.getApprovalListCount(approval_No);
+	}
+
+
+	@Override
+	public ApprovalLine getApprovalLineApprovalDay(String id, int approval_No) {
+		HashMap<String,Object> params = new HashMap<String,Object>();
+		params.put("id", id);
+		params.put("approval_No",approval_No);
+		return approvalMapper.getApprovalLineApprovalDay(params);
 	}
 	
 	

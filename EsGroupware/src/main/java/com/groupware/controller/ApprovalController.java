@@ -107,8 +107,6 @@ public class ApprovalController {
 
 		return approvalService.getApprovalForm3(form_No, session);
 
-		
-
 	}
 
 	@RequestMapping(value = "infomation.action", method = RequestMethod.GET)
@@ -122,13 +120,11 @@ public class ApprovalController {
 	@RequestMapping(value = "approvalview.action", method = RequestMethod.GET)
 	public ModelAndView approvalView(int approval_No) {
 
-
 		return approvalService.getApprovalByNo(approval_No);
- 
-
 	}
 	@RequestMapping(value = "approvalconfirm.action", method = RequestMethod.POST)
-	public void approvalConfirm(
+	@ResponseBody
+	public ApprovalLine approvalConfirm(
 			String approveCheck,
 			String id,
 			int approval_No,
@@ -137,11 +133,12 @@ public class ApprovalController {
 		int count=approvalService.getApprovalListCount(approval_No);
 		
 		if(count == confirmNum){
-			
 			approvalService.updateApproval("1",approval_No);
 		}
 		
 		approvalService.updateApprovalLine(approveCheck,id,approval_No);
-
+		
+		ApprovalLine approvalLine=approvalService.getApprovalLineApprovalDay(id, approval_No);
+		return approvalLine;
 	}
 }

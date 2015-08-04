@@ -38,4 +38,5 @@ public interface ApprovalService {
 	void updateApprovalLine(String approveCheck,String id,int approval_No);
 	void updateApproval(String Approvalconfirm,int approval_No);
 	int getApprovalListCount(int approval_No);
+	ApprovalLine getApprovalLineApprovalDay(String id,int approval_No);
 }

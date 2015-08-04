@@ -27,6 +27,7 @@ $(function() {
 				buttons: {
 				             "결재 하기": function() {
 				                $('form').submit(function(event){
+				                	alert('dd');
 				                	event.preventDefault();
 				                	var formData=new formData(this);
 				                		formData.append("confirmNum",confirmNum);
@@ -37,11 +38,8 @@ $(function() {
 				        				dataType : 'json',
 				        				success : function(result, status, xhr) {
 				        					//alert('성공');
-				        					eval("var r=" + result);
-				        	
-				        					$('#positionName'+i).attr('value', r.position.positionName);
-				        					$('#selectId'+i).attr('value',id);
-				        					$('#selectName'+i).attr('value', r.name);
+				        				
+				        					$('#appDate1'+i).attr('value', result.position.positionName);
 				        					
 				        				},
 				        				error : function(xhr, status, ex) {
@@ -62,7 +60,7 @@ $(function() {
 			});
 
 	$('.dialog-confirm').click(function() {
-		confirmNum=(this).attr('id');
+		confirmNum=$(this).attr('id');
 		$("#dialog-form2").dialog("open");
 	}); 
 });
@@ -84,10 +82,7 @@ $(function() {
 			<!-- init editor : 결재문서 작성(설정형 에디터/기본형 에디터) -->
 			<!-- 결재양식 제목 -->
 			<h2 class="eword_maincolumn">
-			
 				${approval.approvalForm.form_Name}
-						
-			
 			</h2>
 			<form action="approvalwriteform.action" method="post">	
 			<!-- 결재문서 본문 -->
@@ -119,7 +114,6 @@ $(function() {
 												<!-- 결재선/협조선 제목 --> <!-- 결재 --> 결<br> <br>재
 											</th>
 											<!-- 결재자/협조자 직급 표시 영역 -->
-											
 											<td style="border-top: none; text-align: center">
 												${approval.approvalLines[0].employee.positionName}
 											</td>
@@ -144,7 +138,6 @@ $(function() {
 												<input name="approveCheck" type="radio" value="기각"> 기각
 												<input name="approval_No" type="hidden" value="${approval.approval_No }">
 												<input name="id" type="hidden" value="${approval.id }">
-												
 											</form>
 										</div>
 										<tr class="date" style="height: 61px;">
@@ -168,8 +161,6 @@ $(function() {
 													</c:otherwise>
 												</c:choose>
 											</c:forEach>
-										
-										
 										</tr>
 										<tr class="date" style="height: 20px;">
 											<!-- 결재일시 표시 영역 -->
@@ -220,7 +211,6 @@ $(function() {
 											<td>
 												${approval.cooperations[3].employee.name}
 													<div id="MembersFindCell14" class="btn_page pad15l overf">
-														
 													</div>
 											</td>
 											<td>
@@ -242,7 +232,6 @@ $(function() {
 											</td>
 											<td style="border-bottom: none;"><span id="appDate15">&nbsp;</span>
 											</td>
-											
 										</tr>
 									</table>
 								</td>
@@ -311,9 +300,7 @@ $(function() {
 										${approval.receiveDept}
 										<span class="btn_page right"> <!-- 수신부서 지정 --> 
 												<span class="txt_ce" style="width: 70px;">
-													
 												</span>
-											
 										</span>
 									</span>
 								</td>

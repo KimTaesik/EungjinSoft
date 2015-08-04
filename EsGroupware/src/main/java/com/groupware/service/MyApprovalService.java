@@ -182,6 +182,14 @@ public class MyApprovalService implements ApprovalService {
 		return approvalDao.getApprovalListCount(approval_No);
 	}
 
+
+
+	@Override
+	public ApprovalLine getApprovalLineApprovalDay(String id, int approval_No) {
+		
+		return approvalDao.getApprovalLineApprovalDay(id, approval_No);
+	}
+
 	
 	
 }
