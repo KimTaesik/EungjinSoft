@@ -172,11 +172,12 @@ public class OracleEmployeeDao implements EmployeeDao {
 	}
 	
 	@Override
-	public List<Employee> getEmployeeList2(int first, int last, String lineup) {
+	public List<Employee> getEmployeeList2(int first, int last, String lineup, String sort) {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("first", first);
 		params.put("last", last);
 		params.put("lineup", lineup);
+		params.put("sort", sort);
 		
 		return	employeeMapper.getEmployeeList2(params);
 
@@ -226,6 +227,14 @@ public class OracleEmployeeDao implements EmployeeDao {
 	public List<Log> logalllist() {
 		List<Log> logs = employeeMapper.logalllist();
 		return logs;
+	}
+	@Override
+	public Employee AllAdminSearch() {
+		return employeeMapper.AllAdminSearch();
+	}
+	@Override
+	public int getDeletedEmployeeCount() {
+		return employeeMapper.getDeletedEmployeeCount();
 	}
 
 }

@@ -136,7 +136,14 @@
 
 
 	<select id="getemList" resultMap="EmployeeResult">
-		SELECT id,dept_no,position_no,name FROM employee
+		SELECT
+			id, name, dept_no deptNo, position_no positionNo, sex, phone_number phoneNumber, join_date joinDatetype
+		FROM 
+			employee
+		WHERE
+			deleted = 0
+		ORDER BY
+			id ASC
 	</select>
 
 	<select id="getEmployeeInfomationList" parameterType="String"
@@ -270,26 +277,59 @@
  	COUNT (id)
  	FROM 
  		employee
+ 	WHERE
+ 		deleted = 0
+ 	</select>
+ 	<select id="getDeletedEmployeeCount" parameterType="String" resultType="int">
+ 	SELECT 
+ 	COUNT (id)
+ 	FROM 
+ 		employee
+ 	WHERE
+ 		deleted = 1
  	</select>
  	
  	<select id="getEmployeeList2" resultType="Employee" parameterType="hashMap" >
-		SELECT id, name, dept_no deptNo, position_no positionNo, sex
+		SELECT id, name, dept_no deptNo, position_no positionNo, sex, phone_number phoneNumber, join_date joinDatetype
 		FROM 
  		(
  			SELECT 
  				rownum idx, s.*
  			FROM (
  				SELECT 
- 					id, name, dept_no, position_no, sex, deleted
+ 					id, name, dept_no, position_no, sex, phone_number, join_date, deleted
 				FROM 
 					employee
+				ORDER BY
+				<choose>
+					<when test="lineup == 'id'">
+						id 
+					</when>
+					<when test='lineup == "name"'>
+						name 
+					</when>
+					<when test='lineup == "dept"'>
+						dept_no 
+					</when>
+					<when test='lineup == "position"'>
+						position_no 
+					</when>
+					<when test='lineup == "joindate"'>
+						join_date  
+					</when>
+				</choose>
+				<choose>
+					<when test="sort == 'ASC'">
+						ASC
+					</when>
+					<when test="sort == 'DESC'">
+						DESC
+					</when>
+				</choose>
  				)s
  		)
 	 	WHERE
 	 		idx &gt;= #{ first } AND idx &lt; #{ last } AND deleted = 0
-		ORDER BY 
-				id
-		 ASC 
 	</select>
 	
 	<insert id="insertUpload" parameterType="hashMap">
@@ -354,4 +394,7 @@
 		ORDER By logno DESC
 	</select>
 
+	<select id="AllAdminSearch" resultType="Employee">
+		SELECT id, name, phone_number phoneNumber FROM employee where usertype = 1 AND deleted = 0
+	</select>
 </mapper>                                                                                 

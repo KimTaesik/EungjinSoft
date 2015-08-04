@@ -62,6 +62,8 @@ public interface EmployeeMapper {
 	
 	int getEmployeeCount();
 	
+	int getDeletedEmployeeCount();
+	
 	List<Employee> getEmployeeList(String lineup);
 	
 	List<Employee> getEmployeeList2(HashMap<String, Object> params);
@@ -83,4 +85,6 @@ public interface EmployeeMapper {
 	int getlogCount();
 	
 	List<Log> logalllist();
+	
+	Employee AllAdminSearch();
 }

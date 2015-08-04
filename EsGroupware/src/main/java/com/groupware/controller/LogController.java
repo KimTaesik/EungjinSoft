@@ -27,7 +27,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.dao.EmployeeDao;
+import com.groupware.dto.Dept;
+import com.groupware.dto.Employee;
 import com.groupware.dto.Log;
+import com.groupware.dto.Position;
 import com.groupware.ui.ThePager2;
 
  
@@ -83,7 +86,7 @@ public class LogController {
 		mav.addObject("logs", logs);
 		mav.addObject("pager", pager);
 		mav.addObject("pageno", pageNo);
-		mav.setViewName("admin/log2");
+		mav.setViewName("admin/log");
 		
 		return mav;
 	}
@@ -163,6 +166,127 @@ public class LogController {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             cell = row.createCell(4);
             cell.setCellValue(format.format(log.getLogdate()));
+            //cell.setCellStyle(cellStyle); // 셀 스타일 적용
+            i++;
+            //---------------------------------
+        }
+
+        // excel 파일 저장
+
+
+        
+        try {
+        	
+        	ByteArrayOutputStream fileOut = new ByteArrayOutputStream();
+            xlsWb.write(fileOut);
+            xlsWb.close();
+            fileOut.close(); 
+            
+            resp.addHeader("Content-Disposition", "attachment; filename=filename.xls");
+            
+            return fileOut.toByteArray();
+        	
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+
+    }
+	
+	@RequestMapping(value="employeeexcel.action", method = RequestMethod.GET, produces="application/octet-stream")
+	@ResponseBody
+	public byte[] employeeexcel(HttpServletResponse resp) {
+		Workbook xlsWb = new HSSFWorkbook(); // Excel 2007 이전 버전
+        Workbook xlsxWb = new XSSFWorkbook(); // Excel 2007 이상
+
+        // *** Sheet-------------------------------------------------
+        // Sheet 생성
+        List<Employee> employees = employeeDao.getemList();
+        List<Dept> depts = employeeDao.getDeptList();
+		List<Position> positions = employeeDao.getPositionList();
+        
+        Sheet sheet1 = xlsWb.createSheet("firstSheet");
+
+        // 컬럼 너비 설정
+        sheet1.setColumnWidth(0, 2000);
+        sheet1.setColumnWidth(3, 5000);
+        sheet1.setColumnWidth(4, 5000);
+
+        // ----------------------------------------------------------
+        // *** Style--------------------------------------------------
+        // Cell 스타일 생성
+        CellStyle cellStyle = xlsWb.createCellStyle();
+
+        // 줄 바꿈
+        cellStyle.setWrapText(true);
+
+        // Cell 색깔, 무늬 채우기
+        cellStyle.setFillForegroundColor(HSSFColor.LIME.index);
+        cellStyle.setFillPattern(CellStyle.BIG_SPOTS);
+
+        Row row = null;
+
+        Cell cell = null;
+        //----------------------------------------------------------
+
+        // 첫 번째 줄
+        row = sheet1.createRow(0);
+
+        // 첫 번째 줄에 Cell 설정하기-------------
+        cell = row.createCell(0);
+        cell.setCellValue("ID");
+
+        cell = row.createCell(1);
+        cell.setCellValue("부서");
+
+        cell = row.createCell(2);
+        cell.setCellValue("직급");
+        
+        cell = row.createCell(3);
+        cell.setCellValue("이름");
+        
+        cell = row.createCell(4);
+        cell.setCellValue("전화번호");
+        
+        cell = row.createCell(5);
+        cell.setCellValue("입사일");
+        //---------------------------------
+
+        // 두 번째 줄
+        int i = 1;
+        for (Employee employee : employees) {
+        	row = sheet1.createRow(i);
+        	
+        	// 두 번째 줄에 Cell 설정하기-------------
+            cell = row.createCell(0);
+            cell.setCellValue(employee.getId());
+
+            cell = row.createCell(1);   
+            for (Dept dept : depts) {
+            	if (employee.getDeptNo().equals(dept.getDeptNo())) {
+            		cell.setCellValue(dept.getPartName());
+            	}
+            }
+            
+            cell = row.createCell(2);   
+            for (Position position : positions) {
+            	if (employee.getPositionNo().equals(position.getPositionNo())) {
+            		cell.setCellValue(position.getPositionName());
+            	}
+            }   
+            
+            cell = row.createCell(3);
+            cell.setCellValue(employee.getName());
+            
+            cell = row.createCell(4);
+            cell.setCellValue(employee.getPhoneNumber());
+            
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            cell = row.createCell(5);
+            cell.setCellValue(format.format(employee.getJoinDatetype()));
             //cell.setCellStyle(cellStyle); // 셀 스타일 적용
             i++;
             //---------------------------------
