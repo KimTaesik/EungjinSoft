@@ -27,6 +27,7 @@
 		<typeAlias type="com.groupware.dto.ApprovalCooperation" alias="ApprovalCooperation" />
 		
 		<typeAlias type="com.groupware.dto.Menu" alias="Menu" />
+		<typeAlias type="com.groupware.dto.Log" alias="Log" />
 
 	</typeAliases>
 	<mappers>

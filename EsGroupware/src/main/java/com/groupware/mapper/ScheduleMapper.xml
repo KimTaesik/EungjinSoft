@@ -12,8 +12,10 @@
  	</insert>
  	
  	<select id="selectSchedule" parameterType="hashMap" resultType="Schedule">
- 		SELECT key, title, cont, stdate, eddate, classify, priority, category, makepublic, s_id FROM Schedule 
- 		WHERE s_id = #{s_id} and TO_CHAR(stdate, 'YYYY-MM') = #{stDate} and category= #{category}
+ 		SELECT s.key key, s.title title, s.cont cont, s.stdate stdate, s.eddate eddate, 
+ 		s.classify classify, s.priority priority, s.category category, s.makepublic makepublic, s.s_id s_id, p.POSITION_NAME position, d.PARTNAME dept
+ 		FROM SCHEDULE s, EMPLOYEE e, POSITION p, DEPT d
+ 		WHERE s.S_ID = e.ID and p.POSITION_NO = e.POSITION_NO and e.DEPT_NO = d.DEPT_NO and s_id = #{s_id} and TO_CHAR(stdate, 'YYYY-MM') = #{stDate}
  	</select>
  	
  	<select id="editSelectSchedule" parameterType="int" resultType="Schedule">
@@ -23,11 +25,14 @@
  	
  	<update id="editSchedule" parameterType="hashMap">
 		update schedule set title='${title}', cont='${cont}', 
-				stdate=${stDate}, eddate=${edDate}, CLASSIFY= ${classify}, 
+				stdate='${stDate}', eddate='${edDate}', CLASSIFY= ${classify}, 
 				PRIORITY=${priority}, CATEGORY='${category}', MAKEPUBLIC= '${makepublic}' 
 		where key=${key}
  	</update>
-	
  	
+ 	<delete id="deleteSchedule" parameterType="int">
+		delete from SCHEDULE where key=#{key}
+ 	</delete>
+	
  </mapper>
   

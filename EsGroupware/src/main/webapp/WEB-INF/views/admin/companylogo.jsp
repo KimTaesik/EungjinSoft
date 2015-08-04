@@ -36,7 +36,7 @@
 				method : "post",
 				enctype : "multipart/form-data",
 				success : function(result, status, xhr) {
-
+					
 				},
 				error : function(xhr, status, ex) {
 					alert(ex);

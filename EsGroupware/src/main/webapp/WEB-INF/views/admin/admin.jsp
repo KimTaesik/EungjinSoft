@@ -28,6 +28,10 @@
         <li><a href="/groupware/admin/employeelist.action?lineup=position" target="myframe">사원관리</a></li>
     </ul> -->
      <div id="accordion" style="font-size: 10pt">
+		  <h3>관리자 메인</h3>
+			    <ul>
+				      <li><a href="/groupware/admin/adminmain.action" target="myframe">관리자 메인</a></li>
+			    </ul>
 		  <h3>회원 / 관리자 관리</h3>
 		  		<ul>
 			        <li><a href="/groupware/admin/registerform.action" target="myframe">사원등록</a></li>
@@ -41,21 +45,15 @@
 			        <li><a href="/groupware/admin/companylogo.action" target="myframe">회사로고 등록</a></li>
 			        <li><a href="/groupware/admin/companymenu.action" target="myframe">메뉴 설정</a></li>
 		    	</ul>
-		  <h3>관리자 3</h3>
+		  <h3>로그 관리</h3>
 			    <ul>
-				      <li>List item one</li>
-				      <li>List item two</li>
-				      <li>List item three</li>
+				      <li><a href="/groupware/log/log.action" target="myframe">접속 로그</a></li>
 			    </ul>
-		  <h3>관리자 4</h3>
-		  <div>
-
-		  </div>
 		</div>
 		
 </nav>
 
-<iframe name="myframe" src="/groupware/admin/registerform.action">	
+<iframe name="myframe" src="/groupware/admin/adminmain.action">	
 </iframe>   
  
 <!-- 크기를 지정해줘야함, 안그럼 거지같이 나옴 ㅋ 보더값도 0으로 줘야함. 스크롤은 맘대로-->
