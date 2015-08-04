@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.groupware.dao.ScheduleDao;
 import com.groupware.dto.Employee;
+import com.groupware.dto.ScRepeat;
 import com.groupware.dto.Schedule;
 
 @Controller
@@ -64,22 +65,29 @@ public class AddPersonalSchedule {
 	
 	@RequestMapping(value = "insertSchedule.action", method = RequestMethod.GET)
 	public String insertSchedule(HttpSession session,
-			String title, String cont, String stdate, int classify, int priority, String makepublic, String cate) throws ParseException {
+			String title, String cont, String stdate, int classify, int priority, String makepublic, String cate,
+			int rclassify, int freq, String endyear, String endmonth, String enddate, int chk) throws ParseException {
+		
 		System.out.println("삽입="+title+"/"+cont+"/"+stdate+"/"+classify+"/"+priority+"/"+makepublic+"/");
 		
 		ModelAndView mav = new ModelAndView();
 		Employee loginUser = new Employee();
-//		loginUser.setId(((Employee)session.getAttribute("loginuser")).getId());
-		loginUser.setId("admin");
+		loginUser.setId(((Employee)session.getAttribute("loginuser")).getId());
+		
+//		loginUser.setId("admin");
 		String logUser = loginUser.getId();
 		String category;
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		String[] spDate = stdate.split("-");
 		Date cvDate = new Date(Integer.parseInt(spDate[0]),Integer.parseInt(spDate[1]),Integer.parseInt(spDate[2]));
+		
 		System.out.println("내용:"+cont);
 		
 		Schedule sc = new Schedule();
+
+		sc.setRepeat(chk);
+		
 		sc.setTitle(title);
 		sc.setCont(cont.replaceAll("<br>", "\r\n"));
 		sc.setStDate(stdate);
@@ -101,8 +109,20 @@ public class AddPersonalSchedule {
 		System.out.println("인서트:"+category);
 		sc.setCategory(category);
 		sc.setS_id(logUser);
-		
-		scheduleDao.insertSchedule(sc);
+
+		int key = scheduleDao.insertSchedule(sc);
+		System.out.println("현재키"+key);
+		ScRepeat scre = new ScRepeat();
+		if(chk==1){
+			scre.setKey(key);
+			scre.setClassify(rclassify);
+			scre.setFreq(freq);
+			scre.setId(logUser);
+			scre.setEndYear(endyear);
+			scre.setEndMonth(endmonth);
+			scre.setEndDate(enddate);
+			scheduleDao.insertRepeat(scre);
+		}
 		
 		return "redirect:scheduleheader.action";
 	}

@@ -350,54 +350,54 @@
 												<td class="${ dateString[j-1] }" height="70" align="left" valign="top">
 													<font class="org8">${dateNum}<img class="plus cursor" id="${currentMonth}-${dateNum}" src="/groupware/resources/image/cal_plus.png" border="0"  /></font>
 													<br />
-													<c:forEach var="scList" items="${ scList }">
-														<c:if test="${ dateNum eq scList.date && currentYear eq scList.year && currentMonth eq scList.month }">
-												          <c:choose>
-												          	<c:when test="${cate eq 'ps'}">
-												          		<c:if test="${ scList.category eq '개인일정' || scList.category eq '공개일정' }">
-											          			<c:choose>
-													          		<c:when test="${fn:length(scList.title) > 4}">
-													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
-													          		</c:when>
-													          		<c:otherwise>
-													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
-													          		</c:otherwise>
-												          		</c:choose>
-												          		</c:if>
-											          		</c:when>
-												          	<c:when test="${cate eq 'pus' and scList.makepublic eq 'open' }">
-											          			<c:choose>
-													          		<c:when test="${fn:length(scList.title) > 4}">
-													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
-													          		</c:when>
-													          		<c:otherwise>
-													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
-													          		</c:otherwise>
-												          		</c:choose>
-											          		</c:when>
-											          		<c:when test="${cate eq 'ts' and scList.dept eq scList.makepublic }">
-											          			<c:choose>
-													          		<c:when test="${fn:length(scList.title) > 4}">
-													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
-													          		</c:when>
-													          		<c:otherwise>
-													          			<div class="cursor uDate" id="${scList.key}">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
-													          		</c:otherwise>
-												          		</c:choose>
-											          		</c:when>
-											          		<c:when test="${cate eq 'cs' and scList.category eq '회사일정' }">
-											          			<c:choose>
-													          		<c:when test="${fn:length(scList.title) > 4}">
-													          			<div class="cursor uDate" id="${scList.key}">[회사일정] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
-													          		</c:when>
-													          		<c:otherwise>
-													          			<div class="cursor uDate" id="${scList.key}">[회사일정] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
-													          		</c:otherwise>
-												          		</c:choose>
-											          		</c:when>
-												          </c:choose>
-														</c:if>
-													</c:forEach>
+									<c:forEach var="scList" items="${ scList }">
+										<c:if test="${ dateNum eq scList.date && currentYear eq scList.year && currentMonth eq scList.month }">
+								          <c:choose>
+								          	<c:when test="${cate eq 'ps'}">
+								          		<c:if test="${ scList.category eq '개인일정' || scList.category eq '공개일정' }">
+							          			<c:choose>
+									          		<c:when test="${fn:length(scList.title) > 4}">
+									          			<div class="cursor uDate" id="${scList.key}" title="${ scList.cont }">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
+									          		</c:when>
+									          		<c:otherwise>
+									          			<div class="cursor uDate" id="${scList.key}" title="${ scList.cont }">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
+									          		</c:otherwise>
+								          		</c:choose>
+								          		</c:if>
+							          		</c:when>
+								          	<c:when test="${cate eq 'pus' and scList.makepublic eq 'open' }">
+							          			<c:choose>
+									          		<c:when test="${fn:length(scList.title) > 4}">
+									          			<div class="cursor uDate" id="${scList.key}" title="${ scList.cont }">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
+									          		</c:when>
+									          		<c:otherwise>
+									          			<div class="cursor uDate" id="${scList.key}" title="${ scList.cont }">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
+									          		</c:otherwise>
+								          		</c:choose>
+							          		</c:when>
+							          		<c:when test="${cate eq 'ts' and scList.dept eq scList.makepublic }">
+							          			<c:choose>
+									          		<c:when test="${fn:length(scList.title) > 4}">
+									          			<div class="cursor uDate" id="${scList.key}" title="${ scList.cont }">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
+									          		</c:when>
+									          		<c:otherwise>
+									          			<div class="cursor uDate" id="${scList.key}" title="${ scList.cont }">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
+									          		</c:otherwise>
+								          		</c:choose>
+							          		</c:when>
+							          		<c:when test="${cate eq 'cs' and scList.category eq '회사일정' }">
+							          			<c:choose>
+									          		<c:when test="${fn:length(scList.title) > 4}">
+									          			<div class="cursor uDate" id="${scList.key}" title="${ scList.cont }">[회사일정] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>
+									          		</c:when>
+									          		<c:otherwise>
+									          			<div class="cursor uDate" id="${scList.key}" title="${ scList.cont }">[회사일정] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
+									          		</c:otherwise>
+								          		</c:choose>
+							          		</c:when>
+								          </c:choose>
+										</c:if>
+									</c:forEach>
 												</td>
 											</c:otherwise>
 										</c:choose>

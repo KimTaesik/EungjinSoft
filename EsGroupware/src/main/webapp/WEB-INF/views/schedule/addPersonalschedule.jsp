@@ -27,14 +27,24 @@
 		    });
 		    
 		    $('#schedule_add').click(function(e) {
-		    	var cate = $("#cate").val()
-		    	var title = $("#schedule_title").val()
-		    	var cont = $("#schedule_detail").val().replace(/\n/g, "<br>")
-		    	var stdate = $("#addcalendar").val()
-		    	var classify = $("#schedule_kind").val()
-		    	var priority = $("#schedule_priority").val()
-		    	var makepublic = $("#schedule_group").val()
-				var url = 'insertSchedule.action?title='+title+"&cont="+cont+"&stdate="+stdate+"&classify="+classify+"&priority="+priority+"&makepublic="+makepublic+"&cate="+cate;
+		    	var cate		= $("#cate").val()
+		    	var title		= $("#schedule_title").val()
+		    	var cont		= $("#schedule_detail").val().replace(/\n/g, "<br>")
+		    	var stdate		= $("#addcalendar").val()
+		    	var classify	= $("#schedule_kind").val()
+		    	var priority	= $("#schedule_priority").val()
+		    	var makepublic	= $("#schedule_group").val()
+		    	var rclassify	= $(":radio[name=repeat_flag]:checked").val()
+		    	var freq		= $("#repeat_freq").val()
+		    	var endyear		= $("#repeat_end_year").val()
+		    	var endmonth	= $("#repeat_end_month").val()
+		    	var enddate		= $("#repeat_end_day").val()
+		    	alert(rclassify)
+		    	if(rclassify == 0){
+		    		var url = 'insertSchedule.action?title='+title+"&cont="+cont+"&stdate="+stdate+"&classify="+classify+"&priority="+priority+"&makepublic="+makepublic+"&cate="+cate+"&chk=0"
+		    	}else{
+		    		var url = 'insertSchedule.action?title='+title+"&cont="+cont+"&stdate="+stdate+"&classify="+classify+"&priority="+priority+"&makepublic="+makepublic+"&cate="+cate+"&rclassify="+rclassify+"&freq="+freq+"&endyear="+endyear+"&endmonth="+endmonth+"&enddate="+enddate+"&chk=1";	
+		    	}
 				$(location).attr('href', url);
 		    });
 		    
@@ -42,7 +52,21 @@
 				var url = 'reSchedule.action?cate='+$("#cate").val()
 				$(location).attr('href', url);
 		    });
-
+		    $('#none').click(function(e) {
+		    	//var id = $(this).attr('id');
+		        if ($(this).is(':checked')) {
+		        	$("#totalRepeat").hide();
+		        }
+		    });
+		    $('input[name=repeat_flag]').click(function(e) {
+		    	var id = $(this).attr('id');
+		    	var chk =$(this).is(':checked');
+		        if (id=="none" && $(this).is(':checked')) {
+		        	$("#totalRepeat").hide();
+		        }else{
+		        	$("#totalRepeat").show();
+		        }
+		    });
 		});
 	</script>
 </head>
@@ -137,39 +161,49 @@
 
 			<tr bgcolor="#FFFFFF">
 				<td height="28" bgcolor="#efefef" align="center">반복 설정</td>
-				<td style="padding-left:5px;">
-					<input type=radio name=repeat_flag value="N" checked>사용 안함
-					<input type=radio name=repeat_flag value="D" >일
-					<input type=radio name=repeat_flag value="W" >주
-					<input type=radio name=repeat_flag value="M" >월
-					<input type=radio name=repeat_flag value="Y" >년<br>
-					반복 주기 :<input type=text name=repeat_freq value="1" size=2 maxlength=2 class="input"><br>
-					반복 기간 :<input type=text name=repeat_end_year value="" size=4 maxlength=4 class="input">년
-					<select name=repeat_end_month class="input">
-						<option value="">---
-						<option value="1">1
-						<option value="2">2
-						<option value="3">3
-						<option value="4">4
-						<option value="5">5
-						<option value="6">6
-						<option value="7">7
-						<option value="8">8
-						<option value="9">9
-						<option value="10">10
-						<option value="11">11
-						<option value="12">12
-					</select>월
-					<select name=repeat_end_day class="input">
-						<option value="">---
-						<option value="1">1<option value="2">2<option value="3">3<option value="4">4<option value="5">5
-						<option value="6">6<option value="7">7<option value="8">8<option value="9">9<option value="10">10
-						<option value="11">11<option value="12">12<option value="13">13<option value="14">14<option value="15">15
-						<option value="16">16<option value="17">17<option value="18">18<option value="19">19<option value="20">20
-						<option value="21">21<option value="22">22<option value="23">23<option value="24">24<option value="25">25
-						<option value="26">26<option value="27">27<option value="28">28<option value="29">29<option value="30">30
-						<option value="31">31
-					</select>일 까지
+				<td  style="padding-left:5px;">
+					<input type=radio name="repeat_flag" id="none" value="0" >사용 안함
+					<input type=radio name="repeat_flag" id="rday" value="1" checked>일
+					<input type=radio name="repeat_flag" id="rweek" value="2" >주
+					<input type=radio name="repeat_flag" id="rmonth" value="3" >월
+					<input type=radio name="repeat_flag" id="ryear" value="4" >년<br>
+					<div id="totalRepeat">
+						반복 주기 :<input type=text id="repeat_freq" name=repeat_freq value="1" size=2 maxlength=2 class="input"><br>
+						반복 기간 :<input type=text id="repeat_end_year" name=repeat_end_year value="2015" size=4 maxlength=4 class="input">년
+						<select name=repeat_end_month id="repeat_end_month" class="input">
+							<option value="">---
+							<option value="1">1
+							<option value="2">2
+							<option value="3">3
+							<option value="4">4
+							<option value="5">5
+							<option value="6">6
+							<option value="7">7
+							<option value="8">8
+							<option value="9">9
+							<option value="10">10
+							<option value="11">11
+							<option value="12">12
+						</select>월
+						<select name=repeat_end_day id="repeat_end_day" class="input">
+							<option value="">---
+							<option value="1">1
+							<option value="2">2
+							<option value="3">3
+							<option value="4">4
+							<option value="5">5
+							<option value="6">6
+							<option value="7">7
+							<option value="8">8
+							<option value="9">9
+							<option value="10">10
+							<option value="11">11<option value="12">12<option value="13">13<option value="14">14<option value="15">15
+							<option value="16">16<option value="17">17<option value="18">18<option value="19">19<option value="20">20
+							<option value="21">21<option value="22">22<option value="23">23<option value="24">24<option value="25">25
+							<option value="26">26<option value="27">27<option value="28">28<option value="29">29<option value="30">30
+							<option value="31">31
+						</select>일 까지
+					</div>
 				</td>
 			</tr>
 		</table>

@@ -65,6 +65,7 @@ public class ScheduleController {
 			}
 			System.out.println("셀렉트 직그읍=========="+scList.get(0).getPosition());
 			System.out.println("셀렉트 부서어=========="+scList.get(0).getDept());
+			System.out.println("셀렉트 내요옹=========="+scList.get(0).getCont());
 			mav.addObject("scList", scList);
 		}
 		

@@ -1,6 +1,7 @@
 package com.groupware.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 
 public class Schedule {
@@ -21,7 +22,23 @@ public class Schedule {
 	private Date eedDate;
 	private String position;
 	private String dept;
+	private int repeat;
 	
+	
+	private List<ScRepeat> sr;
+	
+	public List<ScRepeat> getSr() {
+		return sr;
+	}
+	public void setSr(List<ScRepeat> sr) {
+		this.sr = sr;
+	}
+	public int getRepeat() {
+		return repeat;
+	}
+	public void setRepeat(int repeat) {
+		this.repeat = repeat;
+	}
 	public String getDept() {
 		return dept;
 	}

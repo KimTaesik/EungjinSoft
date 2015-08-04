@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.groupware.dto.ScRepeat;
 import com.groupware.dto.Schedule;
 import com.groupware.mapper.ScheduleMapper;
 
@@ -20,7 +21,7 @@ public class OracleScheduleDao implements ScheduleDao {
 		this.scheduleMapper = scheduleMapper;
 	}
 	
-	public void insertSchedule(Schedule sc) {
+	public int insertSchedule(Schedule sc) {
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("title", sc.getTitle());
@@ -32,8 +33,10 @@ public class OracleScheduleDao implements ScheduleDao {
 		params.put("category", sc.getCategory());
 		params.put("makepublic", sc.getMakepublic());
 		params.put("s_id", sc.getS_id());
-		
+		params.put("key", "");
 		scheduleMapper.insertSchedule(params);
+		int key = (int)params.get("key");
+		return key;
 	}
 	
 	public List<Schedule> selectSchedule(Schedule sc) {
@@ -70,6 +73,10 @@ public class OracleScheduleDao implements ScheduleDao {
 	}
 	public void deleteSchedule(int key){
 		scheduleMapper.deleteSchedule(key);
+	}
+	@Override
+	public void insertRepeat(ScRepeat scRepeat) {
+		scheduleMapper.insertRepeat(scRepeat);
 	}
 
 }

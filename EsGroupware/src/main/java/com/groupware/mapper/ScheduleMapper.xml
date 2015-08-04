@@ -7,8 +7,16 @@
  <mapper namespace="com.groupware.mapper.ScheduleMapper">
  
  	<insert id="insertSchedule" parameterType="hashMap" >
+ 		<selectKey keyProperty="key" order="AFTER" resultType="int">
+ 			select sc_seq.currVal from dual
+ 		</selectKey>
 		INSERT INTO schedule(key, title, cont, stdate, eddate, classify, priority, category, makepublic, s_id) 
 		values(sc_seq.nextval,#{title},#{cont},#{stDate},#{edDate},#{classify},#{priority},#{category},#{makepublic},#{s_id})
+ 	</insert>
+ 	
+ 	<insert id="insertRepeat" parameterType="ScRepeat" >
+		INSERT INTO screpeat(sc_key, id,key,classify,freq,endyear,endmonth,enddate) 
+		values(screpeat_seq.nextval,#{id},#{key},#{classify},#{freq},#{endYear},#{endMonth},#{endDate})
  	</insert>
  	
  	<select id="selectSchedule" parameterType="hashMap" resultType="Schedule">

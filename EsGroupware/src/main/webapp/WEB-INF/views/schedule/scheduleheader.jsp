@@ -47,14 +47,14 @@
 <nav>
 	<div id="accordion" style="font-size: 10pt">
 			<h3>내 일정</h3>
-		  		<ul>
-			        <li><span id="ps" style="cursor:pointer">개인일정</span></li>
+		  		<ul >
+			        <li id="ps" class="cursor">개인일정</li>
 		    	</ul>
 		    <h3>공개일정</h3>
 		    	<ul>
-			        <li><span id="pus" style="cursor:pointer">공개일정</span></li>
-			        <li><span id="ts" style="cursor:pointer">부서일정</span></li>
-			        <li><span id="cs" style="cursor:pointer">회사일정</span></li>
+			        <li id="pus" class="cursor">공개일정</li>
+			        <li id="ts" class="cursor">부서일정</li>
+			        <li id="cs" class="cursor">회사일정</li>
 		    	</ul>
 	</div>
 </nav>
