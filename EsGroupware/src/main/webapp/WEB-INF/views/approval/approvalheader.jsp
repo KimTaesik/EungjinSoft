@@ -36,7 +36,7 @@
 			$("#frame").load("approvalmain.action");
 		});
 		$("#approvaling").click(function() {
-			$("#frame").load("approvalling.action");
+			$("#frame").load("approvaling.action");
 		});
 		$("#approvalend").click(function() {
 			$("#frame").load("approvalend.action");
