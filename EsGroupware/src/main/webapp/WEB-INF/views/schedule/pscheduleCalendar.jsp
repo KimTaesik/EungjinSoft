@@ -96,7 +96,7 @@
 														</c:when>
 														<c:otherwise>
 																<c:set var="tempdate" value="${currentYear}-${currentMonth<10?'0':''}${currentMonth}-${dateNum<10?'0':''}${dateNum}"/>
-																${tempdate }
+																
 																<c:if test="${ scList.repeat == 1 }">
 																	<c:forEach var="scTemp" items="${ scList.scTemp }">
 																		<c:if test="${ scTemp == tempdate }">

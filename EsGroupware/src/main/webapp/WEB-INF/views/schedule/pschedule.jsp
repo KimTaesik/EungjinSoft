@@ -116,7 +116,7 @@
 			    	var makep = (cate == 'pus' ? 'open' : 'closed')
 			    	var title = $("#schedule_title").val()
 			    	var stdate = $("#year").val()+"-"+$("#month").val()+"-"+$("#day").val();
-					var url = "insertSchedule.action?title="+title+"&cont=&stdate="+stdate+"&classify=0&priority=0&makepublic="+makep+"&cate="+cate;
+					var url = "insertSchedule.action?title="+title+"&cont=&stdate="+stdate+"&classify=0&priority=0&makepublic="+makep+"&cate="+cate+"&chk=0";
 					$(location).attr('href', url);			    	
 			    	$("#quickaddform").hide();
 				});
@@ -401,7 +401,7 @@
 																<c:set var="tempdate" value="${currentYear}-${currentMonth<10?'0':''}${currentMonth}-${dateNum<10?'0':''}${dateNum}"/>
 																
 																<c:if test="${ scList.repeat == 1 }">
-																${tempdate }
+																
 																	<c:forEach var="scTemp" items="${ scList.scTemp }">
 																		<c:if test="${ scTemp == tempdate }">
 																			
