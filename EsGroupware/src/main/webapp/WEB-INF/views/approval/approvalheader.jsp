@@ -58,7 +58,7 @@
 			</ul>
 			<h3>결재할 문서함</h3>
 			<ul>
-				<li><a href="#" id="approvaling">결재할 문서</a></li>
+				<li><a href="#" id="approvaling">미결재 문서</a></li>
 				<li><a href="#" id="approvalend">결재완료 문서</a></li>
 				
 			</ul>

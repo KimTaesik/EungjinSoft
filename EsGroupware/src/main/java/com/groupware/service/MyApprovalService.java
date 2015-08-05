@@ -124,15 +124,13 @@ public class MyApprovalService implements ApprovalService {
 
 
 	@Override
-	public ModelAndView getApprovalList() {
+	public List<Approval> getApprovalList() {
 		
 		
-		ModelAndView mav= new ModelAndView();
-		List<Approval> approvals=approvalDao.getApprovalList();
-		
-		mav.addObject("approvals", approvals);
-		mav.setViewName("approval/documentbox");
-		return mav;
+	 List<Approval> approvals=approvalDao.getApprovalList();
+			
+	 	return approvals;
+		 
 	}
 	@Override
 	public ModelAndView getApprovalList2() {
@@ -188,6 +186,22 @@ public class MyApprovalService implements ApprovalService {
 	public ApprovalLine getApprovalLineApprovalDay(String id, int approval_No) {
 		
 		return approvalDao.getApprovalLineApprovalDay(id, approval_No);
+	}
+
+
+
+	@Override
+	public int getYesApprovalCount() {
+		// TODO Auto-generated method stub
+		return approvalDao.getYesApprovalCount();
+	}
+
+
+
+	@Override
+	public int getNoApprovalCount() {
+		// TODO Auto-generated method stub
+		return approvalDao.getNoApprovalCount();
 	}
 
 	

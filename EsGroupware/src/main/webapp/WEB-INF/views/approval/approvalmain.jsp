@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,7 +104,7 @@ $(document).ready(function() {
 										<td>
 											<div>
 												<nobr>
-													<a href="#"> 0건 </a>
+													<a href="#">${noCount}건 </a>
 												</nobr>
 											</div>
 										</td>
@@ -119,7 +120,7 @@ $(document).ready(function() {
 										<td>
 											<div>
 												<nobr>
-													<a href=#> 0건</a>
+													<a href=#> ${yesCount}건</a>
 												</nobr>
 											</div>
 										</td>
@@ -313,41 +314,62 @@ $(document).ready(function() {
 							<th><div>
 									<nobr>다음결재자</nobr>
 								</div></th>
-							<th><div>
-									<nobr>의견 </nobr>
-								</div></th>
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach  begin="0" end="2" step="1" var="approval" items="${approvals}" >
+							<c:set var="reportDate" value="${approval.reportDate}" />
 						<tr>
 							<td class="txt_ce"><div>
-									<nobr> 11111</nobr>
+									<nobr> ${approval.form_No} </nobr>
 								</div></td>
 							<td class="txt_ce"><div>
-									<nobr> 2015-07-24 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr>
-										<a>비공개문서1</a>
+						
+									<nobr> 
+									<fmt:formatDate value="${reportDate}" pattern="yyyy-MM-dd"/> 
 									</nobr>
 								</div></td>
 							<td class="txt_ce"><div>
-									<nobr> 안대건 사원 </nobr>
+									<nobr>
+										<a>${approval.title} </a>
+									</nobr>
 								</div></td>
 							<td class="txt_ce"><div>
-									<nobr> 미결재 </nobr>
+									<nobr>${approval.employee.name } </nobr>
 								</div></td>
 							<td class="txt_ce"><div>
-									<nobr> 진행중 </nobr>
+									<nobr> 
+										<c:choose>
+   											<c:when test="${ approval.approvalConfirm eq 1}">
+   												<nobr> 결재 </nobr>
+   											</c:when>
+   											<c:otherwise>	
+   												<nobr> 미결재 </nobr>
+   											</c:otherwise>
+										</c:choose> </nobr>
 								</div></td>
 							<td class="txt_ce"><div>
-									<nobr> 김태식 과장 </nobr>
+									<nobr>	<c:choose>
+   											<c:when test="${ approval.approvalConfirm eq 1}">
+   												<nobr> 결재 </nobr>
+   											</c:when>
+   											<c:otherwise>	
+   												<nobr> 진행중 </nobr>
+   											</c:otherwise>
+										</c:choose> </nobr>
 								</div></td>
-							<td class="bdr_none txt_ce"><div>
-									<nobr>1개</nobr>
+							<td class="txt_ce"><div>
+									<nobr>	<c:set var="chk" value="1" />
+									<c:forEach var="approvalline" items="${approval.approvalLines}" >
+										<c:if test="${approvalline.approveCheck eq null and chk eq 1}">
+											<nobr> ${approvalline.employee.name} </nobr>
+											<c:set var="chk" value="${chk+1}" />
+										</c:if>
+									</c:forEach></nobr>
 								</div></td>
+						
 						</tr>
-
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -385,23 +407,11 @@ $(document).ready(function() {
 
 
 						<tr>
-							<td class="txt_ce"><div>
-									<nobr> 11111 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									<nobr> 15.7.24 </nobr>
-								</div></td>
-							<td class="txt_ce"><div>
-									
-									<nobr><a>기안서</a></nobr></div></td>
-							<td class="txt_ce">
+							<td colspan='8'>
 								<div>
-									<nobr> 진행중 </nobr>
+									<nobr> 해당 문서 정보가 없습니다. </nobr>
 								</div>
 							</td>
-							<td class="txt_ce bdr_none"><div>
-									<nobr> 0개 </nobr>
-								</div></td>
 						</tr>
 
 

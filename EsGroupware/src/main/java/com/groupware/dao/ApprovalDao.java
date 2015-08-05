@@ -31,4 +31,8 @@ public interface ApprovalDao {
 	void updateApproval(String approvalConfirm,int approval_No);
 	int getApprovalListCount(int approval_No);
 	ApprovalLine getApprovalLineApprovalDay(String id , int approval_No);
+	
+	int getYesApprovalCount();
+
+	int getNoApprovalCount();
 }

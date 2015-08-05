@@ -15,7 +15,17 @@
 <script src="/groupware/resources/styles/script/jquery.js"></script>
 <script src="/groupware/resources/styles/script/jquery-ui.js"></script>
 <link rel="stylesheet" href="/groupware/resources/styles/approval.css">
+<script type="text/javascript">
+$(document).ready(function() {
+	$('form').on('click', '#approvalview', function(event){ 
+		 
+		var i=$(this).attr('href');
+		$('#frame').load(i);
+		return false;
+	});
 
+});
+</script>
 </head>
 
 <body>
@@ -125,7 +135,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="approval" items="${approvals}" >
+						<c:forEach  var="approval" items="${approvals}" >
 						<tr>
 					
 							<c:set var="reportDate" value="${approval.reportDate}" />
@@ -145,7 +155,19 @@
 							</td>
 							<td class="txt_ce">
 								<div>
-									<nobr>  </nobr>
+								<c:set var="approvalDate" value="${approval.approvalDate }" />
+									<nobr>
+											
+										<c:choose>
+   											<c:when test="${ approvalDate eq null}">
+   												<nobr> -- </nobr>
+   											</c:when>
+   											<c:otherwise>	
+   												<nobr> <fmt:formatDate value="${approvalDate}" pattern="yyyy-MM-dd"/>  </nobr>
+   											</c:otherwise>
+										</c:choose>
+								
+								  </nobr>
 								</div>
 							</td>
 							<td>
@@ -156,7 +178,7 @@
 							<td>
 								<div>
 									<nobr>
-										<a href='approvalview.action?approval_No=${approval.approval_No}'>
+										<a  id="approvalview" href='approvalview.action?approval_No=${approval.approval_No}'>
 											${approval.title} </a>
 									</nobr>
 								</div>
@@ -170,7 +192,7 @@
 								<div>
 										
 										<c:choose>
-   											<c:when test="${ approval.approvalConfirm eq true}">
+   											<c:when test="${ approval.approvalConfirm eq 1}">
    												<nobr> 결재 </nobr>
    											</c:when>
    											<c:otherwise>	
@@ -182,7 +204,7 @@
 							<td class="txt_ce">
 								<div>
 										<c:choose>
-   											<c:when test="${ approval.approvalConfirm eq true}">
+   											<c:when test="${ approval.approvalConfirm eq 1}">
    												<nobr> 결재 </nobr>
    											</c:when>
    											<c:otherwise>	
@@ -213,7 +235,7 @@
 			<!--  //테이블 영역 -->
 			<!--  넘버링 영역 -->
 			<div class="paging">
-				<div class="number">1</div>
+				<div class="number"></div>
 			</div>
 			<!--  //넘버링 영역 -->
 			<!--  검색 버튼 영역 -->
