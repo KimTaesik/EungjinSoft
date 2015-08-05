@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html >
-
+<html>
 <head>
-<title>Whois Groupware - Ubiquitous Collaboration!</title>
 
-
+<link rel="stylesheet"
+	href="/groupware/resources/styles/approvalboard.css">
 <link rel="stylesheet"
 	href="/groupware/resources/styles/jquery/jquery-ui.css">
 <script src="/groupware/resources/styles/script/jquery.js"></script>
@@ -17,31 +20,18 @@
 
 <body>
 
-	
-	<div style="width: 90%; float: right; margin-left: 10px; border: 1px solid;">
+
+	<div
+		style="width: 90%; float: right; margin-left: 10px; border: 1px solid;">
 		<!--  검색 버튼 영역 -->
 		<form name="form" action="" method="post"
 			onsubmit="return setSearchSubmit();">
-			
+
 			<div id="title">
 				<h2>
 					<c:if test=""></c:if>
 					<span class="appr">결재할 문서함 &gt; 미결재 문서</span>
 				</h2>
-				<span class="tb_num"> <a class="cursor"
-					onclick="javascript:goPageSizeMove(15);"><img
-						src="http://static.whoisdesk.net/Src/Img/Renewal/table_number15_on.gif"
-						alt="" title="15" /></a> <a class="cursor"
-					onclick="javascript:goPageSizeMove(20);"><img
-						src="http://static.whoisdesk.net/Src/Img/Renewal/table_number20_off.gif"
-						alt="" title="20" /></a> <a class="cursor"
-					onclick="javascript:goPageSizeMove(25);"><img
-						src="http://static.whoisdesk.net/Src/Img/Renewal/table_number25_off.gif"
-						alt="" title="25" /></a> <a class="cursor"
-					onclick="javascript:goPageSizeMove(30);"><img
-						src="http://static.whoisdesk.net/Src/Img/Renewal/table_number30_off.gif"
-						alt="" title="30" />&nbsp;</a>
-				</span>
 			</div>
 			<div class="toparea">
 				<span class="leftarea">
@@ -96,8 +86,7 @@
 							<th>
 								<div>
 									<nobr>
-										결재일자 <a class="cursor">
-											</a>
+										결재일자 <a class="cursor"> </a>
 									</nobr>
 								</div>
 							</th>
@@ -133,36 +122,30 @@
 									<nobr> 다음결재자 </nobr>
 								</div>
 							</th>
-							<th>
-								<div>
-									<nobr> 의견 </nobr>
-								</div>
-							</th>
 						</tr>
 					</thead>
 					<tbody>
-
-						<!-- COMMON DATA -->
-
-
-
-
+						<c:forEach var="approval" items="${approvals}" >
 						<tr>
-
-
+					
+							<c:set var="reportDate" value="${approval.reportDate}" />
+							
 							<td class="txt_ce">
 								<div>
-									<nobr> 1012-0009 </nobr>
+									<nobr> ${approval.form_No} </nobr>
 								</div>
 							</td>
 							<td class="txt_ce">
 								<div>
-									<nobr> 10.12.03 </nobr>
+									<nobr>
+									<fmt:formatDate value="${reportDate}" pattern="yyyy-MM-dd"/>
+								</nobr>
+								
 								</div>
 							</td>
 							<td class="txt_ce">
 								<div>
-									<nobr> - </nobr>
+									<nobr>  </nobr>
 								</div>
 							</td>
 							<td>
@@ -173,158 +156,56 @@
 							<td>
 								<div>
 									<nobr>
-										<a href='javascript:EWordView( 3, 7, 1 );' title='비공개문서2'>
-											비공개문서2 </a>
+										<a href='approvalview.action?approval_No=${approval.approval_No}'>
+											${approval.title} </a>
 									</nobr>
 								</div>
 							</td>
 							<td class="txt_ce">
 								<div>
-									<nobr> 사원 최진성 </nobr>
+									<nobr> ${approval.employee.name }</nobr>
 								</div>
 							</td>
 							<td class="txt_ce">
 								<div>
-									<nobr> 미결재 </nobr>
+										
+										<c:choose>
+   											<c:when test="${ approval.approvalConfirm eq true}">
+   												<nobr> 결재 </nobr>
+   											</c:when>
+   											<c:otherwise>	
+   												<nobr> 미결재 </nobr>
+   											</c:otherwise>
+										</c:choose>
 								</div>
 							</td>
 							<td class="txt_ce">
 								<div>
-									<nobr> 진행중 </nobr>
+										<c:choose>
+   											<c:when test="${ approval.approvalConfirm eq true}">
+   												<nobr> 결재 </nobr>
+   											</c:when>
+   											<c:otherwise>	
+   												<nobr> 진행중 </nobr>
+   											</c:otherwise>
+										</c:choose>
+									
 								</div>
 							</td>
 							<td class="txt_ce">
 								<div>
-									<nobr> 김철수 이사 </nobr>
+									<c:set var="chk" value="1" />
+									<c:forEach var="approvalline" items="${approval.approvalLines}" >
+										<c:if test="${approvalline.approveCheck eq null and chk eq 1}">
+											<nobr> ${approvalline.employee.name} </nobr>
+											<c:set var="chk" value="${chk+1}" />
+										</c:if>
+									</c:forEach>
 								</div>
 							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> 1 개 </nobr>
-								</div>
-							</td>
+							
 						</tr>
-
-
-						<tr class="bgcolor">
-
-
-							<td class="txt_ce">
-								<div>
-									<nobr> 1012-0007 </nobr>
-								</div>
-							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> 10.12.03 </nobr>
-								</div>
-							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> - </nobr>
-								</div>
-							</td>
-							<td>
-								<div>
-									<nobr> &nbsp; </nobr>
-								</div>
-							</td>
-							<td>
-								<div>
-									<nobr>
-										<a href='javascript:EWordView( 3, 6, 1 );' title='비공개문서'>
-											비공개문서 </a>
-									</nobr>
-								</div>
-							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> 사원 최진성 </nobr>
-								</div>
-							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> 미결재 </nobr>
-								</div>
-							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> 진행중 </nobr>
-								</div>
-							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> 김철수 이사 </nobr>
-								</div>
-							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> 4 개 </nobr>
-								</div>
-							</td>
-						</tr>
-
-
-						<tr>
-
-
-							<td class="txt_ce">
-								<div>
-									<nobr> 1012-0005 </nobr>
-								</div>
-							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> 10.12.03 </nobr>
-								</div>
-							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> - </nobr>
-								</div>
-							</td>
-							<td>
-								<div>
-									<nobr> &nbsp; </nobr>
-								</div>
-							</td>
-							<td>
-								<div>
-									<nobr>
-										<a href='javascript:EWordView( 3, 5, 1 );' title='수신부서없는공개문서'>
-											수신부서없는공개문서 </a>
-									</nobr>
-								</div>
-							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> 사원 최진성 </nobr>
-								</div>
-							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> 미결재 </nobr>
-								</div>
-							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> 진행중 </nobr>
-								</div>
-							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> 김철수 이사 </nobr>
-								</div>
-							</td>
-							<td class="txt_ce">
-								<div>
-									<nobr> 1 개 </nobr>
-								</div>
-							</td>
-						</tr>
-
-						<!-- /COMMON DATA -->
-
+						</c:forEach>
 					</tbody>
 
 				</table>

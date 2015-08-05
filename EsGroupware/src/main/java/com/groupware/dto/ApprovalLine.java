@@ -1,12 +1,14 @@
 package com.groupware.dto;
 
 public class ApprovalLine {
-
+		private int approvalLine_No;
 		private String approvalDay;
 		private String approveCheck;
-		private String priority;
-		private ApprovalWriteForm  approvalwriteform;
+		private int priority;
+		private String id;
 		private Employee employee;
+		private int approval_No;
+		
 		public String getApprovalDay() {
 			return approvalDay;
 		}
@@ -19,17 +21,19 @@ public class ApprovalLine {
 		public void setApproveCheck(String approveCheck) {
 			this.approveCheck = approveCheck;
 		}
-		public String getPriority() {
+		
+		public int getPriority() {
 			return priority;
 		}
-		public void setPriority(String priority) {
+		public void setPriority(int priority) {
 			this.priority = priority;
 		}
-		public ApprovalWriteForm getApprovalwriteform() {
-			return approvalwriteform;
+		
+		public int getApprovalLine_No() {
+			return approvalLine_No;
 		}
-		public void setApprovalwriteform(ApprovalWriteForm approvalwriteform) {
-			this.approvalwriteform = approvalwriteform;
+		public void setApprovalLine_No(int approvalLine_No) {
+			this.approvalLine_No = approvalLine_No;
 		}
 		public Employee getEmployee() {
 			return employee;
@@ -37,6 +41,19 @@ public class ApprovalLine {
 		public void setEmployee(Employee employee) {
 			this.employee = employee;
 		}
+		public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id;
+		}
+		public int getApproval_No() {
+			return approval_No;
+		}
+		public void setApproval_No(int approval_No) {
+			this.approval_No = approval_No;
+		}
+		
 		
 		
 	
