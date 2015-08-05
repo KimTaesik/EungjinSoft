@@ -73,7 +73,7 @@ public class AdminController {
 		return mav;
 	}
 	@RequestMapping(value="registerform.action", method = RequestMethod.POST)
-	public String register(HttpServletRequest req) throws UnsupportedEncodingException {	
+	public String register(HttpServletRequest req, Employee employee) throws UnsupportedEncodingException {	
 		
 		req.setCharacterEncoding("utf-8");
 		
@@ -82,10 +82,10 @@ public class AdminController {
 		String directLine = null;
 		String postcode = null;
 		
-		Employee employee = new Employee();
+		/*Employee employee = new Employee();
 		employee.setId(req.getParameter("id"));
 		employee.setPassword(req.getParameter("password"));
-		employee.setName(req.getParameter("name"));
+		employee.setName(req.getParameter("name"));*/
 		String sex = null;
 		String marital = null;
 		if(req.getParameter("sex").equalsIgnoreCase("male")){
@@ -193,10 +193,6 @@ public class AdminController {
 		//내가 조건에 맞게 검색한 정보만, (type별로) 나오게 하는 작업.
 		List<Employee> employees = null;
 		
-		System.out.println("first : " + first);
-		System.out.println("first+pageSize : " + first + pageSize);
-		System.out.println("lineup : " + lineup);
-		System.out.println("sort : " + sort);
 		employees= employeeDao.getEmployeeList2(first, first + pageSize, lineup, sort); // 페이징 처리로 해줬기 때문에 이런 처리를 해줘야한다.			
 		
 		
@@ -204,10 +200,8 @@ public class AdminController {
 		
 		
 		dataCount = employeeDao.getEmployeeCount(); //전체 게시물 갯수 조회
-		System.out.println(dataCount);
 			
 		ThePager2 pager = new ThePager2(dataCount, pageNo, pageSize, pagerSize, url);
-		System.out.println(pager);
 		
 		ModelAndView mav = new ModelAndView();
 		if(lineup == null || lineup.length() == 0)
@@ -305,9 +299,12 @@ public class AdminController {
 		}
 
 		Employee employee = employeeDao.getEmployeeById(id);
+		
 		if (employee == null) {//조회된 결과가 없으면 (아이디가 잘못된 경우)
 			mav.setViewName("redirect:/admin/employeelist.action");
 		}
+		System.out.println(employee.getBirthDatetype());
+		System.out.println(employee.getBirthDate());
 		
 		List<Dept> depts = employeeDao.getDeptList();
 		List<Position> positions = employeeDao.getPositionList();
@@ -315,7 +312,7 @@ public class AdminController {
 		mav.addObject("depts", depts);
 		mav.addObject("positions", positions);
 		mav.addObject("employee", employee);
-		mav.setViewName("admin/employeeview");
+		mav.setViewName("admin/employeeview2");
 		
 		return mav;
 		
@@ -337,7 +334,6 @@ public class AdminController {
 	
 	@RequestMapping(value="employeedelete.action", method = RequestMethod.GET)
 	public String deleteEmployee(String id) {
-		System.out.println(id);
 		
 		if (id == null || id.length() == 0 ) {
 			return "redirect:/admin/employeelist.action";
@@ -350,6 +346,11 @@ public class AdminController {
 	
 	@RequestMapping(value="employeeupdate.action", method = RequestMethod.POST)
 	public String updateEmployee(@ModelAttribute Employee employee) {
+		if(employee.getSex().equalsIgnoreCase("male")){
+			employee.setSex("남");
+		} else {
+			employee.setSex("여");
+		}
 		employeeDao.updateEmployee(employee);
 
 		return "redirect:/admin/employeelist.action";
@@ -384,10 +385,8 @@ public class AdminController {
 		
 		
 		dataCount = employeeDao.getlogCount(); //전체 게시물 갯수 조회
-		System.out.println(dataCount);
 			
 		ThePager2 pager = new ThePager2(dataCount, pageNo, pageSize, pagerSize, url);
-		System.out.println(pager);
 		
 		ModelAndView mav = new ModelAndView();
 

@@ -104,6 +104,9 @@ public class OracleEmployeeDao implements EmployeeDao {
 		params.put("deptNo", employee.getDeptNo());
 		params.put("positionNo", employee.getPositionNo());
 		params.put("id", employee.getId());
+		params.put("name", employee.getName());
+		params.put("birthdate", employee.getBirthDate());
+		params.put("sex", employee.getSex());
 		
 		employeeMapper.updateEmployee(params);
 	}

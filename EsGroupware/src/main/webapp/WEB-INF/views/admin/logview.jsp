@@ -39,8 +39,8 @@ A:hover	{ text-decoration: none; color: #004A80;}
 
 	<div class="table">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-		<form name="form" method="get" action="userLoginInfo.php">
-		<input type="hidden" name="Id" value="desk05">
+		<form name="form" method="get" action="userLoginInfo.action">
+		<input type="hidden" name="id" value="${ id }">
 		<input type="hidden" name="date" value="7">
 
 
@@ -55,131 +55,20 @@ A:hover	{ text-decoration: none; color: #004A80;}
 								&nbsp;
 								<select name="year" onChange="javascript:showMon();" class='input'>
 									<option value="0" selected>
-										연도									</option>
-																			<option value="2015" selected>
-										2015년										</option>
-																			<option value="2014" >
-										2014년										</option>
-																			<option value="2013" >
-										2013년										</option>
-																			<option value="2012" >
-										2012년										</option>
-																			<option value="2011" >
-										2011년										</option>
-																			<option value="2010" >
-										2010년										</option>
-																			<option value="2009" >
-										2009년										</option>
-																			<option value="2008" >
-										2008년										</option>
-																	</select>
-
-								<select name="mon" id="mon" style="display:none" onChange="javascript:showMon();" class='input'>
-									<option value="0" selected>
-										월별									</option>
-																			<option value="1" >
-										1월										</option>
-																			<option value="2" >
-										2월										</option>
-																			<option value="3" >
-										3월										</option>
-																			<option value="4" >
-										4월										</option>
-																			<option value="5" >
-										5월										</option>
-																			<option value="6" >
-										6월										</option>
-																			<option value="7" >
-										7월										</option>
-																			<option value="8" >
-										8월										</option>
-																			<option value="9" >
-										9월										</option>
-																			<option value="10" >
-										10월										</option>
-																			<option value="11" >
-										11월										</option>
-																			<option value="12" >
-										12월										</option>
-																	</select>
-
-								<select name="day" id="day" style="display:none" class='input'>
-									<option value="0" selected>일별</option>
-																			<option value="1" >
-										1일										</option>
-																			<option value="2" >
-										2일										</option>
-																			<option value="3" >
-										3일										</option>
-																			<option value="4" >
-										4일										</option>
-																			<option value="5" >
-										5일										</option>
-																			<option value="6" >
-										6일										</option>
-																			<option value="7" >
-										7일										</option>
-																			<option value="8" >
-										8일										</option>
-																			<option value="9" >
-										9일										</option>
-																			<option value="10" >
-										10일										</option>
-																			<option value="11" >
-										11일										</option>
-																			<option value="12" >
-										12일										</option>
-																			<option value="13" >
-										13일										</option>
-																			<option value="14" >
-										14일										</option>
+										연도</option>
 																			<option value="15" >
-										15일										</option>
-																			<option value="16" >
-										16일										</option>
-																			<option value="17" >
-										17일										</option>
-																			<option value="18" >
-										18일										</option>
-																			<option value="19" >
-										19일										</option>
-																			<option value="20" >
-										20일										</option>
-																			<option value="21" >
-										21일										</option>
-																			<option value="22" >
-										22일										</option>
-																			<option value="23" >
-										23일										</option>
-																			<option value="24" >
-										24일										</option>
-																			<option value="25" >
-										25일										</option>
-																			<option value="26" >
-										26일										</option>
-																			<option value="27" >
-										27일										</option>
-																			<option value="28" >
-										28일										</option>
-																			<option value="29" >
-										29일										</option>
-																			<option value="30" >
-										30일										</option>
-																			<option value="31" >
-										31일										</option>
-																	</select>
+										2015년										</option>
+																			<option value="14" >
+										2014년										</option>
+																			<option value="13" >
+										2013년										</option>
+									</option>
+								</select>
+
 							</div>
 
 							<div style="float:left;">
 								<div class="btn_page"><a href="#blank-list" onclick="javascript:formSubmit();"><span>검색</span></a></div>
-							</div>
-							<div style="float:left;">&nbsp;</div>
-							<div style="float:left;">
-								<div class="btn_page"><a href="#blank-list" onclick="javascript:loginPageView(4);"><span>요일별</span></a></div>
-							</div>
-							<div style="float:left;">&nbsp;</div>
-							<div style="float:left;">
-								<div class="btn_page"><a href="#blank-list" onclick="javascript:loginPageView(5);"><span>IP 별</span></a></div>
 							</div>
 
 							
@@ -219,7 +108,9 @@ A:hover	{ text-decoration: none; color: #004A80;}
 								<%-- <fmt:parseNumber var="index" integerOnly="true" value="${logMonthcount[i] / logAllcount}"/>
 								<img src="http://static.whoisdesk.net/Src/Img/Renewal/Admin/log_bar_bluebg.gif" height="11" width="${ index * 100 }"> --%>
 								<img src="http://static.whoisdesk.net/Src/Img/Renewal/Admin/log_bar_bluebg.gif" height="11" width="${ (logMonthcount[i] / logAllcount) * 100 }">
-								${ (logMonthcount[i] / logAllcount) * 100 }</td>
+								<%-- <fmt:parseNumber var="index" integerOnly="true" value="${ (logMonthcount[i] / logAllcount) * 100 }"/> --%>
+								<fmt:formatNumber value="${ (logMonthcount[i] / logAllcount) * 100 }" type="number" maxFractionDigits="2" var="index" />
+								${ index } %</td>
 							</tr>
 						</table>
 					</td>
