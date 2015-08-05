@@ -27,7 +27,7 @@ public class Schedule {
 	private Date estDate;
 	private Date eedDate;	
 	
-	private List<ScRepeat> sr;
+//	private List<ScRepeat> sr;
 	private List<String> scTemp = new ArrayList<String>();
 	
 	
@@ -37,12 +37,12 @@ public class Schedule {
 	public void setScTemp(List<String> scTemp) {
 		this.scTemp = scTemp;
 	}
-	public List<ScRepeat> getSr() {
-		return sr;
-	}
-	public void setSr(List<ScRepeat> sr) {
-		this.sr = sr;
-	}
+//	public List<ScRepeat> getSr() {
+//		return sr;
+//	}
+//	public void setSr(List<ScRepeat> sr) {
+//		this.sr = sr;
+//	}
 	public int getRepeat() {
 		return repeat;
 	}

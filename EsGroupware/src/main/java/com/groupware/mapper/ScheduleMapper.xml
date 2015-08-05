@@ -19,11 +19,11 @@
 		values(screpeat_seq.nextval,#{id},#{key},#{classify},#{freq},#{endYear},#{endMonth},#{endDate})
  	</insert>
  	
- 	<select id="selectSchedule" parameterType="hashMap" resultMap="ScheduleResult">
+ 	<select id="selectSchedule" parameterType="hashMap" resultType="Schedule">
  		SELECT s.key key, s.title title, s.cont cont, s.stdate stdate, s.eddate eddate, 
  		s.classify classify, s.priority priority, s.category category, s.makepublic makepublic, s.s_id s_id, p.POSITION_NAME position, d.PARTNAME dept, s.repeat repeat
  		FROM SCHEDULE s, EMPLOYEE e, POSITION p, DEPT d
- 		WHERE s.S_ID = e.ID and p.POSITION_NO = e.POSITION_NO and e.DEPT_NO = d.DEPT_NO and s_id = #{s_id} and TO_CHAR(stdate, 'YYYY-MM') = #{stDate}
+ 		WHERE s.S_ID = e.ID and p.POSITION_NO = e.POSITION_NO and e.DEPT_NO = d.DEPT_NO and s_id = #{s_id}
  	</select>
  	
 
@@ -44,7 +44,7 @@
 		delete from SCHEDULE where key=#{key}
  	</delete>
  	
-  	<select id="selectRepeat" resultMap="ScRepeatResult" >
+  	<select id="selectRepeat" resultType="ScRepeat" >
  		select id, key, classify, freq, endyear, endmonth, enddate, sc_key from screpeat
  	</select>
  		
