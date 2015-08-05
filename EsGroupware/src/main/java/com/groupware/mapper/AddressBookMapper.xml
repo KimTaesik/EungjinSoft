@@ -165,10 +165,10 @@
   	<update id="editAddress" parameterType="hashMap">
  	UPDATE 
  		addressbook
- 	SET email = #{ email }, phone_number = #{phoneNumber}, home_number = #{homeNumber}, fax = #{fax},
+ 	SET email = #{ email }<!-- phone_number = #{phoneNumber} , phone_number = #{phoneNumber}, home_number homeNumber = #{homeNumber},  fax = #{fax} --> <!--
  	 	nation = #{ nation }, address = #{ address }, company_name = #{ companyName }, department_name = #{ deptName },
  	 	position_name = #{ positionName }, company_number = #{ companyNumber }, company_address = #{ companyAddress },
- 	 	memo = #{ memo }
+ 	 	memo = #{ memo } -->
  	WHERE addressno = #{ addressNo } and classify = #{ classify }
  	</update> 
  
@@ -188,6 +188,14 @@
  	WHERE addressno = #{ addressNo } and classify = #{ classify }
  	</delete>
 	
+	<!--  이메일 쓸 때, '받는이'에 기본값을 DB에서 가져오게 하는 부분 -->
+ <!-- 	<select id="selectEmail"  parameterType="String" resultType="AddressBook" >
+	SELECT
+		email
+	FROM 
+		addressbook
+	WHERE name = #{ name }
+	</select> --> 
 
 
 </mapper>                                                                                 

@@ -42,7 +42,7 @@ public class OracleScheduleDao implements ScheduleDao {
 	
 	public List<Schedule> selectSchedule(Schedule sc) {
 		HashMap<String, Object> params = new HashMap<String, Object>();
-		params.put("stDate", sc.getStDate());
+//		params.put("stDate", sc.getStDate());
 		params.put("s_id", sc.getS_id());
 		
 		List<Schedule> schedule = scheduleMapper.selectSchedule(params);
@@ -81,8 +81,8 @@ public class OracleScheduleDao implements ScheduleDao {
 	}
 	
 	@Override
-	public List<ScRepeat> selectRepeat(String id) {
-		List<ScRepeat> sr = scheduleMapper.selectRepeat(id);
+	public List<ScRepeat> selectRepeat() {
+		List<ScRepeat> sr = scheduleMapper.selectRepeat();
 		return sr;
 	}
 

@@ -35,9 +35,6 @@ import com.groupware.ui.ThePager;
 
 
 
-//*****************  메일 보내기 관련 추가 사항.
-
-
 
 
 @Controller
@@ -287,26 +284,37 @@ public class AddressbookController {
 	}
 	
 	@RequestMapping(value="addressedit.action", method= RequestMethod.POST)
-	public String update(String addressNo,String classify, AddressBook addressbook) {
+	public String update(String addressNo,String classify, String email, String cellPhone1,String cellPhone2,String cellPhone3) {
 		
+		AddressBook addressbook = new AddressBook();
+		addressbook.setEmail(email);
+		
+		//String num = cellPhone1+cellPhone2+cellPhone3;
+		//addressbook.setPhoneNumber(num);
+		//System.out.println(num);
 		addressbookDao.editAddress(addressNo, classify, addressbook);
 		
-		return "redirect:/address/addressheader.action?addressno="+addressNo+"&classify="+ classify;
+		return "redirect:/address/addressheader.action?classify=1";
 	}
 	
 	
 	//5. 메일 보내기
 	@RequestMapping(value="sendmailview.action", method= RequestMethod.GET)
-	public ModelAndView sendMailView(HttpSession session) {
+	public ModelAndView sendMailView(HttpSession session, String name) {
 		String email = ((Employee)session.getAttribute("loginuser")).getEmail();
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("email", email);
+		
+		//AddressBook emailadd = addressbookDao.selectEmail(name);
+		//System.out.println(emailadd);
+		
+		mav.addObject("name", name);
+		//mav.addObject("emailadd", emailadd);
 		mav.setViewName("mail/sendmailform");
 		return mav;
 	}
 	@RequestMapping(value="sendmail.action", method= RequestMethod.POST)
 	public void sendMail(@RequestParam String to,String subject, String content) {
-		
+//		
 //		String from = "webmaster@domain.com";
 //			//((Member)(request.getSession().getAttribute("loginuser"))).getEmail();
 //		String cc = "yeonji091@naver.com"; //참조하는 사람 메일
@@ -336,15 +344,12 @@ public class AddressbookController {
 	}
 	
 	
-	
-	
 	//6.*엑셀로 주소 내보내기
 	@RequestMapping(value="addressexcel.action", method = RequestMethod.GET, produces="application/octet-stream")
 	@ResponseBody
 	public byte[] excel(HttpServletResponse resp,String classify) {
 		Workbook xlsWb = new HSSFWorkbook(); // Excel 2007 이전 버전
         Workbook xlsxWb = new XSSFWorkbook(); // Excel 2007 이상
-        System.out.println("ldkfjldkj");
         // *** Sheet-------------------------------------------------
         // Sheet 생성
         List<AddressBook> addressbooks = addressbookDao.getAddressbookList(classify);

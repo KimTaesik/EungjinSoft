@@ -50,4 +50,7 @@ public interface AddressBookMapper {
 	
 	//+++++++++++++주소 수정 시, 기본 값 가져오게 하는 부분.
 	AddressBook selectAddress(String addressNo);
+	
+	//********* 이메일 보낼시, 기본 '받는이' 받아오게 할려고...
+	AddressBook selectEmail(String name);
 }

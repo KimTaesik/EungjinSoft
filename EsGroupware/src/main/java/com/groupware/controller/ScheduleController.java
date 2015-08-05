@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.groupware.dao.ScheduleDao;
 import com.groupware.dto.Employee;
+import com.groupware.dto.ScRepeat;
 import com.groupware.dto.Schedule;
 
 @Controller
@@ -58,6 +59,8 @@ public class ScheduleController {
 		String[] sd;
 		
 		List<Schedule> scList = scheduleDao.selectSchedule(sc);
+		List<ScRepeat> scRep = scheduleDao.selectRepeat();
+		List<String> save = new ArrayList<String>();
 		
 		Date scDate,coDate;
 		Calendar calscDate = Calendar.getInstance();
@@ -70,23 +73,35 @@ public class ScheduleController {
 				scList.get(i).setMonth(sd[1]);
 				scList.get(i).setDate(sd[2]);	
 				if(scList.get(i).getRepeat() == 1){
-					if(scList.get(i).getSr().size() > 0){
-						scDate = sdf.parse(scList.get(i).getStDate());
-						calscDate.setTime(scDate);
-						
-						for(int j=0;j<scList.get(i).getSr().size();j++){
+					scDate = sdf.parse(scList.get(i).getStDate());
+					calscDate.setTime(scDate);
+					
+					for(int j=0;j<scRep.size();j++){
+						save.clear();
+						if(scList.get(i).getKey() == scRep.get(j).getKey()){
 							
-							if(scList.get(i).getKey() == scList.get(i).getSr().get(j).getKey()){
+							coDate = new Date(Integer.parseInt(scRep.get(j).getEndYear())-1900,Integer.parseInt(scRep.get(j).getEndMonth())-1,Integer.parseInt(scRep.get(j).getEndDate()));
+							calCompare.setTime(coDate);
+							/*	1 일
+								2 주
+								3 월
+								4 년*/
+							while(true){
+								if(scRep.get(j).getClassify()==1){
+									calscDate.set(Calendar.DATE, calscDate.get(Calendar.DATE)+1+scRep.get(j).getFreq());
+								}else if(scRep.get(j).getClassify()==2){
+									calscDate.set(Calendar.DATE, calscDate.get(Calendar.DATE)+7*scRep.get(j).getFreq());
+								}else if(scRep.get(j).getClassify()==3){
+									calscDate.set(Calendar.MONTH, calscDate.get(Calendar.MONTH)+1*scRep.get(j).getFreq());
+								}else if(scRep.get(j).getClassify()==4){
+									calscDate.set(Calendar.YEAR, calscDate.get(Calendar.YEAR)+1*scRep.get(j).getFreq());
+								}
 								
-								coDate = new Date(Integer.parseInt(scList.get(i).getSr().get(j).getEndYear())-1900,Integer.parseInt(scList.get(i).getSr().get(j).getEndMonth())-1,Integer.parseInt(scList.get(i).getSr().get(j).getEndDate()));
-								calCompare.setTime(coDate);
-								while(true){
-									calscDate.set(Calendar.DATE, calscDate.get(Calendar.DATE)+14);									
-									if(calscDate.compareTo(calCompare) != -1){
-										break;
-									}else{
-										scList.get(i).getScTemp().add(sdf.format(calscDate.getTime()));
-									}
+								if(calscDate.compareTo(calCompare) != -1){
+									scList.get(i).setScTemp(save);
+									break;
+								}else{
+									save.add(sdf.format(calscDate.getTime()));
 								}
 							}
 						}
@@ -95,6 +110,13 @@ public class ScheduleController {
 			}
 			mav.addObject("scList", scList);
 		}
+		for(int i=0; i<scList.size();i++){
+			for(int j=0;j<scList.get(i).getScTemp().size();j++)
+			if(scList.get(i).getScTemp().size()>0){
+				System.out.println(scList.get(i).getScTemp().get(j));
+			}
+		}
+		
 		mav.addObject("dateString",dateString);
 		mav.addObject("lastDate",lastDate);
 		mav.addObject("cate",cate);
@@ -118,7 +140,7 @@ public class ScheduleController {
 	public ModelAndView calendarcheck2(HttpSession session,String yyear, String mmonth, String cate) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String[] sd;
 		String[] dateString = new String[]{"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
 		int[] lastDate = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -141,6 +163,8 @@ public class ScheduleController {
 //		System.out.println("셀렉트 날짜"+ndate);
 
 		List<Schedule> scList = scheduleDao.selectSchedule(sc);
+		List<ScRepeat> scRep = scheduleDao.selectRepeat();
+		List<String> save = new ArrayList<String>();
 		
 		Date scDate,coDate;
 		Calendar calscDate = Calendar.getInstance();
@@ -148,41 +172,46 @@ public class ScheduleController {
 		
 		if(scList.size() >0){
 			for(int i=0;i<scList.size();i++){
-//				scList.get(i).setStDate(sdf.format(sdf.parse(scList.get(0).getStDate())));
 				sd = sdf.format(sdf.parse(scList.get(i).getStDate())).split("-");
 				scList.get(i).setYear(sd[0]);
 				scList.get(i).setMonth(sd[1]);
 				scList.get(i).setDate(sd[2]);
 				if(scList.get(i).getRepeat() == 1){
-					if(scList.get(i).getSr().size() > 0){
-						scDate = sdf.parse(scList.get(i).getStDate());
-						calscDate.setTime(scDate);
-						
-						for(int j=0;j<scList.get(i).getSr().size();j++){
-							
-							if(scList.get(i).getKey() == scList.get(i).getSr().get(j).getKey()){
-								System.out.println("액션 2 반복"+scList.get(i).getKey()+"//"+scList.get(i).getSr().get(j).getKey()+"/"+scList.get(i).getSr().get(j).getEndMonth());
-								coDate = new Date(Integer.parseInt(scList.get(i).getSr().get(j).getEndYear())-1900,Integer.parseInt(scList.get(i).getSr().get(j).getEndMonth())-1,Integer.parseInt(scList.get(i).getSr().get(j).getEndDate()));
-								calCompare.setTime(coDate);
-								System.out.println(sdf.format(calCompare.getTime())+"/");
-								while(true){
-									calscDate.set(Calendar.DATE, calscDate.get(Calendar.DATE)+14);									
-									if(calscDate.compareTo(calCompare) != -1){
-										break;
-									}else{
-										scList.get(i).getScTemp().add(sdf.format(calscDate.getTime()));
-									}
+					scDate = sdf.parse(scList.get(i).getStDate());
+					calscDate.setTime(scDate);
+					
+					for(int j=0;j<scRep.size();j++){
+						save.clear();
+						if(scList.get(i).getKey() == scRep.get(j).getKey()){
+							coDate = new Date(Integer.parseInt(scRep.get(j).getEndYear())-1900,Integer.parseInt(scRep.get(j).getEndMonth())-1,Integer.parseInt(scRep.get(j).getEndDate()));
+
+							calCompare.setTime(coDate);
+							while(true){
+								if(scRep.get(j).getClassify()==1){
+									calscDate.set(Calendar.DATE, calscDate.get(Calendar.DATE)+1+scRep.get(j).getFreq());
+								}else if(scRep.get(j).getClassify()==2){
+									calscDate.set(Calendar.DATE, calscDate.get(Calendar.DATE)+7*scRep.get(j).getFreq());
+								}else if(scRep.get(j).getClassify()==3){
+									calscDate.set(Calendar.MONTH, calscDate.get(Calendar.MONTH)+1*scRep.get(j).getFreq());
+								}else if(scRep.get(j).getClassify()==4){
+									calscDate.set(Calendar.YEAR, calscDate.get(Calendar.YEAR)+1*scRep.get(j).getFreq());
+								}
+								
+								if(calscDate.compareTo(calCompare) != -1){
+									scList.get(i).setScTemp(save);
+									break;
+								}else{
+									save.add(sdf.format(calscDate.getTime()));
 								}
 							}
 						}
 					}
 				}
-				
 			}
 			mav.addObject("scList", scList);
 		}
 		
-		System.out.println(ryear+"/"+rmonth);
+		System.out.println(ryear+"/"+rmonth+"/"+scList.size());
 		mav.addObject("dateString",dateString);
 		mav.addObject("lastDate",lastDate);
 		mav.addObject("cate",cate);

@@ -141,6 +141,11 @@ public class OracleAddressBookDao implements AddressBookDao {
 		
 		params.put("addressNo", addressNo);
 		params.put("classify", classify);
+		params.put("email", addressbook.getEmail());
+//		params.put("phoneNumber", addressbook.getPhoneNumber());
+//		params.put("homeNumber", addressbook.getHomeNumber());
+//		params.put("fax", addressbook.getFax());
+		
 		
 		addressMapper.editAddress(params);
 		  
@@ -153,4 +158,15 @@ public class OracleAddressBookDao implements AddressBookDao {
 		  
 		return addressbook3;
 	}
+	
+	//********* 이메일 보낼시, 기본 '받는이' 받아오게 할려고...
+//	@Override
+//	public AddressBook selectEmail(String name) {
+//		
+//		AddressBook addressbook5 = addressMapper.selectAddress(name);
+//		  
+//		return addressbook5;
+//	}
+	
+	
 }

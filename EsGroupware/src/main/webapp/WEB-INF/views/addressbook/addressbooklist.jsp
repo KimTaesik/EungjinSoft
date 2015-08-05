@@ -58,7 +58,7 @@
 
 <div class="content" style="background-color: #ffffff">
 	<div class="subject">
-		
+		<br>
 		<caption align="left"><font color="#000000" size="3" ><b>
 		<c:choose>
 		<c:when test="${ classify.equals('1') }">
@@ -90,14 +90,14 @@
 			        <!-- <th scope="col"><img src="/groupware/resources/image/add.png" />그룹추가</th> -->
 			     	<!-- <th scope="col"><img src="/groupware/resources/image/minus.png" />삭제</th> -->
 			        <th scope="col">
-			        <select name="menu" style='width=30px'>
+			 <!--        <select name="menu" style='width=30px'>
 						<option selected>개인주소록/</option>
 						<option value="">그룹1</option>
 						<option value="">그룹2</option>
 						<option value="">그룹3</option>
-					</select>
+					</select> -->
 					</th>
-					<th scope="col">주소록 가져오기</th>
+					<th scope="col"><img src="/groupware/resources/image/add.png" /><a href='#' class="addform" id=${ classify } style="text-decoration: none;">주소추가</a></th>
 					<th scope="col"><img src=""  ><a href="#" id="logexcel" style="text-decoration: none;" >주소록 내보내기</a></th>
 				</tr>
 			</table>
@@ -126,10 +126,9 @@
 			            <td id="homenumber" style="width:130px;text-align:center"><%= addressbook2.getHomeNumber() %></td>
 			            <td id="fax" style="width:130px;text-align:center"><%= addressbook2.getFax() %></td>
 			            <td style="width:40px;text-align:center">
-			            	<img class="editaddress" onchange="<%=addressbook2.getAddressNo() %>" src="/groupware/resources/image/edit.gif" />
+			            	<img class="editaddress" id="<%=addressbook2.getAddressNo() %>" onchange="<%=addressbook2.getAddressNo() %>" src="/groupware/resources/image/edit.gif" />
 			            </td>
-			            <td style="width:40px;text-align:center"><img src="/groupware/resources/image/delete.gif" 
-			            onclick="javascript:deleteAddress(<%= addressbook2.getAddressNo()%>,<%= addressbook2.getClassify() %>)" />
+			            <td style="width:40px; text-align:center"><img src="/groupware/resources/image/delete.gif" onclick="javascript:deleteAddress(<%= addressbook2.getAddressNo()%>,<%= addressbook2.getClassify() %>)" />
 			            </td>
 			        </tr>  
 				<!-- </tbody> -->
@@ -138,7 +137,7 @@
 		 	
 			</table>
 			
-			<div style="text-align:center">
+			<div style="text-align:center; color: black" >
 			 ${ pager.toString() }
 			 <br/>
 			</div>

@@ -214,6 +214,13 @@ public class AttendanceController {
 						case "004": dep="마케팅팀"; break;
 						case "005": dep="임원"; break;
 						case "006": dep="인사과"; break;
+						
+/*						case "001": dep="개발팀"; break;
+						case "002": dep="개발2팀"; break;
+						case "021": dep="인사팀"; break;
+						case "022": dep="영업팀"; break;
+						case "023": dep="마케팅팀"; break;*/
+
 					}
 					dateEmp = attendanceDao.getSelectCalendarDept(Integer.parseInt(startDa[0]),Integer.parseInt(startDa[1]),Integer.parseInt(startDa[2]),Integer.parseInt(endDa[0]),Integer.parseInt(endDa[1]),Integer.parseInt(endDa[2]),dep);
 				}

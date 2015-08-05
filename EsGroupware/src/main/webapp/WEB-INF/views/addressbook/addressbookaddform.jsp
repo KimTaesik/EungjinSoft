@@ -23,7 +23,6 @@
 	
 
 	<script type="text/javascript">
-
 	function doCheck() {
 		//1. 필요하다면 유효성 검사 수행
 		if(document.getElementById("name").value.length == 0) {
@@ -35,8 +34,6 @@
 			//document.forms[0].submit();
 		}
 	}
-	
-	
 	</script>
 	
 	<script>
@@ -64,7 +61,6 @@
 </head>
 <body>
 
-	
 	<section>
 	<div id='pageContainer'>	
 		
@@ -308,9 +304,9 @@
 					<input style="width: 50px;" name="postcode2" type="text" id="sample4_postcode2">
 					<input style="height: 25px;" type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 					<br />
-					<input style="width: 300px;"  name="roadAddress" type="text" id="sample4_roadAddress" placeholder="도로명주소">
+					<input style="width: 300px;height:18px;"  name="roadAddress" type="text" id="sample4_roadAddress" placeholder="도로명주소">
 					<br /><br />
-					<input style="width: 300px;"  name="jibunAddress" type="text" id="sample4_jibunAddress" placeholder="지번주소">
+					<input style="width: 300px;height:18px;"  name="jibunAddress" type="text" id="sample4_jibunAddress" placeholder="지번주소">
 					<span id="guide" style="color:#999"></span>
 					
 					<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -377,19 +373,19 @@
 	             <tr>
 	                <th>회사이름</th>
 	                <td>
-	                	<input id='name' type='text' name='companyName' style='width:280px' />
+	                	<input id='name' type='text' name='companyName' style='width:280px;height:18px;' />
 	                </td>
 	            </tr>
 	            <tr>
 	                <th>부서</th>
 	                <td>
-	                	<input id='deptName' type='text' name='deptName' style='width:280px' />
+	                	<input id='deptName' type='text' name='deptName' style='width:280px;height:18px;' />
 	                </td>
 	            </tr>
 	            <tr>
 	                <th>직책</th>
 	                <td>
-	              		<input id='positionName' type='text' name='positionName' style='width:280px' />
+	              		<input id='positionName' type='text' name='positionName' style='width:280px;height:18px;' />
 	                </td>
 	            </tr>
 	            <tr>
@@ -411,9 +407,9 @@
 					<input style="width: 50px;" name="postcode2" type="text" id="sample4_postcode2">
 					<input style="height: 25px;" type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 					<br />
-					<input style="width: 300px;"  name="roadAddress" type="text" id="sample4_roadAddress" placeholder="도로명주소">
+					<input style="width: 300px;height:18px;"  name="roadAddress" type="text" id="sample4_roadAddress" placeholder="도로명주소">
 					<br /><br />
-					<input style="width: 300px;"  name="jibunAddress" type="text" id="sample4_jibunAddress" placeholder="지번주소">
+					<input style="width: 300px;height:18px;"  name="jibunAddress" type="text" id="sample4_jibunAddress" placeholder="지번주소">
 					<span id="guide" style="color:#999"></span>
 					
 					<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
