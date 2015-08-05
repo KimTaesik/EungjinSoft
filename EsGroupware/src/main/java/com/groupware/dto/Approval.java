@@ -9,6 +9,7 @@ public class Approval {
 	private	String title;
 	private	String content;
 	private	Date reportDate;
+	private Date approvalDate;
 	private	boolean opening;
 	private	String receiveDept;
 	private	int  storagePeriod;
@@ -19,7 +20,7 @@ public class Approval {
 	private Employee employee;
 	private List<ApprovalLine> approvalLines;
 	private List<ApprovalCooperation> cooperations;
-	private boolean approvalConfirm;
+	private String approvalConfirm;
 	public String getTitle() {
 		return title;
 	}
@@ -70,12 +71,7 @@ public class Approval {
 		this.id = id;
 	}
 	
-	public boolean isApprovalConfirm() {
-		return approvalConfirm;
-	}
-	public void setApprovalConfirm(boolean approvalConfirm) {
-		this.approvalConfirm = approvalConfirm;
-	}
+	
 	public Date getReportDate() {
 		return reportDate;
 	}
@@ -111,6 +107,18 @@ public class Approval {
 	}
 	public void setApprovalForm(ApprovalForm approvalForm) {
 		this.approvalForm = approvalForm;
+	}
+	public String getApprovalConfirm() {
+		return approvalConfirm;
+	}
+	public void setApprovalConfirm(String approvalConfirm) {
+		this.approvalConfirm = approvalConfirm;
+	}
+	public Date getApprovalDate() {
+		return approvalDate;
+	}
+	public void setApprovalDate(Date approvalDate) {
+		this.approvalDate = approvalDate;
 	}
 	
 

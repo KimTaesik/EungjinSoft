@@ -19,36 +19,53 @@
 <link rel="stylesheet"
 	href="/groupware/resources/styles/eword_write.css">
 <script type="text/javascript">
-$(function() {
+$(document).ready(function() {
+	var temp=null;
+	var dlg;
+
+
 	var confirmNum=0;
-	$("#dialog-form2").dialog({
+	var approvalName=null;
+	dlg = $("#dialog-form2").dialog({
 				resizable : false,
 				autoOpen : false,
 				buttons: {
-				             "결재 하기": function() {
-				                $('form').submit(function(event){
-				                	alert('dd');
-				                	event.preventDefault();
-				                	var formData=new formData(this);
-				                		formData.append("confirmNum",confirmNum);
+				             "결재 하기": 
+				            	 function() {
+				            	 //$(this).click(function(){
+				            	// $('#approvalconfirm').submit(function() {)
+				                	
+				                	//event.preventDefault();
+				                	//var formData = new FormData($('#approvalconfirm')[0]);
+				                	//	formData.append("confirmNum",confirmNum);
 				                	$.ajax({
 				        				url : "approvalconfirm.action",
 				        				method : 'post',
-				        				data : formData,
+				        				data : {
+				        					approval_No : $("input[name = 'approval_No']").val(),
+				        					
+				        					confirmNum : confirmNum,
+				        					id:approvalName,
+				        					approveCheck : $("input[name='approveCheck']:checked").val(),
+				        				},
 				        				dataType : 'json',
 				        				success : function(result, status, xhr) {
 				        					//alert('성공');
-				        				
-				        					$('#appDate1'+i).attr('value', result.position.positionName);
+				        					$('#approvalConfirm'+confirmNum).attr('value',"-"+result.approveCheck+"-")
+				        					$('#appDate'+confirmNum).attr('value',result.approvalDay);
 				        					
+				        					$(dlg).dialog("close");
+				        				
+				        						$(temp).css("display","none");
+				        						$('#approvalConfirm'+confirmNum).css("display","block");
 				        				},
 				        				error : function(xhr, status, ex) {
 				        					$('#result').text(status + "/" + ex);
 				        				}
 				        			});
-				        			
-				                });
-				             },
+				                	//});
+				            	 //});
+				             },   
 				             "닫기": function() {
 				                 $( this ).dialog( "close" );
 				             }
@@ -60,7 +77,9 @@ $(function() {
 			});
 
 	$('.dialog-confirm').click(function() {
+		temp=$(this);
 		confirmNum=$(this).attr('id');
+		approvalName=$(this).attr('name');
 		$("#dialog-form2").dialog("open");
 	}); 
 });
@@ -70,13 +89,11 @@ $(function() {
 
 <body>
 
-	<div id="sub">
+	
 		<!-- 버튼영역 -->
 		<div id="title">
 
-			<h2>
-				<span class="appr">결재문서 작성 </span>
-			</h2>
+		
 		</div>
 
 			<!-- init editor : 결재문서 작성(설정형 에디터/기본형 에디터) -->
@@ -84,7 +101,7 @@ $(function() {
 			<h2 class="eword_maincolumn">
 				${approval.approvalForm.form_Name}
 			</h2>
-			<form action="approvalwriteform.action" method="post">	
+		
 			<!-- 결재문서 본문 -->
 			<table class="eword_maincolumn boldline mar10b">
 				<tr>
@@ -130,16 +147,7 @@ $(function() {
 												${approval.approvalLines[4].employee.positionName}
 											</td>
 										</tr>
-										<div id="dialog-form2" title="결재">
-											<form action="approvalconfirm.action" id="approvalconfirm" enctype="multipart/form-data">
-												<input name="approveCheck" type="radio" value="결재"> 결재
-												<input name="approveCheck" type="radio" value="전결"> 전결
-												<input name="approveCheck" type="radio" value="보류"> 보류
-												<input name="approveCheck" type="radio" value="기각"> 기각
-												<input name="approval_No" type="hidden" value="${approval.approval_No }">
-												<input name="id" type="hidden" value="${approval.id }">
-											</form>
-										</div>
+										
 										<tr class="date" style="height: 61px;">
 											<!-- 결재 버튼/결재완료 서명 표시 영역 -->
 											<c:set var="count" value="${ fn:length(approval.approvalLines) }" />
@@ -154,7 +162,19 @@ $(function() {
 														<td>
 															${approval.approvalLines[status.index].employee.name}
 															<div align="center">
-																	<input type="button" value="결재" class="dialog-confirm" id="${status.current}" name="${count}">
+																<c:choose>
+					  											<c:when test="${approval.approvalLines[status.index].approveCheck eq null}">
+					  												<nobr>
+					  												 
+					  												 <input type="button" value="결재" class="dialog-confirm" id="${status.current + 1}" name="${approval.approvalLines[status.index].employee.id}">
+					  												 </nobr>
+					  											</c:when>
+					  											<c:otherwise>
+					  											<input type="text" value="-${approval.approvalLines[status.index].approveCheck}-" id="approvalConfirm${status.current + 1}"   class="form_transparent" onclick="1" readonly="readonly"
+					  											 style="display:block; width: 100%">
+					  										</c:otherwise>
+					  										</c:choose>
+															
 															</div> 
 														</td>
 														
@@ -162,13 +182,24 @@ $(function() {
 												</c:choose>
 											</c:forEach>
 										</tr>
+										<div id="dialog-form2" title="결재">
+											<form  id="approvalconfirm" method="post">
+												<input name="approveCheck" type="radio" value="결재"> 결재
+												<input name="approveCheck" type="radio" value="전결"> 전결
+												<input name="approveCheck" type="radio" value="보류"> 보류
+												<input name="approveCheck" type="radio" value="기각"> 기각
+												<input name="approval_No" type="hidden" value="${approval.approval_No }">
+												<input name="id" type="hidden" value="${approval.id }">
+											</form>
+										</div>
 										<tr class="date" style="height: 20px;">
 											<!-- 결재일시 표시 영역 -->
-											<td><span id="appDate1">&nbsp;</span></td>
-											<td><span id="appDate2">&nbsp;</span></td>
-											<td><span id="appDate3">&nbsp;</span></td>
-											<td><span id="appDate4">&nbsp;</span></td>
-											<td><span id="appDate5">&nbsp;</span></td>
+											
+											<td><span ><input type="text" value="${approval.approvalLines[0].approvalDay}" readonly class="form_transparent" id="appDate1" style='width: 100%;'> </span></td>
+											<td><span ><input type="text" value="${approval.approvalLines[1].approvalDay}" readonly class="form_transparent" id="appDate2" style='width: 100%;'> </span></td>
+											<td><span ><input type="text" value="${approval.approvalLines[2].approvalDay}" readonly class="form_transparent" id="appDate3" style='width: 100%;'> </span></td>
+											<td><span ><input type="text" value="${approval.approvalLines[3].approvalDay}" readonly class="form_transparent" id="appDate4" style='width: 100%;'> </span></td>
+											<td><span ><input type="text" value="${approval.approvalLines[4].approvalDay}" readonly class="form_transparent" id="appDate5" style='width: 100%;'> </span></td>
 										</tr>
 										<!-- 협조선 -->
 										<tr class="txt_ce" style="height: 20px;">
@@ -328,12 +359,11 @@ $(function() {
 				<!-- 기본형 에디터 -->
 				<tr>
 					<td id="eword_content" class="pad5">
-						${approval.content }
+					
+						<textarea readonly="readonly" name="content" id="Contents" style="width: 100%; height: 400px; display: block;">	${approval.content }</textarea>
 					</td>
 				</tr>
-				
-
 			</table>
-			</form>
+			
 </body>
 </html>

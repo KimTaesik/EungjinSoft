@@ -119,6 +119,19 @@ public class OracleApprovalDao implements ApprovalDao {
 		params.put("approval_No",approval_No);
 		return approvalMapper.getApprovalLineApprovalDay(params);
 	}
+
+
+	@Override
+	public int getYesApprovalCount() {
+			return approvalMapper.getYesApprovalCount();
+	}
+
+
+	@Override
+	public int getNoApprovalCount() {
+		return approvalMapper.getNoApprovalCount();
+	}
+	
 	
 	
 }

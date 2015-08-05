@@ -117,7 +117,7 @@ var temp =null;
 			resizable : false,
 			autoOpen : false,
 			buttons: {
-			             "확인": function() {
+			            "확인": function() {
 			                 $( this ).dialog( "close" );
 			                 var check="";
 			                 var count=0;
@@ -128,7 +128,7 @@ var temp =null;
 			                	 	
 			                	 	if(index<4 && index>0)
 			                		 	check += ", ";
-			                	 	check += $(this).val() 
+			                	 	check += $(this).val(); 
 			                	 }
 								else if(5<=index && index < total){
 									count++;
