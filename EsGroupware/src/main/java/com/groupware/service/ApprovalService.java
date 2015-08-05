@@ -33,7 +33,7 @@ public interface ApprovalService {
 	List<Approval>getApprovalList();
 	ModelAndView getApprovalList2();
 	
-	ModelAndView getApprovalByNo(int approval_No);
+	Approval getApprovalByNo(int approval_No);
 	
 	void updateApprovalLine(String approveCheck,String id,int approval_No);
 	void updateApproval(String approvalConfirm,int approval_No);

@@ -40,7 +40,14 @@ $(document).ready(function() {
 			<div id="title">
 				<h2>
 					<c:if test=""></c:if>
-					<span class="appr">결재할 문서함 &gt; 미결재 문서</span>
+					<c:choose>
+						<c:when test="${approvals[0].approvalConfirm eq 1 }">
+							<span class="appr">결재할 문서함 &gt; 결재 완료 문서</span>
+						</c:when>
+						<c:otherwise>
+						<span class="appr">결재할 문서함 &gt; 미결재 문서</span>
+						</c:otherwise>
+					</c:choose>
 				</h2>
 			</div>
 			<div class="toparea">

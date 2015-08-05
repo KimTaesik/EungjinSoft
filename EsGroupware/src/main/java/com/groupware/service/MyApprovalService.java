@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
+import javax.servlet.jsp.PageContext;
 
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,7 @@ import com.groupware.dto.ApprovalLine;
 import com.groupware.dto.Board;
 import com.groupware.dto.Dept;
 import com.groupware.dto.Employee;
+import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 @Service("approvalService")
 public class MyApprovalService implements ApprovalService {
@@ -147,13 +151,12 @@ public class MyApprovalService implements ApprovalService {
 
 
 	@Override
-	public ModelAndView getApprovalByNo(int approval_No) {
+	public Approval getApprovalByNo(int approval_No) {
 		// TODO Auto-generated method stub
 		ModelAndView mav= new ModelAndView();
+		
 		Approval approval= approvalDao.getApprovalByNo(approval_No);
-		mav.addObject("approval", approval);
-		mav.setViewName("approval/approvalview");
-		return mav;
+		return approval;
 	}
 
 

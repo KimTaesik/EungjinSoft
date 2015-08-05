@@ -205,8 +205,9 @@ var temp =null;
 			event.preventDefault();
 		});
 		
-		$('#submit').click(function() { 
-			$('form').submit(); 
+		$('#submit2').click(function(event) { 
+			$('#formd').submit(); 
+			event.preventDefault();
 		}); 
 		 var  jqCalendar = {
 				
@@ -244,7 +245,7 @@ var temp =null;
 					</c:if>
 				</c:forEach>
 			</h2>
-			<form action="approvalwriteform.action" method="post">	
+			<form id="formd" action="approvalwriteform.action" method="post">	
 			<!-- 결재문서 본문 -->
 			<table class="eword_maincolumn boldline mar10b">
 				<tr>
@@ -585,7 +586,7 @@ var temp =null;
 				</tr>
 				<tr>
 					<td id="eword_content" class="pad5" align="right">
-						<input id="submit" type="submit" value="상신 하기"> 
+						<input id="submit2" type="submit" value="상신 하기"> 
 					</td>
 				</tr>
 

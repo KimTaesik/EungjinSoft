@@ -131,9 +131,18 @@ public class ApprovalController {
 	}
 	
 	@RequestMapping(value = "approvalview.action", method = RequestMethod.GET)
-	public ModelAndView approvalView(int approval_No) {
-
-		return approvalService.getApprovalByNo(approval_No);
+	public ModelAndView approvalView(int approval_No,HttpSession session) {
+	
+		ModelAndView mav = new ModelAndView();
+		Employee loginUser = new Employee();
+		loginUser.setId(((Employee)session.getAttribute("loginuser")).getId());
+		String logUser = loginUser.getId();
+		
+		Approval approval = approvalService.getApprovalByNo(approval_No);
+		mav.setViewName("approval/approvalview");
+		mav.addObject("approval",approval);
+		mav.addObject("loginuser",logUser);
+		return mav;
 	}
 	@RequestMapping(value = "approvalconfirm.action", method = RequestMethod.POST)
 	@ResponseBody
@@ -150,7 +159,7 @@ public class ApprovalController {
 		if(count == confirmNum){
 			approvalService.updateApproval("1",approval_No);
 		}
-		
+		approvalLine.setCount(count);
 		return approvalLine;
 		
 	

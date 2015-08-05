@@ -22,10 +22,23 @@
 $(document).ready(function() {
 	var temp=null;
 	var dlg;
-
+	
 
 	var confirmNum=0;
 	var approvalName=null;
+	
+	
+	//var approvalId= $("#approvalId").val;
+	//var buttonTemp=$('.dialog-confirm');
+	//var loginuser='${loginuser}';
+	//alert(loginuser);
+	//alert(approvalId);
+	//if(approvalId != loginuser){
+		
+	//	$(buttonTemp).css('display','none');
+		
+	//}
+	
 	dlg = $("#dialog-form2").dialog({
 				resizable : false,
 				autoOpen : false,
@@ -50,14 +63,17 @@ $(document).ready(function() {
 				        				},
 				        				dataType : 'json',
 				        				success : function(result, status, xhr) {
-				        					//alert('성공');
-				        					$('#approvalConfirm'+confirmNum).attr('value',"-"+result.approveCheck+"-")
-				        					$('#appDate'+confirmNum).attr('value',result.approvalDay);
 				        					
+				        					$('#approvalConfirm'+confirmNum).attr('value',"-"+result.approveCheck+"-").css("color",'red')
+				        					$('#appDate'+confirmNum).attr('value',result.approvalDay);
+				        					$('#approvalConfirm'+confirmNum).css("display","block");
 				        					$(dlg).dialog("close");
-				        				
-				        						$(temp).css("display","none");
-				        						$('#approvalConfirm'+confirmNum).css("display","block");
+				        					if(result.count==confirmNum){
+				        						alert('결재가 완료 되었습니다.');
+				        						$('#frame').load("approvalend.action");
+				        					}
+				        					$(temp).css("display","none");
+				        						
 				        				},
 				        				error : function(xhr, status, ex) {
 				        					$('#result').text(status + "/" + ex);
@@ -95,7 +111,9 @@ $(document).ready(function() {
 
 		
 		</div>
-
+				
+					<c:set var="loginuser" value="${loginuser}" > </c:set>
+					
 			<!-- init editor : 결재문서 작성(설정형 에디터/기본형 에디터) -->
 			<!-- 결재양식 제목 -->
 			<h2 class="eword_maincolumn">
@@ -159,25 +177,26 @@ $(document).ready(function() {
 														</td>
 													</c:when>
 													<c:otherwise>
-														<td>
+														<td id="approvalId">
 															${approval.approvalLines[status.index].employee.name}
 															<div align="center">
 																<c:choose>
 					  											<c:when test="${approval.approvalLines[status.index].approveCheck eq null}">
 					  												<nobr>
-					  												 
-					  												 <input type="button" value="결재" class="dialog-confirm" id="${status.current + 1}" name="${approval.approvalLines[status.index].employee.id}">
+					  													<c:set var="approvalId" value="${approval.approvalLines[status.index].employee.id}" > </c:set>
+					  												
+					  												 <input type="button" value="결재" class="dialog-confirm" id="${status.current + 1}" name="${approval.approvalLines[status.index].employee.id}" style="display:${ loginuser ne approvalId ? 'none':'block'}">
+					  												 <input type="text" value="-${approval.approvalLines[status.index].approveCheck}-" id="approvalConfirm${status.current + 1}"   class="form_transparent" onclick="1" readonly="readonly"
+					  											 style="display:none;  width: 100%">
 					  												 </nobr>
 					  											</c:when>
 					  											<c:otherwise>
 					  											<input type="text" value="-${approval.approvalLines[status.index].approveCheck}-" id="approvalConfirm${status.current + 1}"   class="form_transparent" onclick="1" readonly="readonly"
-					  											 style="display:block; width: 100%">
+					  											 style="display:block; color:red; width: 100%">
 					  										</c:otherwise>
 					  										</c:choose>
-															
 															</div> 
 														</td>
-														
 													</c:otherwise>
 												</c:choose>
 											</c:forEach>
@@ -223,37 +242,23 @@ $(document).ready(function() {
 											<td>
 												<input type="hidden" name="lineId6" value="" id="selectId6">
 												${approval.cooperations[0].employee.name}
-											 	<div id="MembersFindCell11" class="btn_page pad15l overf">
-													
-												</div>
 											</td>
 											<td>
 												${approval.cooperations[1].employee.name}
-													<div id="MembersFindCell12" class="btn_page pad15l overf">
-														
-													</div>
 											</td>
 											<td>
 												${approval.cooperations[2].employee.name}
-													<div id="MembersFindCell13" class="btn_page pad15l overf">
-														
-													</div>
 											</td>
 											<td>
 												${approval.cooperations[3].employee.name}
-													<div id="MembersFindCell14" class="btn_page pad15l overf">
-													</div>
 											</td>
 											<td>
 												${approval.cooperations[4].employee.name}
-													<div id="MembersFindCell15" class="btn_page pad15l overf">
-														
-													</div>
 											</td>
 										</tr>
 										<tr class="date" style="height: 20px;">
 											<!-- 결재일시 표시 영역 -->
-											<td style="border-bottom: none;"><span id="appDate11">&nbsp;</span>
+											<td style="border-bottom: none;"><span id="appDate11" >&nbsp;</span>
 											</td>
 											<td style="border-bottom: none;"><span id="appDate12">&nbsp;</span>
 											</td>
