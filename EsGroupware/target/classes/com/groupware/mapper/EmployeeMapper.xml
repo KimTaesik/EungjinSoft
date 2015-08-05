@@ -118,7 +118,7 @@
 		phoneNumber, address, email,
 		marital_status maritalStatus, postcode, direct_line directLine, dept_no deptNo,
 		position_no positionNo, ip_adress ipAdress, extension,join_date
-		joinDate, birth_date birthDate
+		joinDate, birth_date birthDatetype, birth_date birthDate
 		FROM employee WHERE id = #{id}
 	</select>
 
@@ -159,7 +159,7 @@
 		DESC, position_no DESC </select> -->
 	<update id="updateEmployee" parameterType="hashMap">
 		UPDATE employee 
-		set dept_no = #{deptNo}, position_no = #{positionNo} 
+			set dept_no = #{deptNo}, position_no = #{positionNo}, name = #{name}, birth_date = #{birthdate}, sex = #{sex}
 		WHERE id = #{id}
 	</update>
 

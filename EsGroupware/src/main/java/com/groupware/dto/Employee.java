@@ -11,6 +11,7 @@ public class Employee {
 	private String name;
 	private String sex;
 	private String birthDate;
+	private Date birthDatetype;
 	private String homeNumber;
 	private String phoneNumber;
 	private String address;
@@ -191,5 +192,11 @@ public class Employee {
 	}
 	public void setJoinDatetype(Date joinDatetype) {
 		this.joinDatetype = joinDatetype;
+	}
+	public Date getBirthDatetype() {
+		return birthDatetype;
+	}
+	public void setBirthDatetype(Date birthDatetype) {
+		this.birthDatetype = birthDatetype;
 	}
 }
