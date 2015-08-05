@@ -32,4 +32,8 @@ public interface ApprovalMapper {
 	void updateApproval(HashMap<String, Object> params);
 	int getApprovalListCount(int approval_No);
 	ApprovalLine getApprovalLineApprovalDay(HashMap<String, Object> params);
+	
+	int getYesApprovalCount();
+
+	int getNoApprovalCount();
 }

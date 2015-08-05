@@ -16,5 +16,6 @@ public interface ScheduleMapper {
 	public abstract Schedule editSelectSchedule(int key);
 	public abstract void deleteSchedule(int key);
 	public abstract void insertRepeat(ScRepeat scRepeat);
+	public abstract List<ScRepeat> selectRepeat(String id);
 
 }
