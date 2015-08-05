@@ -449,7 +449,7 @@
 	</select>
 
 	<select id="AllAdminSearch" resultType="Employee">
-		SELECT id, name, phone_number phoneNumber FROM employee where usertype = 1 AND deleted = 0
+		SELECT id, name, phone_number phoneNumber FROM employee where <!-- usertype = 1 -->id='admin' AND deleted = 0
 	</select>
 	
 	<select id="logAllcount" resultType="int" parameterType="String" >

@@ -10,20 +10,6 @@
 
 <body>
 
-<style style='text/css'>
-.whiteContent 
-{	
-	width: 500px;
-	height: 220px;
-	background:#FFFFFF;
-	overflow: auto;
-	margin:0 auto;
-	
-}
-
-</style>
-
-
 <div id="sub">
 	
 	<!-- 타이틀 영역 -->
