@@ -33,6 +33,7 @@ public class OracleScheduleDao implements ScheduleDao {
 		params.put("category", sc.getCategory());
 		params.put("makepublic", sc.getMakepublic());
 		params.put("s_id", sc.getS_id());
+		params.put("repeat",sc.getRepeat());
 		params.put("key", "");
 		scheduleMapper.insertSchedule(params);
 		int key = (int)params.get("key");
@@ -77,6 +78,12 @@ public class OracleScheduleDao implements ScheduleDao {
 	@Override
 	public void insertRepeat(ScRepeat scRepeat) {
 		scheduleMapper.insertRepeat(scRepeat);
+	}
+	
+	@Override
+	public List<ScRepeat> selectRepeat(String id) {
+		List<ScRepeat> sr = scheduleMapper.selectRepeat(id);
+		return sr;
 	}
 
 }

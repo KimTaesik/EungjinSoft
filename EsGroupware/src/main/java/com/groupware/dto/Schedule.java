@@ -1,6 +1,7 @@
 package com.groupware.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,18 +16,27 @@ public class Schedule {
 	private String category;
 	private String makepublic;
 	private String s_id;
+	private int repeat;
+	
+	private String position;
+	private String dept;
+	
 	private String year;
 	private String month;
 	private String date;
 	private Date estDate;
-	private Date eedDate;
-	private String position;
-	private String dept;
-	private int repeat;
-	
+	private Date eedDate;	
 	
 	private List<ScRepeat> sr;
+	private List<String> scTemp = new ArrayList<String>();
 	
+	
+	public List<String> getScTemp() {
+		return scTemp;
+	}
+	public void setScTemp(List<String> scTemp) {
+		this.scTemp = scTemp;
+	}
 	public List<ScRepeat> getSr() {
 		return sr;
 	}

@@ -8,7 +8,14 @@ public class ScRepeat {
 	private String endYear;
 	private String endMonth;
 	private String endDate;
+	private int sc_key;
 	
+	public int getSc_key() {
+		return sc_key;
+	}
+	public void setSc_key(int sc_key) {
+		this.sc_key = sc_key;
+	}
 	public String getId() {
 		return id;
 	}

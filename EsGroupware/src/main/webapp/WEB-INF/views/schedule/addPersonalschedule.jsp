@@ -39,7 +39,6 @@
 		    	var endyear		= $("#repeat_end_year").val()
 		    	var endmonth	= $("#repeat_end_month").val()
 		    	var enddate		= $("#repeat_end_day").val()
-		    	alert(rclassify)
 		    	if(rclassify == 0){
 		    		var url = 'insertSchedule.action?title='+title+"&cont="+cont+"&stdate="+stdate+"&classify="+classify+"&priority="+priority+"&makepublic="+makepublic+"&cate="+cate+"&chk=0"
 		    	}else{
@@ -53,7 +52,6 @@
 				$(location).attr('href', url);
 		    });
 		    $('#none').click(function(e) {
-		    	//var id = $(this).attr('id');
 		        if ($(this).is(':checked')) {
 		        	$("#totalRepeat").hide();
 		        }

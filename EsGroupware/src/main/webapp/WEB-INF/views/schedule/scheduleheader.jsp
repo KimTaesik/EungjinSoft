@@ -15,18 +15,6 @@
 		$(function() {	
 			$( "#accordion" ).accordion();
 			$("#frame").load("pschedule.action?cate=ps");
-/* 		    $("#ps").click(function(){
-				$(location).attr('href', '/groupware/schedule/pschedule.action?cate=ps');
-		    });
-		    $("#pus").click(function(){
-				$(location).attr('href', '/groupware/schedule/pschedule.action?cate=pus');
-		    });
-		    $("#ts").click(function(){
-				$(location).attr('href', '/groupware/schedule/pschedule.action?cate=ts');
-		    });
-		    $("#cs").click(function(){
-				$(location).attr('href', '/groupware/schedule/pschedule.action?cate=cs');
-		    }); */
 		    
 			$("#ps").click(function() {
 				$("#frame").load("pschedule.action?cate=ps");

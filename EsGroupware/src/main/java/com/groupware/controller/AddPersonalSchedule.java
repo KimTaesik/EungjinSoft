@@ -143,7 +143,6 @@ public class AddPersonalSchedule {
 		sc.setTitle(title);
 		sc.setCont(cont.replaceAll("<br>", "\r\n"));
 
-		
 		Calendar cal = Calendar.getInstance();
 		
 		cal.setTime(cvDate);
