@@ -41,4 +41,7 @@ public interface AddressBookDao {
 	void editAddress(String addressNo,String classify, AddressBook addressbook);
 	//++++++++++주소록 수정시, 기본 정보 가져오게 할려고..
 	AddressBook selectAddress(String addressNo);
+	
+	//********* 이메일 보낼시, 기본 '받는이' 받아오게 할려고...
+	//AddressBook selectEmail(String name);
 }
