@@ -4,36 +4,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Whois Groupware - Ubiquitous Collaboration!</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>ESsoft Groupware</title>
 	<link href="/groupware/resources/styles/admin/common.css" rel="stylesheet" type="text/css" />
-	<link href="/groupware/resources/styles/admin/board.css" rel="stylesheet" type="text/css" />
-	<link href="/groupware/resources/styles/admin/subpage.css" rel="stylesheet" type="text/css" />
-	<link href="/groupware/resources/styles/admin/popup.css" rel="stylesheet" type="text/css" />
-
-	<link type="text/css" href="http://css.whoisdesk.net/Src/WebCommon/Jquery/Jquery_ui_1_7_2/blitzer/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
-
-	<script src="/groupware/resources/styles/script/jquery.js"></script>
-	<script src="/groupware/resources/styles/script/jquery-ui.js"></script>
-	
 </head>
 
 <body>
-
-<style style='text/css'>
-.whiteContent 
-{	
-	width: 500px;
-	height: 220px;
-	background:#FFFFFF;
-	overflow: auto;
-	margin:0 auto;
-	
-}
-
-</style>
-
 
 <div id="sub">
 	
@@ -59,10 +34,10 @@
 	<div class="table_view mar5t">
 		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
 			
-			<col width="15%">
-			<col width="35%">
-			<col width="15%">
-			<col width="35%">
+			<col width="15%" />
+			<col width="35%" />
+			<col width="15%" />
+			<col width="35%" />
 
 			<thead>
 			<tr>
@@ -85,7 +60,8 @@
 			    <td class="bdr_none">${ admin.id } </td>
 			    <th>퇴사처리 된 회원</th>
 			    <td>
-					<span class="left">${ deletedmembercount } 명</span><span class="right btn_page"><a href="#blank-link" onclick="javascript:memberRetire();"><span>퇴사자 목록</span></a></span>	
+					<span class="left">${ deletedmembercount } 명</span>
+					<span class="right btn_page"><a href="/groupware/admin/employeedeletelist.action"><span>퇴사자 목록</span></a></span>	
 				</td>
 			</tr>
 			<tr>
@@ -105,14 +81,14 @@
 				</td>
 			    <th>그룹웨어 이용정보</th>
 			    <td class="bdr_none">
-					<span class="left">2010.04.08 ~ 2020.03.31 (0 개월)</span><span class="right btn_page"><a href="#blank-link" onclick="javascript:openPageOpen('http://whoisdesk.net/manage_gw20/');"><span>기간연장하기</span></a></span>
+					<span class="left">2015.02.08 ~ 2015.08.07 (6 개월)</span><span class="right btn_page"><a href="#blank-link"><span></span></a></span>
 				</td>
 			</tr>
 
 			</tbody>
 		</table>
-
-
+	</div>
+</div>
 </body>
 </html>
 

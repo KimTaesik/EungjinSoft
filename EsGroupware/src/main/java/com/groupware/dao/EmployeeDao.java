@@ -35,6 +35,10 @@ public interface EmployeeDao {
 	void updateEmployee(Employee employee);
 
 	void deleteEmployee(String id);
+	
+	void shiftdeleteEmployee(String id);
+	
+	void returnEmployee(String id);
 
 	void deleteDept(String id);
 
@@ -60,6 +64,8 @@ public interface EmployeeDao {
 	int getDeletedEmployeeCount();
 	
 	List<Employee> getEmployeeList2(int first, int last, String lineup, String sort);
+	
+	List<Employee> getEmployeeDeleteList(int first, int last, String lineup, String sort);
 
 	void registerAdmin(String id, String usertype);
 

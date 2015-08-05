@@ -10,8 +10,8 @@
  		<selectKey keyProperty="key" order="AFTER" resultType="int">
  			select sc_seq.currVal from dual
  		</selectKey>
-		INSERT INTO schedule(key, title, cont, stdate, eddate, classify, priority, category, makepublic, s_id) 
-		values(sc_seq.nextval,#{title},#{cont},#{stDate},#{edDate},#{classify},#{priority},#{category},#{makepublic},#{s_id})
+		INSERT INTO schedule(key, title, cont, stdate, eddate, classify, priority, category, makepublic, s_id, repeat) 
+		values(sc_seq.nextval,#{title},#{cont},#{stDate},#{edDate},#{classify},#{priority},#{category},#{makepublic},#{s_id},#{repeat})
  	</insert>
  	
  	<insert id="insertRepeat" parameterType="ScRepeat" >
@@ -19,12 +19,14 @@
 		values(screpeat_seq.nextval,#{id},#{key},#{classify},#{freq},#{endYear},#{endMonth},#{endDate})
  	</insert>
  	
- 	<select id="selectSchedule" parameterType="hashMap" resultType="Schedule">
+ 	<select id="selectSchedule" parameterType="hashMap" resultMap="ScheduleResult">
  		SELECT s.key key, s.title title, s.cont cont, s.stdate stdate, s.eddate eddate, 
- 		s.classify classify, s.priority priority, s.category category, s.makepublic makepublic, s.s_id s_id, p.POSITION_NAME position, d.PARTNAME dept
+ 		s.classify classify, s.priority priority, s.category category, s.makepublic makepublic, s.s_id s_id, p.POSITION_NAME position, d.PARTNAME dept, s.repeat repeat
  		FROM SCHEDULE s, EMPLOYEE e, POSITION p, DEPT d
  		WHERE s.S_ID = e.ID and p.POSITION_NO = e.POSITION_NO and e.DEPT_NO = d.DEPT_NO and s_id = #{s_id} and TO_CHAR(stdate, 'YYYY-MM') = #{stDate}
  	</select>
+ 	
+
  	
  	<select id="editSelectSchedule" parameterType="int" resultType="Schedule">
  		SELECT key, title, cont, stdate, eddate, classify, priority, category, makepublic, s_id FROM Schedule 
@@ -41,6 +43,37 @@
  	<delete id="deleteSchedule" parameterType="int">
 		delete from SCHEDULE where key=#{key}
  	</delete>
+ 	
+  	<select id="selectRepeat" resultMap="ScRepeatResult" >
+ 		select id, key, classify, freq, endyear, endmonth, enddate, sc_key from screpeat
+ 	</select>
+ 		
+ 	<resultMap type="Schedule" id="ScheduleResult">
+ 		<id column="key" property="key"/>
+ 		<result column="title" property="title"/>
+ 		<result column="cont" property="cont"/>
+ 		<result column="stdate" property="stDate"/>
+ 		<result column="eddate" property="edDate"/>
+ 		<result column="classify" property="classify"/>
+ 		<result column="priority" property="priority"/>
+ 		<result column="category" property="category"/>
+ 		<result column="makepublic" property="makepublic"/>
+		<result column="s_id" property="s_id"/>
+		<result column="positon" property="positon"/>
+		<result column="dept" property="dept"/>
+ 		<collection column="key" property="sr" select="selectRepeat"></collection>
+ 	</resultMap>
+
+  	<resultMap type="ScRepeat" id="ScRepeatResult">
+ 		<id column="sc_key" property="sc_key"/>
+ 		<result column="id" property="id"/>
+ 		<result column="key" property="key"/>
+ 		<result column="classify" property="classify"/>
+ 		<result column="freq" property="freq"/>
+ 		<result column="endyear" property="endYear"/>
+ 		<result column="endmonth" property="endMonth"/>
+ 		<result column="enddate" property="endDate"/>
+ 	</resultMap>
 	
  </mapper>
   

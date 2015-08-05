@@ -21,12 +21,6 @@
 </head>
 <body>
 <nav>
-<!-- 	<ul>
-        <li><a href="/groupware/admin/registerform.action" target="myframe">사원등록</a></li>
-        <li><a href="/groupware/admin/deptlist.action" target="myframe">부서관리</a></li>
-        <li><a href="/groupware/admin/positionlist.action" target="myframe">직급등록</a></li>
-        <li><a href="/groupware/admin/employeelist.action?lineup=position" target="myframe">사원관리</a></li>
-    </ul> -->
      <div id="accordion" style="font-size: 10pt">
 		  <h3>관리자 메인</h3>
 			    <ul>
@@ -37,7 +31,8 @@
 			        <li><a href="/groupware/admin/registerform.action" target="myframe">사원등록</a></li>
 			        <li><a href="/groupware/admin/deptlist.action" target="myframe">부서관리</a></li>
 			        <li><a href="/groupware/admin/positionlist.action" target="myframe">직급등록</a></li>
-			        <li><a href="/groupware/admin/employeelist.action?lineup=position" target="myframe">사원관리</a></li>
+			        <li><a href="/groupware/admin/employeelist.action" target="myframe">사원관리</a></li>
+			        <li><a href="/groupware/admin/employeedeletelist.action" target="myframe">퇴사자목록</a></li>
 			        <li><a href="/groupware/admin/admingrant.action" target="myframe">관리자지정</a></li>
 		    	</ul>
 		  <h3>기본관리</h3>
@@ -56,14 +51,5 @@
 <iframe name="myframe" src="/groupware/admin/adminmain.action">	
 </iframe>   
  
-<!-- 크기를 지정해줘야함, 안그럼 거지같이 나옴 ㅋ 보더값도 0으로 줘야함. 스크롤은 맘대로-->
- 
-
-
-<%--
-<footer>
-<h4>copyright 응진Soft</h4>
-</footer>
- --%>
 </body>
 </html>

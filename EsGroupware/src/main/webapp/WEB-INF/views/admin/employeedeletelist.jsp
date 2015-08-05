@@ -19,6 +19,12 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function () {
+		$("#delete").click(function() {
+			var yes = confirm("데이터를 삭제하시겠습니까?");
+			if (yes) {
+				location.href = 'employeeshiftdelete.action?id=' + id;
+			}
+		})
 		
 		$("#employeeexcel").click(function(event) {
 			/* alert($(":radio[name='AdminGb']:checked").val()); */
@@ -53,9 +59,9 @@
 		<span class="rightarea">
 			<!-- 퇴사자 회원 리스트 -->
 			<span class="btn">
-				<a href='employeedeletelist.action' >
-					<img src="/groupware/resources/image/admin/icon_memberout.gif" alt="" align="absmiddle" />
-					퇴사자 회원 리스트
+				<a href='employeelist.action' >
+					<img src="/groupware/resources/image/admin/user.gif" alt="" align="absmiddle" />
+					가입된 회원 리스트
 				</a>
 			</span>
 			<!-- 엑셀 파일로 저장 -->
@@ -63,13 +69,6 @@
 				<a href="#" id="employeeexcel">
 					<img src="/groupware/resources/image/admin/icon_file.gif" alt="" align="absmiddle" />
 					엑셀 파일로 저장
-				</a>
-			</span>
-			<!-- 전체 접속 통계 -->
-			<span class="btn">
-				<a href="#">
-					<img src="http://static.whoisdesk.net/Src/Img/Renewal/icon_list.gif" alt="" align="absmiddle" />
-					전체 접속 통계
 				</a>
 			</span>
 		</span>
@@ -198,11 +197,11 @@
 									<img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_list.gif' align='absmiddle' title='접속로그 통계'/>
 								</a> --%>
 								<!-- 수정 -->
-								<a style='text-decoration:none;font-weight: bold' href='employeeview.action?id=${ employee.id }' >
-									<img src='/groupware/resources/image/admin/icon_modify.gif' align='absmiddle' title='수정' />
+								<a style='text-decoration:none;font-weight: bold' href='employeereturn.action?id=${ employee.id }' >
+									<img src='/groupware/resources/image/admin/icon_return.gif' align='absmiddle' title='복귀' />
 								</a>
 								<!-- 삭제 -->
-								<a style='text-decoration:none;font-weight: bold' href='employeedelete.action?id=${ employee.id }' >
+								<a style='text-decoration:none;font-weight: bold' id="delete" >
 									<img src='/groupware/resources/image/admin/icon_x.gif' align='absmiddle' title='삭제' />
 								</a>
 <%-- 								<!-- 퇴사 -->

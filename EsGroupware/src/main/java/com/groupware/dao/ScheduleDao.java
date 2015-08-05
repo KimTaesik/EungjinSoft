@@ -13,4 +13,5 @@ public interface ScheduleDao {
 	public abstract void editSchedule(Schedule sc);
 	public abstract void deleteSchedule(int key);
 	public abstract void insertRepeat(ScRepeat scRepeat);
+	public abstract List<ScRepeat> selectRepeat(String id);
 }

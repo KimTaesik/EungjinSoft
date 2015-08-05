@@ -38,6 +38,10 @@ public interface EmployeeMapper {
 	void updateEmployee(HashMap<String, Object> params);
 
 	void deleteEmployee(String id);
+	
+	void shiftdeleteEmployee(String id);
+	
+	void returnEmployee(String id);
 
 	Employee getEmployeeByIdAndPasswd(HashMap<String, String> params);
 
@@ -67,6 +71,8 @@ public interface EmployeeMapper {
 	List<Employee> getEmployeeList(String lineup);
 	
 	List<Employee> getEmployeeList2(HashMap<String, Object> params);
+	
+	List<Employee> getEmployeeDeleteList(HashMap<String, Object> params);
 	
 	int insertUpload(HashMap<String, Object> params);
 

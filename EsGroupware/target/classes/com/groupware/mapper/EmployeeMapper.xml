@@ -19,15 +19,16 @@
 		home_number,
 		phone_number,
 		address,
-		<!-- marital_status, -->
+		marital_status,
+		email,
 		postcode,
 		direct_line,
 		dept_no,
 		position_no,
-		<!-- ip_adress,
-		extension, -->
-		join_date
-<!-- 		birth_date -->
+		ip_adress,
+		extension,
+		join_date,
+ 		birth_date
 		)
 		VALUES
 		(
@@ -38,15 +39,16 @@
 		#{homeNumber},
 		#{phoneNumber},
 		#{address},
-		<!-- #{maritalStatus}, -->
+		#{maritalStatus},
+		#{email},
 		#{postcode},
 		#{directLine},
 		#{deptNo},
 		#{positionNo},
-<!-- 		#{ipAdress},
-		#{extension}, -->
-		#{joinDate}
-<!-- 		#{birthDate} -->
+ 		#{ipAdress},
+		#{extension},
+		#{joinDate},
+ 		#{birthDate}
 		)
 	</insert>
 
@@ -166,6 +168,15 @@
 	<update id="deleteEmployee" parameterType="String">
 		UPDATE employee set deleted = '1' WHERE id = #{id}
 	</update>
+	
+	<update id="shiftdeleteEmployee" parameterType="String">
+		DELETE TABLE employee WHERE id = #{id}
+	</update>
+	
+	<update id="returnEmployee" parameterType="String">
+		UPDATE employee set deleted = '0' WHERE id = #{id}
+	</update>
+	
 	<update id="deleteDept" parameterType="String">
 		DELETE FROM dept WHERE dept_no = #{id}
 	</update>
@@ -332,6 +343,49 @@
 	 		idx &gt;= #{ first } AND idx &lt; #{ last } AND deleted = 0
 	</select>
 	
+	<select id="getEmployeeDeleteList" resultType="Employee" parameterType="hashMap" >
+		SELECT id, name, dept_no deptNo, position_no positionNo, sex, phone_number phoneNumber, join_date joinDatetype
+		FROM 
+ 		(
+ 			SELECT 
+ 				rownum idx, s.*
+ 			FROM (
+ 				SELECT 
+ 					id, name, dept_no, position_no, sex, phone_number, join_date, deleted
+				FROM 
+					employee
+				ORDER BY
+				<choose>
+					<when test="lineup == 'id'">
+						id 
+					</when>
+					<when test='lineup == "name"'>
+						name 
+					</when>
+					<when test='lineup == "dept"'>
+						dept_no 
+					</when>
+					<when test='lineup == "position"'>
+						position_no 
+					</when>
+					<when test='lineup == "joindate"'>
+						join_date  
+					</when>
+				</choose>
+				<choose>
+					<when test="sort == 'ASC'">
+						ASC
+					</when>
+					<when test="sort == 'DESC'">
+						DESC
+					</when>
+				</choose>
+ 				)s
+ 		)
+	 	WHERE
+	 		idx &gt;= #{ first } AND idx &lt; #{ last } AND deleted = 1
+	</select>
+	
 	<insert id="insertUpload" parameterType="hashMap">
 		INSERT INTO upload
 		(uploadno, title, uploader, content)
@@ -395,7 +449,7 @@
 	</select>
 
 	<select id="AllAdminSearch" resultType="Employee">
-		SELECT id, name, phone_number phoneNumber FROM employee where usertype = 1 AND deleted = 0
+		SELECT id, name, phone_number phoneNumber FROM employee where <!-- usertype = 1 -->id='admin' AND deleted = 0
 	</select>
 	
 	<select id="logAllcount" resultType="int" parameterType="String" >
