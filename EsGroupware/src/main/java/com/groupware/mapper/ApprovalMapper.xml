@@ -65,26 +65,32 @@
 			SET
 				approvecheck=#{approveCheck} , approvalday = sysdate
 			WHERE
-				id=#{id} and approval_no = #{approval_no}		
+				id=#{id} and approval_no = #{approval_No}		
 	</update>
 	
-	<select id="getApprovalLineApprovalDay" parameterType="hashMap" resultType="ApprovalLine">
+	<select id="getApprovalLineApprovalDay" parameterType="hashMap" resultMap="approvalLineResult">
 			select *
 			from approvalline
-			where id=#{id} and approval_no = #{approval_no}	
+			where id=#{id} and approval_no = #{approval_No}	
 	</select>
 	
 	<update id="updateApproval" parameterType="hashMap">
 			UPDATE
-				e.approval
+				e_approval
 			SET
-				approvaldate = sysdate , approvalconfirm = #{approvalConfirm)
+				approvaldate = sysdate , approvalconfirm = #{approvalConfirm} 
 			WHERE
-				approval_no=#{approval_no}		
+				approval_no=#{approval_No}		
 	</update>
 	
 	<select id="getApprovalListCount" parameterType="int" resultType="int">
 		select count(approval_no) from approvalline where approval_no=#{approval_No}
+	</select>
+	<select id="getNoApprovalCount"  resultType="int">
+		select count(approval_no) from e_approval where approvalconfirm='0'
+	</select>
+	<select id="getYesApprovalCount"  resultType="int">
+		select count(approval_no) from e_approval where approvalconfirm='1'
 	</select>
 	
 	<select id="getApprovalList"  resultMap="ApprovalResult">
@@ -99,6 +105,7 @@
 		<result column="title" property="title" />
 		<result column="content" property="content" />
 		<result column="reportdate" property="reportDate" />
+		<result column="approvaldate" property="approvalDate" />
 		<result column="opening" property="opening" />
 		<result column="storageperiod" property="storagePeriod" />
 		<result column="receivedept" property="receiveDept" />

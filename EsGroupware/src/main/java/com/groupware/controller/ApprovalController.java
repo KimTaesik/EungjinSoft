@@ -35,9 +35,17 @@ public class ApprovalController {
 	}
 
 	@RequestMapping(value = "approvalheader.action", method = RequestMethod.GET)
-	public String approvalheader() {
+	public ModelAndView approvalheader() {
 
-		return "approval/approvalheader";
+		ModelAndView mav =new ModelAndView();
+			int yesCount=approvalService.getYesApprovalCount();
+			int noCount=approvalService.getNoApprovalCount();
+			List<Approval>approvals=approvalService.getApprovalList();
+			mav.addObject("yesCount", yesCount);
+			mav.addObject("noCount", noCount);
+			mav.addObject("approvals", approvals);
+			mav.setViewName("approval/approvalheader");
+		return mav;
 
 	}
 
@@ -93,7 +101,12 @@ public class ApprovalController {
 
 	@RequestMapping(value = "approvaling.action", method = RequestMethod.GET)
 	public ModelAndView approvaling() {
-		return approvalService.getApprovalList();
+		ModelAndView mav =new ModelAndView();
+		
+		List<Approval>approvals=approvalService.getApprovalList();
+		mav.addObject("approvals", approvals);
+		mav.setViewName("approval/documentbox");
+		return mav;
 		 
 	}
 	
@@ -131,14 +144,15 @@ public class ApprovalController {
 			int confirmNum) {
 
 		int count=approvalService.getApprovalListCount(approval_No);
+		approvalService.updateApprovalLine(approveCheck,id,approval_No);
+		ApprovalLine approvalLine=approvalService.getApprovalLineApprovalDay(id, approval_No);
 		
 		if(count == confirmNum){
 			approvalService.updateApproval("1",approval_No);
 		}
 		
-		approvalService.updateApprovalLine(approveCheck,id,approval_No);
-		
-		ApprovalLine approvalLine=approvalService.getApprovalLineApprovalDay(id, approval_No);
 		return approvalLine;
+		
+	
 	}
 }
