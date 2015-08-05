@@ -39,9 +39,12 @@
 		    	var endyear		= $("#repeat_end_year").val()
 		    	var endmonth	= $("#repeat_end_month").val()
 		    	var enddate		= $("#repeat_end_day").val()
+		    	alert(rclassify);
 		    	if(rclassify == 0){
+		    		alert(rclassify);
 		    		var url = 'insertSchedule.action?title='+title+"&cont="+cont+"&stdate="+stdate+"&classify="+classify+"&priority="+priority+"&makepublic="+makepublic+"&cate="+cate+"&chk=0"
 		    	}else{
+		    		alert(rclassify+"asdasd");
 		    		var url = 'insertSchedule.action?title='+title+"&cont="+cont+"&stdate="+stdate+"&classify="+classify+"&priority="+priority+"&makepublic="+makepublic+"&cate="+cate+"&rclassify="+rclassify+"&freq="+freq+"&endyear="+endyear+"&endmonth="+endmonth+"&enddate="+enddate+"&chk=1";	
 		    	}
 				$(location).attr('href', url);

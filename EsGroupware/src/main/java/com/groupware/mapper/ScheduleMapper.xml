@@ -45,7 +45,7 @@
  	</delete>
  	
   	<select id="selectRepeat" resultMap="ScRepeatResult" >
- 		select id, key, classify, freq, endyear, endmonth, enddate, sc_key from screpeat where key=#{key}
+ 		select id, key, classify, freq, endyear, endmonth, enddate, sc_key from screpeat
  	</select>
  		
  	<resultMap type="Schedule" id="ScheduleResult">

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -66,7 +67,12 @@ public class AddPersonalSchedule {
 	@RequestMapping(value = "insertSchedule.action", method = RequestMethod.GET)
 	public String insertSchedule(HttpSession session,
 			String title, String cont, String stdate, int classify, int priority, String makepublic, String cate,
-			int rclassify, int freq, String endyear, String endmonth, String enddate, int chk) throws ParseException {
+			@RequestParam(value="rclassify", defaultValue="0") int rclassify, 
+			@RequestParam(value="freq", defaultValue="0") int freq, 
+			@RequestParam(value="endyear", defaultValue="") String endyear, 
+			@RequestParam(value="endmonth", defaultValue="") String endmonth, 
+			@RequestParam(value="enddate", defaultValue="") String enddate, 
+			int chk) throws ParseException {
 		
 		System.out.println("삽입="+title+"/"+cont+"/"+stdate+"/"+classify+"/"+priority+"/"+makepublic+"/");
 		

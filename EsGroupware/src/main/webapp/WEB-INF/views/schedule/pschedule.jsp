@@ -401,10 +401,10 @@
 																<c:set var="tempdate" value="${currentYear}-${currentMonth<10?'0':''}${currentMonth}-${dateNum<10?'0':''}${dateNum}"/>
 																
 																<c:if test="${ scList.repeat == 1 }">
-																
+																${tempdate }
 																	<c:forEach var="scTemp" items="${ scList.scTemp }">
 																		<c:if test="${ scTemp == tempdate }">
-																		
+																			
 														          			<c:choose>
 																          		<c:when test="${fn:length(scList.title) > 4}">
 																          			<div class="cursor uDate" id="${scList.key}" title="${ scList.cont }">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}....</div>

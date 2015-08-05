@@ -115,13 +115,17 @@ public class ScheduleController {
 	
 	@RequestMapping(value = "pschedule2.action", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView calendarcheck2(String yyear, String mmonth, String cate) throws Exception {
+	public ModelAndView calendarcheck2(HttpSession session,String yyear, String mmonth, String cate) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		String[] sd;
 		String[] dateString = new String[]{"sun", "mon", "tue", "wed", "thu", "fri", "sat"};
 		int[] lastDate = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		
+		Employee loginUser = new Employee();
+		loginUser.setId(((Employee)session.getAttribute("loginuser")).getId());
+		String logUser = loginUser.getId();
 
 		int ryear = Integer.parseInt(yyear);
 		int rmonth = Integer.parseInt(mmonth);
@@ -130,7 +134,7 @@ public class ScheduleController {
 		Schedule sc = new Schedule();
 		sc.setStDate(ryear+"-"+(rmonth <10 ? "0"+rmonth:rmonth));
 //		sc.setStDate(new Date(date.getYear(),date.getMonth(),date.getDate()));
-		sc.setS_id("admin");
+		sc.setS_id(logUser);
 		
 //		System.out.println(((int)(date.getMonth() + 1) <10 ? "0"+(int)(date.getMonth() + 1):(int)(date.getMonth() + 1)));
 //		Date ndate = new Date(date.getYear(),date.getMonth(),date.getDate());
@@ -154,11 +158,10 @@ public class ScheduleController {
 						scDate = sdf.parse(scList.get(i).getStDate());
 						calscDate.setTime(scDate);
 						
-						
 						for(int j=0;j<scList.get(i).getSr().size();j++){
 							
 							if(scList.get(i).getKey() == scList.get(i).getSr().get(j).getKey()){
-								
+								System.out.println("액션 2 반복"+scList.get(i).getKey()+"//"+scList.get(i).getSr().get(j).getKey()+"/"+scList.get(i).getSr().get(j).getEndMonth());
 								coDate = new Date(Integer.parseInt(scList.get(i).getSr().get(j).getEndYear())-1900,Integer.parseInt(scList.get(i).getSr().get(j).getEndMonth())-1,Integer.parseInt(scList.get(i).getSr().get(j).getEndDate()));
 								calCompare.setTime(coDate);
 								System.out.println(sdf.format(calCompare.getTime())+"/");
