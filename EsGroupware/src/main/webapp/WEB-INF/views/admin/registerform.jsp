@@ -58,7 +58,8 @@
 			//2. 서버로 전송
 			//document.forms[0].submit();//이 문서 내부에 포함된 <form 요소 중 첫 번째 항목을 submit
 			//-> <input type='submit'을 클릭하는 것과 같은 의미
-			document.getElementById("registerform").submit();//document.forms[0].submit();과같다
+			//document.getElementById("registerform").submit();//document.forms[0].submit();과같다
+			document.forms[0].submit();
 			alert("등록이 되었습니다.");
 		}
 		
@@ -129,8 +130,7 @@
 		            <tr>
 		                <th id="essential" >* 아이디(ID)</th>
 		                <td>
-		                    <input type='text' id="id" name='id' 
-		                    	style='width:200px' />
+		                    <input type='text' id="id" name='id' style='width:200px' />
 		                    &nbsp;
 		                    <input type="button" value="중복검사" style='height:25px' onclick="idcheck();" />
 		                </td>
@@ -146,7 +146,7 @@
 		            <tr>
 		                <th id="essential">* 비밀번호 확인</th>
 		                <td>
-		                    <input id='passwordconf' type='password' name='passwordconf' style='width:280px' onkeyup ="pass2();" />
+		                    <input id='passwordconf' type='password' style='width:280px' onkeyup ="pass2();" />
 		                    <br />
 		                	<span id="sPwdTxt2"></span>
 		                </td>
@@ -207,7 +207,7 @@
 						<br />
 						<input style="width: 300px;"  name="roadAddress" type="text" id="sample4_roadAddress" placeholder="도로명주소">
 						<br /><br />
-						<input style="width: 300px;"  name="jibunAddress" type="text" id="sample4_jibunAddress" placeholder="지번주소">
+						<input style="width: 300px;"  name="address" type="text" id="sample4_jibunAddress" placeholder="지번주소">
 						<span id="guide" style="color:#999"></span>
 						
 						<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -274,8 +274,8 @@
 		            <tr>
 		                <th>결혼여부</th>
 		                <td>
-		                	<input type='radio' name='marital' value='no' checked='checked'>미혼</input>
-		                	<input type='radio' name='marital' value='yes'>기혼</input>
+		                	<input type='radio' name='maritalStatus' value='no' checked='checked'>미혼</input>
+		                	<input type='radio' name='maritalStatus' value='yes'>기혼</input>
 		                </td>
 		            </tr>
 		            <tr>
@@ -292,7 +292,7 @@
 		                	<input type='text' name='directLine2' style='width:60px' value="333"/>&nbsp;-&nbsp;
 		                	<input type='text' name='directLine3' style='width:60px' value="333"/>&nbsp;&nbsp;
 		                	내선
-		                	<input type='text' name='extension' style='width:60px' />
+		                	<input type='text' name='extension' style='width:60px' value="111"/>
 		                	※ 내선은 선택 입력사항입니다.
 		                </td>
 		            </tr>
@@ -300,7 +300,7 @@
 		            <tr>
 		                <th id="essential">* 부서</th>
 		                <td>
-		                	<select id='dept' type='text' name='dept' style='width:80px'>
+		                	<select id='dept' type='text' name='deptNo' style='width:80px'>
 		                	<option></option>
 		                	<c:forEach var="dept" items="${ depts }">
 		                		<option value=${ dept.deptNo }>${ dept.partName }</option>
@@ -312,7 +312,7 @@
 		            <tr>
 		                <th id="essential">* 직급</th>
 		                <td>
-		                	<select id='position' type='text' name='position' style='width:80px'>
+		                	<select id='position' type='text' name='positionNo' style='width:80px'>
 		                	<option></option>
 		                	<c:forEach var="position" items="${ positions }">
 		                		<option value=${ position.positionNo }>${  position.positionName }</option>
@@ -329,10 +329,10 @@
 		            <tr>
 		                <th>IP 주소</th>
 		                <td>
-		                	<input type='text' name='ipaddress' style='width:180px' />
+		                	<input type='text' name='ipAdress' style='width:180px' />
 		                </td>
 		            </tr>
-		            <tr>
+<!-- 		            <tr>
 		            	<th style='background-color: #fffffc;text-align: left;'>
 		            		▶부가정보
 		            	</th>
@@ -363,7 +363,7 @@
 		                <td>
 		                	<textarea name="selfIntro" style='height: 120px; width:280px'></textarea>
 		                </td>
-		            </tr>
+		            </tr> -->
 		        </table>
 		        
 		        <div class='buttons'>

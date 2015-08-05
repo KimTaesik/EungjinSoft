@@ -12,78 +12,62 @@
 <html>
 <head>
 	<meta charset='utf-8' />
-	<title>직원관리</title>
-	<link rel='Stylesheet' href='/groupware/resources/styles/default.css' />
-	<link rel='Stylesheet' href='/groupware/resources/styles/input.css' />
-	<style type="text/css">
-		td {
-			border-bottom: 1px solid #EAEAEA
-		}
-	</style>
+	<title>부서 관리</title>
+	
+	<link href="/groupware/resources/styles/admin/common.css" rel="stylesheet" type="text/css" />
+	
 </head>
 <body>
+	<div id='sub'>
+		<div id="title">
+			<h2>
+				<span class="join">부서 관리 목록</span>
+			</h2>	
+		</div>
+			
+		<div class="toparea">
+			<span class="rightarea">
+				<!-- 퇴사자 회원 리스트 -->
+				<span class="btn">
+					<a class="reg" href='deptregister.action' style='text-decoration:none'>
+						<img src="/groupware/resources/image/admin/icon_pencil.gif" alt="" align="absmiddle" />
+						부서 등록
+					</a>
+				</span>
+			</span>
+		</div> 
 
-	<div id='pageContainer'>
-			
-		<div id='content'>
- 			<br /><br /><br />
- 			<div style='text-align:center;font-size: 15pt'>
-			[ <a class="reg" href='deptregister.action' style='text-decoration:none'>부서 등록</a> ]			
-			</div> 
-			<h3 style="text-align: center;">부서 관리 목록</h3>
-			<br /><br />
-			
-<%-- 			<% List<Employee> employees = (List<Employee>)request.getAttribute("employees"); %>
-			<% List<Dept> depts = (List<Dept>)request.getAttribute("depts"); %>
-			<% List<Position> positions = (List<Position>)request.getAttribute("positions"); %> --%>
-			<!------------------------------JSTL---------------------------------->
-			<c:choose>
-				<c:when test="${ depts != null && depts.size() > 0}">
-					<table id="listcss" style="width:300px; border-spacing: 0px;" align="center">
-						<tr style="background-color:#E4E4E4; text-align:left; " height="30px">
-							<th>부서</th>
-							<th> </th>
-						</tr>
-						<c:forEach var="dept" items="${ depts }">
-							<tr style="height:30px;text-align:left;">
-								<td>
-									${ dept.partName }
-								</td>
-								<td>
-									<a style='text-decoration:none;font-weight: bold' href='deletedept.action?id=${ dept.deptNo}' >삭제</a>
-								</td>
-							</tr>
-						</c:forEach>
-					</table>
-				</c:when>
-				<c:otherwise>
-				</c:otherwise>
-			</c:choose>
-			
-			<%-- <% if (depts != null && depts.size() > 0) { %>			
-			<!-- <table id="listcss" border='1' align='center' width='600' cellspacing="0"> -->
-			<table id="listcss" border="2" bordercolor="#70a3f8" style="width:300px; border-spacing: 0px;" align="center">
-				<tr style="background-color:#70a3f8; text-align:left; " height="30px">
-					<th>부서</th>
-					<th> </th>
-				</tr>
-				<% for (Dept dept : depts) { %>
-					<tr style="height:30px;text-align:left;">
-						<td>
-							<%= dept.getPartName() %>
-						</td>
-						<td>
-							<a style='text-decoration:none;font-weight: bold' href='deletedept.action?id=<%= dept.getDeptNo() %>' >삭제</a>
-						</td>
+		<c:choose>
+			<c:when test="${ depts != null && depts.size() > 0}">
+				<div class="table" align="center">
+				
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_layout">
+					<tr>
+						<th class="nobr text_overf">부서</th>
+						<th class="nobr text_overf">삭제</th>
 					</tr>
-				<% } %>
-			</table>
-			<% } else { %>
-			<h3 style='text-align:center'>등록된 부서가 없습니다.</h3>
-			<% } %> --%>
+				
+					<c:forEach var="dept" items="${ depts }">
+						<tr style="height:30px;text-align:left;border-bottom: 2px #000000 solid;">
+							<td class='nobr text_overf txt_ce'>
+								${ dept.partName }
+							</td>
+							<td class='nobr text_overf txt_ce'>
+								<a style='text-decoration:none;font-weight: bold' href='deletedept.action?id=${ dept.deptNo}' >삭제</a>
+							</td>
+						</tr>
+					</c:forEach>
+
+				</table>
+				</div>
+			</c:when>
+			<c:otherwise>
+			</c:otherwise>
+		</c:choose>
+			
+			
 			${ fn:replace(dept.partName,'a', 'aa') }
 
-		</div>
 	</div>
 
 </body>

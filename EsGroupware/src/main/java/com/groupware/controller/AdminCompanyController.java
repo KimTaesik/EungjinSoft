@@ -43,7 +43,7 @@ public class AdminCompanyController {
 		
 	}
 	
-	@RequestMapping(value="menuchange.action", method = RequestMethod.POST)
+	@RequestMapping(value="menuchange.action", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public String menu2(String checkbox) {
 		System.out.println("asdddddddddddddddddd");

@@ -253,6 +253,25 @@ public class OracleEmployeeDao implements EmployeeDao {
 		
 		return employeeMapper.logMonthcount(params);
 	}
+	@Override
+	public List<Employee> getEmployeeDeleteList(int first, int last,
+			String lineup, String sort) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("first", first);
+		params.put("last", last);
+		params.put("lineup", lineup);
+		params.put("sort", sort);
+		
+		return employeeMapper.getEmployeeDeleteList(params);
+	}
+	@Override
+	public void returnEmployee(String id) {
+		employeeMapper.returnEmployee(id);
+	}
+	@Override
+	public void shiftdeleteEmployee(String id) {
+		employeeMapper.shiftdeleteEmployee(id);
+	}
 
 }
 

@@ -17,9 +17,7 @@
 	<link href="/groupware/resources/styles/admin/board.css" rel="stylesheet" type="text/css" />
 	<link href="/groupware/resources/styles/admin/subpage.css" rel="stylesheet" type="text/css" />
 	<link href="/groupware/resources/styles/admin/popup.css" rel="stylesheet" type="text/css" />
-	<!--[if IE 6]>
-	<link href="http://css.whoisdesk.net/Src/Skin/Renewal/board_ie6.css" rel="stylesheet" type="text/css" />
-	<![endif]-->
+
 	<link type="text/css" href="http://css.whoisdesk.net/Src/WebCommon/Jquery/Jquery_ui_1_7_2/blitzer/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
 
 	<script src="/groupware/resources/styles/script/jquery.js"></script>
@@ -35,8 +33,7 @@
 				data : { "option": $("option:selected").val(), "radio" : $(":radio[name='AdminGb']:checked").val() },
 				method : "post",
 				success : function(result, status, xhr) {
-					/* $("#result").text(result); */
-					//alert(result[0].name);
+
 					var TreeKeyDiv2 = document.getElementById('TreeKeyDiv2');
 					var html = 
 						"<select name='TreeKey2' size='5' style='width:500px;height:100px;' onchange='getTreeKeyCode(this.value);'>";
@@ -61,7 +58,6 @@
 		})
 		
 		$("#registerApprovalAdmin").click(function(event) {
-			/* alert($(":radio[name='AdminGb']:checked").val()); */
 			var radio = $(":radio[name='AdminGb']:checked").val()
 			$.ajax({
 				url : "/groupware/admin/registerAdmin.action",
@@ -69,19 +65,14 @@
 				data : { "id": $(".idoption:selected").val(), "radio" : $(":radio[name='AdminGb']:checked").val() },
 				method : "post",
 				success : function(result, status, xhr) {
-						/* alert("radio?" + radio); */
-						//alert(html);
 						if(radio == "8") {
-							/* alert("radio8 -" + radio); */
 							$(".table1").html(result);
 						}
 						else if (radio == "1") {
-							/* alert("radio1 -" + radio); */
 							$(".table4").html(result);
 						}
 						
 						$(".deleteApprovalAdmin").click(function(event) {
-							/* var selected = $(":select[name='TreeKey2']:selected").val() */
 							var id = $(this).attr("href");
 							$.ajax({			
 								url : "/groupware/admin/deleteApprovalAdmin.action",
@@ -148,19 +139,6 @@
 	</div> 
 
 	<div class="toparea" style="height: 10px;"> 
-<!-- 		<span class="leftarea"> 
-
-			<span class="btn">
-			<a href="#blank-link" onclick="javascript:setHelpGuide();"><img src="/groupware/resources/image/admin/icon_clock.gif" alt="" align="absmiddle" /> 관리자 설명</a>
-			</span>
-
-		</span> 
-
-		<span class="rightarea"> 
-			<span class="btn">		
-				<a href="#blank-link" onclick="javascript:"><img src="/groupware/resources/image/admin/icon_pencil.gif" alt="" align="absmiddle" /> 등록</a>			
-			</span> 
-		</span> -->
 	</div> 
 
     <div class="table_view"> 
@@ -242,7 +220,8 @@
 				<th>
 					<div>
 						<nobr>				
-							관리자 추가						</nobr>
+							관리자 추가						
+						</nobr>
 					</div>						
 				</th>
 				<td>
@@ -633,53 +612,7 @@
 	            </c:forEach>
 		    </tr>
 		    </table>
-			<!-- <tr>
-				<td class='txt_ce'>
-					<div>
-						<nobr>
-							1
-						</nobr>
-					</div>
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>				
-							desk01
-						</nobr>
-					</div>							
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>				
-							대표							
-						</nobr>
-					</div>							
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>				
-							김응진
-						</nobr>
-					</div>							
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>
-							전자결재 관리자
-						</nobr>
-					</div>
-				</td>
-				<td class='txt_ce'>
-					<div>
-						<nobr>
-								<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_modify.gif' class='vm' title=' 수정' /></a>&nbsp;&nbsp;
-								<a href='#blank-link' onclick="javascript:"><img src='http://static.whoisdesk.net/Src/Img/Renewal/icon_x.gif' class='vm'  title='삭제' /></a>
-						</nobr>
-					</div>
-				</td>
-			</tr> -->
-		
-
+			
 			</tbody>
 
 		</table>
