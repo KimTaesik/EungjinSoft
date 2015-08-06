@@ -49,7 +49,7 @@
 		                <th>작성자</th>
 		                <td>
 				<%-- 	<% Employee member = (Employee) session.getAttribute("loginuser"); %> --%>
-		                	<input type="hidden" name="writer"
+		                	<input type="hidden" name="id"
 		                		value='${ member.id }' />
 		                	${ member.id }
 		                </td>

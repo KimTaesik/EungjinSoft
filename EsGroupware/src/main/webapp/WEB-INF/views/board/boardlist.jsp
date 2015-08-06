@@ -112,7 +112,7 @@
 					&nbsp;[삭제된 글]
 					</c:when>
 					<c:otherwise>
-					<a href='view.action?boardno=${ board.boardNo }&pageno=${ pageno }&classify=${ classify }&board_no=${ board.board_No} '>
+					<a href='view.action?boardNo=${ board.boardNo }&pageno=${ pageno }&classify=${ classify }&board_No=${ board.board_No} '>
 					${ board.title }
 					</a>
 					</c:otherwise>
@@ -120,7 +120,7 @@
 						
 					</c:choose>
 					</td>
-					<td>${ board.writer }</td>
+					<td>${ board.id }</td>
 					<td>${ board.regDate }</td>
 					<td>${ board.readCount }</td>
 				</tr>

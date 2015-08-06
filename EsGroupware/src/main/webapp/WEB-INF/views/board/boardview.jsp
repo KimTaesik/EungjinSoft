@@ -24,7 +24,7 @@
 		var yes = confirm("삭제할까요?");
 		//2. 1의 결과에 따라 삭제하거나 또는 취소
 		if (yes) {
-			location.href = 'delete.action?boardno=' + boardNo + "&pageno=" + pageNo+"&classify=" + classify;
+			location.href = 'delete.action?boardNo=' + boardNo + "&pageno=" + pageNo+"&classify=" + classify;
 		}
 	}
 	
@@ -39,7 +39,7 @@
 	
 		if(yes){
 			location.href='deletecomment.action?'+
-					'commentNo='+commentNo+'&board_no='+board_No+'&pageno='+pageNo+'&classify='+classify+"&boardno="+boardNo;
+					'commentNo='+commentNo+'&board_No='+board_No+'&pageno='+pageNo+'&classify='+classify+"&boardNo="+boardNo;
 			
 		}
 	
@@ -61,7 +61,7 @@
 	
 	}
 	function editBoard(boardNo, pageNo, classify) {
-		location.href = 'edit.action?boardno=' + boardNo + "&pageno=" + pageNo + "&classify=" + classify;
+		location.href = 'edit.action?boardNo=' + boardNo + "&pageno=" + pageNo + "&classify=" + classify;
 }
 	</script>
 </head>
@@ -83,7 +83,7 @@
 		            </tr>
 		            <tr>
 		                <th>작성자</th>
-		                <td>${ board.writer }</td>
+		                <td>${ board.id }</td>
 		            </tr>
 		            <tr>
 		                <th>작성일</th>
@@ -112,7 +112,7 @@
 		        	
 		   <%--   	<% Employee member = (Employee)session.getAttribute("loginuser"); %> --%>
 		        	
-		        	<c:if test="${ board.writer.equals(loginuser.id) }" >
+		        	<c:if test="${ board.id.equals(loginuser.id) }" >
 		        	[&nbsp;<a href="javascript:editBoard(${ board.boardNo }, ${ pageNo }, ${ board.classify })">편집</a>&nbsp;]
 		        	[&nbsp;<a href="javascript:deleteBoard(${ board.boardNo }, ${ pageNo }, ${ board.classify})">삭제</a>&nbsp;]
 		        	</c:if>
@@ -130,9 +130,9 @@
 		<form id="commentform" 
 			action="writecomment.action" method="post" >
 			<input type="hidden" name="pageno" value="${pageNo}" />
-			<input type="hidden" name="boardno" value="${board.boardNo}" />
-			<input type="hidden" name="board_no" value="${board.board_No}" />
-			<input type="hidden" name="writer" value="${loginuser.id}" />
+			<input type="hidden" name="boardNo" value="${board.boardNo}" />
+			<input type="hidden" name="board_No" value="${board.board_No}" />
+			<input type="hidden" name="id" value="${loginuser.id}" />
 			<input type="hidden" name="classify" value="${classify}" />
 			<table style="width:600px;border:solid 1px;margin:0 auto">
 	            <tr>
@@ -170,7 +170,7 @@
         		<td style="text-align:left;margin:5px;border-bottom: solid 1px">
         		
         		<div id='commentview${comment.commentNo}'>
-                    ${comment.writer}&nbsp;&nbsp;
+                    ${comment.id}&nbsp;&nbsp;
                     [${comment.regDate}]
                     <br /><br />
                     ${ fn:replace(comment.content, rn, br) }
@@ -183,7 +183,7 @@
                     </div> --%>
                    
                    
-                    <div style="display:${loginuser.id.equals(comment.writer) ? 'block' : 'none' }">
+                    <div style="display:${loginuser.id.equals(comment.id) ? 'block' : 'none' }">
                     	<a href="javascript:toggleCommentStatus(${comment.commentNo}, true);">편집</a>
                     	&nbsp;
                     	<a href="javascript:deleteComment(${comment.commentNo},${board.boardNo},${board.board_No},${pageNo},${board.classify});">삭제</a>
@@ -192,7 +192,7 @@
                     
                 </div>                
                 <div id='commentedit${comment.commentNo}' style='display:none'>					
-					${comment.writer}&nbsp;&nbsp;
+					${comment.id}&nbsp;&nbsp;
                     [${comment.regDate}]
 					<br /><br />
 					<form id="editcommentform${comment.commentNo}"
@@ -201,7 +201,7 @@
 					<input type='hidden' name=commentNo value="${comment.commentNo}">
 					<input type='hidden' name=pageno value="${pageno}">
 					<input type="hidden" name="board_No" value="${board.board_No}" />
-					<input type="hidden" name="boardno" value="${board.boardNo}" />
+					<input type="hidden" name="boardNo" value="${board.boardNo}" />
 					<input type="hidden" name="classify" value="${board.classify}" />
 					<textarea name="content" style='width:99%' rows="3">${comment.content}</textarea>					
 					</form>

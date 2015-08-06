@@ -77,7 +77,7 @@ public class OracleBoardDao implements BoardDao {
 	public List<Board> getBoardList(int first, int last ,String classify) {
 	
 	HashMap<String, Object> params = new HashMap<String, Object>();
-	params.put("first", first);
+	params.put("first", first); 
 	params.put("last", last);
 	params.put("classify", classify);
 	
@@ -143,7 +143,7 @@ public class OracleBoardDao implements BoardDao {
 	public Board getBoardByBoardNo(int boardNo,String classify) {
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
-		params.put("boardno", boardNo);
+		params.put("boardNo", boardNo);
 		params.put("classify", classify);
 		
 		return  boardMapper.getBoardByBoardNo(params);
@@ -164,7 +164,7 @@ public class OracleBoardDao implements BoardDao {
 		HashMap<String, Object> params =new HashMap<String, Object>();
 		params.put("title",board.getTitle());
 		params.put("content",board.getContent());
-		params.put("boardno",board.getBoardNo());
+		params.put("boardNo",board.getBoardNo());
 		boardMapper.updateBoard(params);
 		  
 	}
@@ -218,7 +218,7 @@ public class OracleBoardDao implements BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, board.getTitle());
-			pstmt.setString(2, board.getWriter());
+			pstmt.setString(2, board.getId());
 			pstmt.setString(3, board.getContent());
 			pstmt.setInt(4, parent.getGroupNo());
 			pstmt.setInt(5, parent.getStep()+1);
@@ -273,7 +273,7 @@ public class OracleBoardDao implements BoardDao {
 				BoardComment comment = new BoardComment();
 				comment.setCommentNo(rs.getInt(1));
 				comment.setBoard_No(rs.getInt(2));  
-				comment.setWriter(rs.getString(3));
+				comment.setId(rs.getString(3));
 				comment.setContent(rs.getString(4));
 				comment.setRegDate(rs.getDate(5));
 				
@@ -309,7 +309,7 @@ public class OracleBoardDao implements BoardDao {
 	public void updateReadCount(int boardNo,String classify) {
 		
 		HashMap<String ,Object> params =new HashMap<String,Object>();
-		params.put("boardno", boardNo);
+		params.put("boardNo", boardNo);
 		params.put("classify", classify);
 		boardMapper.updateReadCount(params);
 	}

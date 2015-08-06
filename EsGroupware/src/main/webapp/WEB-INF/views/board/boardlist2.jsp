@@ -105,12 +105,12 @@
 								</c:when>
 								<c:otherwise>
 									<a
-										href='view.action?boardno=${board.boardNo}&pageno=${pageno}&classify=${classify}'>
+										href='view.action?boardNo=${board.boardNo}&pageno=${pageno}&classify=${classify}'>
 										${board.title}</a>
 								</c:otherwise>
 						</c:choose>
 						</td>
-						<td>${ board.writer }</td>
+						<td>${ board.id }</td>
 						<td>${ board.regDate }</td>
 						<td>${ board.readCount }</td>
 					</tr>
