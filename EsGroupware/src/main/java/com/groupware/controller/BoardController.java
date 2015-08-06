@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.xml.stream.events.Comment;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.groupware.dao.BoardDao;
 import com.groupware.dto.Board;
 import com.groupware.dto.BoardComment;
+import com.groupware.dto.Employee;
 import com.groupware.ui.ThePager;
 
 @Controller
@@ -86,10 +88,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="view.action", method = RequestMethod.GET)
-	public ModelAndView view(int boardno,int pageno, String classify) {
+	public ModelAndView view(int boardNo,int pageno, String classify) {
 				
-				boardDao.updateReadCount(boardno,classify);
-				Board board = boardDao.getBoardByBoardNo(boardno,classify);
+				boardDao.updateReadCount(boardNo,classify);
+				Board board = boardDao.getBoardByBoardNo(boardNo,classify);
 			
 				ModelAndView mav = new ModelAndView();
 				if(classify.equals("4"))
@@ -106,10 +108,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="view.action", method = RequestMethod.POST)
-	public ModelAndView view2(int boardno,int pageno, String classify) {
+	public ModelAndView view2(int boardNo,int pageno, String classify) {
 				
 				
-				Board board = boardDao.getBoardByBoardNo(boardno,classify);
+				Board board = boardDao.getBoardByBoardNo(boardNo,classify);
 				
 				
 //				if(board == null ){ 
@@ -127,9 +129,14 @@ public class BoardController {
 		
 	}
 	@RequestMapping(value = "write.action", method = RequestMethod.GET)
-	public String writeForm() {
-		
-		return "board/boardwriteform";
+	public ModelAndView writeForm(HttpSession session) {
+			ModelAndView mav = new ModelAndView();
+		Employee loginUser = new Employee();
+		loginUser.setId(((Employee)session.getAttribute("loginuser")).getId());
+		String id = loginUser.getId();
+		mav.setViewName("board/boardwriteform");
+		mav.addObject("id",id);
+		return mav;
 	}
 	
 	@RequestMapping(value="write.action", method= RequestMethod.POST)
@@ -144,8 +151,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "edit.action", method = RequestMethod.GET)
-	public ModelAndView editForm(int boardno, String classify ,int pageno) {
-		Board board = boardDao.getBoardByBoardNo(boardno,classify);
+	public ModelAndView editForm(int boardNo, String classify ,int pageno) {
+		Board board = boardDao.getBoardByBoardNo(boardNo,classify);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/boardeditform");
@@ -156,59 +163,59 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="edit.action", method= RequestMethod.POST)
-	public String update(int boardno, String title, String content, String pageno, String classify,Board board) {
+	public String update(int boardNo, String title, String content, String pageno, String classify,Board board) {
 
 //		spring에서는 객체생성 ㄴㄴ
 //		board = new Board();
 //		board.setTitle(title);
 //		board.setContent(content);
-//		board.setBoardNo(boardno);
+//		board.setboardNo(boardNo);
 		
 		boardDao.updateBoard(board);
 		
-		return "redirect:/board/list.action?boardno="+boardno+"&pageno="+ pageno +"&classify=" + classify;
+		return "redirect:/board/list.action?boardNo="+boardNo+"&pageno="+ pageno +"&classify=" + classify;
 	}
 	
 	@RequestMapping(value="delete.action", method= RequestMethod.GET)
-	public String delete(int boardno, String pageno, String board_no, String classify) {
+	public String delete(int boardNo, String pageno, String board_No, String classify) {
 		
-		boardDao.deleteBoard(boardno);
+		boardDao.deleteBoard(boardNo);
 		return "redirect:/board/list.action?pageno="+pageno+"&classify=" + classify;
 	}
 	
 //	@RequestMapping(value="writecomment.action", method= RequestMethod.GET)
-//	public void writecommentform(int pageno, int boardno, String classify, int board_no,BoardComment comment) {
+//	public void writecommentform(int pageno, int boardNo, String classify, int board_No,BoardComment comment) {
 //		
 //		boardDao.insertBoardComment(comment);
 //		
 //	}
 	
 	@RequestMapping(value="writecomment.action", method= RequestMethod.POST)
-	public ModelAndView writeComment(int pageno,int board_no, int boardno, String writer, String classify, String content,BoardComment comment) {
-		comment.setBoard_No(board_no);
+	public ModelAndView writeComment(int pageno,int board_No, int boardNo, String writer, String classify, String content,BoardComment comment) {
+		comment.setBoard_No(board_No);
 		
 		ModelAndView mav =new ModelAndView();
 		boardDao.insertBoardComment(comment);
-		mav.setViewName("redirect:/board/view.action?boardno="+boardno+"&pageno="+ pageno +"&classify=" + classify);
+		mav.setViewName("redirect:/board/view.action?boardNo="+boardNo+"&pageno="+ pageno +"&classify=" + classify);
 		return mav;
 	
 	}
 
 	@RequestMapping(value="deletecomment.action", method= RequestMethod.GET)
-	public String deleteComment(int commentNo, int board_no, int pageno, String classify, int boardno) {
+	public String deleteComment(int commentNo, int board_No, int pageno, String classify, int boardNo) {
 		
 		boardDao.deleteComment(commentNo);
-		return "redirect:/board/view.action?boardno="+boardno+"&pageno="+ pageno +"&classify=" + classify;
+		return "redirect:/board/view.action?boardNo="+boardNo+"&pageno="+ pageno +"&classify=" + classify;
 		
 	}
 	
 	@RequestMapping(value="updatecomment.action", method= RequestMethod.POST)
-	public String updateComment(int pageno, int boardno, String classify,@ModelAttribute BoardComment comment) {
+	public String updateComment(int pageno, int boardNo, String classify,@ModelAttribute BoardComment comment) {
 
 		boardDao.updateComment(comment);
 		//redirect를 쓰면, 바로 view.action으로 넘어가는게 아니라, 위에 있는 view.action쪽으로 가서 그 문장을 실행한다. 
 		
-		return "redirect:/board/view.action?boardno="+boardno+"&pageno="+ pageno +"&classify=" + classify;
+		return "redirect:/board/view.action?boardNo="+boardNo+"&pageno="+ pageno +"&classify=" + classify;
 	
 	}
 	
@@ -216,12 +223,12 @@ public class BoardController {
 	//boardDao.updateComment(comment);
 	
 //	@RequestMapping(value="deletecomment.action", method= RequestMethod.POST)
-//	public ModelAndView deleteComment(int pageno,int board_no, int boardno, String writer, String classify, String content,BoardComment comment) {
-//		comment.setBoard_No(board_no);
+//	public ModelAndView deleteComment(int pageno,int board_No, int boardNo, String writer, String classify, String content,BoardComment comment) {
+//		comment.setboard_No(board_No);
 //		
 //		ModelAndView mav =new ModelAndView();
 //		boardDao.deleteComment(comment.getCommentNo());
-//		mav.setViewName("redirect:/board/view.action?boardno="+boardno+"&pageno="+ pageno +"&classify=" + classify);
+//		mav.setViewName("redirect:/board/view.action?boardNo="+boardNo+"&pageno="+ pageno +"&classify=" + classify);
 //		return mav;
 //	
 //	}

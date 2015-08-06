@@ -54,9 +54,9 @@
 						<th>작성자</th>
 						<td>
 						<%-- <% Employee member = (Employee)session.getAttribute("loginuser"); %> --%>
-						${member.id}
+						${id}
 						<!--  hidden : 눈에 보이진 않지만 , 서버로 전송되는 데이터  -->
-						<input type="hidden" name="writer" value="${member.id}" />
+						<input type="hidden" name="id" value="${id}" />
  						</td>
 					</tr>
 					<tr>

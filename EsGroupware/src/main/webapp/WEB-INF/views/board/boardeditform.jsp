@@ -39,15 +39,15 @@
 		                <td>
 		                <input type="text" name="title" value="${ board.title }" />
 		                
-		                <input type="hidden" name="boardno" value="${ board.boardNo }" />
+		                <input type="hidden" name="boardNo" value="${ board.boardNo }" />
 		                <input type="hidden" name="pageno" value="${pageno}"  />
-		                <input type="hidden" name="board_no" value="${ board.board_No }" />
+		                <input type="hidden" name="board_No" value="${ board.board_No }" />
 		                <input type="hidden" name="classify" value="${ board.classify }"  />
 		                </td>
 		            </tr>
 		            <tr>
 		                <th>작성자</th>
-		                <td>${ board.writer }</td>
+		                <td>${ board.id }</td>
 		            </tr>
 		            <tr>
 		                <th>작성일</th>

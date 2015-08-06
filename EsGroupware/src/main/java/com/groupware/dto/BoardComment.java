@@ -7,7 +7,7 @@ public class BoardComment implements Serializable{
 	
 	private int commentNo;
 	private int board_No;
-	private String writer;
+	private String id;
 	private String content;
 	private Date regDate;
 	
@@ -24,12 +24,7 @@ public class BoardComment implements Serializable{
 	public void setBoard_No(int board_No) {
 		this.board_No = board_No;
 	}
-	public String getWriter() {
-		return writer;
-	}
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
+	
 	public String getContent() {
 		return content;
 	}
@@ -41,6 +36,12 @@ public class BoardComment implements Serializable{
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 

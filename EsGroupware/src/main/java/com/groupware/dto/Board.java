@@ -9,12 +9,10 @@ public class Board implements Serializable{
 	private int boardNo;
 	private int board_No;
 	private String title;
-	private String writer;	
-	
+	private String id;	
 	public int getBoard_No() {
 		return board_No;
 	}
-
 	public void setBoard_No(int board_No) {
 		this.board_No = board_No;
 	}
@@ -26,11 +24,9 @@ public class Board implements Serializable{
 	private int step;
 	private int depth;
 	private String classify;
-	
 	public String getClassify() {
 		return classify;
 	}
-
 	public void setClassify(String classify) {
 		this.classify = classify;
 	}
@@ -58,12 +54,6 @@ public class Board implements Serializable{
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getWriter() {
-		return writer;
-	}
-	public void setWriter(String writer) {
-		this.writer = writer;
 	}
 	public String getContent() {
 		return content;
@@ -106,6 +96,14 @@ public class Board implements Serializable{
 	}
 	public void setDepth(int depth) {
 		this.depth = depth;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	
