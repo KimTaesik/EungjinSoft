@@ -54,9 +54,7 @@
 	</script>
 
 
-
-
-<div class="content" style="background-color: #ffffff">
+<div class="content" style="background-color: #ffffff;width: 90%;border: 1px solid #ffffff;margin-left: 50px;">
 	<div class="subject">
 		<br>
 		<caption align="left"><font color="#000000" size="3" ><b>

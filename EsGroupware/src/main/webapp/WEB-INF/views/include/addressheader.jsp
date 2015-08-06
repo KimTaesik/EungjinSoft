@@ -247,7 +247,7 @@
 	
 </div>
 </nav>
-<div class="frame" id="${classify}">
+<div class="frame" id="${classify}" style="float:left;width:80%">
 
 		<c:import url="/WEB-INF/views/addressbook/addressbooklist.jsp" />
 </div>
