@@ -40,17 +40,17 @@
 		    	var endmonth	= $("#repeat_end_month").val()
 		    	var enddate		= $("#repeat_end_day").val()
 		    	var ed = endyear+"-"+(endmonth<10?'0'+endmonth:endmonth)+"-"+(enddate<10?'0'+enddate:enddate)
-		    	if(title!=null){
-			    	if(stdate <= ed){	    		
+		    	if(title!=null){		
 				    	if(rclassify == 0){
 				    		var url = 'insertSchedule.action?title='+title+"&cont="+cont+"&stdate="+stdate+"&classify="+classify+"&priority="+priority+"&makepublic="+makepublic+"&cate="+cate+"&chk=0"
 				    	}else{
-				    		var url = 'insertSchedule.action?title='+title+"&cont="+cont+"&stdate="+stdate+"&classify="+classify+"&priority="+priority+"&makepublic="+makepublic+"&cate="+cate+"&rclassify="+rclassify+"&freq="+freq+"&endyear="+endyear+"&endmonth="+endmonth+"&enddate="+enddate+"&chk=1";	
+				    		if(stdate <= ed){	
+				    			var url = 'insertSchedule.action?title='+title+"&cont="+cont+"&stdate="+stdate+"&classify="+classify+"&priority="+priority+"&makepublic="+makepublic+"&cate="+cate+"&rclassify="+rclassify+"&freq="+freq+"&endyear="+endyear+"&endmonth="+endmonth+"&enddate="+enddate+"&chk=1";
+					    	}else{
+					    		alert("반복주기의 범위를 다시 설정해주세요.")
+					    	}
 				    	}
 						$(location).attr('href', url);
-			    	}else{
-			    		alert("반복주기의 범위를 다시 설정해주세요.")
-			    	}
 		    	}else{
 		    		alert("제목을 입력해주세요.")
 		    	}
@@ -155,7 +155,8 @@
 								<option value='개발2팀'>개발2팀</option>
 								<option value='인사팀'>인사팀</option>
 								<option value='영업팀'>영업팀</option>
-								<option value='마케팅팀' selected>마케팅팀</option>
+								<option value='마케팅팀'>마케팅팀</option>
+								<!-- <option value='대표이사'>대표이사</option> -->
 							</c:when>
 							<c:otherwise>
 								<option value='open'>공개

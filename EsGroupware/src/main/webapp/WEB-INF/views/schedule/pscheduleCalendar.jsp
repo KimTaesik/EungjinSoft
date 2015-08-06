@@ -47,7 +47,7 @@
 												<td class="${ dateString[j-1] }" height="70" align="left" valign="top">
 													<font class="org8">${dateNum}<img class="plus cursor" id="${currentMonth}-${dateNum}" src="/groupware/resources/image/cal_plus.png" border="0"  /></font>
 													<br />
-													<c:forEach var="scList" items="${ scList }">
+														<c:forEach var="scList" items="${ scList }">
 														<c:choose>
 															<c:when test="${ dateNum eq scList.date && currentYear eq scList.year && currentMonth eq scList.month }">
 													          <c:choose>

@@ -47,10 +47,10 @@
 					<span class="left">${ host }</span>
 					
 				</td>
-			    <th>가입된 회원수</th>
+			    <th>가입된 사원수</th>
 			    <td>
 					<span class="left">${ membercount } 명</span>
-					<span class="right btn_page"><a href="/groupware/admin/employeelist.action"><span>가입회원 목록</span></a></span> 				
+					<span class="right btn_page"><a href="/groupware/admin/employeelist.action"><span>가입사원 목록</span></a></span> 				
 				</td>
 			</tr>
 			</thead>

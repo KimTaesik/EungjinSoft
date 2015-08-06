@@ -372,9 +372,9 @@ public class AdminController {
 		return "redirect:/admin/employeelist.action";
 	}
 	
-	@RequestMapping(value="employeeshiftdelete.action", method = RequestMethod.GET)
+	@RequestMapping(value="employeeshiftdelete.action")
 	public String shiftdeleteEmployee(String id) {
-		
+		System.out.println(id);
 		if (id == null || id.length() == 0 ) {
 			return "redirect:/admin/employeelist.action";
 		}

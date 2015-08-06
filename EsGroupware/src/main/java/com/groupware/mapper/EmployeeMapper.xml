@@ -170,7 +170,7 @@
 	</update>
 	
 	<update id="shiftdeleteEmployee" parameterType="String">
-		DELETE TABLE employee WHERE id = #{id}
+		DELETE FROM employee WHERE id = #{id}
 	</update>
 	
 	<update id="returnEmployee" parameterType="String">

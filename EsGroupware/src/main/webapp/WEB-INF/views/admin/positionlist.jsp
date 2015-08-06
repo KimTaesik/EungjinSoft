@@ -20,7 +20,7 @@
 	<div id='sub'>
 		<div id="title">
 			<h2>
-				<span class="join">부서 관리 목록</span>
+				<span class="join">직급 관리 목록</span>
 			</h2>	
 		</div>
 			
@@ -28,9 +28,9 @@
 			<span class="rightarea">
 				<!-- 퇴사자 회원 리스트 -->
 				<span class="btn">
-					<a class="reg" href='deptregister.action' style='text-decoration:none'>
+					<a class="reg" href='positionregister.action' style='text-decoration:none'>
 						<img src="/groupware/resources/image/admin/icon_pencil.gif" alt="" align="absmiddle" />
-						부서 등록
+						직급 등록
 					</a>
 				</span>
 			</span>
