@@ -40,12 +40,9 @@ public class OracleScheduleDao implements ScheduleDao {
 		return key;
 	}
 	
-	public List<Schedule> selectSchedule(Schedule sc) {
-		HashMap<String, Object> params = new HashMap<String, Object>();
-//		params.put("stDate", sc.getStDate());
-		params.put("s_id", sc.getS_id());
+	public List<Schedule> selectSchedule() {
 		
-		List<Schedule> schedule = scheduleMapper.selectSchedule(params);
+		List<Schedule> schedule = scheduleMapper.selectSchedule();
 		
 		return schedule;
 	}

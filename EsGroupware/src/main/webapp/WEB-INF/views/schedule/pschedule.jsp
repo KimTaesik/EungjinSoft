@@ -321,10 +321,12 @@
 													<font class="org8">${dateNum}<img class="plus cursor" id="${currentMonth}-${dateNum}" src="/groupware/resources/image/cal_plus.png" border="0"  /></font>
 													<br />
 													<c:forEach var="scList" items="${ scList }">
+													
 														<c:choose>
 															<c:when test="${ dateNum eq scList.date && currentYear eq scList.year && currentMonth eq scList.month }">
 													          <c:choose>
 													          	<c:when test="${cate eq 'ps'}">
+													          		<c:if test="${ scList.s_id eq logUser }">
 													          		<c:if test="${ scList.category eq '개인일정' || scList.category eq '공개일정' }">
 													          			<c:choose>
 															          		<c:when test="${fn:length(scList.title) > 4}">
@@ -334,6 +336,7 @@
 															          			<div class="cursor uDate" id="${scList.key}" title="${ scList.cont }">[${ scList.makepublic }] ${fn:substring(fn:replace(scList.title, rn, br),0,4)}</div>
 															          		</c:otherwise>
 														          		</c:choose>
+														          	</c:if>
 													          		</c:if>
 												          		</c:when>
 													          	<c:when test="${cate eq 'pus' and scList.makepublic eq 'open' }">
@@ -370,6 +373,7 @@
 															</c:when>
 															<c:otherwise>
 																<c:set var="tempdate" value="${currentYear}-${currentMonth<10?'0':''}${currentMonth}-${dateNum<10?'0':''}${dateNum}"/>
+																<c:if test="${ scList.s_id eq logUser }">
 																<c:if test="${ scList.repeat == 1 }">
 																	<c:forEach var="scTemp" items="${ scList.scTemp }">
 																		<c:if test="${ scTemp == tempdate }">
@@ -420,9 +424,12 @@
 																		</c:if>	
 																	</c:forEach>
 																</c:if>
+																</c:if>
 															</c:otherwise>
 														</c:choose>
+														
 													</c:forEach>
+													
 												</td>
 											</c:otherwise>
 										</c:choose>

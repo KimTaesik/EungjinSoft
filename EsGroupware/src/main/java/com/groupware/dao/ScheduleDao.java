@@ -8,7 +8,7 @@ import com.groupware.dto.Schedule;
 public interface ScheduleDao {
 
 	public abstract int insertSchedule(Schedule sc);
-	public abstract List<Schedule> selectSchedule(Schedule sc);
+	public abstract List<Schedule> selectSchedule();
 	public abstract Schedule editSelectSchedule(int key);
 	public abstract void editSchedule(Schedule sc);
 	public abstract void deleteSchedule(int key);

@@ -11,7 +11,7 @@ import com.groupware.dto.Schedule;
 public interface ScheduleMapper {
 
 	public abstract int insertSchedule(HashMap<String, Object> params);
-	public abstract List<Schedule> selectSchedule(HashMap<String, Object> params);
+	public abstract List<Schedule> selectSchedule();
 	public abstract void editSchedule(HashMap<String, Object> params);
 	public abstract Schedule editSelectSchedule(int key);
 	public abstract void deleteSchedule(int key);

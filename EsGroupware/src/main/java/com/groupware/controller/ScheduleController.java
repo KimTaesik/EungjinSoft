@@ -53,12 +53,11 @@ public class ScheduleController {
 		Schedule sc = new Schedule();
 		sc.setStDate((int)(date.getYear()+1900)+"-"+((int)(date.getMonth() + 1) <10 ? "0"+(int)(date.getMonth() + 1):(int)(date.getMonth() + 1) ));
 //		sc.setStDate(new Date(date.getYear(),date.getMonth(),date.getDate()));
-		sc.setS_id(logUser);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String[] sd;
 		
-		List<Schedule> scList = scheduleDao.selectSchedule(sc);
+		List<Schedule> scList = scheduleDao.selectSchedule();
 		List<ScRepeat> scRep = scheduleDao.selectRepeat();
 		
 		Date scDate,coDate;
@@ -117,13 +116,8 @@ public class ScheduleController {
 			}
 			mav.addObject("scList", scList);
 		}
-		for(int i=0; i<scList.size();i++){
-			for(int j=0;j<scList.get(i).getScTemp().size();j++)
-			if(scList.get(i).getScTemp().size()>0){
-				System.out.println(scList.get(i).getScTemp().get(j));
-			}
-		}
 		
+		mav.addObject("logUser",logUser);
 		mav.addObject("dateString",dateString);
 		mav.addObject("lastDate",lastDate);
 		mav.addObject("cate",cate);
@@ -163,13 +157,13 @@ public class ScheduleController {
 		Schedule sc = new Schedule();
 		sc.setStDate(ryear+"-"+(rmonth <10 ? "0"+rmonth:rmonth));
 //		sc.setStDate(new Date(date.getYear(),date.getMonth(),date.getDate()));
-		sc.setS_id(logUser);
+//		sc.setS_id(logUser);
 		
 //		System.out.println(((int)(date.getMonth() + 1) <10 ? "0"+(int)(date.getMonth() + 1):(int)(date.getMonth() + 1)));
 //		Date ndate = new Date(date.getYear(),date.getMonth(),date.getDate());
 //		System.out.println("셀렉트 날짜"+ndate);
 
-		List<Schedule> scList = scheduleDao.selectSchedule(sc);
+		List<Schedule> scList = scheduleDao.selectSchedule();
 		List<ScRepeat> scRep = scheduleDao.selectRepeat();
 		
 		
@@ -230,7 +224,7 @@ public class ScheduleController {
 			mav.addObject("scList", scList);
 		}
 		
-		System.out.println(ryear+"/"+rmonth+"/"+scList.size());
+		mav.addObject("logUser",logUser);
 		mav.addObject("dateString",dateString);
 		mav.addObject("lastDate",lastDate);
 		mav.addObject("cate",cate);
@@ -239,8 +233,7 @@ public class ScheduleController {
 		mav.addObject("currentMonth", rmonth);
 		mav.addObject("currentDate", 1);
 		mav.addObject("currentDay",date.getDay()-1);
-		System.out.println("2액션이지롱"+cate);
-		System.out.println("2///"+(int)(ryear)+"년"+(int)(rmonth)+"월"+date.getDate()+"일"+(int)(date.getDay()-1)+"요일");
+
 		mav.setViewName("schedule/pscheduleCalendar");
 		
 		return mav;
