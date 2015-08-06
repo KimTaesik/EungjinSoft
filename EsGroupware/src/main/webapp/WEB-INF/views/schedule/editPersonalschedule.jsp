@@ -187,12 +187,12 @@
 								<option value='open'   ${ eSchedule.makepublic == "open" ? "selected":"" }>공개
 							</c:when>
 							<c:when test="${cate eq 'ts' }">
-								<option value='경영지원실'>경영지원실</option>
-								<option value='전략기획팀'>전략기획팀</option>
+								<option value='개발팀'>개발팀</option>
 								<option value='개발2팀'>개발2팀</option>
-								<option value='개발1팀'>개발1팀</option>
-								<option value='임원' selected>임원</option>
-								<option value='대표이사'>대표이사</option>
+								<option value='인사팀'>인사팀</option>
+								<option value='영업팀'>영업팀</option>
+								<option value='마케팅팀'>마케팅팀</option>
+								<!-- <option value='대표이사'>대표이사</option> -->
 							</c:when>
 							<c:otherwise>
 								<option value='open'   ${ eSchedule.makepublic == "open" ? "selected":"" }>공개
@@ -202,7 +202,7 @@
 				</td>
 			</tr>
 
-			<tr bgcolor="#FFFFFF">
+<!-- 			<tr bgcolor="#FFFFFF">
 				<td height="28" bgcolor="#efefef" align="center">반복 설정</td>
 				<td  style="padding-left:5px;">
 					<input type=radio name="repeat_flag" id="none" value="0" >사용 안함
@@ -248,7 +248,7 @@
 						</select>일 까지
 					</div>
 				</td>
-			</tr>
+			</tr> -->
 		</table>
 		</form>
 	</div>

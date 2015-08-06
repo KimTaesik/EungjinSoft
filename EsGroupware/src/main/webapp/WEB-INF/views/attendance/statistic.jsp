@@ -354,9 +354,10 @@
 					</div>
 					<div class="table test1">
 						<table style="width:100%;table-layout:fixed;">
+								<c:set var="temp" value="1"></c:set>
 								<c:forEach var="emps" items="${emp}" >
 									<tr>
-										<td class="txt_ce">1</td>
+										<td class="txt_ce">${ temp }</td>
 										<td class="txt_ce">${ emps.name }</td>
 										<td class="txt_ce">${ emps.deptName}</td>
 										<td class="txt_ce">${ emps.normalCount }</td>
@@ -367,20 +368,7 @@
 										<td class="txt_ce">0</td>
 										<td class="txt_ce">0</td>
 									</tr>
-								</c:forEach>
-								<c:forEach var="emps" items="${emp}" >
-									<tr>
-										<td class="txt_ce">1</td>
-										<td class="txt_ce">${ emps.name }</td>
-										<td class="txt_ce">${ emps.deptName}</td>
-										<td class="txt_ce">${ emps.normalCount }</td>
-										<td class="txt_ce">${ emps.attCount }</td>
-										<td class="txt_ce">0</td>
-										<td class="txt_ce">0</td>
-										<td class="txt_ce">0</td>
-										<td class="txt_ce">0</td>
-										<td class="txt_ce">0</td>
-									</tr>
+									<c:set var="temp" value="${ temp+1 }"></c:set>
 								</c:forEach>
 						</table>
 					</div>

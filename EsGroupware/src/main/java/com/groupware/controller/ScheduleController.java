@@ -60,7 +60,6 @@ public class ScheduleController {
 		
 		List<Schedule> scList = scheduleDao.selectSchedule(sc);
 		List<ScRepeat> scRep = scheduleDao.selectRepeat();
-		List<String> save = new ArrayList<String>();
 		
 		Date scDate,coDate;
 		Calendar calscDate = Calendar.getInstance();
@@ -68,17 +67,25 @@ public class ScheduleController {
 		
 		if(scList.size() >0){
 			for(int i=0;i<scList.size();i++){
+				
 				sd = sdf.format(sdf.parse(scList.get(i).getStDate())).split("-");
 				scList.get(i).setYear(sd[0]);
 				scList.get(i).setMonth(sd[1]);
 				scList.get(i).setDate(sd[2]);	
+				
 				if(scList.get(i).getRepeat() == 1){
+					ArrayList<ScRepeat> test = new ArrayList<ScRepeat>();
+					scList.get(i).setSr(test);
+					
 					scDate = sdf.parse(scList.get(i).getStDate());
 					calscDate.setTime(scDate);
 					
+					List<String> save = new ArrayList<String>();
+					
 					for(int j=0;j<scRep.size();j++){
-						save.clear();
+						//save.clear();
 						if(scList.get(i).getKey() == scRep.get(j).getKey()){
+							test.add(scRep.get(j));
 							
 							coDate = new Date(Integer.parseInt(scRep.get(j).getEndYear())-1900,Integer.parseInt(scRep.get(j).getEndMonth())-1,Integer.parseInt(scRep.get(j).getEndDate()));
 							calCompare.setTime(coDate);
@@ -164,7 +171,7 @@ public class ScheduleController {
 
 		List<Schedule> scList = scheduleDao.selectSchedule(sc);
 		List<ScRepeat> scRep = scheduleDao.selectRepeat();
-		List<String> save = new ArrayList<String>();
+		
 		
 		Date scDate,coDate;
 		Calendar calscDate = Calendar.getInstance();
@@ -172,20 +179,32 @@ public class ScheduleController {
 		
 		if(scList.size() >0){
 			for(int i=0;i<scList.size();i++){
+				
 				sd = sdf.format(sdf.parse(scList.get(i).getStDate())).split("-");
 				scList.get(i).setYear(sd[0]);
 				scList.get(i).setMonth(sd[1]);
-				scList.get(i).setDate(sd[2]);
+				scList.get(i).setDate(sd[2]);	
+				
 				if(scList.get(i).getRepeat() == 1){
+					ArrayList<ScRepeat> test = new ArrayList<ScRepeat>();
+					scList.get(i).setSr(test);
+					
 					scDate = sdf.parse(scList.get(i).getStDate());
 					calscDate.setTime(scDate);
 					
+					List<String> save = new ArrayList<String>();
+					
 					for(int j=0;j<scRep.size();j++){
-						save.clear();
+						//save.clear();
 						if(scList.get(i).getKey() == scRep.get(j).getKey()){
+							test.add(scRep.get(j));
+							
 							coDate = new Date(Integer.parseInt(scRep.get(j).getEndYear())-1900,Integer.parseInt(scRep.get(j).getEndMonth())-1,Integer.parseInt(scRep.get(j).getEndDate()));
-
 							calCompare.setTime(coDate);
+							/*	1 일
+								2 주
+								3 월
+								4 년*/
 							while(true){
 								if(scRep.get(j).getClassify()==1){
 									calscDate.set(Calendar.DATE, calscDate.get(Calendar.DATE)+1+scRep.get(j).getFreq());
