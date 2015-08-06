@@ -225,39 +225,6 @@
 					                        	<option value="30"${ currentDate==30 ? "selected":"" }>30</option>
 					                        	<option value="31"${ currentDate==31 ? "selected":"" }>31</option>
 					                      	</select>일
-					                      	<select name="hour" class="input">
-					                        	<option value="" selected="">하루</option>
-												<option value="0">자정</option>
-					                        	<option value="1">오전 1</option>
-					                        	<option value="2">오전 2</option>
-					                        	<option value="3">오전 3</option>
-					                        	<option value="4">오전 4</option>
-					                        	<option value="5">오전 5</option>
-					                        	<option value="6">오전 6</option>
-					                        	<option value="7">오전 7</option>
-					                        	<option value="8">오전 8</option>
-					                        	<option value="9">오전 9</option>
-					                        	<option value="10">오전 10</option>
-					                        	<option value="11">오전 11</option>
-					                        	<option value="12">정오 12</option>
-					                        	<option value="13">오후 1</option>
-					                        	<option value="14">오후 2</option>
-					                        	<option value="15">오후 3</option>
-					                        	<option value="16">오후 4</option>
-					                        	<option value="17">오후 5</option>
-					                        	<option value="18">오후 6</option>
-					                        	<option value="19">오후 7</option>
-					                        	<option value="20">오후 8</option>
-					                        	<option value="21">오후 9</option>
-					                        	<option value="22">오후 10</option>
-					                        	<option value="23">오후 11</option>
-					                      	</select>시
-					                      	<select name="min" class="input">
-					                      		<option value="0" selected="">00</option>
-					                        	<option value="15">15</option>
-					                        	<option value="30">30</option>
-					                        	<option value="45">45</option>
-					                      	</select>분
 					                      	<input id="quick_add_submit" type="image" src="/groupware/resources/image/addsc.png" width="36" height="15" align="absmiddle" border="0">
 										</td>
 									</tr>
