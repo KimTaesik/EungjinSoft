@@ -50,8 +50,16 @@ public class ApprovalController {
 	}
 
 	@RequestMapping(value = "approvalmain.action", method = RequestMethod.GET)
-	public String approvalmain() {
-		return "approval/approvalmain";
+	public ModelAndView approvalmain() {
+		ModelAndView mav =new ModelAndView();
+		int yesCount=approvalService.getYesApprovalCount();
+		int noCount=approvalService.getNoApprovalCount();
+		List<Approval>approvals=approvalService.getApprovalList();
+		mav.addObject("yesCount", yesCount);
+		mav.addObject("noCount", noCount);
+		mav.addObject("approvals", approvals);
+		mav.setViewName("approval/approvalmain");
+		return mav;
 	}
 
 
@@ -72,7 +80,7 @@ public class ApprovalController {
 	}
 
 	@RequestMapping(value = "approvalwriteform.action", method = RequestMethod.POST)
-	public String approvalwriteform(Approval approval, String lineId1,
+	public ModelAndView approvalwriteform(Approval approval, String lineId1,
 			String lineId2, String lineId3, String lineId4, String lineId5,
 			String lineId6, String lineId7, String lineId8, String lineId9,
 			String lineId10) {
@@ -95,8 +103,17 @@ public class ApprovalController {
 				approvalService.insertApprovalCooperation(approvalCooperation);
 			}
 		}
+		ModelAndView mav =new ModelAndView();
+		int yesCount=approvalService.getYesApprovalCount();
+		int noCount=approvalService.getNoApprovalCount();
+		List<Approval>approvals=approvalService.getApprovalList();
+		mav.addObject("yesCount", yesCount);
+		mav.addObject("noCount", noCount);
+		mav.addObject("approvals", approvals);
+		mav.setViewName("approval/approvalheader");
+		return mav;
 
-		return "approval/approvalheader";
+	
 	}
 
 	@RequestMapping(value = "approvaling.action", method = RequestMethod.GET)

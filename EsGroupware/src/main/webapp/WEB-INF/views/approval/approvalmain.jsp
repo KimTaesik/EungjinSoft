@@ -3,10 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<title>groupware</title>
 
 <link rel="stylesheet"
 	href="/groupware/resources/styles/jquery/jquery-ui.css">
@@ -36,9 +32,7 @@ $(document).ready(function() {
 
 
 </script>
-</head>
 
-<body>
 
 	<!--  검색 버튼 영역 -->
 
@@ -403,9 +397,6 @@ $(document).ready(function() {
 						</tr>
 					</thead>
 					<tbody>
-
-
-
 						<tr>
 							<td colspan='8'>
 								<div>
@@ -413,11 +404,6 @@ $(document).ready(function() {
 								</div>
 							</td>
 						</tr>
-
-
-
-
-
 					</tbody>
 				</table>
 			</div>
@@ -632,4 +618,3 @@ $(document).ready(function() {
 
 
 
-</body>

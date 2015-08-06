@@ -34,9 +34,7 @@ $(document).ready(function() {
 	<div
 		style="width: 90%; float: right; margin-left: 10px; border: 1px solid;">
 		<!--  검색 버튼 영역 -->
-		<form name="form" action="" method="post"
-			onsubmit="return setSearchSubmit();">
-
+	
 			<div id="title">
 				<h2>
 					<c:if test=""></c:if>
@@ -52,21 +50,6 @@ $(document).ready(function() {
 			</div>
 			<div class="toparea">
 				<span class="leftarea">
-
-					<table border='0' cellpadding='0' cellspacing='0'>
-						<tr>
-							<td class='pad1tb'><select name="key_field"
-								onchange="FieldSearch(this.value, 1);SearchKeyCheck(this.value);">
-									<option value="" selected>검색조건</option>
-									<option value="all">전체보기</option>
-									<option value="a.WordNo">문서번호</option>
-									<option value="a.Category">결재문서양식</option>
-									<option value="a.Subject">제목</option>
-									<option value="a.Name">기안자</option>
-									<option value="a.Date">기안일자</option>
-							</select></td>
-						</tr>
-					</table>
 
 				</span>
 
@@ -247,7 +230,6 @@ $(document).ready(function() {
 			<!--  //넘버링 영역 -->
 			<!--  검색 버튼 영역 -->
 
-		</form>
 		<!--  //검색 버튼 영역 -->
 	</div>
 

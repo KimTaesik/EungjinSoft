@@ -136,7 +136,7 @@ $(document).ready(function() {
 								<th style="border-top: none; border-left: none;">문서번호</th>
 								<td class="pad15l" colspan="3" style="border-top: none;">
 									<span id="sub_subject"> 
-									${approval.approvalForm.form_No}
+									&nbsp;${approval.approvalForm.form_No}
 									</span> 
 								</td>
 								<td rowspan="6" style="border-top: none; border-right: none;">
@@ -274,24 +274,24 @@ $(document).ready(function() {
 							</tr>
 							<tr class="eword_meta_height">
 								<th style="border-left: none;">문서종류</th>
-								<td class="pad15l" colspan="3">${approval.approvalForm.form_Name}</td>
+								<td class="pad15l" colspan="3">&nbsp;${approval.approvalForm.form_Name}</td>
 							</tr>
 							<tr class="eword_meta_height">
 								<th style="border-left: none;">부서</th>
-								<td class="pad15l" colspan="3">${approval.employee.deptName}</td>
+								<td class="pad15l" colspan="3">&nbsp;${approval.employee.deptName}</td>
 								
 							</tr>
 							<c:set var="reportDate" value="${approval.reportDate}" />
 							<tr class="eword_meta_height">
 								<th style="border-left: none;">기안일</th>
 								<td class="pad15l" colspan="3">
-										<fmt:formatDate value="${reportDate}" pattern="yyyy-MM-dd"/>
+									&nbsp;<fmt:formatDate value="${reportDate}" pattern="yyyy-MM-dd"/>
 								</td>
 							</tr>
 							<tr class="eword_meta_height">
 								<th style="border-left: none;">기안자</th>
 								<td class="pad15l " colspan="3">
-										${approval.employee.name}
+										&nbsp;${approval.employee.name}
 								</td>
 							</tr>
 							<tr class="eword_meta_height">
@@ -300,10 +300,10 @@ $(document).ready(function() {
 									<!-- 작성 --> 
 									<c:choose>
    											<c:when test="${ approval.opening==true}">
-   												<nobr> 공개 </nobr>
+   												<nobr>&nbsp; 공개 </nobr>
    											</c:when>
    											<c:otherwise>	
-   												<nobr> 비공개 </nobr>
+   												<nobr>&nbsp; 비공개 </nobr>
    											</c:otherwise>
 									</c:choose>
 								</td>
@@ -311,13 +311,13 @@ $(document).ready(function() {
 								<td class="txt_ce">
 									<c:choose>
    											<c:when test="${ approval.storagePeriod>=12}">
-   												<nobr> ${approval.storagePeriod/12}년</nobr>
+   												<nobr>&nbsp; ${approval.storagePeriod/12}년</nobr>
    											</c:when>
    											<c:when test="${ approval.storagePeriod>=1200}">
-   												<nobr> 무기한</nobr>
+   												<nobr>&nbsp; 무기한</nobr>
    											</c:when>
    											<c:otherwise>	
-   												<nobr>${approval.storagePeriod}개월</nobr>
+   												<nobr>&nbsp;${approval.storagePeriod}개월</nobr>
    											</c:otherwise>
 										</c:choose>
 								</td>
@@ -333,7 +333,7 @@ $(document).ready(function() {
 								<th style="border-left: none;">수신부서</th>
 								<td class="pad15l" style="padding-right: 7px;">
 									<span id="ReceiveTreeKeyButtonArea" style='width: 100%;'> 
-										${approval.receiveDept}
+										&nbsp;${approval.receiveDept}
 										<span class="btn_page right"> <!-- 수신부서 지정 --> 
 												<span class="txt_ce" style="width: 70px;">
 												</span>
@@ -356,7 +356,7 @@ $(document).ready(function() {
 							<tr class="eword_meta_height">
 								<th style="border-left: none;">제목</th>
 								<td class="pad15l">
-								${approval.title}</td>
+								&nbsp;${approval.title}</td>
 							</tr>
 						</table>
 					</td>
