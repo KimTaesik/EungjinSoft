@@ -139,11 +139,11 @@
 
 	<select id="getemList" resultMap="EmployeeResult">
 		SELECT
-			id, name, dept_no deptNo, position_no positionNo, sex, phone_number phoneNumber, join_date joinDatetype
+			e.id, e.name, e.dept_no deptNo, e.position_no positionNo, e.sex, e.phone_number phoneNumber, e.join_date joinDatetype, p.position_name positionName
 		FROM 
-			employee
+			employee e ,position p
 		WHERE
-			deleted = 0
+			deleted = 0 AND e.position_no = p.position_no
 		ORDER BY
 			id ASC
 	</select>
@@ -196,6 +196,7 @@
 		<result property="joinDate" column="Join_Date" />
 		<result property="email" column="email" />
 		<result property="address" column="address" />
+		<result property="positionNo" column="position_no" />
 		
 		<association property="dept" column="dept_no" select="selectDeptById" />
 		<association property="position" column="position_no"

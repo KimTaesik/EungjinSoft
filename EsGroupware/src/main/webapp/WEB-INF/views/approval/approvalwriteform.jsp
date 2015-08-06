@@ -308,7 +308,7 @@ var temp =null;
 																			<div>
 																				<a id="${ employee.id }" class="get" href="#"> 
 																				<img src='/groupware/resources/image/re.gif' />&nbsp;
-																					${employee.position.positionName}&nbsp;&nbsp;${employee.name}
+																					${employee.positionName}&nbsp;&nbsp;${employee.name}
 																				</a>
 																			</div>
 																			<br />
@@ -550,7 +550,7 @@ var temp =null;
 													<c:if test="${dept.deptNo eq employee.deptNo}">
 														<div>
 																<input type="checkbox"  class="box_class6" value="${employee.position.positionName}&nbsp;${employee.name}" >
-																${employee.position.positionName}&nbsp;${employee.name}
+																${employee.positionName}&nbsp;${employee.name}
 														</div>
 														<br />
 													</c:if>
