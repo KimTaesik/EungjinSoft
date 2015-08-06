@@ -19,7 +19,8 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function () {
-		$("#delete").click(function() {
+		$(".delete").click(function() {
+			var id = $(this).attr('tag');
 			var yes = confirm("데이터를 삭제하시겠습니까?");
 			if (yes) {
 				location.href = 'employeeshiftdelete.action?id=' + id;
@@ -49,7 +50,7 @@
 	<div id="title">
 		<h2>
 					<!-- 가입된 회원 리스트 -->
-			<span class="join">가입된 회원 리스트</span>
+			<span class="join">퇴사자 리스트</span>
 		</h2>
 		
 	</div>
@@ -201,7 +202,7 @@
 									<img src='/groupware/resources/image/admin/icon_return.gif' align='absmiddle' title='복귀' />
 								</a>
 								<!-- 삭제 -->
-								<a style='text-decoration:none;font-weight: bold' id="delete" >
+								<a style='text-decoration:none;font-weight: bold' class="delete" tag="${ employee.id }" >
 									<img src='/groupware/resources/image/admin/icon_x.gif' align='absmiddle' title='삭제' />
 								</a>
 <%-- 								<!-- 퇴사 -->
