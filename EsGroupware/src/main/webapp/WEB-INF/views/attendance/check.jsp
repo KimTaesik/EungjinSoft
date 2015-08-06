@@ -10,7 +10,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="Stylesheet" href="/groupware/resources/styles/attendanceframe.css" />
 	<link rel="Stylesheet" href="/groupware/resources/styles/calendar.css" >
-	<title>근태식</title>
+	<title>근태</title>
 	<script type="text/javascript">
 	function checkwork(work){
 		var nowTimeStamp	= new Date();
